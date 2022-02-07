@@ -3,6 +3,6 @@ import com.tabram.coffemaker.Coffees;
 
 public class Macchiato extends Coffees {
     Macchiato() {
-        super(95, 18, 5, 17.5, 40, 0, 0, 100);
+        super(95, 18, 5, 17.5, 40, 10, 0, 100);
     }
 }

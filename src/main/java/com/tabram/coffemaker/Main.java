@@ -10,6 +10,9 @@ public class Main {
         MachineAction.turnOffCaffeeMaker();
         Status.checkStatus();
 
+//      Map<String, String> checkStatus = new Map<String, String>();
+//        System.out.println(checkStatus <StatuEnums.WATER, Status_2.waterStatus>);
+
 
     }
 

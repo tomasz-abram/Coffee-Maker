@@ -1,8 +1,5 @@
 package com.tabram.coffemaker;
 
-import java.util.EnumMap;
-import java.util.Map;
-
 public class Status {
     public static int waterLevel = 250;
     public static int minWaterLevel = 150;
@@ -17,7 +14,9 @@ public class Status {
     public static float waterHardness = 5;
     public static float descaleCounter = coffeeCounter * waterHardness;
 
+
     public static void checkStatus() {
+
         if (waterLevel < minWaterLevel) {
             System.err.println("WATER LEVEL: Not enough water! " + waterLevel + "ml in the container. [" + minWaterLevel + "ml min]");
         } else {
@@ -69,9 +68,9 @@ public class Status {
 //    public static float descaleCounter = coffeeCounter * waterHardness;
 //
 //    public Map<String, String> checkStatus() {
-//
+
 //        StringBuilder builder = new StringBuilder();
-//        Map<StatuEnums,String> statusMap = new EnumMap<StatuEnums, String>();
+//        Map<StatusEnums,String> statusMap = new EnumMap<StatusEnums, String>();
 //        String waterStatus;
 //        if (waterLevel < minWaterLevel) {
 //            builder.append("WATER LEVEL: Not enough water! " + waterLevel + "ml in the container. [" + minWaterLevel + "ml min]");
