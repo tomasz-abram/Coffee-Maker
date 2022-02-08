@@ -1,19 +1,24 @@
 package com.tabram.coffemaker;
 
 public class CoffeeMaker {
-    private Status checkMachine;
+    private Status status;
+    private MachineAction machineAction;
 
     public CoffeeMaker() {
-        this.checkMachine = new Status();
+        this.status = new Status();
+        this.machineAction = new MachineAction();
     }
 
     public static void main(String[] args) {
 
-        MachineAction.turnOnCaffeeMaker();
-        MachineAction.turnOffCaffeeMaker();
-
         CoffeeMaker coffeeMaker = new CoffeeMaker();
-        coffeeMaker.checkMachine.checkStatus();
+
+        coffeeMaker.machineAction.turnOnCaffeeMaker();
+        coffeeMaker.machineAction.turnOffCaffeeMaker();
+
+        coffeeMaker.status.checkStatus();
+
+
 
 
     }
