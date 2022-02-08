@@ -6,14 +6,14 @@ public class MachineAction {
     protected static void turnOnCaffeeMaker() {
         System.out.println("Turn-ON");
         System.out.println("Rinsing... -" + rinsing + "ml");
-        Status.waterLevel -= rinsing;
+        Status.WATER_LEVEL -= rinsing;
         System.out.println("Heating turned ON.");
 
     }
 
     protected static void turnOffCaffeeMaker() {
         System.out.println("Rinsing... -" + rinsing + "ml");
-        Status.waterLevel -= rinsing;
+        Status.WATER_LEVEL -= rinsing;
         System.out.println("Turn-OFF");
     }
 }
