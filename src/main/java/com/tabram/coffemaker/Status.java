@@ -18,16 +18,15 @@ public class Status {
     public static float DESCALE_COUNTER = COFFEE_COUNTER * WATER_HARDNESS;
 
     private enum StatuEnums {
-        WATER,
-        MILK,
-        COFFEE_BEANS,
+        WATER_LEVEL,
+        MILK_LEVEL,
+        COFFEE_BEANS_LEVEL,
         GROUND_CONTAINER,
-        DESCALE_COUNTER;
+        DESCALE_COUNTER
     }
 
     public Map<StatuEnums, String> checkStatus() {
-
-        Map<StatuEnums,String> statusMap = new EnumMap<StatuEnums, String>();
+        Map<StatuEnums,String> statusMap = new EnumMap<>(StatuEnums.class);
         String waterStatus;
         String milkStatus;
         String coffeeBeansStatus;
@@ -35,45 +34,45 @@ public class Status {
         String descaleStatus;
 
         if (WATER_LEVEL < MIN_WATER_LEVEL) {
-            waterStatus = "WATER LEVEL: Not enough water! " + WATER_LEVEL + "ml in the container. [" + MIN_WATER_LEVEL + "ml min]";
-            statusMap.put(StatuEnums.WATER, waterStatus);
+            waterStatus = "Not enough water! " + WATER_LEVEL + "ml in the container. [" + MIN_WATER_LEVEL + "ml min]";
+            statusMap.put(StatuEnums.WATER_LEVEL, waterStatus);
         } else {
-            waterStatus="WATER LEVEL: OK! " + WATER_LEVEL + "ml in the container. [" + MIN_WATER_LEVEL + "ml min]";
-            statusMap.put(StatuEnums.WATER, waterStatus);
+            waterStatus="OK! " + WATER_LEVEL + "ml in the container. [" + MIN_WATER_LEVEL + "ml min]";
+            statusMap.put(StatuEnums.WATER_LEVEL, waterStatus);
         }
 
         if (MILK_LEVEL < MIN_MILK_LEVEL) {
-            milkStatus = "MILK LEVEL: Not enough MILK! " + MILK_LEVEL + "ml in the container. [" + MIN_MILK_LEVEL + "ml min]";
-            statusMap.put(StatuEnums.MILK, milkStatus);
+            milkStatus = "Not enough MILK! " + MILK_LEVEL + "ml in the container. [" + MIN_MILK_LEVEL + "ml min]";
+            statusMap.put(StatuEnums.MILK_LEVEL, milkStatus);
         } else {
-            milkStatus = "MILK LEVEL: OK! " + MILK_LEVEL + "ml in the container. [" + MIN_MILK_LEVEL + "ml min]";
-            statusMap.put(StatuEnums.MILK, milkStatus);
+            milkStatus = "OK! " + MILK_LEVEL + "ml in the container. [" + MIN_MILK_LEVEL + "ml min]";
+            statusMap.put(StatuEnums.MILK_LEVEL, milkStatus);
         }
 
         if (COFFEE_BEANS_LEVEL < MIN_COFFEE_BEANS_LEVEL) {
-            coffeeBeansStatus = "COFFEE BEANS LEVEL: Not enough coffee beans! " + COFFEE_BEANS_LEVEL + "g in the container. [" + MIN_COFFEE_BEANS_LEVEL + "g min]";
-            statusMap.put(StatuEnums.COFFEE_BEANS, coffeeBeansStatus);
+            coffeeBeansStatus = "Not enough coffee beans! " + COFFEE_BEANS_LEVEL + "g in the container. [" + MIN_COFFEE_BEANS_LEVEL + "g min]";
+            statusMap.put(StatuEnums.COFFEE_BEANS_LEVEL, coffeeBeansStatus);
         } else {
-            coffeeBeansStatus ="COFFEE BEANS LEVEL: OK! " + COFFEE_BEANS_LEVEL + "g in the container. [" + MIN_COFFEE_BEANS_LEVEL + "g min].";
-            statusMap.put(StatuEnums.COFFEE_BEANS, coffeeBeansStatus);
+            coffeeBeansStatus ="OK! " + COFFEE_BEANS_LEVEL + "g in the container. [" + MIN_COFFEE_BEANS_LEVEL + "g min].";
+            statusMap.put(StatuEnums.COFFEE_BEANS_LEVEL, coffeeBeansStatus);
         }
 
         if (GROUND_CONTAINER > MAX_GROUND_CONTAINER) {
-            groundContainerStatus = "GROUND CONTAINER: Ground container is full [" + MAX_GROUND_CONTAINER + " pieces]";
+            groundContainerStatus = "Ground container is full [" + MAX_GROUND_CONTAINER + " pieces]";
             statusMap.put(StatuEnums.GROUND_CONTAINER, groundContainerStatus);
         } else {
-            groundContainerStatus = "GROUND CONTAINER: Relax you can still make " + (MAX_GROUND_CONTAINER - GROUND_CONTAINER) + " single coffees.";
+            groundContainerStatus = "Relax you can still make " + (MAX_GROUND_CONTAINER - GROUND_CONTAINER) + " single coffees.";
             statusMap.put(StatuEnums.GROUND_CONTAINER, groundContainerStatus);
         }
 
         if (DESCALE_COUNTER > MAX_DESCALE_COUNTER) {
-            descaleStatus = "DESCALE COUNTER: If you want to enjoy delicious coffee all the time, DESCALE the coffee machine now! [" + MAX_DESCALE_COUNTER + "]";
+            descaleStatus = "If you want to enjoy delicious coffee all the time, DESCALE the coffee machine now! [" + MAX_DESCALE_COUNTER + "]";
             statusMap.put(StatuEnums.DESCALE_COUNTER, descaleStatus);
         } else {
-            descaleStatus = "DESCALE COUNTER: You can still make around " + ((MAX_DESCALE_COUNTER - DESCALE_COUNTER) / WATER_HARDNESS) + " single coffees. [" + MAX_DESCALE_COUNTER + " max level]";
+            descaleStatus = "You can still make around " + ((MAX_DESCALE_COUNTER - DESCALE_COUNTER) / WATER_HARDNESS) + " single coffees. [" + MAX_DESCALE_COUNTER + " max level]";
             statusMap.put(StatuEnums.DESCALE_COUNTER, descaleStatus);
         }
-
+        System.out.print(statusMap);
         return statusMap;
     }
 

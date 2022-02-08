@@ -7,8 +7,6 @@ h
 8src/main/java/com/tabram/coffemaker/coffee/Espresso.java,6\a\6aafce24519351a7cc2b5ef663a4e1530fe0b899
 m
 =src/main/java/com/tabram/coffemaker/action/MachineAction.java,9\c\9cc4c04edba4c1bcf041c228c05ee3db87934021
-j
-:src/main/java/com/tabram/coffemaker/coffee/Cappuccino.java,6\6\66f2d71e579068045b380b7d7b93ca5904409733
 n
 >src/main/java/com/tabram/coffemaker/coffee/LatteMacchiato.java,7\a\7a5db5e2c660d98b3c5f26cdd945fd59ea61cdd1
 e
