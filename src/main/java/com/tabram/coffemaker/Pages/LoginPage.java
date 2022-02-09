@@ -1,32 +1,43 @@
 package com.tabram.coffemaker.Pages;
-
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class LoginPage {
     HashMap<String,String> loginInfo = new HashMap<>();
 
-     void login(HashMap<String,String> loginInfoIn) {
-        HashMap<String, String> loginInfo = new HashMap<>();
-        loginInfo = loginInfoIn;
 
-        System.out.println("------------------ ");
-        System.out.println("Enter your id and name.");
-        System.out.println(" ------------------ ");
 
+    public LoginPage(HashMap<String, String> loginInfoOriginal){
+        loginInfo = loginInfoOriginal;
+
+        System.out.println("\n------------------------- ");
+        System.out.println("Enter your ID and NAME.");
+        System.out.println("-------------------------");
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter your ID");
+        System.out.println("Enter your ID.");
         String id = sc.nextLine();
         System.out.println("Enter your Name");
-        String login = sc.nextLine();
+        String name = sc.nextLine();
 
-        if(loginInfo.get(id).equals(login)){
-            System.out.println("Login successful");
-        } else {
-            System.out.println("Wrong password");
+
+        if(loginInfo.containsKey(id)) {
+            if(loginInfo.get(id).equals(name)) {
+                System.out.println("Login successful!");
+//                MenuPage menuPage = new MenuPage(id);
+            }
+            else {
+                System.out.println("Name");
+
+            }
+
+        }
+        else {
+            System.out.println("Id not found.");
         }
 
-
     }
+
+
+
 }

@@ -64,7 +64,7 @@ public class Status {
             descaleStatus = "You can still make around " + ((MAX_SCALE_COUNTER - scaleCounter) / waterHardness) + " single coffees. [" + MAX_SCALE_COUNTER + " max level]";
             statusMap.put(StatuEnums.DESCALE_COUNTER, descaleStatus);
         }
-   //     System.out.print(statusMap);
+        System.out.print(statusMap);
         return statusMap;
     }
 
