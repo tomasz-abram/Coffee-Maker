@@ -17,6 +17,15 @@ public class Status {
     public static float scaleCounter = coffeeCounter * waterHardness;
     public static final float MAX_SCALE_COUNTER = 250;
 
+
+    private enum StatuEnums {
+        WATER_LEVEL,
+        MILK_LEVEL,
+        COFFEE_BEANS_LEVEL,
+        GROUND_CONTAINER,
+        DESCALE_COUNTER
+    }
+
     public Map<StatuEnums, String> checkStatus() {
         Map<StatuEnums, String> statusMap = new EnumMap<>(StatuEnums.class);
         String waterStatus;
@@ -68,13 +77,7 @@ public class Status {
         return statusMap;
     }
 
-    private enum StatuEnums {
-        WATER_LEVEL,
-        MILK_LEVEL,
-        COFFEE_BEANS_LEVEL,
-        GROUND_CONTAINER,
-        DESCALE_COUNTER
-    }
+
 
 
 }

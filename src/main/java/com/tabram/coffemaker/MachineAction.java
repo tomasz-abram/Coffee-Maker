@@ -11,26 +11,26 @@ public class MachineAction {
 
     }
 
-    protected void turnOffCaffeeMaker() {
+    public static void turnOffCaffeeMaker() {
         System.out.println("Rinsing... -" + rinsing + "ml");
         Status.waterLevel -= rinsing;
         System.out.println("Turn-OFF");
     }
 
-    protected void fillWater(){
+    public void fillWater(){
         Status.waterLevel = 1500;
     }
-    protected void fillMilk(){
+    public void fillMilk(){
         Status.milkLevel = 1000;
     }
-    protected void fillCoffeeBeans(){
+    public void fillCoffeeBeans(){
         Status.coffeeBeansLevel = 300;
     }
-    protected void emptyGroundContainer(){
+    public void emptyGroundContainer(){
         Status.groundContainer = 0;
     }
-    protected void descale(){
-        Status.coffeeCounter = 0;
+    public void descale(){
+        Status.coffeeCounter = 1;
     }
 
 }

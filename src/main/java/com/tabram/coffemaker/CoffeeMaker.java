@@ -3,8 +3,9 @@ package com.tabram.coffemaker;
 import com.tabram.coffemaker.Pages.LoginPage;
 
 public class CoffeeMaker {
+
     private Status status;
-    private MachineAction machineAction;
+    public static MachineAction machineAction;
 
 
     public CoffeeMaker() {
@@ -18,10 +19,7 @@ public class CoffeeMaker {
 
         CoffeeMaker coffeeMaker = new CoffeeMaker();
         coffeeMaker.machineAction.turnOnCaffeeMaker();
-        coffeeMaker.machineAction.turnOffCaffeeMaker();
         coffeeMaker.status.checkStatus();
-
-
         IdAndName idAndName = new IdAndName();
         LoginPage loginPage = new LoginPage(IdAndName.getLoginInfo());
 

@@ -3,8 +3,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class LoginPage {
-    HashMap<String,String> loginInfo = new HashMap<>();
-
+    public static String id;
+    HashMap<String,String> loginInfo;
+    boolean logSuccess = false;
 
 
     public LoginPage(HashMap<String, String> loginInfoOriginal){
@@ -14,26 +15,26 @@ public class LoginPage {
         System.out.println("Enter your ID and NAME.");
         System.out.println("-------------------------");
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter your ID.");
-        String id = sc.nextLine();
-        System.out.println("Enter your Name");
-        String name = sc.nextLine();
+        while (!logSuccess){
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter your ID.");
+            String id = sc.nextLine();
+            System.out.println("Enter your Name");
+            String name = sc.nextLine();
 
 
-        if(loginInfo.containsKey(id)) {
-            if(loginInfo.get(id).equals(name)) {
-                System.out.println("Login successful!");
-//                MenuPage menuPage = new MenuPage(id);
+            if (loginInfo.containsKey(id)) {
+                if (loginInfo.get(id).equals(name)) {
+                    System.out.println("Login successful!");
+                    logSuccess = true;
+                    MenuPage menuPage = new MenuPage(name);
+                } else {
+                    System.out.println("Wrong ID or Name!");
+                }
+
+            } else {
+                System.out.println("Id not found.");
             }
-            else {
-                System.out.println("Name");
-
-            }
-
-        }
-        else {
-            System.out.println("Id not found.");
         }
 
     }
