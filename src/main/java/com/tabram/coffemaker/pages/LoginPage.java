@@ -1,4 +1,4 @@
-package com.tabram.coffemaker.Pages;
+package com.tabram.coffemaker.pages;
 import java.util.HashMap;
 import java.util.Scanner;
 

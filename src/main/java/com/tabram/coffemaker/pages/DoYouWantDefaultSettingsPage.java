@@ -1,4 +1,4 @@
-package com.tabram.coffemaker.Pages;
+package com.tabram.coffemaker.pages;
 
 public class DoYouWantDefaultSettingsPage {
 }

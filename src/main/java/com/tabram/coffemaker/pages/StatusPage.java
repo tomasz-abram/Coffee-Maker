@@ -1,7 +1,6 @@
-package com.tabram.coffemaker.Pages;
+package com.tabram.coffemaker.pages;
 
-import com.tabram.coffemaker.MachineAction;
-import com.tabram.coffemaker.Status;
+import com.tabram.coffemaker.CoffeeMaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +8,14 @@ import java.util.Scanner;
 
 public class StatusPage {
     private int i;
-    private Status status = new Status();
-    private MachineAction machineAction = new MachineAction();
+//    private Status status = new Status();
+//    private MachineAction machineAction = new MachineAction();
     public StatusPage() {
-        System.out.println(status.getWaterLevel());
-        System.out.println(status.getMilkLevel());
-        System.out.println(status.getCoffeeBeansLevel());
-        System.out.println(status.getGroundContainer());
-        System.out.println(status.getScaleCounter());
+        System.out.println(CoffeeMaker.status.getWaterLevel());
+        System.out.println(CoffeeMaker.status.getMilkLevel());
+        System.out.println(CoffeeMaker.status.getCoffeeBeansLevel());
+        System.out.println(CoffeeMaker.status.getGroundContainer());
+        System.out.println(CoffeeMaker.status.getScaleCounter());
 
         List<String> statusList = new ArrayList<>();
         statusList.add("Refill Water");
@@ -38,31 +37,32 @@ public class StatusPage {
 
         switch (choice) {
             case 1:
-                status.setWaterLevel(1500);
-                System.out.println("TEST: " + status.getWaterLevel());
+                CoffeeMaker.machineAction.fillWater();
                 new StatusPage();
                 break;
             case 2:
-                machineAction.fillMilk();
+                CoffeeMaker.machineAction.fillMilk();
                 new StatusPage();
                 break;
             case 3:
-                machineAction.fillCoffeeBeans();
+                CoffeeMaker.machineAction.fillCoffeeBeans();
                 new StatusPage();
                 break;
             case 4:
-                machineAction.emptyGroundContainer();
+                CoffeeMaker.machineAction.emptyGroundContainer();
                 new StatusPage();
                 break;
             case 5:
-                machineAction.descale();
+                CoffeeMaker.machineAction.descale();
                 new StatusPage();
                 break;
             case 6:
-                MenuPage menuPage = new MenuPage(LoginPage.id);
+                new MenuPage(LoginPage.id);
                 break;
             default:
-                throw new UnsupportedOperationException();
+                System.err.println("Enter a range between 1 - 6");
+                new StatusPage();
+
 
         }
 

@@ -10,7 +10,6 @@ public class Status {
     private int groundContainer;
     private int coffeeCounter;
     private float waterHardness;
-    private float scaleCounter;
 
     public Status() {
         this.waterLevel = 250;
@@ -19,7 +18,6 @@ public class Status {
         this.groundContainer = 20;
         this.coffeeCounter = 15;
         this.waterHardness = 5;
-        this.scaleCounter = coffeeCounter * scaleCounter;
     }
 
 
@@ -72,12 +70,9 @@ public class Status {
     }
 
     public float getScaleCounter() {
-        return scaleCounter;
+        return coffeeCounter * waterHardness;
     }
 
-    public void setScaleCounter(float scaleCounter) {
-        this.scaleCounter = scaleCounter;
-    }
 
     public Map<StatusEnum, String> checkStatus() {
         Map<StatusEnum, String> statusMap = new EnumMap<>(StatusEnum.class);
@@ -119,15 +114,14 @@ public class Status {
             statusMap.put(StatusEnum.GROUND_CONTAINER, groundContainerStatus);
         }
 
-        if (scaleCounter > StatusEnum.SCALE_COUNTER.getWarningLevel()) {
+        if (getScaleCounter() > StatusEnum.SCALE_COUNTER.getWarningLevel()) {
             descaleStatus = "If you want to enjoy delicious coffee all the time, DESCALE the coffee machine now! [" + StatusEnum.SCALE_COUNTER.getWarningLevel() + "]";
             statusMap.put(StatusEnum.SCALE_COUNTER, descaleStatus);
         } else {
-            descaleStatus = "You can still make around " + ((StatusEnum.SCALE_COUNTER.getWarningLevel() - scaleCounter) / waterHardness) + " single coffees. [" + StatusEnum.SCALE_COUNTER.getWarningLevel() + " max level]";
+            descaleStatus = "You can still make around " + ((StatusEnum.SCALE_COUNTER.getWarningLevel() - getScaleCounter()) / waterHardness) + " single coffees. [" + StatusEnum.SCALE_COUNTER.getWarningLevel() + " max level]";
             statusMap.put(StatusEnum.SCALE_COUNTER, descaleStatus);
         }
         statusMap.forEach((k, v) -> System.out.println(k + " " + v));
-        //   System.out.println(statusMap);
         return statusMap;
     }
 

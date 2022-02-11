@@ -18,6 +18,10 @@ public class IdAndName {
         loginInfo.put("999", "Default");
     }
 
+    public void setLoginInfo(Map<String, String> loginInfo) {
+        this.loginInfo = loginInfo;
+    }
+
     public static IdAndName getInstance() {
         return instance;
     }

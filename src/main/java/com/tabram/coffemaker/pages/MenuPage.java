@@ -1,4 +1,4 @@
-package com.tabram.coffemaker.Pages;
+package com.tabram.coffemaker.pages;
 
 import com.tabram.coffemaker.IdAndName;
 import com.tabram.coffemaker.MachineAction;
@@ -36,13 +36,13 @@ public class MenuPage {
 
         switch (choice) {
             case 1:
-                SelectCoffeePage selectCoffeePage = new SelectCoffeePage();
+                new SelectCoffeePage();
                 break;
             case 2:
-                SettingsPage settingsPage = new SettingsPage();
+                new SettingsPage();
                 break;
             case 3:
-                StatusPage statusPage = new StatusPage();
+                 new StatusPage();
                 break;
             case 4:
                 IdAndName idAndName = new IdAndName();
@@ -52,6 +52,9 @@ public class MenuPage {
                 MachineAction machineAction = new MachineAction();
                 machineAction.turnOffCoffeeMaker();
                 break;
+            default:
+                System.err.println("Enter a range between 1 - 5");
+                new MenuPage(id);
         }
 
 
