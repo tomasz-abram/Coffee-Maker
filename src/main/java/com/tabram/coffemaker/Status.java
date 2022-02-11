@@ -4,80 +4,132 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class Status {
-    public static int waterLevel = 250;
-    public static final int MIN_WATER_LEVEL = 150;
-    public static int milkLevel = 200;
-    public static final int MIN_MILK_LEVEL = 150;
-    public static float coffeeBeansLevel = 250;
-    public static final float MIN_COFFEE_BEANS_LEVEL = 40;
-    public static int groundContainer = 15;
-    public static final int MAX_GROUND_CONTAINER = 25;
-    public static float coffeeCounter = 23;
-    public static float waterHardness = 5;
-    public static float scaleCounter = coffeeCounter * waterHardness;
-    public static final float MAX_SCALE_COUNTER = 250;
+    private int waterLevel;
+    private int milkLevel;
+    private float coffeeBeansLevel;
+    private int groundContainer;
+    private int coffeeCounter;
+    private float waterHardness;
+    private float scaleCounter;
 
-
-    private enum StatuEnums {
-        WATER_LEVEL,
-        MILK_LEVEL,
-        COFFEE_BEANS_LEVEL,
-        GROUND_CONTAINER,
-        DESCALE_COUNTER
+    public Status() {
+        this.waterLevel = 250;
+        this.milkLevel = 150;
+        this.coffeeBeansLevel = 200;
+        this.groundContainer = 20;
+        this.coffeeCounter = 15;
+        this.waterHardness = 5;
+        this.scaleCounter = coffeeCounter * scaleCounter;
     }
 
-    public Map<StatuEnums, String> checkStatus() {
-        Map<StatuEnums, String> statusMap = new EnumMap<>(StatuEnums.class);
+
+    public int getWaterLevel() {
+        return waterLevel;
+    }
+
+    public void setWaterLevel(int waterLevel) {
+        this.waterLevel = waterLevel;
+    }
+
+    public int getMilkLevel() {
+        return milkLevel;
+    }
+
+    public void setMilkLevel(int milkLevel) {
+        this.milkLevel = milkLevel;
+    }
+
+    public float getCoffeeBeansLevel() {
+        return coffeeBeansLevel;
+    }
+
+    public void setCoffeeBeansLevel(float coffeeBeansLevel) {
+        this.coffeeBeansLevel = coffeeBeansLevel;
+    }
+
+    public int getGroundContainer() {
+        return groundContainer;
+    }
+
+    public void setGroundContainer(int groundContainer) {
+        this.groundContainer = groundContainer;
+    }
+
+    public int getCoffeeCounter() {
+        return coffeeCounter;
+    }
+
+    public void setCoffeeCounter(int coffeeCounter) {
+        this.coffeeCounter = coffeeCounter;
+    }
+
+    public float getWaterHardness() {
+        return waterHardness;
+    }
+
+    public void setWaterHardness(float waterHardness) {
+        this.waterHardness = waterHardness;
+    }
+
+    public float getScaleCounter() {
+        return scaleCounter;
+    }
+
+    public void setScaleCounter(float scaleCounter) {
+        this.scaleCounter = scaleCounter;
+    }
+
+    public Map<StatusEnum, String> checkStatus() {
+        Map<StatusEnum, String> statusMap = new EnumMap<>(StatusEnum.class);
         String waterStatus;
         String milkStatus;
         String coffeeBeansStatus;
         String groundContainerStatus;
         String descaleStatus;
 
-        if (waterLevel < MIN_WATER_LEVEL) {
-            waterStatus = "Not enough water! " + waterLevel + "ml in the container. [" + MIN_WATER_LEVEL + "ml min]";
-            statusMap.put(StatuEnums.WATER_LEVEL, waterStatus);
+        if (waterLevel < StatusEnum.WATER_LEVEL.getWarningLevel()) {
+            waterStatus = "Not enough water! " + waterLevel + "ml in the container. [" + StatusEnum.WATER_LEVEL.getWarningLevel() + "ml min]";
+            statusMap.put(StatusEnum.WATER_LEVEL, waterStatus);
         } else {
-            waterStatus = "OK! " + waterLevel + "ml in the container. [" + MIN_WATER_LEVEL + "ml min]";
-            statusMap.put(StatuEnums.WATER_LEVEL, waterStatus);
+            waterStatus = "OK! " + waterLevel + "ml in the container. [" + StatusEnum.WATER_LEVEL.getWarningLevel() + "ml min]";
+            statusMap.put(StatusEnum.WATER_LEVEL, waterStatus);
         }
 
-        if (milkLevel < MIN_MILK_LEVEL) {
-            milkStatus = "Not enough MILK! " + milkLevel + "ml in the container. [" + MIN_MILK_LEVEL + "ml min]";
-            statusMap.put(StatuEnums.MILK_LEVEL, milkStatus);
+        if (milkLevel < StatusEnum.MILK_LEVEL.getWarningLevel()) {
+            milkStatus = "Not enough MILK! " + milkLevel + "ml in the container. [" + StatusEnum.MILK_LEVEL.getWarningLevel() + "ml min]";
+            statusMap.put(StatusEnum.MILK_LEVEL, milkStatus);
         } else {
-            milkStatus = "OK! " + milkLevel + "ml in the container. [" + MIN_MILK_LEVEL + "ml min]";
-            statusMap.put(StatuEnums.MILK_LEVEL, milkStatus);
+            milkStatus = "OK! " + milkLevel + "ml in the container. [" + StatusEnum.MILK_LEVEL.getWarningLevel() + "ml min]";
+            statusMap.put(StatusEnum.MILK_LEVEL, milkStatus);
         }
 
-        if (coffeeBeansLevel < MIN_COFFEE_BEANS_LEVEL) {
-            coffeeBeansStatus = "Not enough coffee beans! " + coffeeBeansLevel + "g in the container. [" + MIN_COFFEE_BEANS_LEVEL + "g min]";
-            statusMap.put(StatuEnums.COFFEE_BEANS_LEVEL, coffeeBeansStatus);
+        if (coffeeBeansLevel < StatusEnum.COFFEE_BEANS_LEVEL.getWarningLevel()) {
+            coffeeBeansStatus = "Not enough coffee beans! " + coffeeBeansLevel + "g in the container. [" + StatusEnum.COFFEE_BEANS_LEVEL.getWarningLevel() + "g min]";
+            statusMap.put(StatusEnum.COFFEE_BEANS_LEVEL, coffeeBeansStatus);
         } else {
-            coffeeBeansStatus = "OK! " + coffeeBeansLevel + "g in the container. [" + MIN_COFFEE_BEANS_LEVEL + "g min].";
-            statusMap.put(StatuEnums.COFFEE_BEANS_LEVEL, coffeeBeansStatus);
+            coffeeBeansStatus = "OK! " + coffeeBeansLevel + "g in the container. [" + StatusEnum.COFFEE_BEANS_LEVEL.getWarningLevel() + "g min].";
+            statusMap.put(StatusEnum.COFFEE_BEANS_LEVEL, coffeeBeansStatus);
         }
 
-        if (groundContainer > MAX_GROUND_CONTAINER) {
-            groundContainerStatus = "Ground container is full [" + MAX_GROUND_CONTAINER + " pieces]";
-            statusMap.put(StatuEnums.GROUND_CONTAINER, groundContainerStatus);
+        if (groundContainer > StatusEnum.GROUND_CONTAINER.getWarningLevel()) {
+            groundContainerStatus = "Ground container is full [" + StatusEnum.GROUND_CONTAINER.getWarningLevel() + " pieces]";
+            statusMap.put(StatusEnum.GROUND_CONTAINER, groundContainerStatus);
         } else {
-            groundContainerStatus = "Relax you can still make " + (MAX_GROUND_CONTAINER - groundContainer) + " single coffees.";
-            statusMap.put(StatuEnums.GROUND_CONTAINER, groundContainerStatus);
+            groundContainerStatus = "Relax you can still make " + (StatusEnum.GROUND_CONTAINER.getWarningLevel() - groundContainer) + " single coffees.";
+            statusMap.put(StatusEnum.GROUND_CONTAINER, groundContainerStatus);
         }
 
-        if (scaleCounter > MAX_SCALE_COUNTER) {
-            descaleStatus = "If you want to enjoy delicious coffee all the time, DESCALE the coffee machine now! [" + MAX_SCALE_COUNTER + "]";
-            statusMap.put(StatuEnums.DESCALE_COUNTER, descaleStatus);
+        if (scaleCounter > StatusEnum.SCALE_COUNTER.getWarningLevel()) {
+            descaleStatus = "If you want to enjoy delicious coffee all the time, DESCALE the coffee machine now! [" + StatusEnum.SCALE_COUNTER.getWarningLevel() + "]";
+            statusMap.put(StatusEnum.SCALE_COUNTER, descaleStatus);
         } else {
-            descaleStatus = "You can still make around " + ((MAX_SCALE_COUNTER - scaleCounter) / waterHardness) + " single coffees. [" + MAX_SCALE_COUNTER + " max level]";
-            statusMap.put(StatuEnums.DESCALE_COUNTER, descaleStatus);
+            descaleStatus = "You can still make around " + ((StatusEnum.SCALE_COUNTER.getWarningLevel() - scaleCounter) / waterHardness) + " single coffees. [" + StatusEnum.SCALE_COUNTER.getWarningLevel() + " max level]";
+            statusMap.put(StatusEnum.SCALE_COUNTER, descaleStatus);
         }
-        System.out.print(statusMap);
+        statusMap.forEach((k, v) -> System.out.println(k + " " + v));
+        //   System.out.println(statusMap);
         return statusMap;
     }
-
-
 
 
 }

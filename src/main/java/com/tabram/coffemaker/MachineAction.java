@@ -1,36 +1,38 @@
 package com.tabram.coffemaker;
 
 public class MachineAction {
-    static int rinsing = 60;
+    private int rinsing = 60;
+    private  Status status = new Status();
+    
+    public void turnOnCoffeeMaker() {
 
-    protected void turnOnCaffeeMaker() {
         System.out.println("Turn-ON");
         System.out.println("Rinsing... -" + rinsing + "ml");
-        Status.waterLevel -= rinsing;
+        status.setWaterLevel(status.getWaterLevel() - rinsing);
         System.out.println("Heating turned ON.");
 
     }
 
-    public static void turnOffCaffeeMaker() {
+    public void turnOffCoffeeMaker() {
         System.out.println("Rinsing... -" + rinsing + "ml");
-        Status.waterLevel -= rinsing;
+        status.setWaterLevel(status.getWaterLevel() - rinsing);
         System.out.println("Turn-OFF");
     }
 
     public void fillWater(){
-        Status.waterLevel = 1500;
+        status.setWaterLevel(1500);
     }
     public void fillMilk(){
-        Status.milkLevel = 1000;
+        status.setMilkLevel(1000);
     }
-    public void fillCoffeeBeans(){
-        Status.coffeeBeansLevel = 300;
+    public void fillCoffeeBeans() {
+        status.setCoffeeBeansLevel(300);
     }
     public void emptyGroundContainer(){
-        Status.groundContainer = 0;
+        status.setGroundContainer(0);
     }
     public void descale(){
-        Status.coffeeCounter = 1;
+        status.setCoffeeCounter(0);
     }
 
 }

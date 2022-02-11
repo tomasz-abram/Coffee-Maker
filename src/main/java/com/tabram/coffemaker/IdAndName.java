@@ -1,30 +1,35 @@
 package com.tabram.coffemaker;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class IdAndName {
-    static HashMap<String,String> loginInfo = new HashMap<>();
+    private static IdAndName instance;
+    private Map<String, String> loginInfo;
 
 
-    IdAndName(){
+
+    public IdAndName() {
+        loginInfo = new HashMap<>();
+        loginInfo.put("1", "1");
         loginInfo.put("001", "Kozinus");
         loginInfo.put("002", "Brodson");
         loginInfo.put("003", "Bromasz");
         loginInfo.put("999", "Default");
     }
 
-    public static HashMap getLoginInfo(){
-        return loginInfo;
+    public static IdAndName getInstance() {
+        return instance;
     }
 
+    public static IdAndName getIdAndNameInstance() {
+        if (instance == null)
+            instance = new IdAndName();
+        return instance;
+    }
 
-
-//   NewUser(String id, String user){
-//        loginInfo.put(id,user);
-//
-//    }
-//
-//    DefaultUser(){
-//
-//    }
+    public Map<String, String> getLoginInfo() {
+        return loginInfo;
+    }
 }
+

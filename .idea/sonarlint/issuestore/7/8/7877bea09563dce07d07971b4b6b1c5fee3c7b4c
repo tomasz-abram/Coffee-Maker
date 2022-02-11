@@ -1,0 +1,21 @@
+
+F
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ
+H
+java:S1068"-Remove this unused "tempWater" private field.(›È¬òüÿÿÿÿ
+G
+java:S1068",Remove this unused "pressure" private field.(«»ø“úÿÿÿÿ
+G
+java:S1068"1Remove this unused "grindingLevel" private field.(Á÷Ş”
+M
+java:S1068	"2Remove this unused "amountOfCoffee" private field.(¹ø™ıÿÿÿÿ
+G
+java:S1068
+"1Remove this unused "amountOfWater" private field.(¬Üê“
+D
+java:S1068".Remove this unused "amountMilk" private field.(ŠøÚÛ
+D
+java:S1068"/Remove this unused "amountSugar" private field.( ÚÉN
+F
+java:S1068"+Remove this unused "cupSize" private field.(ìƒŞ øÿÿÿÿ
+[	java:S107"AConstructor has 8 parameters, which is greater than 7 authorized.(€Âé¬şÿÿÿÿ

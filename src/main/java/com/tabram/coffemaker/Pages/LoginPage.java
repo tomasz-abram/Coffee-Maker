@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class LoginPage {
     public static String id;
     HashMap<String,String> loginInfo;
-    boolean logSuccess = false;
+    boolean logSuccess;
 
 
     public LoginPage(HashMap<String, String> loginInfoOriginal){

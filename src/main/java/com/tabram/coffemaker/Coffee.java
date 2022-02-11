@@ -1,8 +1,6 @@
 package com.tabram.coffemaker;
 
-import java.util.List;
-
-public class Coffees {
+public class Coffee {
     private final int tempWater;
     private final double pressure;
     private final int grindingLevel;
@@ -12,7 +10,7 @@ public class Coffees {
     private final double amountSugar;
     private final int cupSize;
 
-    public Coffees(int tempWater, double pressure, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, double amountSugar, int cupSize) {
+    public Coffee(int tempWater, double pressure, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, double amountSugar, int cupSize) {
         this.tempWater = tempWater;
         this.pressure = pressure;
         this.grindingLevel = grindingLevel;
