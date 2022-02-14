@@ -8,24 +8,24 @@ import java.util.Scanner;
 
 public class StatusPage {
     private int i;
-//    private Status status = new Status();
-//    private MachineAction machineAction = new MachineAction();
+
     public StatusPage() {
-        System.out.println(CoffeeMaker.status.getWaterLevel());
-        System.out.println(CoffeeMaker.status.getMilkLevel());
-        System.out.println(CoffeeMaker.status.getCoffeeBeansLevel());
-        System.out.println(CoffeeMaker.status.getGroundContainer());
-        System.out.println(CoffeeMaker.status.getScaleCounter());
+        System.out.println("Water level        : " + CoffeeMaker.status.getWaterLevel() + "ml.    Max level: 1500ml");
+        System.out.println("Milk level         : " + CoffeeMaker.status.getMilkLevel() + "ml.    Max level: 1000ml");
+        System.out.println("Coffee beans level : " + CoffeeMaker.status.getCoffeeBeansLevel() + "g.    Max level: 300g");
+        System.out.println("Ground container   : " + CoffeeMaker.status.getGroundContainer() + "pcs.      Max level: 25 pieces");
+        System.out.println("Water hardness     : " + CoffeeMaker.status.getWaterHardness());
+        System.out.println("Scale level        : " + CoffeeMaker.status.getScaleCounter() + "        Max level: 250");
 
-        List<String> statusList = new ArrayList<>();
-        statusList.add("Refill Water");
-        statusList.add("Refill Milk");
-        statusList.add("Refill the coffee beans");
-        statusList.add("Empty the ground container");
-        statusList.add("Descale");
-        statusList.add("Exit");
+        List<String> aList = new ArrayList<>();
+        aList.add("Refill Water");
+        aList.add("Refill Milk");
+        aList.add("Refill the coffee beans");
+        aList.add("Empty the ground container");
+        aList.add("Descale");
+        aList.add("Back");
 
-        for (String element : statusList) {
+        for (String element : aList) {
             i++;
             System.out.println("-------------------------------- ");
             System.out.println(i + ") " + element);
@@ -60,7 +60,7 @@ public class StatusPage {
                 new MenuPage(LoginPage.id);
                 break;
             default:
-                System.err.println("Enter a range between 1 - 6");
+                System.err.println("Enter a range between 1 - " + aList.size());
                 new StatusPage();
 
 

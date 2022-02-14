@@ -1,21 +1,22 @@
 package com.tabram.coffemaker.pages;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class LoginPage {
     public static String id;
-    HashMap<String,String> loginInfo;
+    HashMap<String, String> loginInfo;
     boolean logSuccess;
 
 
-    public LoginPage(HashMap<String, String> loginInfoOriginal){
+    public LoginPage(HashMap<String, String> loginInfoOriginal) {
         loginInfo = loginInfoOriginal;
 
         System.out.println("\n------------------------- ");
         System.out.println("Enter your ID and NAME.");
         System.out.println("-------------------------");
 
-        while (!logSuccess){
+        while (!logSuccess) {
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter your ID.");
             String id = sc.nextLine();
@@ -38,7 +39,6 @@ public class LoginPage {
         }
 
     }
-
 
 
 }

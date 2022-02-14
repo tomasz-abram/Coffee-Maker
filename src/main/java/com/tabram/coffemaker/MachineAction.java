@@ -1,5 +1,6 @@
 package com.tabram.coffemaker;
 
+
 public class MachineAction {
     private int rinsing = 60;
 

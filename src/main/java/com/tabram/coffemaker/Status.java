@@ -15,7 +15,7 @@ public class Status {
         this.waterLevel = 250;
         this.milkLevel = 150;
         this.coffeeBeansLevel = 200;
-        this.groundContainer = 20;
+        this.groundContainer = 23;
         this.coffeeCounter = 15;
         this.waterHardness = 5;
     }
