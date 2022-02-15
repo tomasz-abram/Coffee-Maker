@@ -1,6 +1,7 @@
 package com.tabram.coffemaker.pages;
 
 import com.tabram.coffemaker.CoffeeMaker;
+import com.tabram.coffemaker.ScannerSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 
 public class StatusPage {
     private int i;
-
+    private ScannerSettings scanner = new ScannerSettings();
     public StatusPage() {
         System.out.println("Water level        : " + CoffeeMaker.status.getWaterLevel() + "ml.    Max level: 1500ml");
         System.out.println("Milk level         : " + CoffeeMaker.status.getMilkLevel() + "ml.    Max level: 1000ml");
@@ -22,6 +23,7 @@ public class StatusPage {
         aList.add("Refill Milk");
         aList.add("Refill the coffee beans");
         aList.add("Empty the ground container");
+        aList.add("Set the water hardness");
         aList.add("Descale");
         aList.add("Back");
 
@@ -53,11 +55,17 @@ public class StatusPage {
                 new StatusPage();
                 break;
             case 5:
+                scanner.scanner();
+                scanner.checkScanner("Water hardness", 0 , "0", 100 , "100");
+                CoffeeMaker.status.setWaterHardness(scanner.getSetSettings());
+                new StatusPage();
+              break;
+                case 6:
                 CoffeeMaker.machineAction.descale();
                 new StatusPage();
                 break;
-            case 6:
-                new MenuPage(LoginPage.id);
+            case 7:
+                new MenuPage(null);
                 break;
             default:
                 System.err.println("Enter a range between 1 - " + aList.size());

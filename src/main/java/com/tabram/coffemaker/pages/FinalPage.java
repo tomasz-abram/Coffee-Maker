@@ -38,11 +38,11 @@ public class FinalPage {
                 LoginPage loginPage = new LoginPage((HashMap<String, String>) idAndName.getLoginInfo());
                 break;
             case 3:
-                CoffeeMaker.machineAction.turnOnCoffeeMaker();
+                CoffeeMaker.machineAction.turnOffCoffeeMaker();
                 break;
             default:
                 System.err.println("Enter a range between 1 - " + aList.size());
-                new SelectCoffeePage();
+                new FinalPage();
         }
     }
 }

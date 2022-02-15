@@ -1,7 +1,7 @@
 package com.tabram.coffemaker.pages;
 
 import com.tabram.coffemaker.Coffee;
-import com.tabram.coffemaker.coffee.*;
+import com.tabram.coffemaker.CoffeeMaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,27 +35,27 @@ public class SelectCoffeePage {
 
         switch (choice) {
             case 1:
-                Coffee espresso = new Espresso();
+                Coffee espresso = CoffeeMaker.espresso;
                 new DoYouHaveTheSameCupSizePage(espresso);
                 break;
             case 2:
-                Coffee ristretto = new Ristretto();
+                Coffee ristretto = CoffeeMaker.ristretto;
                 new DoYouHaveTheSameCupSizePage(ristretto);
                 break;
             case 3:
-                Coffee cappuccino = new Cappuccino();
+                Coffee cappuccino = CoffeeMaker.cappuccino;
                 new DoYouHaveTheSameCupSizePage(cappuccino);
                 break;
             case 4:
-                Coffee macchiato = new Macchiato();
+                Coffee macchiato = CoffeeMaker.macchiato;
                 new DoYouHaveTheSameCupSizePage(macchiato);
                 break;
             case 5:
-                Coffee lungo = new Lungo();
+                Coffee lungo = CoffeeMaker.lungo;
                 new DoYouHaveTheSameCupSizePage(lungo);
                 break;
             case 6:
-                Coffee latteMacchiato = new LatteMacchiato();
+                Coffee latteMacchiato = CoffeeMaker.latteMacchiato;
                 new DoYouHaveTheSameCupSizePage(latteMacchiato);
                 break;
             case 7:

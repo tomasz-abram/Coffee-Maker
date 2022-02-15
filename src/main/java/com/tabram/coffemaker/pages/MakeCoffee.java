@@ -66,28 +66,32 @@ public class MakeCoffee {
     }
 
     private void checkQuantity() {
-        if ((coffee.getAmountOfWater() + coffee.getAmountMilk()) * quantity > coffee.getCupSize()) {
-            System.err.println("Too small cup.");
-            new ChangeCupSize(coffee);
-
-        }
+       boolean goToStatusPage = false;
         if (CoffeeMaker.status.getWaterLevel() < coffee.getAmountOfWater() * quantity) {
             System.err.println("Not enough water for coffees.");
-            new StatusPage();
+            goToStatusPage = true;
         }
         if (CoffeeMaker.status.getMilkLevel() < coffee.getAmountMilk() * quantity) {
             System.err.println("Not enough milk for coffees.");
-            new StatusPage();
+            goToStatusPage = true;
         }
         if (CoffeeMaker.status.getCoffeeBeansLevel() < coffee.getAmountOfCoffee() * quantity) {
             System.err.println("Not enough coffee beans for coffees.");
-            new StatusPage();
+            goToStatusPage = true;
         }
         if (CoffeeMaker.status.getGroundContainer() + quantity > StatusEnum.GROUND_CONTAINER.getWarningLevel()) {
             System.err.println("I cannot make coffees, because you will overfill the ground container.");
             System.out.println("Maybe you want a single coffee? If you don't, please, empty the ground container.");
-            new StatusPage();
+            goToStatusPage = true;
         }
+       if (goToStatusPage == true){
+           new StatusPage();
+       }
+        if ((coffee.getAmountOfWater() + coffee.getAmountMilk()) * quantity > coffee.getCupSize()) {
+            System.err.println("Too small cup.");
+            new ChangeCupSize(coffee);
+        } 
+        
     }
 
     private void subtractionOfIngredients() {

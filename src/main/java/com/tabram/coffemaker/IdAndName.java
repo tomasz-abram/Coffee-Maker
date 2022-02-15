@@ -12,11 +12,13 @@ public class IdAndName {
     public IdAndName() {
         loginInfo = new HashMap<>();
         loginInfo.put("1", "1");
+        loginInfo.put("000", "Default");
         loginInfo.put("001", "Kozinus");
         loginInfo.put("002", "Brodson");
         loginInfo.put("003", "Bromasz");
-        loginInfo.put("999", "Default");
+
     }
+
 
     public void setLoginInfo(Map<String, String> loginInfo) {
         this.loginInfo = loginInfo;
