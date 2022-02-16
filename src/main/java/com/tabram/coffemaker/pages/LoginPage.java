@@ -1,6 +1,7 @@
 package com.tabram.coffemaker.pages;
 
 import com.tabram.coffemaker.CoffeeMaker;
+import com.tabram.coffemaker.IdAndName;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,16 +63,17 @@ public class LoginPage {
 
                 break;
             case 2:
-                MenuPage menuPage = new MenuPage("Default");
+                MenuPage menuPage = new MenuPage("000");
                 break;
             case 3:
-                System.out.println("Write your name.");
+                System.out.println("Write your ID.");
                 sc = new Scanner(System.in);
+                String id = sc.nextLine();
+                System.out.println("Write your name.");
                 String name = sc.nextLine();
-
-
-
-
+                IdAndName newId = new IdAndName();
+                newId.setLoginInfo(id,name);
+                menuPage = new MenuPage(name);
                 break;
             case 4:
                 CoffeeMaker.machineAction.turnOffCoffeeMaker();
