@@ -22,12 +22,11 @@ public class IdAndName {
     }
 
 
-    public void setLoginInfo(String id, String name) {
-        if(loginInfo.containsKey(id)) {
+    public void setLoginInfo(CoffeeMaker coffeeMaker, String id, String name) {
+        if (loginInfo.containsKey(id)) {
             System.out.println("The given id already exists, enter a different one.");
-            LoginPage loginPage = new LoginPage((HashMap<String, String>) loginInfo);
-        }
-        else {
+            LoginPage loginPage = new LoginPage(coffeeMaker, (HashMap<String, String>) loginInfo);
+        } else {
             System.out.println("Successful new user created.");
             loginInfo.put(id, name);
 

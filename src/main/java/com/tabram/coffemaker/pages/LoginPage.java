@@ -14,7 +14,7 @@ public class LoginPage {
     boolean logSuccess;
 
 
-    public LoginPage(HashMap<String, String> loginInfoOriginal) {
+    public LoginPage(CoffeeMaker coffeeMaker, HashMap<String, String> loginInfoOriginal) {
         loginInfo = loginInfoOriginal;
 
         System.out.println("\n---------------------------------------------  ");
@@ -40,7 +40,7 @@ public class LoginPage {
 
         switch (choice) {
             case 1:
-                while (!logSuccess) {
+
                     sc = new Scanner(System.in);
                     System.out.println("Enter your ID.");
                     String id = sc.nextLine();
@@ -51,7 +51,7 @@ public class LoginPage {
                         if (loginInfo.get(id).equals(name)) {
                             System.out.println("Login successful!");
                             logSuccess = true;
-                            MenuPage menuPage = new MenuPage(name);
+                            MenuPage menuPage = new MenuPage(coffeeMaker, name);
                         } else {
                             System.out.println("Wrong ID or Name!");
                         }
@@ -59,28 +59,29 @@ public class LoginPage {
                     } else {
                         System.out.println("Id not found.");
                     }
-                }
 
+                LoginPage loginPage = new LoginPage(coffeeMaker, loginInfoOriginal);
                 break;
             case 2:
-                MenuPage menuPage = new MenuPage("000");
+                MenuPage menuPage = new MenuPage(coffeeMaker, "Default");
                 break;
             case 3:
                 System.out.println("Write your ID.");
                 sc = new Scanner(System.in);
-                String id = sc.nextLine();
+                id = sc.nextLine();
                 System.out.println("Write your name.");
-                String name = sc.nextLine();
+                name = sc.nextLine();
                 IdAndName newId = new IdAndName();
-                newId.setLoginInfo(id,name);
-                menuPage = new MenuPage(name);
+                newId.setLoginInfo(coffeeMaker, id, name);
+                menuPage = new MenuPage(coffeeMaker, name);
                 break;
             case 4:
-                CoffeeMaker.machineAction.turnOffCoffeeMaker();
+                coffeeMaker.machineAction.turnOffCoffeeMaker(coffeeMaker);
                 break;
             default:
+                //  throw new UnsupportedOperationException(String message);
                 System.err.println("Enter a range between 1 - " + aList.size());
-                new SelectCoffeePage();
+                new SelectCoffeePage(coffeeMaker);
         }
 
 

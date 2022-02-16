@@ -1,13 +1,14 @@
 package com.tabram.coffemaker.pages;
 
 import com.tabram.coffemaker.Coffee;
+import com.tabram.coffemaker.CoffeeMaker;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class DoYouHaveTheSameCupSizePage {
-    public DoYouHaveTheSameCupSizePage(Coffee coffee) {
+    public DoYouHaveTheSameCupSizePage(CoffeeMaker coffeeMaker, Coffee coffee) {
 
         System.out.println("Cup size for " + coffee.getNameOfCoffee() + " is set to " + coffee.getCupSize() + "ml.");
         System.out.println("A single " + coffee.getNameOfCoffee() + " has the volume " + (coffee.getAmountOfWater() + coffee.getAmountMilk()) + "ml");
@@ -31,18 +32,18 @@ public class DoYouHaveTheSameCupSizePage {
 
         switch (choice) {
             case 1:
-                new SetHowManyCoffeesYouWant(coffee);
+                new SetHowManyCoffeesYouWant(coffeeMaker, coffee);
                 break;
             case 2:
-                new ChangeCupSize(coffee);
+                new ChangeCupSize(coffeeMaker, coffee);
                 break;
             case 3:
-                new SelectCoffeePage();
+                new SelectCoffeePage(coffeeMaker);
                 break;
 
             default:
                 System.err.println("Enter a range between 1 - 3");
-                new DoYouHaveTheSameCupSizePage(coffee);
+                new DoYouHaveTheSameCupSizePage(coffeeMaker, coffee);
         }
     }
 }

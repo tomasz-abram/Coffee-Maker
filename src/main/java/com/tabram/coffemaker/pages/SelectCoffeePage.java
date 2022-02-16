@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class SelectCoffeePage {
 
 
-    public SelectCoffeePage() {
+    public SelectCoffeePage(CoffeeMaker coffeeMaker) {
         int i = 0;
 // ?????? czy można uzyskać dostęp do nazw child albo zautomatyzować proces generowania menu
         List<String> aList = new ArrayList<>();
@@ -35,35 +35,29 @@ public class SelectCoffeePage {
 
         switch (choice) {
             case 1:
-                Coffee espresso = CoffeeMaker.espresso;
-                new DoYouHaveTheSameCupSizePage(espresso);
+                new DoYouHaveTheSameCupSizePage(coffeeMaker, coffeeMaker.espresso);
                 break;
             case 2:
-                Coffee ristretto = CoffeeMaker.ristretto;
-                new DoYouHaveTheSameCupSizePage(ristretto);
+                new DoYouHaveTheSameCupSizePage(coffeeMaker, coffeeMaker.ristretto);
                 break;
             case 3:
-                Coffee cappuccino = CoffeeMaker.cappuccino;
-                new DoYouHaveTheSameCupSizePage(cappuccino);
+                new DoYouHaveTheSameCupSizePage(coffeeMaker, coffeeMaker.cappuccino);
                 break;
             case 4:
-                Coffee macchiato = CoffeeMaker.macchiato;
-                new DoYouHaveTheSameCupSizePage(macchiato);
+                new DoYouHaveTheSameCupSizePage(coffeeMaker, coffeeMaker.macchiato);
                 break;
             case 5:
-                Coffee lungo = CoffeeMaker.lungo;
-                new DoYouHaveTheSameCupSizePage(lungo);
+                new DoYouHaveTheSameCupSizePage(coffeeMaker, coffeeMaker.lungo);
                 break;
             case 6:
-                Coffee latteMacchiato = CoffeeMaker.latteMacchiato;
-                new DoYouHaveTheSameCupSizePage(latteMacchiato);
+                new DoYouHaveTheSameCupSizePage(coffeeMaker, coffeeMaker.latteMacchiato);
                 break;
             case 7:
-                new MenuPage(null);
+                new MenuPage(coffeeMaker, null);
                 break;
             default:
                 System.err.println("Enter a range between 1 - " + aList.size());
-                new SelectCoffeePage();
+                new SelectCoffeePage(coffeeMaker);
         }
     }
 }

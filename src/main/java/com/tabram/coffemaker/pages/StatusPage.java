@@ -10,13 +10,14 @@ import java.util.Scanner;
 public class StatusPage {
     private int i;
     private ScannerSettings scanner = new ScannerSettings();
-    public StatusPage() {
-        System.out.println("Water level        : " + CoffeeMaker.status.getWaterLevel() + "ml.    Max level: 1500ml");
-        System.out.println("Milk level         : " + CoffeeMaker.status.getMilkLevel() + "ml.    Max level: 1000ml");
-        System.out.println("Coffee beans level : " + CoffeeMaker.status.getCoffeeBeansLevel() + "g.    Max level: 300g");
-        System.out.println("Ground container   : " + CoffeeMaker.status.getGroundContainer() + "pcs.      Max level: 25 pieces");
-        System.out.println("Water hardness     : " + CoffeeMaker.status.getWaterHardness());
-        System.out.println("Scale level        : " + CoffeeMaker.status.getScaleCounter() + "        Max level: 250");
+
+    public StatusPage(CoffeeMaker coffeeMaker) {
+        System.out.println("Water level        : " + coffeeMaker.status.getWaterLevel() + "ml.    Max level: 1500ml");
+        System.out.println("Milk level         : " + coffeeMaker.status.getMilkLevel() + "ml.    Max level: 1000ml");
+        System.out.println("Coffee beans level : " + coffeeMaker.status.getCoffeeBeansLevel() + "g.    Max level: 300g");
+        System.out.println("Ground container   : " + coffeeMaker.status.getGroundContainer() + "pcs.      Max level: 25 pieces");
+        System.out.println("Water hardness     : " + coffeeMaker.status.getWaterHardness());
+        System.out.println("Scale level        : " + coffeeMaker.status.getScaleCounter() + "        Max level: 250");
 
         List<String> aList = new ArrayList<>();
         aList.add("Refill Water");
@@ -39,37 +40,37 @@ public class StatusPage {
 
         switch (choice) {
             case 1:
-                CoffeeMaker.machineAction.fillWater();
-                new StatusPage();
+                coffeeMaker.machineAction.fillWater(coffeeMaker);
+                new StatusPage(coffeeMaker);
                 break;
             case 2:
-                CoffeeMaker.machineAction.fillMilk();
-                new StatusPage();
+                coffeeMaker.machineAction.fillMilk(coffeeMaker);
+                new StatusPage(coffeeMaker);
                 break;
             case 3:
-                CoffeeMaker.machineAction.fillCoffeeBeans();
-                new StatusPage();
+                coffeeMaker.machineAction.fillCoffeeBeans(coffeeMaker);
+                new StatusPage(coffeeMaker);
                 break;
             case 4:
-                CoffeeMaker.machineAction.emptyGroundContainer();
-                new StatusPage();
+                coffeeMaker.machineAction.emptyGroundContainer(coffeeMaker);
+                new StatusPage(coffeeMaker);
                 break;
             case 5:
                 scanner.scanner();
-                scanner.checkScanner("Water hardness", 0 , "0", 100 , "100");
-                CoffeeMaker.status.setWaterHardness(scanner.getSetSettings());
-                new StatusPage();
-              break;
-                case 6:
-                CoffeeMaker.machineAction.descale();
-                new StatusPage();
+                scanner.checkScanner("Water hardness", 0, "0", 100, "100");
+                coffeeMaker.status.setWaterHardness(scanner.getSetSettings());
+                new StatusPage(coffeeMaker);
+                break;
+            case 6:
+                coffeeMaker.machineAction.descale(coffeeMaker);
+                new StatusPage(coffeeMaker);
                 break;
             case 7:
-                new MenuPage(null);
+                new MenuPage(coffeeMaker, null);
                 break;
             default:
                 System.err.println("Enter a range between 1 - " + aList.size());
-                new StatusPage();
+                new StatusPage(coffeeMaker);
 
 
         }

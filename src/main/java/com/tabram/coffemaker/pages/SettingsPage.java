@@ -11,7 +11,7 @@ public class SettingsPage {
     private int i;
     private int setSettings;
 
-    public SettingsPage() {
+    public SettingsPage(CoffeeMaker coffeeMaker) {
 //        System.err.println("Nothing to do yet...");
 //        new MenuPage(null);
 
@@ -39,35 +39,29 @@ public class SettingsPage {
 
         switch (choice) {
             case 1:
-                Coffee espresso = CoffeeMaker.espresso;
-                new ChangeSettings(espresso);
+                new ChangeSettings(coffeeMaker, coffeeMaker.espresso);
                 break;
             case 2:
-                Coffee ristretto = CoffeeMaker.ristretto;
-                new ChangeSettings(ristretto);
+                new ChangeSettings(coffeeMaker, coffeeMaker.ristretto);
                 break;
             case 3:
-                Coffee cappuccino = CoffeeMaker.cappuccino;
-                new ChangeSettings(cappuccino);
+                new ChangeSettings(coffeeMaker, coffeeMaker.cappuccino);
                 break;
             case 4:
-                Coffee macchiato = CoffeeMaker.macchiato;
-                new ChangeSettings(macchiato);
+                new ChangeSettings(coffeeMaker, coffeeMaker.macchiato);
                 break;
             case 5:
-                Coffee lungo = CoffeeMaker.lungo;
-                new ChangeSettings(lungo);
+                new ChangeSettings(coffeeMaker, coffeeMaker.lungo);
                 break;
             case 6:
-                Coffee latteMacchiato = CoffeeMaker.latteMacchiato;
-                new ChangeSettings(latteMacchiato);
+                new ChangeSettings(coffeeMaker, coffeeMaker.latteMacchiato);
                 break;
             case 7:
-                new MenuPage(null);
+                new MenuPage(coffeeMaker, null);
                 break;
             default:
                 System.err.println("Enter a range between 1 - " + aList.size());
-                new SelectCoffeePage();
+                new SelectCoffeePage(coffeeMaker);
         }
 
 

@@ -14,8 +14,10 @@ public class MakeCoffee {
     long t = System.currentTimeMillis();
     int preheatedWater = 65; // degree
     int accelerate = 10;
+    CoffeeMaker coffeeMaker;
 
-    public MakeCoffee(int quantity, Coffee coffee) {
+    public MakeCoffee(CoffeeMaker coffeeMaker, int quantity, Coffee coffee) {
+        this.coffeeMaker = coffeeMaker;
         this.quantity = quantity;
         this.coffee = coffee;
         long waterHeatingTime = ((4180 * ((long) coffee.getAmountOfWater() * quantity) / 1000 * (coffee.getTempWater() - preheatedWater)) / 1800);
@@ -61,45 +63,45 @@ public class MakeCoffee {
             }
         }
         subtractionOfIngredients();
-        new FinalPage();
+        new FinalPage(coffeeMaker);
 
     }
 
     private void checkQuantity() {
        boolean goToStatusPage = false;
-        if (CoffeeMaker.status.getWaterLevel() < coffee.getAmountOfWater() * quantity) {
+        if (coffeeMaker.status.getWaterLevel() < coffee.getAmountOfWater() * quantity) {
             System.err.println("Not enough water for coffees.");
             goToStatusPage = true;
         }
-        if (CoffeeMaker.status.getMilkLevel() < coffee.getAmountMilk() * quantity) {
+        if (coffeeMaker.status.getMilkLevel() < coffee.getAmountMilk() * quantity) {
             System.err.println("Not enough milk for coffees.");
             goToStatusPage = true;
         }
-        if (CoffeeMaker.status.getCoffeeBeansLevel() < coffee.getAmountOfCoffee() * quantity) {
+        if (coffeeMaker.status.getCoffeeBeansLevel() < coffee.getAmountOfCoffee() * quantity) {
             System.err.println("Not enough coffee beans for coffees.");
             goToStatusPage = true;
         }
-        if (CoffeeMaker.status.getGroundContainer() + quantity > StatusEnum.GROUND_CONTAINER.getWarningLevel()) {
+        if (coffeeMaker.status.getGroundContainer() + quantity > StatusEnum.GROUND_CONTAINER.getWarningLevel()) {
             System.err.println("I cannot make coffees, because you will overfill the ground container.");
             System.out.println("Maybe you want a single coffee? If you don't, please, empty the ground container.");
             goToStatusPage = true;
         }
-       if (goToStatusPage == true){
-           new StatusPage();
-       }
+        if (goToStatusPage == true) {
+            new StatusPage(coffeeMaker);
+        }
         if ((coffee.getAmountOfWater() + coffee.getAmountMilk()) * quantity > coffee.getCupSize()) {
             System.err.println("Too small cup.");
-            new ChangeCupSize(coffee);
+            new ChangeCupSize(coffeeMaker, coffee);
         } 
         
     }
 
     private void subtractionOfIngredients() {
-        CoffeeMaker.status.setWaterLevel(CoffeeMaker.status.getWaterLevel() - coffee.getAmountOfWater() * quantity);
-        CoffeeMaker.status.setMilkLevel(CoffeeMaker.status.getMilkLevel() - coffee.getAmountMilk() * quantity);
-        CoffeeMaker.status.setCoffeeBeansLevel((float) (CoffeeMaker.status.getCoffeeBeansLevel() - coffee.getAmountOfCoffee() * quantity));
-        CoffeeMaker.status.setGroundContainer(quantity);
-        CoffeeMaker.status.setCoffeeCounter(quantity);
+        coffeeMaker.status.setWaterLevel(coffeeMaker.status.getWaterLevel() - coffee.getAmountOfWater() * quantity);
+        coffeeMaker.status.setMilkLevel(coffeeMaker.status.getMilkLevel() - coffee.getAmountMilk() * quantity);
+        coffeeMaker.status.setCoffeeBeansLevel((float) (coffeeMaker.status.getCoffeeBeansLevel() - coffee.getAmountOfCoffee() * quantity));
+        coffeeMaker.status.setGroundContainer(quantity);
+        coffeeMaker.status.setCoffeeCounter(quantity);
 
     }
 

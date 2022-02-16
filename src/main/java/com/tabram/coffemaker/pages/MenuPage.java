@@ -10,8 +10,7 @@ import java.util.Scanner;
 
 public class MenuPage {
     private int i;
-
-    public MenuPage(String id) {
+    public MenuPage(CoffeeMaker coffeeMaker, String id) {
         if (id != null) {
             System.out.println("\nHello " + id);
             System.out.println("it's time for your coffee.");
@@ -36,24 +35,24 @@ public class MenuPage {
 
         switch (choice) {
             case 1:
-                new SelectCoffeePage();
+                new SelectCoffeePage(coffeeMaker);
                 break;
             case 2:
-                new SettingsPage();
+                new SettingsPage(coffeeMaker);
                 break;
             case 3:
-                new StatusPage();
+                new StatusPage(coffeeMaker);
                 break;
             case 4:
                 IdAndName idAndName = new IdAndName();
-                LoginPage loginPage = new LoginPage((HashMap<String, String>) idAndName.getLoginInfo());
+                LoginPage loginPage = new LoginPage(coffeeMaker, (HashMap<String, String>) idAndName.getLoginInfo());
                 break;
             case 5:
-                CoffeeMaker.machineAction.turnOffCoffeeMaker();
+                coffeeMaker.machineAction.turnOffCoffeeMaker(coffeeMaker);
                 break;
             default:
                 System.err.println("Enter a range between 1 - " + aList.size());
-                new MenuPage(id);
+                new MenuPage(coffeeMaker, id);
         }
 
 

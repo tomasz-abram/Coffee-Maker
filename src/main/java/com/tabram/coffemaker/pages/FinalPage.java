@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class FinalPage {
     private int i;
 
-    public FinalPage() {
+    public FinalPage(CoffeeMaker coffeeMaker) {
         System.out.println("Enjoy Your Coffee!");
         System.out.println("What you want to do now?");
 
@@ -31,18 +31,18 @@ public class FinalPage {
 
         switch (choice) {
             case 1:
-                new MenuPage(null);
+                new MenuPage(coffeeMaker, null);
                 break;
             case 2:
                 IdAndName idAndName = new IdAndName();
-                LoginPage loginPage = new LoginPage((HashMap<String, String>) idAndName.getLoginInfo());
+                LoginPage loginPage = new LoginPage(coffeeMaker, (HashMap<String, String>) idAndName.getLoginInfo());
                 break;
             case 3:
-                CoffeeMaker.machineAction.turnOffCoffeeMaker();
+                coffeeMaker.machineAction.turnOffCoffeeMaker(coffeeMaker);
                 break;
             default:
                 System.err.println("Enter a range between 1 - " + aList.size());
-                new FinalPage();
+                new FinalPage(coffeeMaker);
         }
     }
 }
