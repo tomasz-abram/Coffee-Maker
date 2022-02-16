@@ -1,5 +1,7 @@
 package com.tabram.coffemaker;
 
+import com.tabram.coffemaker.pages.LoginPage;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,8 +22,16 @@ public class IdAndName {
     }
 
 
-    public void setLoginInfo(Map<String, String> loginInfo) {
-        this.loginInfo = loginInfo;
+    public void setLoginInfo(String id, String name) {
+        if(loginInfo.containsKey(id)) {
+            System.out.println("The given id already exists, enter a different one.");
+            LoginPage loginPage = new LoginPage((HashMap<String, String>) loginInfo);
+        }
+        else {
+            System.out.println("Successful new user created.");
+            loginInfo.put(id, name);
+
+        }
     }
 
     public static IdAndName getInstance() {
