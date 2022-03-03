@@ -1,6 +1,15 @@
 package com.tabram.coffemaker;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "coffee_table")
 public class Coffee {
+    @Id
+    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //   @GeneratedValue(generator = "incrementor")
+    private int id;
     private String nameOfCoffee;
     private int tempWater;
     private int grindingLevel;
@@ -9,16 +18,15 @@ public class Coffee {
     private int amountMilk;
     private int cupSize;
 
+    public Coffee() {
+    }
 
-    public Coffee(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
-        this.setNameOfCoffee(nameOfCoffee);
-        this.tempWater = tempWater;
-        this.grindingLevel = grindingLevel;
-        this.amountOfCoffee = amountOfCoffee;
-        this.amountOfWater = amountOfWater;
-        this.amountMilk = amountMilk;
-        this.cupSize = cupSize;
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNameOfCoffee() {
@@ -75,5 +83,32 @@ public class Coffee {
 
     public void setCupSize(int cupSize) {
         this.cupSize = cupSize;
+    }
+
+
+    public Coffee(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
+        this.setNameOfCoffee(nameOfCoffee);
+        this.tempWater = tempWater;
+        this.grindingLevel = grindingLevel;
+        this.amountOfCoffee = amountOfCoffee;
+        this.amountOfWater = amountOfWater;
+        this.amountMilk = amountMilk;
+        this.cupSize = cupSize;
+
+
+    }
+
+    @Override
+    public String toString() {
+        return "Coffee{" +
+                "id=" + id +
+                ", nameOfCoffee='" + nameOfCoffee + '\'' +
+                ", tempWater=" + tempWater +
+                ", grindingLevel=" + grindingLevel +
+                ", amountOfCoffee=" + amountOfCoffee +
+                ", amountOfWater=" + amountOfWater +
+                ", amountMilk=" + amountMilk +
+                ", cupSize=" + cupSize +
+                '}';
     }
 }

@@ -41,24 +41,24 @@ public class LoginPage {
         switch (choice) {
             case 1:
 
-                    sc = new Scanner(System.in);
-                    System.out.println("Enter your ID.");
-                    String id = sc.nextLine();
-                    System.out.println("Enter your Name");
-                    String name = sc.nextLine();
+                sc = new Scanner(System.in);
+                System.out.println("Enter your ID.");
+                String id = sc.nextLine();
+                System.out.println("Enter your Name");
+                String name = sc.nextLine();
 
-                    if (loginInfo.containsKey(id)) {
-                        if (loginInfo.get(id).equals(name)) {
-                            System.out.println("Login successful!");
-                            logSuccess = true;
-                            MenuPage menuPage = new MenuPage(coffeeMaker, name);
-                        } else {
-                            System.out.println("Wrong ID or Name!");
-                        }
-
+                if (loginInfo.containsKey(id)) {
+                    if (loginInfo.get(id).equals(name)) {
+                        System.out.println("Login successful!");
+                        logSuccess = true;
+                        MenuPage menuPage = new MenuPage(coffeeMaker, name);
                     } else {
-                        System.out.println("Id not found.");
+                        System.out.println("Wrong ID or Name!");
                     }
+
+                } else {
+                    System.out.println("Id not found.");
+                }
 
                 LoginPage loginPage = new LoginPage(coffeeMaker, loginInfoOriginal);
                 break;
@@ -84,7 +84,9 @@ public class LoginPage {
                 new SelectCoffeePage(coffeeMaker);
         }
 
+    }
 
+    private void setNewUser() {
 
 
     }
