@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class CoffeeService {
@@ -18,7 +19,10 @@ public class CoffeeService {
     }
 
     public void addCoffee(Coffee coffee) {
-
+        Optional<Coffee> coffeeOptional = coffeeRepository.findCoffeeByName(coffee.getNameOfCoffee());
+        if (coffeeOptional.isPresent()) {
+            throw new IllegalStateException("name taken");
+        }
         coffeeRepository.save(coffee);
     }
 

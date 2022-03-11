@@ -3,9 +3,10 @@ package com.tabram.coffeemaker.user;
 import com.tabram.coffeemaker.coffee.Coffee;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "User")
 public class User {
     @Id
     @Column(name = "Id")
@@ -20,22 +21,59 @@ public class User {
     )
     Long id;
 
-    @Column
-    String name;
-    @ManyToOne
-    @JoinColumn(name = "coffee_id")
-    Coffee coffee;
+    private String userName;
+    private String password;
+    private boolean active;
+    private String roles;
+
+    @ManyToMany(mappedBy = "user")
+    private Set<Coffee> coffee;
 
     public User() {
     }
 
-    public User(String name, Coffee coffee) {
-        this.name = name;
-        this.coffee = coffee;
+    public String getUserName() {
+        return userName;
     }
 
-    public User(String name) {
-        this.name = name;
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public User(String userName, String password, boolean active, String roles) {
+        this.userName = userName;
+        this.password = password;
+        this.active = active;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -46,19 +84,11 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Coffee getCoffee() {
+    public java.util.Set<Coffee> getCoffee() {
         return coffee;
     }
 
-    public void setCoffee(Coffee coffee) {
+    public void setCoffee(java.util.Set<Coffee> coffee) {
         this.coffee = coffee;
     }
 
@@ -66,10 +96,9 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", coffee=" + coffee +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+//                ", coffee=" + coffee +
                 '}';
     }
-
-
 }

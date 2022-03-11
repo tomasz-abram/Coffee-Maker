@@ -1,7 +1,5 @@
 package com.tabram.coffeemaker.coffee;
 
-import com.tabram.coffeemaker.user.User;
-import com.tabram.coffeemaker.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

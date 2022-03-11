@@ -10,7 +10,7 @@ import java.util.List;
 public class CoffeeConfig {
 
     @Bean
-    CommandLineRunner CoffeeCommandLineRunner(CoffeeRepository repository) {
+    CommandLineRunner coffeeCommandLineRunner(CoffeeRepository repository) {
         return args -> {
             Coffee espresso = new Coffee("Espresso", 95, 5, 17.5, 40, 0, 60);
             Coffee cappuccino = new Coffee("Cappuccino", 95, 5, 17.5, 30, 100, 200);

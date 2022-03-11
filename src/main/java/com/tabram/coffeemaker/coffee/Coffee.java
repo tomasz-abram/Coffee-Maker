@@ -1,5 +1,7 @@
 package com.tabram.coffeemaker.coffee;
 
+import com.tabram.coffeemaker.user.User;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,7 +21,7 @@ public class Coffee {
 
 
     private int id;
-    @Column(name = "name_of_coffee", unique = true)
+    @Column(name = "name_of_coffee")
     private String nameOfCoffee;
     @Column(name = "temp_water")
     private int tempWater;
@@ -34,8 +36,19 @@ public class Coffee {
     @Column(name = "cup_size")
     private int cupSize;
 
-    public Coffee() {
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable=false)
+    private User user;
+
+    public User getUser() {
+        return user;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Coffee() {}
 
     public int getId() {
         return id;
