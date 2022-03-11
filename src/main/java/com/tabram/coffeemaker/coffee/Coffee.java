@@ -1,4 +1,4 @@
-package com.tabram.coffeemaker;
+package com.tabram.coffeemaker.coffee;
 
 import javax.persistence.*;
 

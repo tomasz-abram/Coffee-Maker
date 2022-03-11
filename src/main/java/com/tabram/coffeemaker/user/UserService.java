@@ -43,7 +43,7 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalStateException("User with id " + userId + " does not exist"));
 
-        if (name != null && name.length() > 0 && !Objects.equals(user.getName(),name)) {
+        if (name != null && name.length() > 0 && !Objects.equals(user.getName(), name)) {
             user.setName(name);
         }
     }

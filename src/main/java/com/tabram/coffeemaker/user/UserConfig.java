@@ -9,16 +9,16 @@ import java.util.List;
 @Configuration
 public class UserConfig {
 
-//    @Bean
-//    CommandLineRunner commandLineRunner(UserRepository repository){
-//        return args -> {
-//            User mark = new User("Mark");
-//            User tony = new User("Tony");
-//
-//            repository.saveAll(List.of(mark,tony));
-//        };
-//
-//    }
+    @Bean
+    CommandLineRunner commandLineRunner(UserRepository repository) {
+        return args -> {
+            User mark = new User("Mark");
+            User tony = new User("Tony");
+
+            repository.saveAll(List.of(mark, tony));
+        };
+
+    }
 
 
 }

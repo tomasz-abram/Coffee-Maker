@@ -1,6 +1,6 @@
 package com.tabram.coffeemaker.user;
 
-import com.tabram.coffeemaker.Coffee;
+import com.tabram.coffeemaker.coffee.Coffee;
 
 import javax.persistence.*;
 
@@ -72,21 +72,4 @@ public class User {
     }
 
 
-
-    private void login() {
-
-    }
-
-    private void newUser() {
-
-    }
-
-    private void defaultUser() {
-
-    }
-
-    private void setNewUser() {
-
-
-    }
 }
