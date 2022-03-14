@@ -26,8 +26,8 @@ public class User {
     private boolean active;
     private String roles;
 
-    @ManyToMany(mappedBy = "user")
-    private Set<Coffee> coffee;
+//    @ManyToMany(mappedBy = "user")
+//    private Set<Coffee> coffee;
 
     public User() {
     }
@@ -84,13 +84,13 @@ public class User {
         this.id = id;
     }
 
-    public java.util.Set<Coffee> getCoffee() {
-        return coffee;
-    }
-
-    public void setCoffee(java.util.Set<Coffee> coffee) {
-        this.coffee = coffee;
-    }
+//    public java.util.Set<Coffee> getCoffee() {
+//        return coffee;
+//    }
+//
+//    public void setCoffee(java.util.Set<Coffee> coffee) {
+//        this.coffee = coffee;
+//    }
 
     @Override
     public String toString() {

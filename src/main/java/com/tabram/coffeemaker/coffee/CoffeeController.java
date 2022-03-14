@@ -17,7 +17,7 @@ public class CoffeeController {
 
     @GetMapping
     public List<Coffee> getCoffees() {
-        return coffeeService.getCoffee();
+        return coffeeService.getCoffees();
     }
 
     @PostMapping

@@ -1,5 +1,6 @@
 package com.tabram.coffeemaker.coffee;
 
+import com.tabram.coffeemaker.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,9 @@ public class CoffeeService {
         this.coffeeRepository = coffeeRepository;
     }
 
+    public List<Coffee> getCoffees() {
+        return coffeeRepository.findAll();
+    }
     public void addCoffee(Coffee coffee) {
         Optional<Coffee> coffeeOptional = coffeeRepository.findCoffeeByName(coffee.getNameOfCoffee());
         if (coffeeOptional.isPresent()) {

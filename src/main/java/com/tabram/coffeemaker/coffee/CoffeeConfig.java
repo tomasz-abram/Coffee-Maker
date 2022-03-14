@@ -10,7 +10,7 @@ import java.util.List;
 public class CoffeeConfig {
 
     @Bean
-    CommandLineRunner coffeeCommandLineRunner(CoffeeRepository repository) {
+    CommandLineRunner coffeeCommandLineRunner(CoffeeRepository coffeeRepository) {
         return args -> {
             Coffee espresso = new Coffee("Espresso", 95, 5, 17.5, 40, 0, 60);
             Coffee cappuccino = new Coffee("Cappuccino", 95, 5, 17.5, 30, 100, 200);
@@ -19,7 +19,7 @@ public class CoffeeConfig {
             Coffee macchiato = new Coffee("Macchiato", 95, 5, 17.5, 40, 10, 100);
             Coffee ristretto = new Coffee("Ristretto", 95, 5, 17.5, 20, 0, 60);
 
-            repository.saveAll(List.of(espresso, cappuccino, latteMacchiato, lungo, macchiato, ristretto));
+            coffeeRepository.saveAll(List.of(espresso, cappuccino, latteMacchiato, lungo, macchiato, ristretto));
         };
 
     }

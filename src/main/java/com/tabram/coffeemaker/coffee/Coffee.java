@@ -36,17 +36,17 @@ public class Coffee {
     @Column(name = "cup_size")
     private int cupSize;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable=false)
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable=false)
+//    private User user;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Coffee() {}
 
