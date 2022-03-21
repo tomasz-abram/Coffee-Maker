@@ -3,31 +3,44 @@ package com.tabram.coffeemaker.user;
 import com.tabram.coffeemaker.coffee.Coffee;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "User")
 public class User {
     @Id
-    @Column(name = "Id")
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @GeneratedValue
+//    @Column(name = "user_id")
+//    @SequenceGenerator(
+//            name = "user_sequence",
+//            sequenceName = "user_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "user_sequence"
+//    )
     Long id;
-
+    @Column
     private String userName;
+    @Column
     private String password;
+    @Column
     private boolean active;
+    @Column
     private String roles;
 
-//    @ManyToMany(mappedBy = "user")
-//    private Set<Coffee> coffee;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Coffee> coffee = new ArrayList<>();
+
+    public List<Coffee> getCoffee() {
+        return coffee;
+    }
+
+    public void setCoffee(List<Coffee> coffee) {
+        this.coffee = coffee;
+    }
 
     public User() {
     }

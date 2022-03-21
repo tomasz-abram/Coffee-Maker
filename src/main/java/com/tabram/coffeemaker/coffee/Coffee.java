@@ -8,16 +8,17 @@ import javax.persistence.*;
 @Table(name = "coffee_table")
 public class Coffee {
     @Id
-    @Column(name = "Id")
-    @SequenceGenerator(
-            name = "coffee_sequence",
-            sequenceName = "coffee_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "coffee_sequence"
-    )
+    @GeneratedValue
+//    @Column(name = "coffee_id")
+//    @SequenceGenerator(
+//            name = "coffee_sequence",
+//            sequenceName = "coffee_sequence",
+//            allocationSize = 1
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "coffee_sequence"
+//    )
 
 
     private int id;
@@ -36,19 +37,32 @@ public class Coffee {
     @Column(name = "cup_size")
     private int cupSize;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable=false)
-//    private User user;
+    @OneToMany
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public Coffee() {
+    }
 
-    public Coffee() {}
+    public Coffee(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
+        this.setNameOfCoffee(nameOfCoffee);
+        this.tempWater = tempWater;
+        this.grindingLevel = grindingLevel;
+        this.amountOfCoffee = amountOfCoffee;
+        this.amountOfWater = amountOfWater;
+        this.amountMilk = amountMilk;
+        this.cupSize = cupSize;
+
+
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;
@@ -112,19 +126,6 @@ public class Coffee {
 
     public void setCupSize(int cupSize) {
         this.cupSize = cupSize;
-    }
-
-
-    public Coffee(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
-        this.setNameOfCoffee(nameOfCoffee);
-        this.tempWater = tempWater;
-        this.grindingLevel = grindingLevel;
-        this.amountOfCoffee = amountOfCoffee;
-        this.amountOfWater = amountOfWater;
-        this.amountMilk = amountMilk;
-        this.cupSize = cupSize;
-
-
     }
 
     @Override
