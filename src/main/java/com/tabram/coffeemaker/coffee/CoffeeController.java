@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
+@RequestMapping("/coffee")
 public class CoffeeController {
 
     private CoffeeService coffeeService;
@@ -13,7 +15,6 @@ public class CoffeeController {
     public CoffeeController(CoffeeService coffeeService) {
         this.coffeeService = coffeeService;
     }
-
 
     @GetMapping
     public List<Coffee> getCoffees() {
@@ -26,16 +27,14 @@ public class CoffeeController {
     }
 
     @DeleteMapping(path = {"coffeeId"})
-    public void deleteCoffee(@PathVariable("coffeeId") Long coffeeId){
+    public void deleteCoffee(@PathVariable("coffeeId") Long coffeeId) {
         coffeeService.deleteCoffee(coffeeId);
     }
 
     @PutMapping(path = {"coffeeId"})
     public void updateCoffee(
-        @PathVariable("coffeeId") Long coffeeId,
-        @RequestParam(required = false) String nameOfCoffee){
-    coffeeService.updateCoffee(coffeeId,nameOfCoffee);
-    }
-    {
+            @PathVariable("coffeeId") Long coffeeId,
+            @RequestParam(required = false) String nameOfCoffee) {
+        coffeeService.updateCoffee(coffeeId, nameOfCoffee);
     }
 }

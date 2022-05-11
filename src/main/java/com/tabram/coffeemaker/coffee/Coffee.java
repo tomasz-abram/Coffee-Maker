@@ -3,23 +3,27 @@ package com.tabram.coffeemaker.coffee;
 import com.tabram.coffeemaker.user.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "coffee_table")
 public class Coffee {
-    @Id
-    @GeneratedValue
-//    @Column(name = "coffee_id")
-//    @SequenceGenerator(
-//            name = "coffee_sequence",
-//            sequenceName = "coffee_sequence",
-//            allocationSize = 1
-//    )
-//    @GeneratedValue(
-//            strategy = GenerationType.SEQUENCE,
-//            generator = "coffee_sequence"
-//    )
 
+    @ManyToMany(mappedBy = "coffeeList")
+    List<User> usersList = new ArrayList<>();
+
+    @Id
+    @Column(name = "coffee_id")
+    @SequenceGenerator(
+            name = "coffee_sequence",
+            sequenceName = "coffee_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "coffee_sequence"
+    )
 
     private int id;
     @Column(name = "name_of_coffee")
@@ -37,10 +41,6 @@ public class Coffee {
     @Column(name = "cup_size")
     private int cupSize;
 
-    @OneToMany
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
     public Coffee() {
     }
 
@@ -56,12 +56,12 @@ public class Coffee {
 
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUsersList() {
+        return usersList;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsersList(List<User> usersList) {
+        this.usersList = usersList;
     }
 
     public int getId() {

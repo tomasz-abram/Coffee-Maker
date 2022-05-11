@@ -10,18 +10,17 @@ import java.util.List;
 @Table(name = "User")
 public class User {
     @Id
-    @GeneratedValue
-//    @Column(name = "user_id")
-//    @SequenceGenerator(
-//            name = "user_sequence",
-//            sequenceName = "user_sequence",
-//            allocationSize = 1
-//    )
-//    @GeneratedValue(
-//            strategy = GenerationType.SEQUENCE,
-//            generator = "user_sequence"
-//    )
-    Long id;
+    @Column(name = "user_id")
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
+    private int id;
     @Column
     private String userName;
     @Column
@@ -31,15 +30,20 @@ public class User {
     @Column
     private String roles;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Coffee> coffee = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "users_coffees",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "coffee_id"))
 
-    public List<Coffee> getCoffee() {
-        return coffee;
+    private List<Coffee> coffeeList = new ArrayList<>();
+
+    public List<Coffee> getCoffeeList() {
+        return coffeeList;
     }
 
-    public void setCoffee(List<Coffee> coffee) {
-        this.coffee = coffee;
+    public void setCoffeeList(List<Coffee> coffeeList) {
+        this.coffeeList = coffeeList;
     }
 
     public User() {
@@ -89,21 +93,14 @@ public class User {
         this.roles = roles;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-//    public java.util.Set<Coffee> getCoffee() {
-//        return coffee;
-//    }
-//
-//    public void setCoffee(java.util.Set<Coffee> coffee) {
-//        this.coffee = coffee;
-//    }
 
     @Override
     public String toString() {
