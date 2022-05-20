@@ -1,0 +1,17 @@
+
+.button {
+  background-color: #f4511e;
+  border: none;
+  color: white;
+  padding: 0.6rem 2.5rem;
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: -2;
+}

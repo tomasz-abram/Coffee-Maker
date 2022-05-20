@@ -1,4 +1,5 @@
-package com.tabram.coffeemaker.login;
+package com.tabram.coffeemaker.security;
+
 
 import com.tabram.coffeemaker.user.User;
 import com.tabram.coffeemaker.user.UserRepository;
@@ -19,7 +20,9 @@ public class MyUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findUserByName(userName);
+
         user.orElseThrow(() -> new UsernameNotFoundException("User not found: " + userName));
+
         return user.map(MyUserDetails::new).get();
     }
 }

@@ -46,7 +46,12 @@ public class User {
         this.coffeeList = coffeeList;
     }
 
-    public User() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -81,6 +86,9 @@ public class User {
         this.password = password;
     }
 
+    public User() {
+    }
+
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
@@ -93,13 +101,7 @@ public class User {
         this.roles = roles;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
 
     @Override

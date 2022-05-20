@@ -10,8 +10,7 @@ import java.util.List;
 @Table(name = "coffee_table")
 public class Coffee {
 
-    @ManyToMany(mappedBy = "coffeeList")
-    List<User> usersList = new ArrayList<>();
+
 
     @Id
     @Column(name = "coffee_id")
@@ -40,6 +39,10 @@ public class Coffee {
     private int amountMilk;
     @Column(name = "cup_size")
     private int cupSize;
+
+    @ManyToMany(mappedBy = "coffeeList")
+    List<User> usersList = new ArrayList<>();
+
 
     public Coffee() {
     }
