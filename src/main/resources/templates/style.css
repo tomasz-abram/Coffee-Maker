@@ -1,4 +1,28 @@
+:root {
 
+  --submit-color: rgba(25, 25, 25, 0.8);
+  --form-color: rgba(255, 255, 255, 0.7);
+  --corners: 5px;
+  --border-color: rgba(150, 150, 150, 1);
+}
+
+body {
+  align-items: center;
+}
+
+.container {
+  background-color: #827f7f;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  background-color: var(--form-color);
+  border-radius: var(--corners);
+  border: solid;
+  border-color: white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 6px 6px rgba(0,0,0,0.4);
+
+}
 .button {
   background-color: #f4511e;
   border: none;

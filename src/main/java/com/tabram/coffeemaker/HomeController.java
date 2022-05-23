@@ -13,8 +13,6 @@ public class HomeController {
         return "home";
     }
 
-
-
     @GetMapping("/user")
     public String user(){
        return ("<h1>Welcome User</h1>");

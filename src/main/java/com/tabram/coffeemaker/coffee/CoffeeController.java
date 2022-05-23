@@ -27,13 +27,13 @@ public class CoffeeController {
     }
 
     @DeleteMapping(path = {"coffeeId"})
-    public void deleteCoffee(@PathVariable("coffeeId") Long coffeeId) {
+    public void deleteCoffee(@PathVariable("coffeeId") Integer coffeeId) {
         coffeeService.deleteCoffee(coffeeId);
     }
 
     @PutMapping(path = {"coffeeId"})
     public void updateCoffee(
-            @PathVariable("coffeeId") Long coffeeId,
+            @PathVariable("coffeeId") Integer coffeeId,
             @RequestParam(required = false) String nameOfCoffee) {
         coffeeService.updateCoffee(coffeeId, nameOfCoffee);
     }

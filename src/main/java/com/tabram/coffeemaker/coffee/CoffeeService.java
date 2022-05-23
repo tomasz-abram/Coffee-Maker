@@ -35,13 +35,13 @@ public class CoffeeService {
         return coffeeRepository.findAll();
     }
 
-    public void deleteCoffee(Long coffeeId) {
+    public void deleteCoffee(Integer coffeeId) {
         coffeeRepository.deleteById(coffeeId);
 
     }
 
     @Transactional
-    public void updateCoffee(Long coffeeId, String nameOfCoffee) {
+    public void updateCoffee(Integer coffeeId, String nameOfCoffee) {
         Coffee coffee = coffeeRepository.findById(coffeeId).orElseThrow(() -> new IllegalStateException("Coffee with id " + coffeeId + " does not exist"));
 
         if (nameOfCoffee != null && nameOfCoffee.length() > 0 && !Objects.equals(coffee.getNameOfCoffee(), nameOfCoffee)) {

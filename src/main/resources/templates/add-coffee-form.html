@@ -1,0 +1,36 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add Employee</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous" />
+</head>
+<body>
+
+<div class="container">
+
+    <h3>Add New Employee</h3>
+    <hr/>
+
+    <form th:action="@{/add-coffee}" th:object="${coffee}" method="POST">
+
+        <input type="text" th:field="*{getNameOfCoffee()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
+        <input type="text" th:field="*{getTempWater()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
+        <input type="text" th:field="*{getGrindingLevel()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
+        <input type="text" th:field="*{getAmountOfCoffee()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
+        <input type="text" th:field="*{getAmountMilk()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
+        <input type="text" th:field="*{getCupSize()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
+
+        <button type="submit" class="btn btn-primary col-2">Save</button>
+        <input type="hidden" th:field="*{id}" />
+
+    </form>
+    <hr/>
+    <a th:href="@{/home}">Back to list</a>
+</div>
+
+</body>
+</html>

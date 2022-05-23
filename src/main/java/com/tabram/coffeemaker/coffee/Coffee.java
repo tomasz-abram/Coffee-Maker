@@ -67,7 +67,7 @@ public class Coffee {
         this.usersList = usersList;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

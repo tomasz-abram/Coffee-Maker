@@ -1,14 +1,72 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout " xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Home page</title>
+  <meta charset="UTF-8">
+  <title>Home</title>
+
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+        crossorigin="anonymous" />
+
 </head>
 <body>
+<a th:href="@{/login}" class="btn btn-primary">Login</a></br>
+<a th:href="@{/register-user}" class="btn btn-primary">Register</a></br>
+<a th:href="@{/coffee-list}" class="btn btn-primary">Coffee List</a></br>
+<a th:href="@{/add-coffee-form}" class="btn btn-primary">Add Coffee</a></br>
 
-<h1>Welcome to Coffee Machine T-2000</h1>
+<menu>
+
+  <li>
+
+    <button type="menu" value="File" menu="filemenu">
+
+      <menu id="filemenu" type="context">
+
+        <menuitem label="New..." onclick="new()">
+
+          <menuitem label="Open..." onclick="open()">
+
+            <menuitem label="Save" onclick="save()">
+
+              <menuitem label="Save as..." onclick="saveas()">
+
+      </menu>
+
+  </li>
+
+  <li>
+
+    <button type="menu" value="Edit" menu="editmenu">
+
+      <menu id="editmenu" type="context">
+
+        <menuitem label="Copy" onclick="copy()">
+
+          <menuitem label="Cut" onclick="cut()">
+
+            <menuitem label="Paste" onclick="paste()">
+
+      </menu>
+
+  </li>
+
+  <li>
+
+    <button type="menu" value="Help" menu="helpmenu">
+
+      <menu id="helpmenu" type="context">
+
+        <menuitem label="Help contents" onclick="helpcontents()">
+
+          <menuitem label="About" onclick="about()">
+
+      </menu>
+
+  </li>
+
+</menu>
 
 
 </body>
