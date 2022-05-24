@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Sign in</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous">
+
+    <link th:href="@{styles/sign-in-up.css}" rel="stylesheet">
+    <link href="../static/styles/sign-in-up.css" rel="stylesheet">
+
+</head>
+<body class="text-center">
+
+<!--<div th:if="${param.error} class"alert alert-error> Invalid username and password</div>-->
+
+
+
+<main class="form-signin w-100 m-auto">
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">Invalid username and password!</div>
+    </div>
+    <form class="form-signup" method="post" th:action="@{sign-in}">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="username" placeholder="Username">
+            <label for="username">Username</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password" placeholder="Password">
+            <label for="password">Password</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    </form>
+    <a th:href="@{/}">Back to menu</a>
+</main>
+
+
+</body>
+</html>
+<!--<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <meta name="description" content="">-->
+<!--    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">-->
+<!--    <meta name="generator" content="Hugo 0.98.0">-->
+<!--    <title>Please sign up</title>-->
+
+<!--    <link rel="stylesheet"-->
+<!--          type="text/css"-->
+<!--          href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"/>-->
+
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"-->
+<!--          rel="stylesheet"-->
+<!--          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"-->
+<!--          crossorigin="anonymous">-->
+
+<!--    <link th:href="@{/styles/main.css}" rel="stylesheet"/>-->
+
+<!--</head>-->
+
+<!--<body>-->
+
+<!--<div class="container" th:insert="fragments/header::header"></div>-->
+<!--<div class="container w-25 ">-->
+
+<!--    <form class="form-signup" method="post" action="/login">-->
+<!--        <h2 class="form-signup-heading">Please sign up</h2>-->
+<!--        <p>-->
+<!--            <label for="username" class="sr-only">Username</label>-->
+<!--            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required-->
+<!--                   autofocus>-->
+<!--        </p>-->
+<!--        <p>-->
+<!--            <label for="password" class="sr-only">Password</label>-->
+<!--            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>-->
+<!--        </p>-->
+
+<!--        <input name="_csrf" type="hidden" value="52515bbb-9396-4766-9a86-5d1e3e687d05"/>-->
+
+<!--        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

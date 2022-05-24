@@ -1,36 +1,38 @@
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Add Employee</title>
+    <title>Add Coffee</title>
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-          crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous">
+
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+
 </head>
+
 <body>
+<div>
+<div class="container" th:insert="fragments/header::header"></div>
 
-<div class="container">
-
-    <h3>Add New Employee</h3>
+<div class="container ">
+    <h3>Add New Coffee</h3>
     <hr/>
-
     <form th:action="@{/add-coffee}" th:object="${coffee}" method="POST">
 
-        <input type="text" th:field="*{getNameOfCoffee()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
-        <input type="text" th:field="*{getTempWater()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
-        <input type="text" th:field="*{getGrindingLevel()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
-        <input type="text" th:field="*{getAmountOfCoffee()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
-        <input type="text" th:field="*{getAmountMilk()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
-        <input type="text" th:field="*{getCupSize()}" class="form-control col-4 mb-4" placeholder="Enter Name" />
-
+        <input type="text" th:field="*{nameOfCoffee}" class="form-control col-4 mb-4" placeholder="Enter Name"/>
+        <input type="text" th:field="*{tempWater}" class="form-control col-4 mb-4" placeholder="Enter Name"/>
+        <input type="text" th:field="*{grindingLevel}" class="form-control col-4 mb-4" placeholder="Enter Name"/>
+        <input type="text" th:field="*{amountOfCoffee}" class="form-control col-4 mb-4" placeholder="Enter Name"/>
+        <input type="text" th:field="*{amountMilk}" class="form-control col-4 mb-4" placeholder="Enter Name"/>
+        <input type="text" th:field="*{cupSize}" class="form-control col-4 mb-4" placeholder="Enter Name"/>
         <button type="submit" class="btn btn-primary col-2">Save</button>
-        <input type="hidden" th:field="*{id}" />
-
+        <input type="hidden" th:field="*{id}"/>
     </form>
     <hr/>
-    <a th:href="@{/home}">Back to list</a>
+    <a th:href="@{/home}">Back to menu</a>
 </div>
-
+</div>
 </body>
 </html>

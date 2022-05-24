@@ -24,7 +24,7 @@ public class Coffee {
             generator = "coffee_sequence"
     )
 
-    private int id;
+    private Long id;
     @Column(name = "name_of_coffee")
     private String nameOfCoffee;
     @Column(name = "temp_water")
@@ -67,11 +67,11 @@ public class Coffee {
         this.usersList = usersList;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

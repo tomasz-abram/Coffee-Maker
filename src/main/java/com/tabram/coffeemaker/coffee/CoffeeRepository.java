@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CoffeeRepository extends JpaRepository<Coffee, Integer> {
+public interface CoffeeRepository extends JpaRepository<Coffee, Long> {
 
 
     @Query("SELECT c FROM Coffee c WHERE c.nameOfCoffee = ?1")

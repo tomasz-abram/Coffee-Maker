@@ -1,4 +1,4 @@
-package com.tabram.coffeemaker;
+package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.coffee.Coffee;
 import com.tabram.coffeemaker.coffee.CoffeeRepository;
@@ -33,7 +33,6 @@ public class CoffeeListController {
         return mav;
     }
 
-
     @PostMapping("/add-coffee")
     public String saveCoffee(@ModelAttribute Coffee coffee) {
         coffeeRepository.save(coffee);
@@ -41,7 +40,7 @@ public class CoffeeListController {
     }
 
     @GetMapping("/show-update-coffees")
-    public ModelAndView showUpdateForm(@RequestParam Integer coffeeId) {
+    public ModelAndView showUpdateCoffees(@RequestParam Long coffeeId) {
         ModelAndView mav = new ModelAndView("add-coffee-form");
         Coffee coffee = coffeeRepository.findById(coffeeId).get();
         mav.addObject("coffee", coffee);
@@ -49,7 +48,7 @@ public class CoffeeListController {
     }
 
     @GetMapping("/delete-coffee")
-    public String deleteCoffee(@RequestParam Integer coffeeId) {
+    public String deleteCoffee(@RequestParam Long coffeeId) {
         coffeeRepository.deleteById(coffeeId);
         return "redirect:/coffee-list";
     }

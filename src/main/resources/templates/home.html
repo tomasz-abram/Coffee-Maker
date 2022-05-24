@@ -1,73 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Home</title>
+    <title>Home</title>
 
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-        crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous">
+
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+    <link href="../static/styles/main.css" rel="stylesheet">
 
 </head>
+
 <body>
-<a th:href="@{/login}" class="btn btn-primary">Login</a></br>
-<a th:href="@{/register-user}" class="btn btn-primary">Register</a></br>
-<a th:href="@{/coffee-list}" class="btn btn-primary">Coffee List</a></br>
-<a th:href="@{/add-coffee-form}" class="btn btn-primary">Add Coffee</a></br>
-
-<menu>
-
-  <li>
-
-    <button type="menu" value="File" menu="filemenu">
-
-      <menu id="filemenu" type="context">
-
-        <menuitem label="New..." onclick="new()">
-
-          <menuitem label="Open..." onclick="open()">
-
-            <menuitem label="Save" onclick="save()">
-
-              <menuitem label="Save as..." onclick="saveas()">
-
-      </menu>
-
-  </li>
-
-  <li>
-
-    <button type="menu" value="Edit" menu="editmenu">
-
-      <menu id="editmenu" type="context">
-
-        <menuitem label="Copy" onclick="copy()">
-
-          <menuitem label="Cut" onclick="cut()">
-
-            <menuitem label="Paste" onclick="paste()">
-
-      </menu>
-
-  </li>
-
-  <li>
-
-    <button type="menu" value="Help" menu="helpmenu">
-
-      <menu id="helpmenu" type="context">
-
-        <menuitem label="Help contents" onclick="helpcontents()">
-
-          <menuitem label="About" onclick="about()">
-
-      </menu>
-
-  </li>
-
-</menu>
+<!--header-->
+<div class="container" th:insert="fragments/header::header"></div>
 
 
+<div class="list-group w-auto">
+
+    <div th:if="${param.success}">
+        <div class="alert alert-success">You've successfully registered!</div>
+    </div>
+    <div th:if="${param.logSuccess}">
+        <div class="alert alert-success">You've successfully sign in</div>
+    </div>
+
+    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+
+        <a th:href="@{/sign-in}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+            <div class="d-flex gap-2 w-100 justify-content-between">
+                <h6 class="mb-0">Sign in</h6>
+            </div>
+        </a></a>
+    <a th:href="@{/sign-up}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+        <div class="d-flex gap-2 w-100 justify-content-between">
+            <h6 class="mb-0">Sign up</h6>
+        </div>
+    </a>
+    <a th:href="@{/coffee-list}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+        <div class="d-flex gap-2 w-100 justify-content-between">
+            <h6 class="mb-0">Coffee list</h6>
+        </div>
+    </a>
+    <a th:href="@{/add-coffee-form}" class="list-group-item list-group-item-action d-flex gap-3 py-3"
+       aria-current="true">
+        <div class="d-flex gap-2 w-100 justify-content-between">
+            <h6 class="mb-0">Add coffee</h6>
+        </div>
+    </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

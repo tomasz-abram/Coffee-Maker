@@ -1,4 +1,4 @@
-package com.tabram.coffeemaker;
+package com.tabram.coffeemaker.web;
 
 
 import org.springframework.stereotype.Controller;
