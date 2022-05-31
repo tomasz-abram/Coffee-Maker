@@ -1,29 +1,14 @@
-package com.tabram.coffeemaker.coffee;
-
-import com.tabram.coffeemaker.user.User;
+package com.tabram.coffeemaker.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "coffee_table")
-public class Coffee {
-
-
+@Table(name = "coffee_user_table")
+public class CoffeeUser {
 
     @Id
-    @Column(name = "coffee_id")
-    @SequenceGenerator(
-            name = "coffee_sequence",
-            sequenceName = "coffee_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "coffee_sequence"
-    )
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name_of_coffee")
     private String nameOfCoffee;
@@ -40,31 +25,35 @@ public class Coffee {
     @Column(name = "cup_size")
     private int cupSize;
 
-    @ManyToMany(mappedBy = "coffeeList")
-    List<User> usersList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-
-    public Coffee() {
+    public CoffeeUser() {
     }
 
-    public Coffee(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
-        this.setNameOfCoffee(nameOfCoffee);
+    public CoffeeUser(List<CoffeeUser> all) {
+    }
+
+    public CoffeeUser(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
+        this.nameOfCoffee = nameOfCoffee;
         this.tempWater = tempWater;
         this.grindingLevel = grindingLevel;
         this.amountOfCoffee = amountOfCoffee;
         this.amountOfWater = amountOfWater;
         this.amountMilk = amountMilk;
         this.cupSize = cupSize;
-
-
     }
 
-    public List<User> getUsersList() {
-        return usersList;
-    }
-
-    public void setUsersList(List<User> usersList) {
-        this.usersList = usersList;
+    public CoffeeUser(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize, User user) {
+        this.nameOfCoffee = nameOfCoffee;
+        this.tempWater = tempWater;
+        this.grindingLevel = grindingLevel;
+        this.amountOfCoffee = amountOfCoffee;
+        this.amountOfWater = amountOfWater;
+        this.amountMilk = amountMilk;
+        this.cupSize = cupSize;
+        this.user = user;
     }
 
     public Long getId() {
@@ -131,17 +120,11 @@ public class Coffee {
         this.cupSize = cupSize;
     }
 
-    @Override
-    public String toString() {
-        return "Coffee{" +
-                "id=" + id +
-                ", nameOfCoffee='" + nameOfCoffee + '\'' +
-                ", tempWater=" + tempWater +
-                ", grindingLevel=" + grindingLevel +
-                ", amountOfCoffee=" + amountOfCoffee +
-                ", amountOfWater=" + amountOfWater +
-                ", amountMilk=" + amountMilk +
-                ", cupSize=" + cupSize +
-                '}';
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
