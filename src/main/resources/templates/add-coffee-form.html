@@ -20,16 +20,18 @@
     <div class="container ">
         <h3>Add New Coffee</h3>
         <hr/>
-        <form method="POST" th:action="@{/add-coffee}" th:object="${coffeeAdmin}">
+        <form method="POST" th:action="@{/add-coffee-form}" th:object="${coffeeAdmin}" >
 
             <input class="form-control col-4 mb-4" id="nameOfCoffee" name="nameOfCoffee" placeholder="Enter Name"
                    th:field="*{nameOfCoffee}" type="text"/>
-            <input class="form-control col-4 mb-4" id="tempWater" name="tempWater" placeholder="Enter Name" th:field="*{tempWater}"
-                   type="number"/>
+            <input class="form-control col-4 mb-4" id="tempWater" name="tempWater" placeholder="Enter Name"
+                   th:field="*{tempWater}" type="number"/>
             <input class="form-control col-4 mb-4" id="grindingLevel" name="grindingLevel" placeholder="Enter Name"
                    th:field="*{grindingLevel}" type="number"/>
             <input class="form-control col-4 mb-4" id="amountOfCoffee" name="amountOfCoffee" placeholder="Enter Name"
                    th:field="*{amountOfCoffee}" type="number"/>
+            <input class="form-control col-4 mb-4" id="amountOfWater" name="amountOfWater" placeholder="Enter Name"
+                   th:field="*{amountOfWater}" type="number"/>
             <input class="form-control col-4 mb-4" id="amountMilk" name="amountMilk" placeholder="Enter Name"
                    th:field="*{amountMilk}" type="number"/>
             <input class="form-control col-4 mb-4" id="cupSize" name="cupSize" placeholder="Enter Name" th:field="*{cupSize}"

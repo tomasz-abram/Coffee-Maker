@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CoffeeListControler {
 
 
-    private CoffeeAdminRepository coffeeAdminRepository;
+    private final CoffeeAdminRepository coffeeAdminRepository;
 
     public CoffeeListControler(CoffeeAdminRepository coffeeAdminRepository) {
         this.coffeeAdminRepository = coffeeAdminRepository;
@@ -26,23 +26,23 @@ public class CoffeeListControler {
         return mav;
     }
 
-    @PostMapping("/add-coffee") // -dodać DTO
-    public String saveCoffee(@ModelAttribute CoffeeAdmin coffeeAdmin) {
-        coffeeAdminRepository.save(coffeeAdmin);
-        return "redirect:/coffee-list";
-    }
+//    @PostMapping("/add-coffee") // -dodać DTO
+//    public String saveCoffee(@ModelAttribute CoffeeAdmin coffeeAdmin) {
+//        coffeeAdminRepository.save(coffeeAdmin);
+//        return "redirect:/coffee-list";
+//    }
 
-    @GetMapping("/show-update-coffees")
-    public ModelAndView showUpdateCoffees(@RequestParam Long coffeeId) {
-        ModelAndView mav = new ModelAndView("add-coffee-form");
-        CoffeeAdmin coffeeAdmin = coffeeAdminRepository.findById(coffeeId).get();
-        mav.addObject("coffee", coffeeAdmin);
-        return mav;
-    }
+//    @GetMapping("/show-update-coffees")
+//    public ModelAndView showUpdateCoffees(@RequestParam Long coffeeId) {
+//        ModelAndView mav = new ModelAndView("add-coffee-form");
+//        CoffeeAdmin coffeeAdmin = coffeeAdminRepository.findById(coffeeId).get();
+//        mav.addObject("coffee", coffeeAdmin);
+//        return mav;
+//    }
 
-    @GetMapping("/delete-coffee")
-    public String deleteCoffee(@RequestParam Long coffeeId) {
-        coffeeAdminRepository.deleteById(coffeeId);
-        return "redirect:/coffee-list";
-    }
+//    @GetMapping("/delete-coffee")
+//    public String deleteCoffee(@RequestParam Long coffeeId) {
+//        coffeeAdminRepository.deleteById(coffeeId);
+//        return "redirect:/coffee-list";
+//    }
 }

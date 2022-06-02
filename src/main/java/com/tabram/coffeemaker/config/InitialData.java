@@ -18,7 +18,7 @@ import java.util.List;
 @Configuration
 public class InitialData {
 
-    private CoffeeUserService coffeeUserService;
+    private final CoffeeUserService coffeeUserService;
 
     @Autowired
     public InitialData(CoffeeUserService coffeeUserService) {
@@ -40,9 +40,9 @@ public class InitialData {
 
 
             User user = new User("default", new BCryptPasswordEncoder().encode("default"), Collections.singleton(new Role("DEFAULT")));
-            userRepository.saveAndFlush(user);
+            userRepository.save(user);
 
-            coffeeUserService.addCoffeeUser(user);
+            coffeeUserService.addCoffeeListToUser(user);
 
 
         };

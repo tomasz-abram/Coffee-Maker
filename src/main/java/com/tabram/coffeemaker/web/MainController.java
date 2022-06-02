@@ -16,4 +16,9 @@ public class MainController {
         return "home";
     }
 
+    @GetMapping({"menu"})
+    public String menu() {
+        return "menu";
+    }
+
 }

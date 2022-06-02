@@ -25,7 +25,12 @@ public class CoffeeAdmin {
     @Column(name = "cup_size")
     private int cupSize;
 
+
     public CoffeeAdmin(List<CoffeeAdmin> all) {
+    }
+
+    public CoffeeAdmin() {
+
     }
 
     public CoffeeAdmin(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
@@ -39,9 +44,6 @@ public class CoffeeAdmin {
 
     }
 
-    public CoffeeAdmin() {
-
-    }
 
     public Long getId() {
         return id;

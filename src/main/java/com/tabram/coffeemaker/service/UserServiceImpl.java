@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
-    private CoffeeUserService coffeeUserService;
+    private final UserRepository userRepository;
+    private final CoffeeUserService coffeeUserService;
 
     public UserServiceImpl(UserRepository userRepository, CoffeeUserService coffeeUserService) {
         this.userRepository = userRepository;
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
                 new BCryptPasswordEncoder().encode(registrationDto.getPassword()),
                 Arrays.asList(new Role("USER")));
         userRepository.saveAndFlush(user);
-        coffeeUserService.addCoffeeUser(user);
+        coffeeUserService.addCoffeeListToUser(user);
         return user;
     }
 

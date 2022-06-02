@@ -1,7 +1,8 @@
 package com.tabram.coffeemaker.web;
 
-import com.tabram.coffeemaker.dto.CoffeeAdminDto;
+import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.service.CoffeeAdminServiceInterface;
+import com.tabram.coffeemaker.service.CoffeeUserServiceInterface;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,16 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CoffeeAdminController {
 
 
-    private CoffeeAdminServiceInterface coffeeAdminServiceInterface;
+    private final CoffeeAdminServiceInterface coffeeAdminServiceInterface;
+    private final CoffeeUserServiceInterface coffeeUserServiceInterface;
 
-    public CoffeeAdminController(CoffeeAdminServiceInterface coffeeAdminServiceInterface) {
+    public CoffeeAdminController(CoffeeAdminServiceInterface coffeeAdminServiceInterface, CoffeeUserServiceInterface coffeeUserServiceInterface) {
         this.coffeeAdminServiceInterface = coffeeAdminServiceInterface;
+        this.coffeeUserServiceInterface = coffeeUserServiceInterface;
     }
 
 
     @ModelAttribute("coffeeAdmin")
-    public CoffeeAdminDto coffeeAdminDto() {
-        return new CoffeeAdminDto();
+    public CoffeeDto coffeeDto() {
+        return new CoffeeDto();
     }
 
     @GetMapping
@@ -32,8 +35,9 @@ public class CoffeeAdminController {
 
 
     @PostMapping
-    public String addCoffeeAdmin(@ModelAttribute("coffeeAdmin") CoffeeAdminDto coffeeAdminDto) {
-        coffeeAdminServiceInterface.saveCoffee(coffeeAdminDto);
+    public String addCoffee(@ModelAttribute("coffeeAdmin") CoffeeDto coffeeDto) {
+        coffeeAdminServiceInterface.addNewCoffee(coffeeDto);
+        coffeeUserServiceInterface.addOneCoffeeForEachUser(coffeeDto);
         return "redirect:/coffee-list";
     }
 

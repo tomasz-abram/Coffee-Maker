@@ -1,6 +1,8 @@
 package com.tabram.coffeemaker.dto;
 
-public class CoffeeAdminDto {
+import com.tabram.coffeemaker.model.User;
+
+public class CoffeeDto {
 
     private String nameOfCoffee;
     private int tempWater;
@@ -10,10 +12,11 @@ public class CoffeeAdminDto {
     private int amountMilk;
     private int cupSize;
 
-    public CoffeeAdminDto() {
+
+    public CoffeeDto() {
     }
 
-    public CoffeeAdminDto(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
+    public CoffeeDto(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
         this.nameOfCoffee = nameOfCoffee;
         this.tempWater = tempWater;
         this.grindingLevel = grindingLevel;

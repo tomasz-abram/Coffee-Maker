@@ -1,7 +1,12 @@
+<!--<div class="alert alert-success" th:if="${param.success}">You've successfully registered!</div>-->
+
+<!--<div class="alert alert-success" th:if="${param.logSuccess}">You've successfully sign in</div>-->
+
+<!--<div class="alert alert-info" th:if="${param.logout}">You have been logged out.</div>-->
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Home</title>
+    <title>Menu</title>
 
     <link crossorigin="anonymous"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
@@ -32,25 +37,19 @@
     </div>
 </div>
 
+<div class="container">
+    <h1>TEST - who are you</h1>
+    Welcome <span sec:authentication="principal.username"> User</span>
+</div>
+
+
 <div class="container h-100">
     <div class="list-group text-center row h-50 justify-content-center align-items-center">
         <a class="navbar-brand list-group-item align-items-center justify-content-center"><h5>Coffee Maker</h5></a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/login}"> Login</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/registration}">Registration</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/menu}">Default settings</a>
-
-
-<!--            <a action="/myURL" method="POST">-->
-<!--                <a type="text" name="fname"><br>-->
-<!--                <a type="text" name="lname"><br>-->
-<!--                <a type="submit" value="Submit">-->
-<!--            </a>-->
-
-
-
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/coffee-list}">Admin - Coffee list</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/add-coffee-form}">Admin - Add coffee form</a>
-
+        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Make Coffee</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Settings</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Status</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Turn Off</a>
     </div>
 </div>
 </body>
