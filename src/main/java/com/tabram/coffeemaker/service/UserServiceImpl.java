@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 
@@ -29,9 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(UserRegistrationDto registrationDto) {
-        User user = new User(registrationDto.getUserName(),
-                new BCryptPasswordEncoder().encode(registrationDto.getPassword()),
-                Arrays.asList(new Role("USER")));
+        User user = new User(registrationDto.getUserName(), new BCryptPasswordEncoder().encode(registrationDto.getPassword()), Collections.singleton(new Role("USER")));
         userRepository.saveAndFlush(user);
         coffeeUserService.addCoffeeListToUser(user);
         return user;

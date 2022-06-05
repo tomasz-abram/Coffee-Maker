@@ -1,9 +1,8 @@
 package com.tabram.coffeemaker.config;
 
-import com.tabram.coffeemaker.model.CoffeeAdmin;
-import com.tabram.coffeemaker.model.Role;
-import com.tabram.coffeemaker.model.User;
+import com.tabram.coffeemaker.model.*;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
+import com.tabram.coffeemaker.repository.CoffeeMachineStatusRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +18,12 @@ import java.util.List;
 public class InitialData {
 
     private final CoffeeUserService coffeeUserService;
+    private final CoffeeMachineStatusRepository coffeeMachineStatusRepository;
 
     @Autowired
-    public InitialData(CoffeeUserService coffeeUserService) {
+    public InitialData(CoffeeUserService coffeeUserService, CoffeeMachineStatusRepository coffeeMachineStatusRepository) {
         this.coffeeUserService = coffeeUserService;
+        this.coffeeMachineStatusRepository = coffeeMachineStatusRepository;
     }
 
     @Bean
@@ -43,6 +44,10 @@ public class InitialData {
             userRepository.save(user);
 
             coffeeUserService.addCoffeeListToUser(user);
+
+
+            CoffeeMachineStatus coffeeMachineStatus = new CoffeeMachineStatus(250,150,200,23,5);
+            coffeeMachineStatusRepository.save(coffeeMachineStatus);
 
 
         };

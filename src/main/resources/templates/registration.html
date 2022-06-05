@@ -9,8 +9,7 @@
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
           rel="stylesheet">
 
-    <link rel="stylesheet" th:href="@{/css/sign-in-up.css}">
-    <link href="../static/css/sign-in-up.css" rel="stylesheet">
+    <link href="../static/css/sign-in-up.css" rel="stylesheet" th:href="@{/css/sign-in-up.css}">
 
 </head>
 <body class="text-center">
@@ -20,20 +19,24 @@
     <div>
         <div class="form-signin w-100 m-auto">
 
+            <div th:if="${param.regisError}">
+                <div class="alert alert-danger">Username is taken! Please choose a different username.</div>
+            </div>
 
             <form method="POST" th:action="@{/registration}" th:object="${user}">
-
 
                 <h1 class="h3 mb-3 fw-normal">Please register</h1>
 
                 <div class="form-floating">
-                    <input autofocus="autofocus" class="form-control" id="username" name="username" placeholder="Enter Email ID"
+                    <input autofocus="autofocus" class="form-control" id="username" name="username"
+                           placeholder="Enter Email ID"
                            th:field="*{userName}" type="text">
                     <label for="username">Username</label>
                 </div>
 
                 <div class="form-floating">
-                    <input class="form-control" id="password" name="password" placeholder="Enter Password" th:field="*{password}"
+                    <input class="form-control" id="password" name="password" placeholder="Enter Password"
+                           th:field="*{password}"
                            type="password"/>
                     <label for="username">Password</label>
                 </div>

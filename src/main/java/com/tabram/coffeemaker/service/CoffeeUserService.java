@@ -31,15 +31,7 @@ public class CoffeeUserService implements CoffeeUserServiceInterface {
 
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         coffeeAdminRepository.findAll().forEach(coffees -> {
-            CoffeeUser coffee = new CoffeeUser(
-                    coffees.getNameOfCoffee(),
-                    coffees.getTempWater(),
-                    coffees.getGrindingLevel(),
-                    coffees.getAmountOfCoffee(),
-                    coffees.getAmountOfWater(),
-                    coffees.getAmountMilk(),
-                    coffees.getCupSize(),
-                    user);
+            CoffeeUser coffee = new CoffeeUser(coffees.getNameOfCoffee(), coffees.getTempWater(), coffees.getGrindingLevel(), coffees.getAmountOfCoffee(), coffees.getAmountOfWater(), coffees.getAmountMilk(), coffees.getCupSize(), user);
             coffeeUsers.add(coffee);
         });
         return coffeeUserRepository.saveAll(coffeeUsers);
@@ -62,15 +54,7 @@ public class CoffeeUserService implements CoffeeUserServiceInterface {
     public List<CoffeeUser> addOneCoffeeForEachUser(CoffeeDto coffeeDto) {
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
-            CoffeeUser coffee = new CoffeeUser(
-                    coffeeDto.getNameOfCoffee(),
-                    coffeeDto.getTempWater(),
-                    coffeeDto.getGrindingLevel(),
-                    coffeeDto.getAmountOfCoffee(),
-                    coffeeDto.getAmountOfWater(),
-                    coffeeDto.getAmountMilk(),
-                    coffeeDto.getCupSize(),
-                    user);
+            CoffeeUser coffee = new CoffeeUser(coffeeDto.getNameOfCoffee(), coffeeDto.getTempWater(), coffeeDto.getGrindingLevel(), coffeeDto.getAmountOfCoffee(), coffeeDto.getAmountOfWater(), coffeeDto.getAmountMilk(), coffeeDto.getCupSize(), user);
             coffeeUsers.add(coffee);
         });
         return coffeeUserRepository.saveAll(coffeeUsers);

@@ -45,16 +45,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/js/**",
                         "/css/**",
                         "/img/**",
-                        "/"
+                        "/",
+                        "/login**"
+
+
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-//                .defaultSuccessUrl("/menu", true)
+                .defaultSuccessUrl("/menu?logSuccess", true)
+                .failureUrl("/login?error")
+//                .successHandler()
 //                .successForwardUrl("/")
-//                .failureUrl("/login.html?error=true")
 //                .failureHandler(authenticationFailureHandler())
+
                 .permitAll()
                 .and()
                 .logout()

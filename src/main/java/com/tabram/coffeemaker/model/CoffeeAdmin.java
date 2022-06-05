@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "coffee_admin_table")
+@Table(name = "coffee_admin_table", uniqueConstraints = { @UniqueConstraint(columnNames = { "name_of_coffee", "user_id" }) })
 public class CoffeeAdmin {
 
     @Id
@@ -25,6 +25,9 @@ public class CoffeeAdmin {
     @Column(name = "cup_size")
     private int cupSize;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
 
     public CoffeeAdmin(List<CoffeeAdmin> all) {
     }

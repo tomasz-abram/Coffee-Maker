@@ -1,10 +1,6 @@
-<!--<div class="alert alert-success" th:if="${param.success}">You've successfully registered!</div>-->
-
-<!--<div class="alert alert-success" th:if="${param.logSuccess}">You've successfully sign in</div>-->
-
-<!--<div class="alert alert-info" th:if="${param.logout}">You have been logged out.</div>-->
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Menu</title>
 
@@ -13,8 +9,7 @@
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
           rel="stylesheet">
 
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
-    <link href="../static/css/main.css" rel="stylesheet">
+    <link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}"/>
 
 </head>
 
@@ -28,7 +23,7 @@
     </div>
 
     <div th:if="${param.logSuccess}">
-        <div class="alert alert-success">You've successfully sign in</div>
+        <div class="alert alert-success">You've successfully log in</div>
     </div>
 
     <!-- logout message -->
@@ -39,7 +34,9 @@
 
 <div class="container">
     <h1>TEST - who are you</h1>
-    Welcome <span sec:authentication="principal.username"> User</span>
+    <div sec:authorize="isAuthenticated()">
+        Welcome, <span sec:authentication="name">Username</span>
+    </div>
 </div>
 
 
@@ -47,8 +44,9 @@
     <div class="list-group text-center row h-50 justify-content-center align-items-center">
         <a class="navbar-brand list-group-item align-items-center justify-content-center"><h5>Coffee Maker</h5></a>
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Make Coffee</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Settings</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Status</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/user-coffee-settings}">Coffee
+            settings</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/status-coffee-machine}">Status</a>
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Turn Off</a>
     </div>
 </div>

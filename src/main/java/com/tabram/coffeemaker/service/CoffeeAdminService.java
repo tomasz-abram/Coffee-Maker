@@ -3,12 +3,11 @@ package com.tabram.coffeemaker.service;
 import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.model.CoffeeAdmin;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
-import com.tabram.coffeemaker.repository.CoffeeUserRepository;
-import com.tabram.coffeemaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CoffeeAdminService implements CoffeeAdminServiceInterface {
@@ -39,16 +38,8 @@ public class CoffeeAdminService implements CoffeeAdminServiceInterface {
             throw new IllegalStateException("name taken");
         }
 
-        CoffeeAdmin coffeeAdmin = new CoffeeAdmin(
-                coffeeDto.getNameOfCoffee(),
-                coffeeDto.getTempWater(),
-                coffeeDto.getGrindingLevel(),
-                coffeeDto.getAmountOfCoffee(),
-                coffeeDto.getAmountOfWater(),
-                coffeeDto.getAmountMilk(),
-                coffeeDto.getCupSize()
-        );
+        CoffeeAdmin coffeeAdmin = new CoffeeAdmin(coffeeDto.getNameOfCoffee(), coffeeDto.getTempWater(), coffeeDto.getGrindingLevel(), coffeeDto.getAmountOfCoffee(), coffeeDto.getAmountOfWater(), coffeeDto.getAmountMilk(), coffeeDto.getCupSize());
 
-       return coffeeAdminRepository.save(coffeeAdmin);
+        return coffeeAdminRepository.save(coffeeAdmin);
     }
 }

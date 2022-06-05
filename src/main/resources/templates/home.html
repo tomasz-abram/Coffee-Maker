@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
@@ -8,8 +8,7 @@
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
           rel="stylesheet">
 
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
-    <link href="../static/css/main.css" rel="stylesheet">
+    <link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}"/>
 
 </head>
 
@@ -18,6 +17,7 @@
 <div class="container fixed-top" th:insert="fragments/header::header"></div>
 </br></br>
 <div class="container ">
+
     <div th:if="${param.success}">
         <div class="alert alert-success">You've successfully registered!</div>
     </div>
@@ -40,16 +40,17 @@
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/menu}">Default settings</a>
 
 
-<!--            <a action="/myURL" method="POST">-->
-<!--                <a type="text" name="fname"><br>-->
-<!--                <a type="text" name="lname"><br>-->
-<!--                <a type="submit" value="Submit">-->
-<!--            </a>-->
+        <!--            <a action="/myURL" method="POST">-->
+        <!--                <a type="text" name="fname"><br>-->
+        <!--                <a type="text" name="lname"><br>-->
+        <!--                <a type="submit" value="Submit">-->
+        <!--            </a>-->
 
 
-
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/coffee-list}">Admin - Coffee list</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/add-coffee-form}">Admin - Add coffee form</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/admin-coffee-list}">Admin - Coffee
+            list</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/admin-add-coffee-form}">Admin - Add
+            coffee form</a>
 
     </div>
 </div>

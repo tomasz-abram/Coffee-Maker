@@ -10,6 +10,7 @@
     <ul class="nav nav-pills">
         <li class="nav-item" sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="nav-link">Log out</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Turn off</a></li>
+        <li class="nav-item" sec:authorize="isAuthenticated()"><a th:href="@{/menu}" class="nav-link active" aria-current="page">Menu</a></li>
         <li class="nav-item"><a th:href="@{/}" class="nav-link active" aria-current="page">Home</a></li>
 
     </ul>

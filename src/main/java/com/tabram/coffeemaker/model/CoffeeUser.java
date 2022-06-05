@@ -29,6 +29,7 @@ public class CoffeeUser {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     public CoffeeUser() {
     }
 
@@ -122,6 +123,10 @@ public class CoffeeUser {
 
     public User getUser() {
         return user;
+    }
+
+    public String getUserName() {
+        return user.getUserName();
     }
 
     public void setUser(User user) {

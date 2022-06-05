@@ -1,6 +1,7 @@
 package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.dto.UserRegistrationDto;
+import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registration")
 public class UserRegistrationController {
 
-    private UserService userService;
+    private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserRegistrationController(UserService userService) {
+    public UserRegistrationController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @ModelAttribute("user")
@@ -25,19 +28,20 @@ public class UserRegistrationController {
 
     @GetMapping
     public String showRegistrationForm() {
-        return "registration";
+        return "/registration";
     }
-
-// zamiast modelattribute i powyższego getMapping można zastosować
-//    @GetMapping
-//    public String showRegistrationForm(Model model){
-//        model.addAttribute("user", new UserRegistrationDto());
-//        return "registration";
-//    }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto) {
-        userService.save(registrationDto);
-        return "redirect:/?success";
+    public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto userRegistrationDto) {
+        String userName = userRegistrationDto.getUserName();
+        if (userRepository.findByUserName(userRegistrationDto.getUserName()) == null) {
+            userService.save(userRegistrationDto);
+            return "redirect:/login?regisSuccess";
+        } else {
+            return "redirect:/registration?regisError";
+        }
     }
+
+
 }
+
