@@ -2,7 +2,8 @@ package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.dto.UserRegistrationDto;
 import com.tabram.coffeemaker.repository.UserRepository;
-import com.tabram.coffeemaker.service.UserService;
+import com.tabram.coffeemaker.service.UserServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/registration")
 public class UserRegistrationController {
 
-    private final UserService userService;
+    private final UserServiceInterface userServiceInterface;
     private final UserRepository userRepository;
-
-    public UserRegistrationController(UserService userService, UserRepository userRepository) {
-        this.userService = userService;
+    @Autowired
+    public UserRegistrationController(UserServiceInterface userServiceInterface, UserRepository userRepository) {
+        this.userServiceInterface = userServiceInterface;
         this.userRepository = userRepository;
     }
 
@@ -35,7 +36,7 @@ public class UserRegistrationController {
     public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto userRegistrationDto) {
         String userName = userRegistrationDto.getUserName();
         if (userRepository.findByUserName(userRegistrationDto.getUserName()) == null) {
-            userService.save(userRegistrationDto);
+            userServiceInterface.save(userRegistrationDto);
             return "redirect:/login?regisSuccess";
         } else {
             return "redirect:/registration?regisError";

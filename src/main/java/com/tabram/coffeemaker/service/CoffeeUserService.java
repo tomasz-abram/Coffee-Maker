@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CoffeeUserService implements CoffeeUserServiceInterface {
+public class CoffeeUserService {
 
     private final CoffeeUserRepository coffeeUserRepository;
     private final CoffeeAdminRepository coffeeAdminRepository;
@@ -46,11 +46,11 @@ public class CoffeeUserService implements CoffeeUserServiceInterface {
         coffeeUserRepository.deleteById(coffeeId);
     }
 
+
     @Transactional
     public void updateCoffee(Long userId, String nameOfCoffee) {
     }
 
-    @Override
     public List<CoffeeUser> addOneCoffeeForEachUser(CoffeeDto coffeeDto) {
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {

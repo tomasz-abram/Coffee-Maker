@@ -32,25 +32,25 @@
     </div>
 </div>
 
-<div class="container h-100">
-    <div class="list-group text-center row h-50 justify-content-center align-items-center">
+<div class="container ">
+    <div class="list-group text-center row  justify-content-center align-items-center">
         <a class="navbar-brand list-group-item align-items-center justify-content-center"><h5>Coffee Maker</h5></a>
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/login}"> Login</a>
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/registration}">Registration</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/menu}">Default settings</a>
 
-
-        <!--            <a action="/myURL" method="POST">-->
-        <!--                <a type="text" name="fname"><br>-->
-        <!--                <a type="text" name="lname"><br>-->
-        <!--                <a type="submit" value="Submit">-->
-        <!--            </a>-->
-
+        <form class="px-0 py-0  list-group-item list-group-item-action" method="post" th:action="@{/login}">
+            <input class="visually-hidden" id="username" name="username" type="text" value="default"/>
+            <input class="visually-hidden" id="password" name="password" type="password" value="default"/>
+            <input class="w-100 border-0 gap-3 py-3 list-group-item list-group-item-action" id="login-submit" name="login-submit" type="submit"
+                   value="Default settings"/>
+        </form>
 
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/admin-coffee-list}">Admin - Coffee
             list</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/admin-add-coffee-form}">Admin - Add
-            coffee form</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/admin-add-coffee}">Admin - Add
+            coffee </a>
+        <a class="gap-3 py-3  list-group-item list-group-item-action" th:href="@{/admin-users-list}">Admin - Users
+            list</a>
 
     </div>
 </div>

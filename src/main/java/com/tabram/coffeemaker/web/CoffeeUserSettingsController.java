@@ -2,6 +2,7 @@ package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +18,7 @@ public class CoffeeUserSettingsController {
     private final UserRepository userRepository;
     private final CoffeeUserService coffeeUserService;
     private Authentication authentication;
-
+    @Autowired
     public CoffeeUserSettingsController(UserRepository userRepository, CoffeeUserService coffeeUserService) {
         this.userRepository = userRepository;
         this.coffeeUserService = coffeeUserService;

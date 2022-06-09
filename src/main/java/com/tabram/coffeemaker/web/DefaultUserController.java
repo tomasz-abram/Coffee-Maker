@@ -1,17 +1,18 @@
 package com.tabram.coffeemaker.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DefaultUserController {
 
-//    @GetMapping("/default")
-//    public void logDefaultUser(){
-//String userName = "default";
-//String password = "default";
-//
-//    }
 
+    @PostMapping("/default")
+    public String login() {
+
+
+        return "redirect:/menu?logSuccess";
+    }
 
 
 }

@@ -11,8 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+
+import static java.util.Arrays.*;
 
 @Configuration
 public class InitialData {
@@ -36,14 +40,16 @@ public class InitialData {
             CoffeeAdmin macchiato = new CoffeeAdmin("Macchiato", 95, 5, 17.5, 40, 10, 100);
             CoffeeAdmin ristretto = new CoffeeAdmin("Ristretto", 95, 5, 17.5, 20, 0, 60);
 
-            List coffees = List.of(espresso, cappuccino, latteMacchiato, lungo, macchiato, ristretto);
+            List <CoffeeAdmin> coffees = List.of(espresso, cappuccino, latteMacchiato, lungo, macchiato, ristretto);
             coffeeAdminRepository.saveAllAndFlush(coffees);
 
+            User userAdmin = new User("Admin", new BCryptPasswordEncoder().encode("Admin"),true, Collections.singleton( new Role("ADMIN")));
+            User userDefault = new User("default", new BCryptPasswordEncoder().encode("default"),true, Collections.singleton(new Role("DEFAULT")));
+            List <User> users = List.of(userAdmin, userDefault);
+            userRepository.saveAll(users);
 
-            User user = new User("default", new BCryptPasswordEncoder().encode("default"), Collections.singleton(new Role("DEFAULT")));
-            userRepository.save(user);
 
-            coffeeUserService.addCoffeeListToUser(user);
+            coffeeUserService.addCoffeeListToUser(userDefault);
 
 
             CoffeeMachineStatus coffeeMachineStatus = new CoffeeMachineStatus(250,150,200,23,5);

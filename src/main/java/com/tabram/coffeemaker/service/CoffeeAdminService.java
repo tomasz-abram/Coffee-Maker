@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CoffeeAdminService implements CoffeeAdminServiceInterface {
+public class CoffeeAdminService {
 
     private final CoffeeAdminRepository coffeeAdminRepository;
 
@@ -30,7 +30,7 @@ public class CoffeeAdminService implements CoffeeAdminServiceInterface {
 
     }
 
-    @Override
+
     public CoffeeAdmin addNewCoffee(CoffeeDto coffeeDto) {
 
         Optional<CoffeeAdmin> coffeeOptional = coffeeAdminRepository.findCoffeeByName(coffeeDto.getNameOfCoffee());

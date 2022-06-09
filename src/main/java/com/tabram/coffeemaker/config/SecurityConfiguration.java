@@ -1,6 +1,6 @@
 package com.tabram.coffeemaker.config;
 
-import com.tabram.coffeemaker.service.UserService;
+import com.tabram.coffeemaker.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +17,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private final UserServiceInterface userServiceInterface;
+
     @Autowired
-    private UserService userService;
+    public SecurityConfiguration(UserServiceInterface userServiceInterface) {
+        this.userServiceInterface = userServiceInterface;
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -28,10 +32,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userService);
+        auth.setUserDetailsService(userServiceInterface);
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
     }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -40,15 +45,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(
+        http.authorizeRequests()
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/user").hasAnyRole("ADMIN", "USER")
+                .antMatchers(
                         "/registration**",
                         "/js/**",
                         "/css/**",
                         "/img/**",
                         "/",
                         "/login**"
-
-
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()

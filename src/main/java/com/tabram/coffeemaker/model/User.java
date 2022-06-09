@@ -2,19 +2,21 @@ package com.tabram.coffeemaker.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "user_name"))
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "user_name", unique = true)
     private String userName;
     private String password;
+    private boolean isActive;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
@@ -35,17 +37,27 @@ public class User {
         this.coffeeUser = coffeeUser;
     }
 
-    public User(String userName, String password, Collection<Role> roles) {
+    public User(String userName, String password, boolean isActive, Collection<Role> roles, List<CoffeeUser> coffeeUser) {
         this.userName = userName;
         this.password = password;
+        this.isActive = isActive;
+        this.roles = roles;
+        this.coffeeUser = coffeeUser;
+    }
+
+    public User(String userName, String password, boolean isActive, Collection<Role> roles) {
+        this.userName = userName;
+        this.password = password;
+        this.isActive = isActive;
         this.roles = roles;
     }
 
-    public User(String userName, String password, Collection<Role> roles, List<CoffeeUser> coffeeUser) {
-        this.userName = userName;
-        this.password = password;
-        this.roles = roles;
-        this.coffeeUser = coffeeUser;
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public List<CoffeeUser> getCoffeeUser() {
@@ -83,8 +95,8 @@ public class User {
     public Collection<Role> getRoles() {
         return roles;
     }
-
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
+
 }

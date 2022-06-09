@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "coffee_user_table")
+@Table(name = "coffee_user")
 public class CoffeeUser {
 
     @Id
@@ -125,11 +125,11 @@ public class CoffeeUser {
         return user;
     }
 
-    public String getUserName() {
-        return user.getUserName();
-    }
-
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getUserName() {
+        return user.getUserName();
     }
 }
