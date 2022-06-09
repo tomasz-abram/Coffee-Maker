@@ -2,7 +2,7 @@ package com.tabram.coffeemaker.model;
 
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.Collection;
 
 @Entity
 @Table(name = "role")
@@ -13,6 +13,8 @@ public class Role {
     private Long id;
     private String name;
 
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
 
     public Role() {
     }

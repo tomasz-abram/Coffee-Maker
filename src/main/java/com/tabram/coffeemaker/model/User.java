@@ -16,7 +16,7 @@ public class User implements Serializable {
     @Column(name = "user_name", unique = true)
     private String userName;
     private String password;
-    private boolean isActive;
+    private boolean isEnabled;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
@@ -37,27 +37,33 @@ public class User implements Serializable {
         this.coffeeUser = coffeeUser;
     }
 
-    public User(String userName, String password, boolean isActive, Collection<Role> roles, List<CoffeeUser> coffeeUser) {
+    public User(String userName, String password, boolean isEnabled) {
         this.userName = userName;
         this.password = password;
-        this.isActive = isActive;
+        this.isEnabled = isEnabled;
+    }
+
+    public User(String userName, String password, boolean isEnabled, Collection<Role> roles, List<CoffeeUser> coffeeUser) {
+        this.userName = userName;
+        this.password = password;
+        this.isEnabled = isEnabled;
         this.roles = roles;
         this.coffeeUser = coffeeUser;
     }
 
-    public User(String userName, String password, boolean isActive, Collection<Role> roles) {
+    public User(String userName, String password, boolean isEnabled, Collection<Role> roles) {
         this.userName = userName;
         this.password = password;
-        this.isActive = isActive;
+        this.isEnabled = isEnabled;
         this.roles = roles;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 
     public List<CoffeeUser> getCoffeeUser() {
@@ -95,6 +101,7 @@ public class User implements Serializable {
     public Collection<Role> getRoles() {
         return roles;
     }
+
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }

@@ -16,8 +16,8 @@
 <body>
 <!--header-->
 <div class="container fixed-top" th:insert="fragments/header::header"></div>
-</br></br>
-<div class="container ">
+
+<div class="container mt-5 ">
     <div th:if="${param.success}">
         <div class="alert alert-success">You've successfully registered!</div>
     </div>
@@ -32,22 +32,41 @@
     </div>
 </div>
 
-<div class="container">
-    <h1>TEST - who are you</h1>
+<div class="container text-center">
+    <h3>TEST - who are you</h3>
     <div sec:authorize="isAuthenticated()">
         Welcome, <span sec:authentication="name">Username</span>
     </div>
 </div>
 
 
-<div class="container h-100">
-    <div class="list-group text-center row h-50 justify-content-center align-items-center">
+<div class="container">
+    <div class="list-group text-center row justify-content-center align-items-center">
         <a class="navbar-brand list-group-item align-items-center justify-content-center"><h5>Coffee Maker</h5></a>
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Make Coffee</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/user-coffee-settings}">Coffee
+        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/coffee-settings}">Coffee
             settings</a>
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/status-coffee-machine}">Status</a>
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Turn Off</a>
+
+
+        <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
+           sec:authorize="hasRole('ROLE_ADMIN')"
+           th:href="@{/admin/admin-coffee-list}">Admin -
+            Coffee
+            list</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
+           sec:authorize="hasRole('ROLE_ADMIN')"
+           th:href="@{/admin/admin-add-coffee}">Admin -
+            Add
+            coffee </a>
+        <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
+           sec:authorize="hasRole('ROLE_ADMIN')"
+           th:href="@{admin/admin-users-list}">Admin -
+            Users
+            list</a>
+
+
     </div>
 </div>
 </body>

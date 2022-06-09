@@ -16,6 +16,7 @@ public class UserRegistrationController {
 
     private final UserServiceInterface userServiceInterface;
     private final UserRepository userRepository;
+
     @Autowired
     public UserRegistrationController(UserServiceInterface userServiceInterface, UserRepository userRepository) {
         this.userServiceInterface = userServiceInterface;

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class StatusController {
 
     CoffeeMachineStatusRepository coffeeMachineStatusRepository;
+
     @Autowired
     public StatusController(CoffeeMachineStatusRepository coffeeMachineStatusRepository) {
         this.coffeeMachineStatusRepository = coffeeMachineStatusRepository;

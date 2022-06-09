@@ -1,6 +1,9 @@
 package com.tabram.coffeemaker.config;
 
-import com.tabram.coffeemaker.model.*;
+import com.tabram.coffeemaker.model.CoffeeAdmin;
+import com.tabram.coffeemaker.model.CoffeeMachineStatus;
+import com.tabram.coffeemaker.model.Role;
+import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
 import com.tabram.coffeemaker.repository.CoffeeMachineStatusRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
@@ -12,11 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-
-import static java.util.Arrays.*;
 
 @Configuration
 public class InitialData {
@@ -40,19 +39,19 @@ public class InitialData {
             CoffeeAdmin macchiato = new CoffeeAdmin("Macchiato", 95, 5, 17.5, 40, 10, 100);
             CoffeeAdmin ristretto = new CoffeeAdmin("Ristretto", 95, 5, 17.5, 20, 0, 60);
 
-            List <CoffeeAdmin> coffees = List.of(espresso, cappuccino, latteMacchiato, lungo, macchiato, ristretto);
+            List<CoffeeAdmin> coffees = List.of(espresso, cappuccino, latteMacchiato, lungo, macchiato, ristretto);
             coffeeAdminRepository.saveAllAndFlush(coffees);
 
-            User userAdmin = new User("Admin", new BCryptPasswordEncoder().encode("Admin"),true, Collections.singleton( new Role("ADMIN")));
-            User userDefault = new User("default", new BCryptPasswordEncoder().encode("default"),true, Collections.singleton(new Role("DEFAULT")));
-            List <User> users = List.of(userAdmin, userDefault);
+            User userAdmin = new User("Admin", new BCryptPasswordEncoder().encode("Admin"), true, Arrays.asList(new Role("ROLE_ADMIN")));
+            User userDefault = new User("Default", new BCryptPasswordEncoder().encode("Default"), true, Arrays.asList(new Role("ROLE_DEFAULT")));
+            List<User> users = List.of(userAdmin, userDefault);
             userRepository.saveAll(users);
 
 
             coffeeUserService.addCoffeeListToUser(userDefault);
 
 
-            CoffeeMachineStatus coffeeMachineStatus = new CoffeeMachineStatus(250,150,200,23,5);
+            CoffeeMachineStatus coffeeMachineStatus = new CoffeeMachineStatus(250, 150, 200, 23, 5);
             coffeeMachineStatusRepository.save(coffeeMachineStatus);
 
 

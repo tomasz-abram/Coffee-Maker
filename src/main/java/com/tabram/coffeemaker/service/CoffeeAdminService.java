@@ -30,7 +30,6 @@ public class CoffeeAdminService {
 
     }
 
-
     public CoffeeAdmin addNewCoffee(CoffeeDto coffeeDto) {
 
         Optional<CoffeeAdmin> coffeeOptional = coffeeAdminRepository.findCoffeeByName(coffeeDto.getNameOfCoffee());
