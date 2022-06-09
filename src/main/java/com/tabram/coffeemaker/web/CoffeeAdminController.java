@@ -2,8 +2,8 @@ package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
-import com.tabram.coffeemaker.service.CoffeeAdminServiceInterface;
-import com.tabram.coffeemaker.service.CoffeeUserServiceInterface;
+import com.tabram.coffeemaker.service.CoffeeAdminService;
+import com.tabram.coffeemaker.service.CoffeeUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,13 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 public class CoffeeAdminController {
 
     private final CoffeeAdminRepository coffeeAdminRepository;
-    private final CoffeeAdminServiceInterface coffeeAdminServiceInterface;
-    private final CoffeeUserServiceInterface coffeeUserServiceInterface;
+    private final CoffeeAdminService coffeeAdminService;
+    private final CoffeeUserService coffeeUserService;
 
-    public CoffeeAdminController(CoffeeAdminRepository coffeeAdminRepository, CoffeeAdminServiceInterface coffeeAdminServiceInterface, CoffeeUserServiceInterface coffeeUserServiceInterface) {
+
+    public CoffeeAdminController(CoffeeAdminRepository coffeeAdminRepository, CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService) {
         this.coffeeAdminRepository = coffeeAdminRepository;
-        this.coffeeAdminServiceInterface = coffeeAdminServiceInterface;
-        this.coffeeUserServiceInterface = coffeeUserServiceInterface;
+        this.coffeeAdminService = coffeeAdminService;
+        this.coffeeUserService = coffeeUserService;
     }
 
 
@@ -30,25 +31,26 @@ public class CoffeeAdminController {
         return new CoffeeDto();
     }
 
-    @GetMapping("/add-coffee-form")
+    @GetMapping("/admin-add-coffee")
     public String showAddCoffeeForm() {
-        return "admin-add-coffee-form";
+        return "admin-add-coffee";
     }
 
 
-    @PostMapping("/add-coffee-form")
+    @PostMapping("/admin-add-coffee")
     public String addCoffee(@ModelAttribute("coffeeAdmin") CoffeeDto coffeeDto) {
-        coffeeAdminServiceInterface.addNewCoffee(coffeeDto);
-        coffeeUserServiceInterface.addOneCoffeeForEachUser(coffeeDto);
+        coffeeAdminService.addNewCoffee(coffeeDto);
+        coffeeUserService.addOneCoffeeForEachUser(coffeeDto);
         return "redirect:/coffee-list";
     }
 
-    @GetMapping("/admin-coffee-list")
+    @GetMapping("admin-coffee-list")
     public ModelAndView getAllCoffees() {
         ModelAndView mav = new ModelAndView("admin-coffee-list");
         mav.addObject("coffees", coffeeAdminRepository.findAll());
         return mav;
     }
+
 
 }
 
