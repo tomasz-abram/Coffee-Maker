@@ -1,6 +1,7 @@
 package com.tabram.coffeemaker.service;
 
 import com.tabram.coffeemaker.dto.CoffeeDto;
+import com.tabram.coffeemaker.model.CoffeeAdmin;
 import com.tabram.coffeemaker.model.CoffeeUser;
 import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
@@ -11,7 +12,6 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,15 @@ public class CoffeeUserService {
 
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         coffeeAdminRepository.findAll().forEach(coffees -> {
-            CoffeeUser coffee = new CoffeeUser(coffees.getNameOfCoffee(), coffees.getTempWater(), coffees.getGrindingLevel(), coffees.getAmountOfCoffee(), coffees.getAmountOfWater(), coffees.getAmountMilk(), coffees.getCupSize(), user);
+            CoffeeUser coffee = new CoffeeUser(
+                    coffees.getNameOfCoffee(),
+                    coffees.getTempWater(),
+                    coffees.getGrindingLevel(),
+                    coffees.getAmountOfCoffee(),
+                    coffees.getAmountOfWater(),
+                    coffees.getAmountMilk(),
+                    coffees.getCupSize(),
+                    user);
             coffeeUsers.add(coffee);
         });
         return coffeeUserRepository.saveAll(coffeeUsers);
@@ -57,26 +65,80 @@ public class CoffeeUserService {
         return currentUser;
     }
 
-    @Transactional
-    public void updateCoffee(Long userId, String nameOfCoffee) {
-    }
-
     public List<CoffeeUser> addOneCoffeeForEachUser(CoffeeDto coffeeDto) {
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
-            CoffeeUser coffee = new CoffeeUser(coffeeDto.getNameOfCoffee(), coffeeDto.getTempWater(), coffeeDto.getGrindingLevel(), coffeeDto.getAmountOfCoffee(), coffeeDto.getAmountOfWater(), coffeeDto.getAmountMilk(), coffeeDto.getCupSize(), user);
+            CoffeeUser coffee = new CoffeeUser(
+                    coffeeDto.getNameOfCoffee(),
+                    coffeeDto.getTempWater(),
+                    coffeeDto.getGrindingLevel(),
+                    coffeeDto.getAmountOfCoffee(),
+                    coffeeDto.getAmountOfWater(),
+                    coffeeDto.getAmountMilk(),
+                    coffeeDto.getCupSize(),
+                    user);
             coffeeUsers.add(coffee);
         });
         return coffeeUserRepository.saveAll(coffeeUsers);
     }
 
-    public CoffeeUser addNewCoffee(CoffeeDto coffeeDto, User user) {
-        CoffeeUser coffeeOptional = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId());
-        if (coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId()) != null) {
-            throw new IllegalStateException("name taken");
-        }
-        CoffeeUser coffeeUser = new CoffeeUser(coffeeDto.getNameOfCoffee(), coffeeDto.getTempWater(), coffeeDto.getGrindingLevel(), coffeeDto.getAmountOfCoffee(), coffeeDto.getAmountOfWater(), coffeeDto.getAmountMilk(), coffeeDto.getCupSize(), currentUser());
+    public CoffeeUser saveCoffee(CoffeeDto coffeeDto, User user) {
 
-        return coffeeUserRepository.save(coffeeUser);
+        if (coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId()) != null) {
+            CoffeeUser coffeeDB = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId());
+            coffeeDB.setTempWater(coffeeDto.getTempWater());
+            coffeeDB.setGrindingLevel(coffeeDto.getGrindingLevel());
+            coffeeDB.setAmountOfCoffee(coffeeDto.getAmountOfCoffee());
+            coffeeDB.setAmountOfWater(coffeeDto.getAmountOfWater());
+            coffeeDB.setAmountMilk(coffeeDto.getAmountMilk());
+            coffeeDB.setCupSize(coffeeDB.getCupSize());
+            return coffeeUserRepository.save(coffeeDB);
+        } else {
+            CoffeeUser coffeeUser = new CoffeeUser(
+                    coffeeDto.getNameOfCoffee(),
+                    coffeeDto.getTempWater(),
+                    coffeeDto.getGrindingLevel(),
+                    coffeeDto.getAmountOfCoffee(),
+                    coffeeDto.getAmountOfWater(),
+                    coffeeDto.getAmountMilk(),
+                    coffeeDto.getCupSize(),
+                    currentUser());
+
+            return coffeeUserRepository.save(coffeeUser);
+        }
+    }
+
+    public List<CoffeeUser> updateDefaultCoffees(User user) {
+
+        List<CoffeeAdmin> coffees = coffeeAdminRepository.findAll();
+        List<CoffeeUser> coffeesUser = new ArrayList<>();
+
+        coffees.forEach(coffeeAdmin -> {
+
+            CoffeeUser cU = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeAdmin.getNameOfCoffee(), user.getId());
+
+            if (cU == null) {
+                CoffeeUser newCoffee = new CoffeeUser(
+                        coffeeAdmin.getNameOfCoffee(),
+                        coffeeAdmin.getTempWater(),
+                        coffeeAdmin.getGrindingLevel(),
+                        coffeeAdmin.getAmountOfCoffee(),
+                        coffeeAdmin.getAmountOfWater(),
+                        coffeeAdmin.getAmountMilk(),
+                        coffeeAdmin.getCupSize(),
+                        user);
+                coffeesUser.add(newCoffee);
+
+            } else {
+                cU.setTempWater(coffeeAdmin.getTempWater());
+                cU.setGrindingLevel(coffeeAdmin.getGrindingLevel());
+                cU.setAmountOfCoffee(coffeeAdmin.getAmountOfCoffee());
+                cU.setAmountOfWater(coffeeAdmin.getAmountOfWater());
+                cU.setAmountMilk(coffeeAdmin.getAmountMilk());
+                cU.setCupSize(coffeeAdmin.getCupSize());
+                coffeesUser.add(cU);
+            }
+        });
+        return coffeeUserRepository.saveAll(coffeesUser);
     }
 }

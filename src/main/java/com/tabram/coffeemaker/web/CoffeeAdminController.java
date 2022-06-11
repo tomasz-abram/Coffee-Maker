@@ -60,5 +60,11 @@ public class CoffeeAdminController {
         mav.addObject("coffees", coffeeAdminRepository.findAll());
         return mav;
     }
+
+    @GetMapping("/admin/delete-admin-coffee")
+    public String deleteAdminCoffee(@RequestParam Long coffeeAdminId) {
+        coffeeAdminService.deleteCoffee(coffeeAdminId);
+        return "redirect:/admin/admin-coffee-list";
+    }
 }
 

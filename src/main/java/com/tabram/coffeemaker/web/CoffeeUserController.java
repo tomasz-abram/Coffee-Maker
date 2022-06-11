@@ -41,7 +41,7 @@ public class CoffeeUserController {
 
     @PostMapping("/user/user-add-coffee")
     public String addCoffee(@ModelAttribute("coffeeUser") CoffeeDto coffeeDto) {
-        coffeeUserService.addNewCoffee(coffeeDto, coffeeUserService.currentUser());
+        coffeeUserService.saveCoffee(coffeeDto, coffeeUserService.currentUser());
         return "redirect:/coffee-settings";
     }
 
@@ -61,8 +61,14 @@ public class CoffeeUserController {
     }
 
     @GetMapping("/user/delete-user-coffee")
-    public String deleteUserCoffee(@RequestParam Long coffeeId) {
-        coffeeUserService.deleteCoffee(coffeeId);
-        return "redirect:/user/user-coffee-settings";
+    public String deleteUserCoffee(@RequestParam Long coffeeUserId) {
+        coffeeUserService.deleteCoffee(coffeeUserId);
+        return "redirect:/coffee-settings";
+    }
+
+    @GetMapping("/user/update-coffee-recipes")
+    public String updateCoffeeRecipes() {
+        coffeeUserService.updateDefaultCoffees(coffeeUserService.currentUser());
+        return "redirect:/coffee-settings";
     }
 }

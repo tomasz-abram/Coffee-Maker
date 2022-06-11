@@ -35,14 +35,14 @@
     <table class="table table-bordered table-striped text-center align-items-center" id="adminCoffeeTable">
         <thead>
         <tr class="fs-6">
-            <th>Name of the coffeeAdmin</th>
-            <th>Temp. water</th>
+            <th>Name of the coffee</th>
+            <th>Temp. water [C]</th>
             <th>Grinding level</th>
-            <th>Amount of coffee</th>
-            <th>Amount of water</th>
-            <th>Amount of coffee</th>
-            <th>Amount of milk</th>
-            <th>Cup size</th>
+            <th>Amount of coffee [g]</th>
+            <th>Amount of water [ml]</th>
+            <th>Amount of coffee [g]</th>
+            <th>Amount of milk [ml]</th>
+            <th>Cup size [ml]</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -59,10 +59,10 @@
 
             <td>
                 <div class="text-center">
-                    <a class="btn btn-info w-75"
+                    <a class="btn btn-outline-dark w-75"
                        th:href="@{/admin/showUpdateForm(coffeeAdminId=${coffeeAdmin.id})}">Update</a>
                     <a class="btn btn-danger ml-2 w-75"
-                       th:href="@{/admin/deleteCoffee(coffeeAdminId=${coffeeAdmin.id})}">Delete</a>
+                       th:href="@{/admin/delete-admin-coffee(coffeeAdminId=${coffeeAdmin.id})}">Delete</a>
                 </div>
             </td>
         </tr>
@@ -71,6 +71,7 @@
     </table>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function () {

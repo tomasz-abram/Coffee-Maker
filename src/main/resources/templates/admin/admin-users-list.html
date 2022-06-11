@@ -46,10 +46,10 @@
             <td th:text="${user.getId()}"/>
             <td th:text="${user.getUserName()}"/>
             <td th:text="${user.isEnabled()}"/>
-            <td th:text="${user}"/>
+            <td th:text="${user.getRoles()}"/>
             <td>
                 <div>
-                    <a class="btn btn-info " th:href="@{/admin/showUpdateForm(coffeeUserId=${user.id})}">Update</a>
+                    <a class="btn btn-info " th:href="@{/admin/showUpdateForm(UserId=${user.id})}">Update</a>
                     <a class="btn btn-warning ml-2 " th:href="@{/admin/deactivationUser(userId=${user.id})}">Deactivation</a>
                 </div>
             </td>
@@ -59,11 +59,11 @@
             <td th:text="${user.getId()}"/>
             <td th:text="${user.getUserName()}"/>
             <td th:text="${user.isEnabled()}"/>
-            <td th:text="${user.roles}"/>
+            <td th:text="${user.getRoles()}"/>
             <td>
                 <div>
                     <a class="btn btn-outline-info "
-                       th:href="@{/admin/showUpdateForm(coffeeUserId=${user.id})}">Update</a>
+                       th:href="@{/admin/showUpdateForm(UserId=${user.id})}">Update</a>
                     <a class="btn btn-outline-warning ml-2 "
                        th:href="@{/admin/deactivationUser(userId=${user.id})}">Enabled / Disabled</a>
                 </div>

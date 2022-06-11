@@ -23,6 +23,7 @@
 <div class="container mt-5">
     <a class="btn btn-outline-dark float-start" th:href="@{/menu}" type="button"><< Go Back</a>
     <a class="btn btn-outline-dark float-end" th:href="@{/user/user-add-coffee}" type="button">Add Coffee</a>
+    <a class="btn btn-outline-dark float-end" th:href="@{/user/update-coffee-recipes}" type="button">Default / Update recipes</a>
 </div>
 
 <div class="container">
@@ -57,9 +58,9 @@
             <td th:text="${coffeeUser.cupSize}"/>
             <td>
                 <div class="text-center">
-                    <a class="btn btn-primary w-75" th:href="@{/user/showUpdateForm(coffeeUserId=${coffeeUser.id})}">Update</a>
+                    <a class="btn btn-outline-dark w-75" th:href="@{/user/showUpdateForm(coffeeUserId=${coffeeUser.id})}">Update</a>
                     <a class="btn btn-danger ml-2 w-75 "
-                       th:href="@{/user/delete-user-coffee(coffeeId=${coffeeUser.id})}">Delete</a>
+                       th:href="@{/user/delete-user-coffee(coffeeUserId=${coffeeUser.id})}">Delete</a>
                 </div>
             </td>
         </tr>

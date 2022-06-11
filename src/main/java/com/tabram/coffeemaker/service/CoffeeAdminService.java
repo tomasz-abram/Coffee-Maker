@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CoffeeAdminService {
@@ -32,13 +31,26 @@ public class CoffeeAdminService {
 
     public CoffeeAdmin addNewCoffee(CoffeeDto coffeeDto) {
 
-        Optional<CoffeeAdmin> coffeeOptional = coffeeAdminRepository.findCoffeeByName(coffeeDto.getNameOfCoffee());
-        if (coffeeOptional.isPresent()) {
-            throw new IllegalStateException("name taken");
+        CoffeeAdmin coffee = coffeeAdminRepository.findCoffeeAdminByNameOfCoffee(coffeeDto.getNameOfCoffee());
+        if (coffee != null) {
+            CoffeeAdmin coffeeDB = coffeeAdminRepository.findCoffeeAdminByNameOfCoffee(coffeeDto.getNameOfCoffee());
+            coffeeDB.setTempWater(coffeeDto.getTempWater());
+            coffeeDB.setGrindingLevel(coffeeDto.getGrindingLevel());
+            coffeeDB.setAmountOfCoffee(coffeeDto.getAmountOfCoffee());
+            coffeeDB.setAmountOfWater(coffeeDto.getAmountOfWater());
+            coffeeDB.setAmountMilk(coffeeDto.getAmountMilk());
+            coffeeDB.setCupSize(coffeeDB.getCupSize());
+            return coffeeAdminRepository.save(coffeeDB);
+
         }
-
-        CoffeeAdmin coffeeAdmin = new CoffeeAdmin(coffeeDto.getNameOfCoffee(), coffeeDto.getTempWater(), coffeeDto.getGrindingLevel(), coffeeDto.getAmountOfCoffee(), coffeeDto.getAmountOfWater(), coffeeDto.getAmountMilk(), coffeeDto.getCupSize());
-
+        CoffeeAdmin coffeeAdmin = new CoffeeAdmin(
+                coffeeDto.getNameOfCoffee(),
+                coffeeDto.getTempWater(),
+                coffeeDto.getGrindingLevel(),
+                coffeeDto.getAmountOfCoffee(),
+                coffeeDto.getAmountOfWater(),
+                coffeeDto.getAmountMilk(),
+                coffeeDto.getCupSize());
         return coffeeAdminRepository.save(coffeeAdmin);
     }
 }
