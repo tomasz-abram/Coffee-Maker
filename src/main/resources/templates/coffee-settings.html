@@ -21,27 +21,27 @@
 <div class="container fixed-top" th:insert="fragments/header::header"></div>
 
 <div class="container mt-5">
-    <a class="btn btn-outline-dark float-start" th:href="@{/menu}" type="button"><< Go Back</a>
-    <a class="btn btn-outline-dark float-end" th:href="@{/user/user-add-coffee}" type="button">Add Coffee</a>
-    <a class="btn btn-outline-dark float-end" th:href="@{/user/update-coffee-recipes}" type="button">Default / Update recipes</a>
+    <a class="btn btn-dark " th:href="@{/menu}" type="button">Go Back</a>
+    <a class="btn btn-dark float-end " th:href="@{/user/user-add-coffee}" type="button">Add Coffee</a>
+    <a class="btn btn-dark float-end mx-3" th:href="@{/user/update-coffee-recipes}" type="button">Default / Update recipes</a>
 </div>
 
 <div class="container">
     <div class="text-center">
-        <span class="fs-3  align-items-center">Coffees settings</span>
+        <span class="fs-4  align-items-center">Coffees settings</span>
     </div>
     <hr/>
 
     <table class="table table-bordered table-striped text-center align-items-center" id="coffeeUserTable">
         <thead>
-        <tr class="fs-6">
+        <tr class="fs-6 ">
             <th>Name of the coffee</th>
             <th>Temp. water</th>
+            <th>Amount of water</th>
+            <th>Temp. milk</th>
+            <th>Amount of milk</th>
             <th>Grinding level</th>
             <th>Amount of coffee</th>
-            <th>Amount of water</th>
-            <th>Amount of coffee</th>
-            <th>Amount of milk</th>
             <th>Cup size</th>
             <th>Actions</th>
         </tr>
@@ -50,11 +50,11 @@
         <tr th:each="coffeeUser: ${coffees}">
             <td th:text="${coffeeUser.nameOfCoffee}"/>
             <td th:text="${coffeeUser.tempWater}"/>
+            <td th:text="${coffeeUser.amountOfWater}"/>
+            <td th:text="${coffeeUser.tempMilk}"/>
+            <td th:text="${coffeeUser.amountMilk}"/>
             <td th:text="${coffeeUser.grindingLevel}"/>
             <td th:text="${coffeeUser.amountOfCoffee}"/>
-            <td th:text="${coffeeUser.amountOfWater}"/>
-            <td th:text="${coffeeUser.amountOfCoffee}"/>
-            <td th:text="${coffeeUser.amountMilk}"/>
             <td th:text="${coffeeUser.cupSize}"/>
             <td>
                 <div class="text-center">

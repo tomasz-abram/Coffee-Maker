@@ -50,6 +50,7 @@ public class CoffeeAdminService {
                 coffeeDto.getAmountOfCoffee(),
                 coffeeDto.getAmountOfWater(),
                 coffeeDto.getAmountMilk(),
+                coffeeDto.getTempMilk(),
                 coffeeDto.getCupSize());
         return coffeeAdminRepository.save(coffeeAdmin);
     }

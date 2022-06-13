@@ -10,19 +10,21 @@ public class CoffeeDto {
     private double amountOfCoffee;
     private int amountOfWater;
     private int amountMilk;
+    private int tempMilk;
     private int cupSize;
 
 
     public CoffeeDto() {
     }
 
-    public CoffeeDto(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
+    public CoffeeDto(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize) {
         this.nameOfCoffee = nameOfCoffee;
         this.tempWater = tempWater;
         this.grindingLevel = grindingLevel;
         this.amountOfCoffee = amountOfCoffee;
         this.amountOfWater = amountOfWater;
         this.amountMilk = amountMilk;
+        this.tempMilk = tempMilk;
         this.cupSize = cupSize;
     }
 
@@ -80,5 +82,13 @@ public class CoffeeDto {
 
     public void setCupSize(int cupSize) {
         this.cupSize = cupSize;
+    }
+
+    public int getTempMilk() {
+        return tempMilk;
+    }
+
+    public void setTempMilk(int tempMilk) {
+        this.tempMilk = tempMilk;
     }
 }

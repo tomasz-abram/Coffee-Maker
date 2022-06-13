@@ -4,22 +4,23 @@ package com.tabram.coffeemaker.model;
 public class CoffeeMachine {
 
 
-private final int MAX_GRINDING_LEVEL = 10;
-private final int MIN_GRINDING_LEVEL = 1;
+final int MAX_GRINDING_LEVEL = 10;
+final int MIN_GRINDING_LEVEL = 1;
 
-private final double MAX_AMOUNT_OF_COFFEE = 40;
-private final double MIN_AMOUNT_OF_COFFEE = 10;
+final double MAX_AMOUNT_OF_COFFEE = 40;
+final double MIN_AMOUNT_OF_COFFEE = 10;
 
-private final int   MAX_TEMP_WATER = 98;
-private final int MIN_TEMP_WATER = 30;
-private final int MAX_AMOUNT_OF_WATER = 500;
-private final int MIN_AMOUNT_OF_WATER = 15;
+final int   MAX_TEMP_WATER = 98;
+final int MIN_TEMP_WATER = 30;
+final int MAX_AMOUNT_OF_WATER = 500;
+final int MIN_AMOUNT_OF_WATER = 15;
 
-private final int  MAX_TEMP_MILK = 98;
-private final int MIN_TEMP_MILK = 1;
-private final int MAX_AMOUNT_OF_MILK = 500;
-private final int MIN_AMOUNT_OF_MILK = 0;
-
+final int  MAX_TEMP_MILK = 90;
+final int MIN_TEMP_MILK = 1;
+final int MAX_AMOUNT_OF_MILK = 500;
+final int MIN_AMOUNT_OF_MILK = 0;
+final int MAX_CUP_SIZE = 1000;
+final int MIN_CUP_SIZE = 15;
 
     public int getMAX_GRINDING_LEVEL() {
         return MAX_GRINDING_LEVEL;
@@ -77,7 +78,6 @@ private final int MIN_AMOUNT_OF_MILK = 0;
         return MIN_CUP_SIZE;
     }
 
-    private final int MAX_CUP_SIZE = 1000;
-private final int MIN_CUP_SIZE = 15;
+
 
 }

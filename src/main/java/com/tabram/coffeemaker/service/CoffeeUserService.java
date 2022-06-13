@@ -41,6 +41,7 @@ public class CoffeeUserService {
                     coffees.getAmountOfCoffee(),
                     coffees.getAmountOfWater(),
                     coffees.getAmountMilk(),
+                    coffees.getTempMilk(),
                     coffees.getCupSize(),
                     user);
             coffeeUsers.add(coffee);
@@ -75,6 +76,7 @@ public class CoffeeUserService {
                     coffeeDto.getAmountOfCoffee(),
                     coffeeDto.getAmountOfWater(),
                     coffeeDto.getAmountMilk(),
+                    coffeeDto.getTempMilk(),
                     coffeeDto.getCupSize(),
                     user);
             coffeeUsers.add(coffee);
@@ -91,6 +93,7 @@ public class CoffeeUserService {
             coffeeDB.setAmountOfCoffee(coffeeDto.getAmountOfCoffee());
             coffeeDB.setAmountOfWater(coffeeDto.getAmountOfWater());
             coffeeDB.setAmountMilk(coffeeDto.getAmountMilk());
+            coffeeDB.setTempMilk(coffeeDto.getTempMilk());
             coffeeDB.setCupSize(coffeeDB.getCupSize());
             return coffeeUserRepository.save(coffeeDB);
         } else {
@@ -101,6 +104,7 @@ public class CoffeeUserService {
                     coffeeDto.getAmountOfCoffee(),
                     coffeeDto.getAmountOfWater(),
                     coffeeDto.getAmountMilk(),
+                    coffeeDto.getTempMilk(),
                     coffeeDto.getCupSize(),
                     currentUser());
 
@@ -126,6 +130,7 @@ public class CoffeeUserService {
                         coffeeAdmin.getAmountOfCoffee(),
                         coffeeAdmin.getAmountOfWater(),
                         coffeeAdmin.getAmountMilk(),
+                        coffeeAdmin.getTempMilk(),
                         coffeeAdmin.getCupSize(),
                         user);
                 coffeesUser.add(newCoffee);
@@ -136,6 +141,7 @@ public class CoffeeUserService {
                 cU.setAmountOfCoffee(coffeeAdmin.getAmountOfCoffee());
                 cU.setAmountOfWater(coffeeAdmin.getAmountOfWater());
                 cU.setAmountMilk(coffeeAdmin.getAmountMilk());
+                cU.setTempMilk(coffeeAdmin.getTempMilk());
                 cU.setCupSize(coffeeAdmin.getCupSize());
                 coffeesUser.add(cU);
             }

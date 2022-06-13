@@ -22,6 +22,8 @@ public class CoffeeUser {
     private int amountOfWater;
     @Column(name = "amount_milk")
     private int amountMilk;
+    @Column(name = "temp_milk")
+    private int tempMilk;
     @Column(name = "cup_size")
     private int cupSize;
 
@@ -36,23 +38,25 @@ public class CoffeeUser {
     public CoffeeUser(List<CoffeeUser> all) {
     }
 
-    public CoffeeUser(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize) {
+    public CoffeeUser(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize) {
         this.nameOfCoffee = nameOfCoffee;
         this.tempWater = tempWater;
         this.grindingLevel = grindingLevel;
         this.amountOfCoffee = amountOfCoffee;
         this.amountOfWater = amountOfWater;
         this.amountMilk = amountMilk;
+        this.tempMilk = tempMilk;
         this.cupSize = cupSize;
     }
 
-    public CoffeeUser(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int cupSize, User user) {
+    public CoffeeUser(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize, User user) {
         this.nameOfCoffee = nameOfCoffee;
         this.tempWater = tempWater;
         this.grindingLevel = grindingLevel;
         this.amountOfCoffee = amountOfCoffee;
         this.amountOfWater = amountOfWater;
         this.amountMilk = amountMilk;
+        this.tempMilk = tempMilk;
         this.cupSize = cupSize;
         this.user = user;
     }
@@ -131,5 +135,13 @@ public class CoffeeUser {
 
     public String getUserName() {
         return user.getUserName();
+    }
+
+    public int getTempMilk() {
+        return tempMilk;
+    }
+
+    public void setTempMilk(int tempMilk) {
+        this.tempMilk = tempMilk;
     }
 }

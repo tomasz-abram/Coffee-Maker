@@ -61,11 +61,8 @@ public class CoffeeUserController {
         ModelAndView mav = new ModelAndView("/user/user-add-coffee");
         CoffeeUser coffeeUser = coffeeUserRepository.findById(coffeeUserId).get();
         mav.addObject("coffeeUser", coffeeUser);
-
         CoffeeMachine coffeeMachine = new CoffeeMachine();
         mav.addObject("coffeeMachine", coffeeMachine);
-
-
         return mav;
     }
 

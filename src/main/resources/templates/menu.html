@@ -17,7 +17,9 @@
 <!--header-->
 <div class="container fixed-top" th:insert="fragments/header::header"></div>
 
-<div class="container mt-5 ">
+<div class="  justify-content-center align-items-center h-100 mt-5 ">
+
+<div class="container">
     <div th:if="${param.success}">
         <div class="alert alert-success">You've successfully registered!</div>
     </div>
@@ -33,15 +35,14 @@
 </div>
 
 <div class="container text-center">
-    <h3>TEST - who are you</h3>
-    <div sec:authorize="isAuthenticated()">
+
+    <div class = " fs-4" sec:authorize="isAuthenticated()">
         Welcome, <span sec:authentication="name">Username</span>
     </div>
+    <p>Do you want some coffee?</p>
 </div>
 
-
-<div class="container">
-    <div class="list-group text-center row justify-content-center align-items-center">
+    <div class="list-group text-center row">
         <a class="navbar-brand list-group-item align-items-center justify-content-center"><h5>Coffee Maker</h5></a>
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Make Coffee</a>
         <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/coffee-settings}">Coffee

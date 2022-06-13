@@ -2,6 +2,7 @@ package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.model.CoffeeAdmin;
+import com.tabram.coffeemaker.model.CoffeeMachine;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
 import com.tabram.coffeemaker.service.CoffeeAdminService;
 import com.tabram.coffeemaker.service.CoffeeUserService;
@@ -34,10 +35,12 @@ public class CoffeeAdminController {
     }
 
     @GetMapping("/admin/admin-add-coffee")
-    public String showAddCoffeeForm() {
-        return "admin/admin-add-coffee";
+    public ModelAndView showAddCoffeeForm() {
+        ModelAndView mav = new ModelAndView("/admin/admin-add-coffee");
+        CoffeeMachine coffeeMachine = new CoffeeMachine();
+        mav.addObject("coffeeMachine", coffeeMachine);
+        return mav;
     }
-
 
     @PostMapping("/admin/admin-add-coffee")
     public String addCoffee(@ModelAttribute("coffeeAdmin") CoffeeDto coffeeDto) {
@@ -51,6 +54,8 @@ public class CoffeeAdminController {
         ModelAndView mav = new ModelAndView("/admin/admin-add-coffee");
         CoffeeAdmin coffeeAdmin = coffeeAdminRepository.findById(coffeeAdminId).get();
         mav.addObject("coffeeAdmin", coffeeAdmin);
+        CoffeeMachine coffeeMachine = new CoffeeMachine();
+        mav.addObject("coffeeMachine", coffeeMachine);
         return mav;
     }
 
