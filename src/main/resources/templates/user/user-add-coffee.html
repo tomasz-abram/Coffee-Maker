@@ -17,45 +17,117 @@
 <div>
     <div class="container fixed-top" th:insert="fragments/header::header"></div>
     <div class="container mt-5">
-        <a class="btn btn-outline-dark float-start" th:href="@{/coffee-settings}" type="button">Go Back</a>
+        <a class="btn btn-outline-dark float-start " th:href="@{/coffee-settings}" type="button">Go Back</a>
     </div>
 
-    <div class="container">
+    <div class="container ">
         <div class="text-center">
-            <span class="fs-3  align-items-center">Add New Coffee</span>
+            <span class="fs-3 ">Add New Coffee</span>
         </div>
-
         <hr/>
-        <form method="POST" th:action="@{/user/user-add-coffee}" th:object="${coffeeUser}">
 
-            <label class="form-label" for="nameOfCoffee">Name of coffee</label>
-            <input class="form-control col-4 mb-4" id="nameOfCoffee" name="nameOfCoffee" placeholder="Name of coffee"
-                   th:field="*{nameOfCoffee}" type="text"/>
 
-            <label class="form-label" for="tempWater">Temp. water[C]</label>
-            <input class="form-control col-4 mb-4" id="tempWater" name="tempWater" placeholder="Temp. water"
-                   th:field="*{tempWater}" type="number"/>
+        <form class="text-center w-75 m-auto" method="POST" th:action="@{/user/user-add-coffee}">
 
-            <label class="form-label" for="grindingLevel">Grinding level</label>
-            <input class="form-control col-4 mb-4" id="grindingLevel" name="grindingLevel" placeholder="Grinding level"
-                   th:field="*{grindingLevel}" type="number"/>
 
-            <label class="form-label" for="amountOfCoffee">Amount of coffee [g]</label>
-            <input class="form-control col-4 mb-4" id="amountOfCoffee" name="amountOfCoffee" placeholder="Amount of coffee"
-                   th:field="*{amountOfCoffee}" type="number"/>
+            <label class="form-label fs-5 m-auto" for="nameOfCoffee">Name of coffee</label>
+            <input class="form-control col-4 mb-4 text-center m-auto" id="nameOfCoffee" name="nameOfCoffee"
+                   placeholder="Enter name of coffee"
+                   th:value="*{coffeeUser.nameOfCoffee}" type="text"/>
 
-            <label class="form-label" for="amountOfWater">Amount of water [ml]</label>
-            <input class="form-control col-4 mb-4" id="amountOfWater" name="amountOfWater" placeholder="Amount of water"
-                   th:field="*{amountOfWater}" type="number"/>
 
-            <label class="form-label" for="amountMilk">Amount milk [ml]</label>
-            <input class="form-control col-4 mb-4" id="amountMilk" name="amountMilk" placeholder="Amount milk"
-                   th:field="*{amountMilk}" type="number"/>
+            <div class ="m-auto">
+                <label class="form-label m-auto" for="tempWaterSlider">Temp. water:</label>
+                    <span class="fs-5 position-" id="tempWater">0</span><span>&#8451;</span>
 
-            <label class="form-label" for="cupSize">Cup size [ml]</label>
-            <input class="form-control col-4 mb-4" id="cupSize" name="cupSize" placeholder="Cup size"
-                   th:field="*{cupSize}" type="number"/>
+                <input class="form-range h-100 m-auto" id="tempWaterSlider"
+                       name="tempWater"
+                       step="1" th:attr="min=${coffeeMachine.getMIN_TEMP_WATER()}, max=${coffeeMachine.getMAX_TEMP_WATER()}" th:value="*{coffeeUser.tempWater}" type="range" value="95">
+                <ul class="form-range list-group-horizontal">
+                    <li class="float-start list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_TEMP_WATER()}">min</span> &#8451;
+                    </li>
+                    <li class="float-end list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_TEMP_WATER()}">max</span> &#8451;
+                    </li>
+                </ul>
+            </div>
 
+            <div class ="m-auto">
+                <label class="form-label m-auto " for="grindingLevelSlider">Grinding level: </label>
+                    <span class="fs-5" id="grindingLevel">0</span>
+
+                <input class="form-range h-100 " id="grindingLevelSlider"
+                       name="grindingLevel"
+                       step="1" th:attr="min=${coffeeMachine.getMIN_GRINDING_LEVEL()} , max=${coffeeMachine.getMAX_GRINDING_LEVEL()}" th:value="*{coffeeUser.grindingLevel}" type="range" value="5">
+                <ul class="form-range list-group-horizontal">
+                    <li class="float-start list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_GRINDING_LEVEL()}">min</span></li>
+                    <li class="float-end list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_GRINDING_LEVEL()}">max</span></li>
+                </ul>
+            </div>
+
+
+            <div class="m-auto">
+                <label class="form-label m-auto" for="amountOfCoffeeSlider">Amount of coffee: </label>
+                    <span class="fs-5" id="amountOfCoffee">0</span><span class="fs-5"> g</span>
+
+                <input class="form-range h-100 " id="amountOfCoffeeSlider"
+                       name="amountOfCoffee"
+                       step="0.5" th:attr="min=${coffeeMachine.getMIN_AMOUNT_OF_COFFEE()} , max=${coffeeMachine.getMAX_AMOUNT_OF_COFFEE()}" th:value="*{coffeeUser.amountOfCoffee}" type="range" value="17.5">
+                <ul class="form-range list-group-horizontal">
+                    <li class="float-start list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_AMOUNT_OF_COFFEE()}">min</span></li>
+                    <li class="float-end list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_AMOUNT_OF_COFFEE()}">max</span></li>
+                </ul>
+            </div>
+
+            <div class="m-auto">
+                <label class="form-label m-auto" for="amountOfWaterSlider">Amount of water: </label>
+                    <span class="fs-5" id="amountOfWater">0</span><span class="fs-5"> ml</span>
+
+                <input class="form-range h-100 " id="amountOfWaterSlider"
+                       name="amountOfWater"
+                       step="5" th:attr="min=${coffeeMachine.getMIN_AMOUNT_OF_WATER()} , max=${coffeeMachine.getMAX_AMOUNT_OF_WATER()}" th:value="*{coffeeUser.amountOfWater}" type="range" value="45">
+                <ul class="form-range list-group-horizontal">
+                    <li class="float-start list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_AMOUNT_OF_WATER()}">min</span></li>
+                    <li class="float-end list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_AMOUNT_OF_WATER()}">max</span></li>
+                </ul>
+            </div>
+
+            <div class="m-auto">
+                <label class="form-label m-auto" for="amountMilkSlider">Amount of milk: </label>
+                    <span class="fs-5 " id="amountMilk">0</span><span class="fs-5 m-auto"> ml</span>
+
+                <input class="form-range h-100 " id="amountMilkSlider"
+                       name="amountMilk"
+                       step="5" th:attr="min=${coffeeMachine.getMIN_AMOUNT_OF_MILK()} , max=${coffeeMachine.getMAX_AMOUNT_OF_MILK()}" th:value="*{coffeeUser.amountMilk}" type="range" value="0">
+                <ul class="form-range list-group-horizontal">
+                    <li class="float-start list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_AMOUNT_OF_MILK()}">min</span></li>
+                    <li class="float-end list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_AMOUNT_OF_MILK()}">max</span></li>
+                </ul>
+            </div>
+
+            <div class="m-auto">
+                <label class="form-label m-auto" for="cupSizeSlider">Cup size: </label>
+                    <span class="fs-5" id="cupSize">0</span><span class="fs-5">[ml]</span>
+
+                <input class="form-range h-100 " id="cupSizeSlider"
+                       name="cupSize"
+                       step="5" th:attr="min=${coffeeMachine.getMIN_CUP_SIZE()} , max=${coffeeMachine.getMAX_CUP_SIZE()}" th:value="*{coffeeUser.cupSize}" type="range" value="45">
+                <ul class="form-range list-group-horizontal">
+                    <li class="float-start list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_CUP_SIZE()}">min</span></li>
+                    <li class="float-end list-group-item">
+                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_CUP_SIZE()}">max</span></li>
+                </ul>
+            </div>
             <button class="btn btn-primary col-2" type="submit">Save</button>
         </form>
 
@@ -63,4 +135,58 @@
 </div>
 </body>
 </html>
+
+<script>
+    var SlideTemp = document.getElementById("tempWaterSlider");
+    var SlideTempText = document.getElementById("tempWater");
+
+    var SlideGrinding = document.getElementById("grindingLevelSlider");
+    var SlideGrindingText = document.getElementById("grindingLevel");
+
+    var SlideAmountOfCoffee = document.getElementById("amountOfCoffeeSlider");
+    var SlideAmountOfCoffeeText = document.getElementById("amountOfCoffee");
+
+    var AmountOfWater = document.getElementById("amountOfWaterSlider");
+    var AmountOfWaterText = document.getElementById("amountOfWater");
+
+    var SlideAmountOfMilk = document.getElementById("amountMilkSlider");
+    var SlideAmountOfMilkText = document.getElementById("amountMilk");
+
+    var SlideCupSize = document.getElementById("cupSizeSlider");
+    var SlideCupSizeText = document.getElementById("cupSize");
+
+    // var SlideCupSize = document.getElementById("tempWaterSlider");
+    // var SlideCupSizeText = document.getElementById("tempWaterSlider");
+
+
+    SlideTempText.innerHTML = SlideTemp.value;
+    SlideGrindingText.innerHTML = SlideGrinding.value;
+    SlideAmountOfCoffeeText.innerHTML = SlideAmountOfCoffee.value;
+    AmountOfWaterText.innerHTML = AmountOfWater.value;
+    SlideAmountOfMilkText.innerHTML = SlideAmountOfMilk.value;
+    SlideCupSizeText.innerHTML = SlideCupSize.value;
+
+    SlideTemp.oninput = function () {
+        SlideTempText.innerHTML = this.value;
+    }
+
+    SlideGrinding.oninput = function () {
+        SlideGrindingText.innerHTML = this.value;
+    }
+    SlideAmountOfCoffee.oninput = function () {
+        SlideAmountOfCoffeeText.innerHTML = this.value;
+    }
+    AmountOfWater.oninput = function () {
+        AmountOfWaterText.innerHTML = this.value;
+    }
+    SlideAmountOfMilk.oninput = function () {
+        SlideAmountOfMilkText.innerHTML = this.value;
+    }
+
+    SlideCupSize.oninput = function () {
+        SlideCupSizeText.innerHTML = this.value;
+    }
+
+
+</script>
 

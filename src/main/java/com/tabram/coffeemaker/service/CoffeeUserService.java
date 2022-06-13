@@ -107,7 +107,8 @@ public class CoffeeUserService {
             return coffeeUserRepository.save(coffeeUser);
         }
     }
-
+// Update exist coffee or creates a new coffee in coffeeUserRepository from coffeeAdminRepository.
+// Check the given coffee exist in the user's repository if yes, update, if not create new.
     public List<CoffeeUser> updateDefaultCoffees(User user) {
 
         List<CoffeeAdmin> coffees = coffeeAdminRepository.findAll();
