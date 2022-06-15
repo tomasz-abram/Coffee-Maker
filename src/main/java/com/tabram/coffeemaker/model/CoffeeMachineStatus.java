@@ -18,19 +18,30 @@ public class CoffeeMachineStatus {
     private float coffeeBeansLevel;
     @Column(name = "ground_container_level")
     private int groundContainerLevel;
-    @Column(name = "water_hardnes")
+    @Column(name = "descaleCounter")
+    private float descaleCounter;
+    @Column(name = "water_hardness")
     private float waterHardness;
 
-    public CoffeeMachineStatus(int waterLevel, int milkLevel, float coffeeBeansLevel, int groundContainerLevel, float waterHardness) {
+    public CoffeeMachineStatus(int waterLevel, int milkLevel, float coffeeBeansLevel, int groundContainerLevel, float descaleCounter,  float waterHardness) {
         this.waterLevel = waterLevel;
         this.milkLevel = milkLevel;
         this.coffeeBeansLevel = coffeeBeansLevel;
         this.groundContainerLevel = groundContainerLevel;
+        this.descaleCounter = descaleCounter;
         this.waterHardness = waterHardness;
     }
 
     public CoffeeMachineStatus() {
 
+    }
+
+    public float getDescaleCounter() {
+        return descaleCounter;
+    }
+
+    public void setDescaleCounter(int descaleCounter) {
+        this.descaleCounter = descaleCounter;
     }
 
     public int getWaterLevel() {

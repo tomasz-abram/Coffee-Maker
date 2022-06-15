@@ -1,7 +1,7 @@
 package com.tabram.coffeemaker.web;
 
+import com.tabram.coffeemaker.config.CoffeeMachine;
 import com.tabram.coffeemaker.dto.CoffeeDto;
-import com.tabram.coffeemaker.model.CoffeeMachine;
 import com.tabram.coffeemaker.model.CoffeeUser;
 import com.tabram.coffeemaker.repository.CoffeeUserRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
@@ -28,7 +28,6 @@ public class CoffeeUserController {
         this.coffeeUserService = coffeeUserService;
         this.coffeeUserRepository = coffeeUserRepository;
     }
-
 
     @ModelAttribute("coffeeUser")
     public CoffeeDto coffeeDto() {
@@ -59,7 +58,7 @@ public class CoffeeUserController {
     @GetMapping("/user/showUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Long coffeeUserId) {
         ModelAndView mav = new ModelAndView("/user/user-add-coffee");
-        CoffeeUser coffeeUser = coffeeUserRepository.findById(coffeeUserId).get();
+        CoffeeUser coffeeUser = coffeeUserRepository.findById(coffeeUserId).orElse(null);
         mav.addObject("coffeeUser", coffeeUser);
         CoffeeMachine coffeeMachine = new CoffeeMachine();
         mav.addObject("coffeeMachine", coffeeMachine);

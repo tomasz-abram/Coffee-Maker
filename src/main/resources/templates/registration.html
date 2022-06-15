@@ -36,18 +36,18 @@
                     <input class="form-control" id="password" name="password" placeholder="Enter Password"
                            th:field="*{password}"
                            type="password"/>
-                    <label for="username">Password</label>
+                    <label for="password">Password</label>
                 </div>
 
                 <div class="form-floating">
-                    <input class="w-100 btn btn-lg btn-primary" id="login-submit" name="login-submit" type="submit"
+                    <input class="w-100 btn btn-lg btn-dark" id="login-submit" name="login-submit" type="submit"
                            value="Register"/>
                 </div>
 
             </form>
             <span> Already registered? <a href="/" th:href="@{/login}"> Login here</a></span>
-            </br>
-            <span>or </br><a th:href="@{/}">Back to menu</a></span>
+            <br>
+            <span>or <br><a th:href="@{/}">Back to menu</a></span>
         </div>
     </div>
 </div>

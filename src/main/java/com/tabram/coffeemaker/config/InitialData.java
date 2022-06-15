@@ -42,8 +42,8 @@ public class InitialData {
             List<CoffeeAdmin> coffees = List.of(espresso, cappuccino, latteMacchiato, lungo, macchiato, ristretto);
             coffeeAdminRepository.saveAllAndFlush(coffees);
 
-            User userAdmin = new User("Admin", new BCryptPasswordEncoder().encode("Admin"), true, Arrays.asList(new Role("ROLE_ADMIN")));
-            User userDefault = new User("Default", new BCryptPasswordEncoder().encode("Default"), true, Arrays.asList(new Role("ROLE_DEFAULT")));
+            User userAdmin = new User("Admin", new BCryptPasswordEncoder().encode("Admin"), true, List.of(new Role("ROLE_ADMIN")));
+            User userDefault = new User("Default", new BCryptPasswordEncoder().encode("Default"), true, List.of(new Role("ROLE_DEFAULT")));
             List<User> users = List.of(userAdmin, userDefault);
             userRepository.saveAll(users);
 
@@ -51,7 +51,7 @@ public class InitialData {
             coffeeUserService.addCoffeeListToUser(userDefault);
 
 
-            CoffeeMachineStatus coffeeMachineStatus = new CoffeeMachineStatus(250, 150, 200, 23, 5);
+            CoffeeMachineStatus coffeeMachineStatus = new CoffeeMachineStatus(250, 150, 200, 23,200, 5);
             coffeeMachineStatusRepository.save(coffeeMachineStatus);
 
 
