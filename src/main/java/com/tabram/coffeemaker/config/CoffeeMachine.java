@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CoffeeMachine {
 
-
+    final long MACHINE_ID = 1L;
     final int MIN_WATER_CONTAINER = 0;
     final int MAX_WATER_CONTAINER = 3000;
     final int MIN_MILK_CONTAINER = 0;
@@ -14,7 +14,7 @@ public class CoffeeMachine {
     final int MAX_COFFEE_BEANS_CONTAINER = 300;
     final int MIN_GROUND_CONTAINER = 0;
     final int MAX_GROUND_CONTAINER = 30;
-    final int MAX_DESCALE_COUNTER = 500;
+    final int MAX_DESCALE_COUNTER = 50000;
     final int MAX_GRINDING_LEVEL = 10;
     final int MIN_GRINDING_LEVEL = 1;
     final double MAX_AMOUNT_OF_COFFEE = 40;
@@ -29,6 +29,10 @@ public class CoffeeMachine {
     final int MIN_AMOUNT_OF_MILK = 0;
     final int MAX_CUP_SIZE = 1000;
     final int MIN_CUP_SIZE = 15;
+
+    public long getMACHINE_ID() {
+        return MACHINE_ID;
+    }
 
     public int getMIN_WATER_CONTAINER() {
         return MIN_WATER_CONTAINER;

@@ -51,7 +51,7 @@ public class InitialData {
             coffeeUserService.addCoffeeListToUser(userDefault);
 
 
-            CoffeeMachineStatus coffeeMachineStatus = new CoffeeMachineStatus(250, 150, 200, 23,200, 5);
+            CoffeeMachineStatus coffeeMachineStatus = new CoffeeMachineStatus(500, 300, 200, 23,200, 5);
             coffeeMachineStatusRepository.save(coffeeMachineStatus);
 
 

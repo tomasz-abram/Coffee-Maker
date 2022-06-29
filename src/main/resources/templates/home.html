@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Home</title>
 
@@ -32,32 +33,38 @@
     </div>
 </div>
 
+<div class="container text-center">
 
-<div class="text-center row justify-content-center align-items-center h-100 ">
-    <div class="list-group row text-center ">
-        <a class="navbar-brand list-group-item  justify-content-center"><h5>Coffee Maker</h5></a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/login}"> Login</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/registration}">Registration</a>
-
-        <form class="px-0 py-0  list-group-item list-group-item-action" id="default-login" method="post"
-              th:action="@{/login}">
-            <input class="visually-hidden" id="username" name="username" type="text" value="Default"/>
-            <input class="visually-hidden" id="password" name="password" type="password" value="Default"/>
-            <input class="w-100 border-0 gap-3 py-3 list-group-item list-group-item-action" id="default-login-submit"
-                   name="login-submit" type="submit"
-                   value="Default settings"/>
-        </form>
-
-        <form class="px-0 py-0  list-group-item list-group-item-action " id="admin-login" method="post"
-              th:action="@{/login}">
-            <input class="visually-hidden" id="username1" name="username" type="text" value="Admin"/>
-            <input class="visually-hidden" id="password1" name="password" type="password" value="Admin"/>
-            <input class="w-100 border-0 gap-3 py-3 list-group-item list-group-item-action list-group-item-warning"
-                   id="admin-login-submit" name="login-submit" type="submit"
-                   value="SERVICE:Login like ADMIN"/>
-        </form>
-
-    </div>
+    <span class="fs-4">Coffee... </span>
+    <p>...is always a good idea.</p>
 </div>
+
+<!--<div class="text-center row justify-content-center align-items-center h-100 ">-->
+
+<div class="list-group text-center row">
+    <a class="navbar-brand list-group-item  justify-content-center"><h5>Coffee Maker</h5></a>
+    <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/login}"> Login</a>
+    <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/registration}">Registration</a>
+
+    <form class="px-0 py-0  list-group-item list-group-item-action" id="default-login" method="post"
+          th:action="@{/login}">
+        <input class="visually-hidden" id="username" name="username" type="text" value="Default"/>
+        <input class="visually-hidden" id="password" name="password" type="password" value="Default"/>
+        <input class="w-100 border-0 gap-3 py-3 list-group-item list-group-item-action" id="default-login-submit"
+               name="login-submit" type="submit"
+               value="Default settings"/>
+    </form>
+
+    <form class="px-0 py-0  list-group-item list-group-item-action " id="admin-login" method="post"
+          th:action="@{/login}">
+        <input class="visually-hidden" id="username1" name="username" type="text" value="Admin"/>
+        <input class="visually-hidden" id="password1" name="password" type="password" value="Admin"/>
+        <input class="w-100 border-0 gap-3 py-3 list-group-item list-group-item-action list-group-item-warning"
+               id="admin-login-submit" name="login-submit" type="submit"
+               value="SERVICE:Login like ADMIN"/>
+    </form>
+
+</div>
+<!--</div>-->
 </body>
 </html>

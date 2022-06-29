@@ -2,6 +2,8 @@ package com.tabram.coffeemaker.service;
 
 import com.tabram.coffeemaker.config.CoffeeMachine;
 import com.tabram.coffeemaker.model.CoffeeMachineStatus;
+import com.tabram.coffeemaker.model.CoffeeUser;
+import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.CoffeeMachineStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,6 @@ public class CoffeeMachineStatusService {
 
     private final CoffeeMachineStatusRepository coffeeMachineStatusRepository;
     private final CoffeeMachine coffeeMachine;
-    Long machineId = 1L;
 
     @Autowired
     public CoffeeMachineStatusService(CoffeeMachineStatusRepository coffeeMachineStatusRepository, CoffeeMachine coffeeMachine) {
@@ -24,7 +25,7 @@ public class CoffeeMachineStatusService {
 
 
     public void updateWater(int addWater) {
-        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(machineId).orElse(null);
+        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(coffeeMachine.getMACHINE_ID()).orElse(null);
 
         int updateWater = Objects.requireNonNull(machine).getWaterLevel() + addWater;
 
@@ -37,14 +38,14 @@ public class CoffeeMachineStatusService {
     }
 
     public void emptyWater() {
-        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(machineId).orElse(null);
+        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(coffeeMachine.getMACHINE_ID()).orElse(null);
         Objects.requireNonNull(machine).setWaterLevel(0);
         coffeeMachineStatusRepository.save(machine);
     }
 
 
     public void updateMilk(int addMilk) {
-        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(machineId).orElse(null);
+        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(coffeeMachine.getMACHINE_ID()).orElse(null);
         int updateMilk = Objects.requireNonNull(machine).getMilkLevel() + addMilk;
 
         if (updateMilk > coffeeMachine.getMAX_MILK_CONTAINER()) {
@@ -56,13 +57,13 @@ public class CoffeeMachineStatusService {
     }
 
     public void emptyMilk() {
-        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(machineId).orElse(null);
+        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(coffeeMachine.getMACHINE_ID()).orElse(null);
         Objects.requireNonNull(machine).setMilkLevel(0);
         coffeeMachineStatusRepository.save(machine);
     }
 
     public void updateBeans(int addBeans) {
-        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(machineId).orElse(null);
+        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(coffeeMachine.getMACHINE_ID()).orElse(null);
         float updateBeans = Objects.requireNonNull(machine).getCoffeeBeansLevel() + addBeans;
 
         if (updateBeans > coffeeMachine.getMAX_COFFEE_BEANS_CONTAINER()) {
@@ -74,25 +75,25 @@ public class CoffeeMachineStatusService {
     }
 
     public void emptyCoffeeBeans() {
-        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(machineId).orElse(null);
+        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(coffeeMachine.getMACHINE_ID()).orElse(null);
         Objects.requireNonNull(machine).setCoffeeBeansLevel(0);
         coffeeMachineStatusRepository.save(machine);
     }
 
     public void emptyGroundContainer() {
-        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(machineId).orElse(null);
+        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(coffeeMachine.getMACHINE_ID()).orElse(null);
         Objects.requireNonNull(machine).setGroundContainerLevel(0);
         coffeeMachineStatusRepository.save(machine);
     }
 
     public void descale() {
-        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(machineId).orElse(null);
+        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(coffeeMachine.getMACHINE_ID()).orElse(null);
         Objects.requireNonNull(machine).setDescaleCounter(0);
         coffeeMachineStatusRepository.save(machine);
     }
 
     public void updateWaterHardness(CoffeeMachineStatus cMS) {
-        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(machineId).orElse(null);
+        CoffeeMachineStatus machine = coffeeMachineStatusRepository.findById(coffeeMachine.getMACHINE_ID()).orElse(null);
         if (cMS.getWaterHardness() < 0) {
             throw new IllegalStateException("The water hardness must not be less than zero");
         }
@@ -102,4 +103,5 @@ public class CoffeeMachineStatusService {
         Objects.requireNonNull(machine).setWaterHardness(cMS.getWaterHardness());
         coffeeMachineStatusRepository.save(machine);
     }
+
 }
