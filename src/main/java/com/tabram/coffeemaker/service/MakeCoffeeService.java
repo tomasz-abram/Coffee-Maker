@@ -1,71 +1,78 @@
 package com.tabram.coffeemaker.service;
 
 import com.tabram.coffeemaker.config.CoffeeMachine;
-import com.tabram.coffeemaker.model.CoffeeMachineStatus;
+import com.tabram.coffeemaker.model.CoffeeMachineStock;
 import com.tabram.coffeemaker.model.CoffeeUser;
 import com.tabram.coffeemaker.model.User;
-import com.tabram.coffeemaker.repository.CoffeeMachineStatusRepository;
+import com.tabram.coffeemaker.repository.CoffeeMachineStockRepository;
 import com.tabram.coffeemaker.repository.CoffeeUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MakeCoffeeService {
 
-    private final CoffeeMachineStatusRepository coffeeMachineStatusRepository;
+    private final CoffeeMachineStockRepository coffeeMachineStockRepository;
     private final CoffeeUserRepository coffeeUserRepository;
     private final CoffeeMachine coffeeMachine;
 
 
     @Autowired
-    public MakeCoffeeService(CoffeeMachineStatusRepository coffeeMachineStatusRepository, CoffeeUserRepository coffeeUserRepository, CoffeeMachine coffeeMachine) {
-        this.coffeeMachineStatusRepository = coffeeMachineStatusRepository;
+    public MakeCoffeeService(CoffeeMachineStockRepository coffeeMachineStockRepository, CoffeeUserRepository coffeeUserRepository, CoffeeMachine coffeeMachine) {
+        this.coffeeMachineStockRepository = coffeeMachineStockRepository;
         this.coffeeUserRepository = coffeeUserRepository;
         this.coffeeMachine = coffeeMachine;
     }
 
     public void makeCoffee(String nameOfCoffee, int quantity, User user) {
-        CoffeeMachineStatus machineStatusRep = coffeeMachineStatusRepository.findById(coffeeMachine.getMACHINE_ID()).orElse(null);
-        CoffeeUser coffee = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(nameOfCoffee, user.getId());
+        List<CoffeeMachineStock> cMSList = new ArrayList<>();
+        CoffeeMachineStock waterStock = coffeeMachineStockRepository.findByName("Water");
+        CoffeeMachineStock milkStock = coffeeMachineStockRepository.findByName("Milk");
+        CoffeeMachineStock coffeeBeansStock = coffeeMachineStockRepository.findByName("Coffee beans");
+        CoffeeMachineStock groundContainerStock = coffeeMachineStockRepository.findByName("Ground container");
+        CoffeeMachineStock descaleCounter = coffeeMachineStockRepository.findByName("Descale counter");
+        CoffeeMachineStock waterHardnessStock = coffeeMachineStockRepository.findByName("Water hardness");
 
-        if (machineStatusRep.getWaterLevel() < coffee.getAmountOfWater()) {
+        CoffeeUser coffee = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(nameOfCoffee, user.getId());
+        if (waterStock.getValue() < coffee.getAmountOfWater()) {
             throw new IllegalStateException("There is not enough water in the machine to make this coffee");
         } else {
-            machineStatusRep.setWaterLevel(machineStatusRep.getWaterLevel() - coffee.getAmountOfWater());
+            waterStock.setValue(waterStock.getValue() - coffee.getAmountOfWater());
+            cMSList.add(waterStock);
         }
 
-        if (machineStatusRep.getMilkLevel() < coffee.getAmountMilk()) {
+        if (milkStock.getValue() < coffee.getAmountMilk()) {
             throw new IllegalStateException("There is not enough milk in the machine to make this coffee");
         } else {
-            machineStatusRep.setMilkLevel(machineStatusRep.getMilkLevel() - coffee.getAmountMilk());
+            milkStock.setValue(milkStock.getValue() - coffee.getAmountMilk());
+            cMSList.add(milkStock);
         }
 
-        if (machineStatusRep.getCoffeeBeansLevel() < coffee.getAmountOfCoffee() * quantity) {
+        if (coffeeBeansStock.getValue() < coffee.getAmountOfCoffee() * quantity) {
             throw new IllegalStateException("There is not enough coffee beans in the machine to make this coffee");
         } else {
-            machineStatusRep.setCoffeeBeansLevel((float) (machineStatusRep.getCoffeeBeansLevel() - coffee.getAmountOfCoffee() * quantity));
+            coffeeBeansStock.setValue((float) (coffeeBeansStock.getValue() - coffee.getAmountOfCoffee() * quantity));
+            cMSList.add(coffeeBeansStock);
         }
 
-        if (coffeeMachine.getMAX_GROUND_CONTAINER() < machineStatusRep.getGroundContainerLevel() + quantity) {
+        if (coffeeMachine.getMAX_GROUND_CONTAINER() < groundContainerStock.getValue() + quantity) {
             throw new IllegalStateException("Empty the grounds container before making this coffee");
         } else {
-            machineStatusRep.setGroundContainerLevel(machineStatusRep.getGroundContainerLevel() + quantity);
+            groundContainerStock.setValue(groundContainerStock.getValue() + quantity);
+            cMSList.add(groundContainerStock);
         }
 
-        if (coffeeMachine.getMAX_DESCALE_COUNTER() < machineStatusRep.getDescaleCounter() + machineStatusRep.getWaterHardness() * coffee.getAmountOfWater()) {
+        if (coffeeMachine.getMAX_DESCALE_COUNTER() < descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater()) {
             throw new IllegalStateException("Descale the coffee machine before making this coffee");
         } else {
-            machineStatusRep.setDescaleCounter((int) (machineStatusRep.getDescaleCounter() + machineStatusRep.getWaterHardness() * coffee.getAmountOfWater()));
+            descaleCounter.setValue((int) (descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater()));
+            cMSList.add(descaleCounter);
         }
 
-        coffeeMachineStatusRepository.save(machineStatusRep);
+        coffeeMachineStockRepository.saveAll(cMSList);
     }
 
-
-    public void checkMakeCoffee(String nameOfCoffee, int quantity) {
-
-
-
-
-    }
 }

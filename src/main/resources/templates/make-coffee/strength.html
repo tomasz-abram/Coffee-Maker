@@ -21,7 +21,7 @@
 <div class="container fixed-top" th:insert="fragments/header::header"></div>
 
 <div class="container mt-5">
-    <a class="btn btn-dark " th:href="@{/menu}" type="button">Go Back</a>
+    <a class="btn btn-dark " th:href="@{/menu}" type="button">Back</a>
 </div>
 
 <div class="container">
@@ -31,7 +31,7 @@
     <hr/>
 
 
-    <table class="table table-bordered table-striped text-center align-items-center m-auto" >
+    <table class="table table-bordered table-striped text-center align-items-center m-auto">
         <thead>
         <tr class="fs-6">
             <th>Name of the coffee</th>
@@ -59,19 +59,27 @@
         </tbody>
     </table>
 
+    <div class = "list-group text-center row " >
 
-        <div class="text-center ">
-            <a class="btn btn-outline-dark w-100" th:href="@{/coffee-settings}">
-                Change settings</a>
-        </div>
+    <div class="list-group-item  mb-4 bg-dark text-white">
+        <label class="form-label" for="tempCoffee">Temp. coffee: </label>
+        <span class="fs-5" id="tempCoffee" th:text="${tempCoffee}">0</span><span>&#8451;</span>
+    </div>
+
+        <a class="btn btn-outline-dark w-100" th:href="@{/coffee-settings}">
+            Change settings</a>
 
 
+    </div>
 
 
     <div class="list-group text-center row">
-        <a class="gap-3 py-3 list-group-item list-group-item-action fs-6 " th:href="@{/make-coffee/{nameOfCoffee}/1/brew(nameOfCoffee=${chooseCoffee.nameOfCoffee})}">Single coffee</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action fs-6" th:href="@{/make-coffee/{nameOfCoffee}/2/brew(nameOfCoffee=${chooseCoffee.nameOfCoffee})}">Double coffee</a>
-        <a class="gap-3 py-3 list-group-item list-group-item-action fs-6" th:href="@{/make-coffee/{nameOfCoffee}/3/brew(nameOfCoffee=${chooseCoffee.nameOfCoffee})}">Triple coffee</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action fs-6 "
+           th:href="@{/make-coffee/{nameOfCoffee}/1/brew(nameOfCoffee=${chooseCoffee.nameOfCoffee})}">Single coffee</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action fs-6"
+           th:href="@{/make-coffee/{nameOfCoffee}/2/brew(nameOfCoffee=${chooseCoffee.nameOfCoffee})}">Double coffee</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-action fs-6"
+           th:href="@{/make-coffee/{nameOfCoffee}/3/brew(nameOfCoffee=${chooseCoffee.nameOfCoffee})}">Triple coffee</a>
 
     </div>
 

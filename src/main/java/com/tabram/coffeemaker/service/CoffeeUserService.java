@@ -13,6 +13,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class CoffeeUserService {
         this.userRepository = userRepository;
     }
 
-    public List<CoffeeUser> addCoffeeListToUser(User user) {
+    public void addCoffeeListToUser(User user) {
 
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         coffeeAdminRepository.findAll().forEach(coffees -> {
@@ -46,7 +48,7 @@ public class CoffeeUserService {
                     user);
             coffeeUsers.add(coffee);
         });
-        return coffeeUserRepository.saveAll(coffeeUsers);
+        coffeeUserRepository.saveAll(coffeeUsers);
     }
 
     public List<CoffeeUser> getCoffee() {
@@ -66,7 +68,7 @@ public class CoffeeUserService {
         return currentUser;
     }
 
-    public List<CoffeeUser> addOneCoffeeForEachUser(CoffeeDto coffeeDto) {
+    public void addOneCoffeeForEachUser(CoffeeDto coffeeDto) {
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
             CoffeeUser coffee = new CoffeeUser(
@@ -81,10 +83,10 @@ public class CoffeeUserService {
                     user);
             coffeeUsers.add(coffee);
         });
-        return coffeeUserRepository.saveAll(coffeeUsers);
+        coffeeUserRepository.saveAll(coffeeUsers);
     }
 
-    public CoffeeUser saveCoffee(CoffeeDto coffeeDto, User user) {
+    public void saveCoffee(CoffeeDto coffeeDto, User user) {
 
         if (coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId()) != null) {
             CoffeeUser coffeeDB = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId());
@@ -95,7 +97,7 @@ public class CoffeeUserService {
             coffeeDB.setAmountMilk(coffeeDto.getAmountMilk());
             coffeeDB.setTempMilk(coffeeDto.getTempMilk());
             coffeeDB.setCupSize(coffeeDB.getCupSize());
-            return coffeeUserRepository.save(coffeeDB);
+            coffeeUserRepository.save(coffeeDB);
         } else {
             CoffeeUser coffeeUser = new CoffeeUser(
                     coffeeDto.getNameOfCoffee(),
@@ -108,12 +110,13 @@ public class CoffeeUserService {
                     coffeeDto.getCupSize(),
                     currentUser());
 
-            return coffeeUserRepository.save(coffeeUser);
+             coffeeUserRepository.save(coffeeUser);
         }
     }
-// Update exist coffee or creates a new coffee in coffeeUserRepository from coffeeAdminRepository.
+
+    // Update exist coffee or creates a new coffee in coffeeUserRepository from coffeeAdminRepository.
 // Check the given coffee exist in the user's repository if yes, update, if not create new.
-    public List<CoffeeUser> updateDefaultCoffees(User user) {
+    public void updateDefaultCoffees(User user) {
 
         List<CoffeeAdmin> coffees = coffeeAdminRepository.findAll();
         List<CoffeeUser> coffeesUser = new ArrayList<>();
@@ -146,6 +149,20 @@ public class CoffeeUserService {
                 coffeesUser.add(cU);
             }
         });
-        return coffeeUserRepository.saveAll(coffeesUser);
+        coffeeUserRepository.saveAll(coffeesUser);
+    }
+
+
+    public Double tempCoffee(CoffeeUser coffeeUser) {
+        double w = coffeeUser.getAmountOfWater();
+        double wT = coffeeUser.getTempWater();
+        double m = coffeeUser.getAmountMilk();
+        double mT = coffeeUser.getTempMilk();
+
+        double temp = ((w * wT) + (m * mT)) / (m + w);
+
+        return BigDecimal.valueOf(temp)
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
     }
 }

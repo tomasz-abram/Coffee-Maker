@@ -21,9 +21,10 @@
 <div class="container fixed-top" th:insert="fragments/header::header"></div>
 
 <div class="container mt-5">
-    <a class="btn btn-dark " th:href="@{/menu}" type="button">Go Back</a>
+    <a class="btn btn-dark " th:href="@{/menu}" type="button">Back</a>
     <a class="btn btn-dark float-end " th:href="@{/user/user-add-coffee}" type="button">Add Coffee</a>
-    <a class="btn btn-dark float-end mx-3" th:href="@{/user/update-coffee-recipes}" type="button">Default / Update recipes</a>
+    <a class="btn btn-dark float-end mx-3" th:href="@{/user/update-coffee-recipes}" type="button">Default / Update
+        recipes</a>
 </div>
 
 <div class="container">
@@ -58,7 +59,8 @@
             <td th:text="${coffeeUser.cupSize}"/>
             <td>
                 <div class="text-center">
-                    <a class="btn btn-outline-dark w-75" th:href="@{/user/showUpdateForm(coffeeUserId=${coffeeUser.id})}">Update</a>
+                    <a class="btn btn-outline-dark w-75"
+                       th:href="@{/user/showUpdateForm(coffeeUserId=${coffeeUser.id})}">Update</a>
                     <a class="btn btn-danger ml-2 w-75 "
                        th:href="@{/user/delete-user-coffee(coffeeUserId=${coffeeUser.id})}">Delete</a>
                 </div>

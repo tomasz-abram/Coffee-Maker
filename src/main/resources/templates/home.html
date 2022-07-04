@@ -15,7 +15,7 @@
 
 <body>
 <!--header-->
-<div class="container fixed-top" th:insert="fragments/header::header"></div>
+<div class="container fixed-top" th:insert="fragments/header"></div>
 
 <div class="container mt-5">
 
@@ -39,8 +39,6 @@
     <p>...is always a good idea.</p>
 </div>
 
-<!--<div class="text-center row justify-content-center align-items-center h-100 ">-->
-
 <div class="list-group text-center row">
     <a class="navbar-brand list-group-item  justify-content-center"><h5>Coffee Maker</h5></a>
     <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/login}"> Login</a>
@@ -61,7 +59,7 @@
         <input class="visually-hidden" id="password1" name="password" type="password" value="Admin"/>
         <input class="w-100 border-0 gap-3 py-3 list-group-item list-group-item-action list-group-item-warning"
                id="admin-login-submit" name="login-submit" type="submit"
-               value="SERVICE:Login like ADMIN"/>
+               value="SERVICE: Login like 'ADMIN'"/>
     </form>
 
 </div>

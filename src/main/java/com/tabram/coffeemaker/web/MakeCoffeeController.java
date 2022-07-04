@@ -1,5 +1,6 @@
 package com.tabram.coffeemaker.web;
 
+import com.tabram.coffeemaker.model.CoffeeUser;
 import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.CoffeeUserRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
@@ -40,7 +41,9 @@ public class MakeCoffeeController {
     @GetMapping("/{coffeeName}/strength")
     public ModelAndView chooseCoffee(@PathVariable String coffeeName) {
         ModelAndView mav = new ModelAndView("make-coffee/strength");
-        mav.addObject("chooseCoffee", coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeName, coffeeUserService.currentUser().getId()));
+        CoffeeUser coffeeUser = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeName, coffeeUserService.currentUser().getId());
+        mav.addObject("chooseCoffee", coffeeUser);
+        mav.addObject("tempCoffee", coffeeUserService.tempCoffee(coffeeUser));
         return mav;
     }
 

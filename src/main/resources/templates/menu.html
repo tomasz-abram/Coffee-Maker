@@ -15,7 +15,7 @@
 
 <body>
 <!--header-->
-<div class="container fixed-top" th:insert="fragments/header::header"></div>
+<div class="container fixed-top" th:insert="fragments/header"></div>
 
 <div class="container mt-5">
 
@@ -46,8 +46,16 @@
     <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/make-coffee/list}">Make Coffee</a>
     <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/coffee-settings}">Coffee
         settings</a>
-<!--    <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/status-coffee-machine}">Status</a>-->
-<!--    <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}">Turn Off</a>-->
+
+
+    <a class="gap-3 py-3 list-group-item list-group-item-action bg-opacity-25 "
+       th:classappend="
+            ${(@coffeeMachineStockService.alarmLightStockStatus() =='Ok' ? 'bg-success ': '') +
+              (@coffeeMachineStockService.alarmLightStockStatus() =='Warning' ? 'bg-warning ': '')+
+              (@coffeeMachineStockService.alarmLightStockStatus() =='Danger' ? 'bg-danger ': '')}"
+
+       th:href="@{/stock-coffee-machine}">Stock - "<span
+            th:text="${@coffeeMachineStockService.alarmLightStockStatus()}">Name status</span>"</a>
 
 
     <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
@@ -66,6 +74,7 @@
         Users
         list</a>
 
+    <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}"> [ Back ] </a>
 
 </div>
 </body>

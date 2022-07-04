@@ -1,11 +1,11 @@
 package com.tabram.coffeemaker.config;
 
 import com.tabram.coffeemaker.model.CoffeeAdmin;
-import com.tabram.coffeemaker.model.CoffeeMachineStatus;
+import com.tabram.coffeemaker.model.CoffeeMachineStock;
 import com.tabram.coffeemaker.model.Role;
 import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
-import com.tabram.coffeemaker.repository.CoffeeMachineStatusRepository;
+import com.tabram.coffeemaker.repository.CoffeeMachineStockRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +14,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Configuration
 public class InitialData {
 
     private final CoffeeUserService coffeeUserService;
-    private final CoffeeMachineStatusRepository coffeeMachineStatusRepository;
+    private final CoffeeMachineStockRepository coffeeMachineStockRepository;
 
     @Autowired
-    public InitialData(CoffeeUserService coffeeUserService, CoffeeMachineStatusRepository coffeeMachineStatusRepository) {
+    public InitialData(CoffeeUserService coffeeUserService, CoffeeMachineStockRepository coffeeMachineStockRepository) {
         this.coffeeUserService = coffeeUserService;
-        this.coffeeMachineStatusRepository = coffeeMachineStatusRepository;
+        this.coffeeMachineStockRepository = coffeeMachineStockRepository;
     }
 
     @Bean
@@ -51,8 +50,16 @@ public class InitialData {
             coffeeUserService.addCoffeeListToUser(userDefault);
 
 
-            CoffeeMachineStatus coffeeMachineStatus = new CoffeeMachineStatus(500, 300, 200, 23,200, 5);
-            coffeeMachineStatusRepository.save(coffeeMachineStatus);
+            CoffeeMachineStock waterStock = new CoffeeMachineStock("Water", 500, "ml", "");
+            CoffeeMachineStock milkStock = new CoffeeMachineStock("Milk",300, "ml","");
+            CoffeeMachineStock coffeeBeansStock = new CoffeeMachineStock("Coffee beans", 200, "g", "");
+            CoffeeMachineStock groundContainerStock = new CoffeeMachineStock("Ground container",25, "pcs", "");
+            CoffeeMachineStock waterHardnessStock = new CoffeeMachineStock("Water hardness",5,"mmol/l", "");
+            CoffeeMachineStock descaleCounterStock = new CoffeeMachineStock("Descale counter",2000, "", "");
+
+            List<CoffeeMachineStock> stocks = List.of(waterStock,milkStock,coffeeBeansStock,groundContainerStock,waterHardnessStock,descaleCounterStock);
+            coffeeMachineStockRepository.saveAll(stocks);
+
 
 
         };

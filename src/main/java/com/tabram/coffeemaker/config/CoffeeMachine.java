@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CoffeeMachine {
 
-    final long MACHINE_ID = 1L;
+    //Defining the maximum and minimum values for the coffee machine
     final int MIN_WATER_CONTAINER = 0;
     final int MAX_WATER_CONTAINER = 3000;
     final int MIN_MILK_CONTAINER = 0;
@@ -17,7 +17,7 @@ public class CoffeeMachine {
     final int MAX_DESCALE_COUNTER = 50000;
     final int MAX_GRINDING_LEVEL = 10;
     final int MIN_GRINDING_LEVEL = 1;
-    final double MAX_AMOUNT_OF_COFFEE = 40;
+    final double MAX_AMOUNT_OF_COFFEE = 30;
     final double MIN_AMOUNT_OF_COFFEE = 10;
     final int MAX_TEMP_WATER = 98;
     final int MIN_TEMP_WATER = 30;
@@ -30,8 +30,24 @@ public class CoffeeMachine {
     final int MAX_CUP_SIZE = 1000;
     final int MIN_CUP_SIZE = 15;
 
-    public long getMACHINE_ID() {
-        return MACHINE_ID;
+    // Component alarm values
+    final int WARNING_LEVEL_WATER = 500;
+    final int DANGER_LEVEL_WATER = 200;
+    final int WARNING_LEVEL_MILK = 500;
+    final int DANGER_LEVEL_MILK = 200;
+    final int WARNING_LEVEL_COFFEE_BEANS = 90;
+    final int DANGER_LEVEL_COFFEE_BEANS = 20;
+    final int WARNING_LEVEL_GROUND_CONTAINER = MAX_GROUND_CONTAINER - 3;
+    final int DANGER_LEVEL_GROUND_CONTAINER = MAX_GROUND_CONTAINER - 1;
+    final int WARNING_LEVEL_DESCALE = MAX_DESCALE_COUNTER - 5000;
+    final int DANGER_LEVEL_DESCALE = MAX_DESCALE_COUNTER - 2000;
+
+    public int getWARNING_LEVEL_GROUND_CONTAINER() {
+        return WARNING_LEVEL_GROUND_CONTAINER;
+    }
+
+    public int getDANGER_LEVEL_GROUND_CONTAINER() {
+        return DANGER_LEVEL_GROUND_CONTAINER;
     }
 
     public int getMIN_WATER_CONTAINER() {
@@ -42,7 +58,6 @@ public class CoffeeMachine {
         return MAX_WATER_CONTAINER;
     }
 
-
     public int getMIN_MILK_CONTAINER() {
         return MIN_MILK_CONTAINER;
     }
@@ -51,7 +66,6 @@ public class CoffeeMachine {
         return MAX_MILK_CONTAINER;
     }
 
-
     public int getMIN_COFFEE_BEANS_CONTAINER() {
         return MIN_COFFEE_BEANS_CONTAINER;
     }
@@ -59,7 +73,6 @@ public class CoffeeMachine {
     public int getMAX_COFFEE_BEANS_CONTAINER() {
         return MAX_COFFEE_BEANS_CONTAINER;
     }
-
 
     public int getMIN_GROUND_CONTAINER() {
         return MIN_GROUND_CONTAINER;
@@ -127,6 +140,38 @@ public class CoffeeMachine {
 
     public int getMIN_CUP_SIZE() {
         return MIN_CUP_SIZE;
+    }
+
+    public int getWARNING_LEVEL_WATER() {
+        return WARNING_LEVEL_WATER;
+    }
+
+    public int getDANGER_LEVEL_WATER() {
+        return DANGER_LEVEL_WATER;
+    }
+
+    public int getWARNING_LEVEL_MILK() {
+        return WARNING_LEVEL_MILK;
+    }
+
+    public int getDANGER_LEVEL_MILK() {
+        return DANGER_LEVEL_MILK;
+    }
+
+    public int getWARNING_LEVEL_COFFEE_BEANS() {
+        return WARNING_LEVEL_COFFEE_BEANS;
+    }
+
+    public int getDANGER_LEVEL_COFFEE_BEANS() {
+        return DANGER_LEVEL_COFFEE_BEANS;
+    }
+
+    public int getWARNING_LEVEL_DESCALE() {
+        return WARNING_LEVEL_DESCALE;
+    }
+
+    public int getDANGER_LEVEL_DESCALE() {
+        return DANGER_LEVEL_DESCALE;
     }
 
 

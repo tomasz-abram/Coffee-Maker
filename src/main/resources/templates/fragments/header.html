@@ -1,27 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<header th:header class=" d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
 
-    <a th:href="@{/}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+<header
+        class=" d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" th:action="${@coffeeMachineStockService.checkStockStatus()}"
+        th:header>
+
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" th:href="@{/}">
         <span class="fs-4">Coffee machine</span>
     </a>
 
-    <label class="switch">
-        <input type="checkbox">
-        <span class="slider"></span>
-    </label>
-
-
-
     <ul class=" nav nav-pills">
-        <li class="nav-item px-1 " sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="btn">Log out</a></li>
+        <li class="nav-item px-1 " sec:authorize="isAuthenticated()"><a class="btn" th:href="@{/logout}">Log out</a></li>
 
-        <li class="nav-item px-1"><a th:href="@{/status-coffee-machine}" class="btn btn-success">Status</a></li>
+        <li class="nav-item px-1 ">
+            <a aria-current="page" class="btn btn-outline-dark bg-opacity-50 "
+               th:classappend="
+            ${(@coffeeMachineStockService.alarmLightStockStatus() =='Ok' ? 'bg-success': '') +
+              (@coffeeMachineStockService.alarmLightStockStatus() =='Warning' ? 'bg-warning': '')+
+              (@coffeeMachineStockService.alarmLightStockStatus() =='Danger' ? 'bg-danger': '')}"
+               th:href="@{/stock-coffee-machine}">Stock</a></li>
 
-        <li class="nav-item px-1"><a th:href="@{/}" class="btn btn-outline-dark" aria-current="page">Home</a></li>
-        <li class="nav-item px-1" sec:authorize="isAuthenticated()"><a th:href="@{/menu}" class="btn btn-outline-dark" aria-current="page">Menu</a></li>
+        <!--        -->
+        <!--        <li  th:switch ="${@coffeeMachineStockService.alarmLightStockStatus()}" class="nav-item px-1">-->
+        <!--            <a th:case="'Ok'" th:href="@{/stock-coffee-machine}" class="btn btn-success" >Stock</a>-->
+        <!--            <a th:case="'Warning'" th:href="@{/stock-coffee-machine}" class="btn btn-warning" >Stock</a>-->
+        <!--            <a th:case="'Danger'" th:href="@{/stock-coffee-machine}" class="btn btn-danger" >Stock</a>-->
+        <!--        </li>-->
+
+        <li class="nav-item px-1" sec:authorize="isAuthenticated()"><a aria-current="page" class="btn btn-outline-dark"
+                                                                       th:href="@{/menu}">Menu</a></li>
     </ul>
 
 </header>
