@@ -45,9 +45,15 @@
                 </div>
 
             </form>
-            <span> Already registered? <a href="/" th:href="@{/login}"> Login here</a></span>
-            <br>
-            <span>or <br><a th:href="@{/}">Back to home page</a></span>
+
+            <div>
+                <span> Already registered?</span> <br>
+                <div class="container w-100">
+                    <a class="btn btn-outline-dark py-0 float-start" th:href="@{/login}" type="button">Login here</a>
+                    <span>or </span>
+                    <a class="btn btn-outline-dark py-0 float-end" th:href="@{/}" type="button">Back to home</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

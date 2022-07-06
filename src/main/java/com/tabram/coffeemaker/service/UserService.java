@@ -5,6 +5,7 @@ import com.tabram.coffeemaker.model.Role;
 import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.RoleRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +25,7 @@ public class UserService implements UserServiceInterface {
     private final UserRepository userRepository;
     private final CoffeeUserService coffeeUserService;
     private final RoleRepository roleRepository;
-
+@Autowired
     public UserService(UserRepository userRepository, CoffeeUserService coffeeUserService, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.coffeeUserService = coffeeUserService;

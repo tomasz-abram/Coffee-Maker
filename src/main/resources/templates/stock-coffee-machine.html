@@ -137,12 +137,12 @@
 
 
             <div class="col ">
-                <span th:text="${waterStock.getValue()} + ' /'"></span>
+                <span th:text="${#numbers.formatDecimal(waterStock.getValue(),0,'COMMA',0,'POINT')} + ' /'"></span>
                 <span th:text="${machine.getMAX_WATER_CONTAINER() + 'ml'}"></span>
             </div>
 
             <div class="col">
-                <span th:text="${milkStock.getValue()} + ' /'"></span>
+                <span th:text="${#numbers.formatDecimal(milkStock.getValue(),0,'COMMA',0,'POINT')} + ' /'"></span>
                 <span th:text="${machine.getMAX_MILK_CONTAINER() + 'ml'}"></span>
             </div>
 
@@ -152,7 +152,7 @@
             </div>
 
             <div class="col">
-                <span th:text="${groundContainerStock.getValue()} + ' /'"></span>
+                <span th:text="${#numbers.formatDecimal(groundContainerStock.getValue(),0,'COMMA',0,'POINT')} + ' /'"></span>
                 <span th:text="${machine.getMAX_GROUND_CONTAINER() + 'pcs'}"></span>
             </div>
 
@@ -237,21 +237,16 @@
                     <input class="form-control col-4 mb-4" id="waterHardness" name="waterHardness"
                            placeholder="Water hardness" step="0.01" th:field="*{value}" type="number"/>
 
-                    <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <button class="btn btn-primary w-100"
-                                type="submit">Save
-                        </button>
-                    </div>
-                    <div sec:authorize="hasRole('ROLE_USER')">
-                        <button class="btn btn-primary w-100"
-                                type="submit">Save
-                        </button>
+
+                    <div sec:authorize="hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')">
+                        <button class="btn btn-primary w-100" type="submit">Save</button>
                     </div>
 
                     <div sec:authorize="hasRole('ROLE_DEFAULT')">
                         <button class="btn w-100 btn-secondary " type="button">Save</button>
-                        <span><a href="/" th:href="@{/registration}">Register</a>to save</span>
-
+                        <span><a class="btn btn-outline-dark py-0 " th:href="@{/registration}"
+                                 type="button">Register</a>
+                           to be able to change the value.</span>
                     </div>
 
 

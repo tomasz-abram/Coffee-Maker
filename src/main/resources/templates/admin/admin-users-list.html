@@ -41,30 +41,26 @@
         </thead>
         <tbody>
 
-        <tr th:each="user:${users}" th:if="${user.isEnabled() == true}">
-            <td th:text="${user.getId()}"/>
-            <td th:text="${user.getUserName()}"/>
-            <td th:text="${user.isEnabled()}"/>
-            <td th:text="${user.getRoles()}"/>
-            <td>
-                <div>
-                    <a class="btn btn-info " th:href="@{/admin/showUpdateForm(UserId=${user.id})}">Update</a>
-                    <a class="btn btn-warning ml-2 " th:href="@{/admin/deactivationUser(userId=${user.id})}">Deactivation</a>
-                </div>
-            </td>
-        </tr>
 
-        <tr class="text-decoration-line-through" th:each="user :${users}" th:if="${user.isEnabled() == false}">
+        <tr class="" th:classappend="${user.isEnabled() ? '' : 'text-decoration-line-through'}"
+            th:each="user:${users}">
+
             <td th:text="${user.getId()}"/>
             <td th:text="${user.getUserName()}"/>
             <td th:text="${user.isEnabled()}"/>
-            <td th:text="${user.getRoles()}"/>
+            <td th:text="${user.getRolesName()}"/>
             <td>
                 <div>
-                    <a class="btn btn-outline-info "
+                    <a class="btn"
+                       th:classappend="${user.isEnabled() ? 'btn-info' : 'btn-outline-info'}"
                        th:href="@{/admin/showUpdateForm(UserId=${user.id})}">Update</a>
-                    <a class="btn btn-outline-warning ml-2 "
-                       th:href="@{/admin/deactivationUser(userId=${user.id})}">Enabled / Disabled</a>
+
+                    <a class="btn ml-2 "
+                       th:classappend="${user.isEnabled() ? 'btn-warning' : 'btn-outline-warning'}"
+                       th:href="@{/admin/deactivationUser(userId=${user.id})}"
+                       th:text="${user.isEnabled() ? 'Deactivation' : 'Activation '}"
+                    >Deactivation</a>
+
                 </div>
             </td>
         </tr>

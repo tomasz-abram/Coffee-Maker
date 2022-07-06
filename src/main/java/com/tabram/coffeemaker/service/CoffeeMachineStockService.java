@@ -27,9 +27,7 @@ public class CoffeeMachineStockService {
 
     public void updateWater(int addWater) {
         CoffeeMachineStock waterStock = coffeeMachineStockRepository.findByName("Water");
-
         float updateWater = (Objects.requireNonNull(waterStock).getValue() + addWater);
-
         if (updateWater > coffeeMachine.getMAX_WATER_CONTAINER()) {
             waterStock.setValue(coffeeMachine.getMAX_WATER_CONTAINER());
         } else {
@@ -96,10 +94,10 @@ public class CoffeeMachineStockService {
     public void updateWaterHardness(float setHardness) {
         CoffeeMachineStock waterHardnessStock = coffeeMachineStockRepository.findByName("Water hardness");
         if (setHardness < 0) {
-            throw new IllegalStateException("The water hardness must not be less than zero");
+            throw new IllegalArgumentException("The water hardness must not be less than zero");
         }
         if (setHardness > 100) {
-            throw new IllegalStateException("If you don't pour concrete over your coffee, this value is probably lower :)");
+            throw new IllegalArgumentException("If you don't pour concrete over your coffee, this value is probably lower :)");
         }
         Objects.requireNonNull(waterHardnessStock).setValue(setHardness);
         coffeeMachineStockRepository.save(waterHardnessStock);
@@ -171,7 +169,6 @@ public class CoffeeMachineStockService {
             if (lCMS.stream().anyMatch(x->x.equals("Danger"))){
                 alarmLight = "Danger";
             }
-
         } else {
             alarmLight = "Ok";
         }

@@ -3,6 +3,7 @@ package com.tabram.coffeemaker.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -104,6 +105,12 @@ public class User implements Serializable {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public List getRolesName() {
+        List<String> l = new ArrayList<>();
+        roles.stream().forEach(role -> l.add(role.getName()));
+        return l;
     }
 
 }

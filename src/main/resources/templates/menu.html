@@ -57,23 +57,16 @@
        th:href="@{/stock-coffee-machine}">Stock - "<span
             th:text="${@coffeeMachineStockService.alarmLightStockStatus()}">Name status</span>"</a>
 
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
 
-    <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
-       sec:authorize="hasRole('ROLE_ADMIN')"
-       th:href="@{/admin/admin-coffee-list}">Admin -
-        Coffee
-        list</a>
-    <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
-       sec:authorize="hasRole('ROLE_ADMIN')"
-       th:href="@{/admin/admin-add-coffee}">Admin -
-        Add
-        coffee </a>
-    <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
-       sec:authorize="hasRole('ROLE_ADMIN')"
-       th:href="@{admin/admin-users-list}">Admin -
-        Users
-        list</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
+           th:href="@{/admin/admin-coffee-list}">Admin - Coffee list</a>
+        <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
+           th:href="@{/admin/admin-add-coffee}">Admin - Add coffee </a>
+        <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
+           th:href="@{admin/admin-users-list}">Admin - Users list</a>
 
+    </div>
     <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}"> [ Back ] </a>
 
 </div>

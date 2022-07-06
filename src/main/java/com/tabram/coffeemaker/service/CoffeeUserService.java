@@ -1,5 +1,6 @@
 package com.tabram.coffeemaker.service;
 
+import com.tabram.coffeemaker.config.CoffeeMachine;
 import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.model.CoffeeAdmin;
 import com.tabram.coffeemaker.model.CoffeeUser;
@@ -24,12 +25,16 @@ public class CoffeeUserService {
     private final CoffeeUserRepository coffeeUserRepository;
     private final CoffeeAdminRepository coffeeAdminRepository;
     private final UserRepository userRepository;
+    private final CoffeeMachine coffeeMachine;
+    private final CoffeeAdminService coffeeAdminService;
 
     @Autowired
-    public CoffeeUserService(CoffeeUserRepository coffeeUserRepository, CoffeeAdminRepository coffeeAdminRepository, UserRepository userRepository) {
+    public CoffeeUserService(CoffeeUserRepository coffeeUserRepository, CoffeeAdminRepository coffeeAdminRepository, UserRepository userRepository, CoffeeMachine coffeeMachine, CoffeeAdminService coffeeAdminService) {
         this.coffeeUserRepository = coffeeUserRepository;
         this.coffeeAdminRepository = coffeeAdminRepository;
         this.userRepository = userRepository;
+        this.coffeeMachine = coffeeMachine;
+        this.coffeeAdminService = coffeeAdminService;
     }
 
     public void addCoffeeListToUser(User user) {
@@ -68,6 +73,7 @@ public class CoffeeUserService {
         return currentUser;
     }
 
+
     public void addOneCoffeeForEachUser(CoffeeDto coffeeDto) {
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
@@ -87,6 +93,8 @@ public class CoffeeUserService {
     }
 
     public void saveCoffee(CoffeeDto coffeeDto, User user) {
+
+        coffeeAdminService.checkCoffeeParameters(coffeeDto, coffeeMachine);
 
         if (coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId()) != null) {
             CoffeeUser coffeeDB = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId());
@@ -152,15 +160,12 @@ public class CoffeeUserService {
         coffeeUserRepository.saveAll(coffeesUser);
     }
 
-
     public Double tempCoffee(CoffeeUser coffeeUser) {
         double w = coffeeUser.getAmountOfWater();
         double wT = coffeeUser.getTempWater();
         double m = coffeeUser.getAmountMilk();
         double mT = coffeeUser.getTempMilk();
-
         double temp = ((w * wT) + (m * mT)) / (m + w);
-
         return BigDecimal.valueOf(temp)
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();

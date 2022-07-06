@@ -1,8 +1,8 @@
 package com.tabram.coffeemaker.config;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
+@Component
 public class CoffeeMachine {
 
     //Defining the maximum and minimum values for the coffee machine
