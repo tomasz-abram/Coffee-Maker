@@ -134,7 +134,7 @@ public class CoffeeUser {
     }
 
     public String getUserName() {
-        return user.getUserName();
+        return user.getUsername();
     }
 
     public int getTempMilk() {

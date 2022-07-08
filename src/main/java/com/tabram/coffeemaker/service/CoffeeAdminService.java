@@ -2,8 +2,11 @@ package com.tabram.coffeemaker.service;
 
 import com.tabram.coffeemaker.config.CoffeeMachine;
 import com.tabram.coffeemaker.dto.CoffeeDto;
+import com.tabram.coffeemaker.dto.UserDto;
 import com.tabram.coffeemaker.model.CoffeeAdmin;
+import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
+import com.tabram.coffeemaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +17,13 @@ public class CoffeeAdminService {
 
     private final CoffeeAdminRepository coffeeAdminRepository;
     private final CoffeeMachine coffeeMachine;
+    private final UserRepository userRepository;
 
     @Autowired
-    public CoffeeAdminService(CoffeeAdminRepository coffeeAdminRepository, CoffeeMachine coffeeMachine) {
+    public CoffeeAdminService(CoffeeAdminRepository coffeeAdminRepository, CoffeeMachine coffeeMachine, UserRepository userRepository) {
         this.coffeeAdminRepository = coffeeAdminRepository;
         this.coffeeMachine = coffeeMachine;
+        this.userRepository = userRepository;
     }
 
     public void checkCoffeeParameters(CoffeeDto coffeeDto, CoffeeMachine coffeeMachine) {
@@ -60,7 +65,7 @@ public class CoffeeAdminService {
 
     }
 
-    public CoffeeAdmin addNewCoffee(CoffeeDto coffeeDto) {
+    public void addNewCoffee(CoffeeDto coffeeDto) {
 
         checkCoffeeParameters(coffeeDto, coffeeMachine);
 
@@ -72,8 +77,9 @@ public class CoffeeAdminService {
             coffeeDB.setAmountOfCoffee(coffeeDto.getAmountOfCoffee());
             coffeeDB.setAmountOfWater(coffeeDto.getAmountOfWater());
             coffeeDB.setAmountMilk(coffeeDto.getAmountMilk());
-            coffeeDB.setCupSize(coffeeDB.getCupSize());
-            return coffeeAdminRepository.save(coffeeDB);
+            coffeeDB.setCupSize(coffeeDto.getCupSize());
+            coffeeAdminRepository.save(coffeeDB);
+            return;
 
         }
         CoffeeAdmin coffeeAdmin = new CoffeeAdmin(
@@ -85,6 +91,17 @@ public class CoffeeAdminService {
                 coffeeDto.getAmountMilk(),
                 coffeeDto.getTempMilk(),
                 coffeeDto.getCupSize());
-        return coffeeAdminRepository.save(coffeeAdmin);
+        coffeeAdminRepository.save(coffeeAdmin);
+
+
     }
+
+   public void updateUser(UserDto userDto) {
+
+        User userDB = userRepository.findByUserName(userDto.getUsername());
+        userDB.setRoles(userDto.getRoles());
+        userDB.setEnabled(userDto.isEnabled());
+
+        userRepository.save(userDB);
+   }
 }

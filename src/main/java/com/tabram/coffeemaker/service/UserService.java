@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -37,9 +38,9 @@ public class UserService implements UserServiceInterface {
         User user = new User(registrationDto.getUserName(), new BCryptPasswordEncoder().encode(registrationDto.getPassword()), true);
 
         if (roleRepository.findByName("ROLE_USER") == null) {
-            user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+            user.setRoles(List.of(new Role("ROLE_USER")));
         } else {
-            user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
+            user.setRoles(List.of(roleRepository.findByName("ROLE_USER")));
         }
 
         userRepository.saveAndFlush(user);
@@ -54,7 +55,7 @@ public class UserService implements UserServiceInterface {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), user.isEnabled(), true, true, true, mapRolesToAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
@@ -63,6 +64,13 @@ public class UserService implements UserServiceInterface {
 
     @Transactional
     public void deactivationUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("User with id " + userId + " does not exist"));
+        user.setEnabled(!user.isEnabled());
+    }
+
+    @Transactional
+    public void updateUser(Long userId) {
+
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("User with id " + userId + " does not exist"));
         user.setEnabled(!user.isEnabled());
     }

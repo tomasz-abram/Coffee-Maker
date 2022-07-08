@@ -73,21 +73,22 @@ public class CoffeeUserService {
         return currentUser;
     }
 
-
     public void addOneCoffeeForEachUser(CoffeeDto coffeeDto) {
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
-            CoffeeUser coffee = new CoffeeUser(
-                    coffeeDto.getNameOfCoffee(),
-                    coffeeDto.getTempWater(),
-                    coffeeDto.getGrindingLevel(),
-                    coffeeDto.getAmountOfCoffee(),
-                    coffeeDto.getAmountOfWater(),
-                    coffeeDto.getAmountMilk(),
-                    coffeeDto.getTempMilk(),
-                    coffeeDto.getCupSize(),
-                    user);
-            coffeeUsers.add(coffee);
+            if (coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId()) == null) {
+                CoffeeUser coffee = new CoffeeUser(
+                        coffeeDto.getNameOfCoffee(),
+                        coffeeDto.getTempWater(),
+                        coffeeDto.getGrindingLevel(),
+                        coffeeDto.getAmountOfCoffee(),
+                        coffeeDto.getAmountOfWater(),
+                        coffeeDto.getAmountMilk(),
+                        coffeeDto.getTempMilk(),
+                        coffeeDto.getCupSize(),
+                        user);
+                coffeeUsers.add(coffee);
+            }
         });
         coffeeUserRepository.saveAll(coffeeUsers);
     }
@@ -104,7 +105,7 @@ public class CoffeeUserService {
             coffeeDB.setAmountOfWater(coffeeDto.getAmountOfWater());
             coffeeDB.setAmountMilk(coffeeDto.getAmountMilk());
             coffeeDB.setTempMilk(coffeeDto.getTempMilk());
-            coffeeDB.setCupSize(coffeeDB.getCupSize());
+            coffeeDB.setCupSize(coffeeDto.getCupSize());
             coffeeUserRepository.save(coffeeDB);
         } else {
             CoffeeUser coffeeUser = new CoffeeUser(

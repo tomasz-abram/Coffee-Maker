@@ -34,7 +34,7 @@ public class MakeCoffeeController {
     @GetMapping("/list")
     public ModelAndView getAllCoffees() {
         ModelAndView mav = new ModelAndView("make-coffee/list");
-        mav.addObject("coffees", userRepository.findByUserName(coffeeUserService.currentUser().getUserName()).getCoffeeUser());
+        mav.addObject("coffees", userRepository.findByUserName(coffeeUserService.currentUser().getUsername()).getCoffeeUser());
         return mav;
     }
 

@@ -83,11 +83,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return userName;
     }
 
-    public void setUserName(String username) {
+    public void setUsername(String username) {
         this.userName = username;
     }
 
@@ -107,9 +107,9 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public List getRolesName() {
+    public List<String> getRolesName() {
         List<String> l = new ArrayList<>();
-        roles.stream().forEach(role -> l.add(role.getName()));
+        roles.forEach(role -> l.add(role.getName()));
         return l;
     }
 

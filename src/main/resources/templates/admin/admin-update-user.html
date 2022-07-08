@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <title>User Add Coffee</title>
+
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          rel="stylesheet">
+
+    <link href="../../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+<div>
+    <div class="container fixed-top" th:insert="fragments/header::header"></div>
+
+
+    <div class="container  mt-5">
+        <div>
+            <a class="btn btn-dark align-content-lg-start " th:href="@{/admin/admin-users-list}" type="button">
+                Back </a>
+        </div>
+
+        <div class="text-center  container">
+            <span class="fs-4 ">Update user</span>
+        </div>
+        <hr/>
+
+        <form class=" container w-50" method="POST" th:action="@{/admin/admin-update-user}">
+
+            <div class="form-group row py-2">
+                <label class="col-sm-2 col-form-label" for="id">Id :</label>
+                <div class="col-sm-10 ">
+                    <input class="form-control text-center" id="id" placeholder="Id" readonly
+                           th:field="*{userD.id}" th:value="${userD.id}" type="number">
+                </div>
+            </div>
+
+            <div class="form-group row py-2">
+                <label class="col-sm-2 col-form-label" for="userName">Username :</label>
+                <div class="col-sm-10">
+                    <input class="form-control text-center" id="userName" placeholder="Username"
+                           readonly th:field="*{userD.username}"
+                           th:value="*{userD.username}" type="text">
+                </div>
+            </div>
+
+            <fieldset class="form-group py-2">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Active :</legend>
+                    <div class="col-sm-10 d-inline-flex justify-content-around">
+                        <div class="form-check-inline">
+                            <input class="form-check-input" id="true" name="true" th:checked="*{userD.enabled}"
+                                   th:field="*{userD.enabled}" th:value="true" type="radio">
+                            <label class="form-check-label" for="true">
+                                Active
+                            </label>
+                        </div>
+                        <div class="form-check-inline d-inline-flex">
+                            <input class="form-check-input" id="gridRadios5" name="true" th:checked="*{userD.enabled}"
+                                   th:field="*{userD.enabled}" th:value="false" type="radio">
+                            <label class="form-check-label" for="gridRadios5">
+                                Inactive
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-group py-2">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Role :</legend>
+                    <div class="col-sm-10 d-inline-flex justify-content-around">
+                        <div class="form-check-inline" th:each="role : ${roles}">
+                            <input class="form-check-input" th:field="*{userD.roles}" th:value="${role.id}"
+                                   type="radio">
+                            <label class="form-check-label" th:for="${role.id}" th:text="${role.name}">TEXT </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+
+            <div class="form-group justify-content-center text-center row">
+                <div class=" col-sm-12">
+                    <button class="btn btn-dark col-2 w-100 " type="submit">Save</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
+

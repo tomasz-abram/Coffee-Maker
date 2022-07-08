@@ -3,6 +3,8 @@
 <head>
     <title>Stock Coffee Machine</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <link href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"
           rel="stylesheet"
           type="text/css"/>
@@ -237,16 +239,15 @@
                     <input class="form-control col-4 mb-4" id="waterHardness" name="waterHardness"
                            placeholder="Water hardness" step="0.01" th:field="*{value}" type="number"/>
 
-
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')">
                         <button class="btn btn-primary w-100" type="submit">Save</button>
                     </div>
 
                     <div sec:authorize="hasRole('ROLE_DEFAULT')">
-                        <button class="btn w-100 btn-secondary " type="button">Save</button>
-                        <span><a class="btn btn-outline-dark py-0 " th:href="@{/registration}"
-                                 type="button">Register</a>
-                           to be able to change the value.</span>
+                        <button class="btn w-100 btn-secondary" data-bs-placement="left" data-bs-toggle="tooltip"
+                                title="Register to be able to change this the value!"
+                                type="button">Save
+                        </button>
                     </div>
 
 
@@ -257,6 +258,13 @@
     </div>
 
 </div>
+<script>
+    // Initialize tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
 
 
 </body>

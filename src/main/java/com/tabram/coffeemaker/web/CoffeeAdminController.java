@@ -4,6 +4,7 @@ import com.tabram.coffeemaker.config.CoffeeMachine;
 import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.model.CoffeeAdmin;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
+import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeAdminService;
 import com.tabram.coffeemaker.service.CoffeeUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,14 @@ public class CoffeeAdminController {
     private final CoffeeAdminRepository coffeeAdminRepository;
     private final CoffeeAdminService coffeeAdminService;
     private final CoffeeUserService coffeeUserService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public CoffeeAdminController(CoffeeAdminRepository coffeeAdminRepository, CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService) {
+    public CoffeeAdminController(CoffeeAdminRepository coffeeAdminRepository, CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService, UserRepository userRepository) {
         this.coffeeAdminRepository = coffeeAdminRepository;
         this.coffeeAdminService = coffeeAdminService;
         this.coffeeUserService = coffeeUserService;
+        this.userRepository = userRepository;
     }
 
     @ModelAttribute("coffeeAdmin")
@@ -46,6 +49,7 @@ public class CoffeeAdminController {
     public String addCoffee(@ModelAttribute("coffeeAdmin") CoffeeDto coffeeDto) {
         coffeeAdminService.addNewCoffee(coffeeDto);
         coffeeUserService.addOneCoffeeForEachUser(coffeeDto);
+        coffeeUserService.updateDefaultCoffees(userRepository.findByUserName("Default"));
         return "redirect:/admin/admin-coffee-list";
     }
 

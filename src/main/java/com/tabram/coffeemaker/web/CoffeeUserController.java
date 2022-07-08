@@ -51,7 +51,7 @@ public class CoffeeUserController {
     @GetMapping("/coffee-settings")
     public ModelAndView getAllCoffees() {
         ModelAndView mav = new ModelAndView("coffee-settings");
-        mav.addObject("coffees", userRepository.findByUserName(coffeeUserService.currentUser().getUserName()).getCoffeeUser());
+        mav.addObject("coffees", userRepository.findByUserName(coffeeUserService.currentUser().getUsername()).getCoffeeUser());
         return mav;
     }
 
