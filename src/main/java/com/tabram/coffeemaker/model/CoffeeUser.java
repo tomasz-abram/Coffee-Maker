@@ -35,9 +35,6 @@ public class CoffeeUser {
     public CoffeeUser() {
     }
 
-    public CoffeeUser(List<CoffeeUser> all) {
-    }
-
     public CoffeeUser(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize) {
         this.nameOfCoffee = nameOfCoffee;
         this.tempWater = tempWater;

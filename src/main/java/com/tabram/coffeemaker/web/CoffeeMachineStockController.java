@@ -1,7 +1,6 @@
 package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.config.CoffeeMachine;
-import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.model.CoffeeMachineStock;
 import com.tabram.coffeemaker.repository.CoffeeMachineStockRepository;
 import com.tabram.coffeemaker.service.CoffeeMachineStockService;
@@ -16,11 +15,13 @@ public class CoffeeMachineStockController {
 
     private final CoffeeMachineStockRepository coffeeMachineStockRepository;
     private final CoffeeMachineStockService coffeeMachineStockService;
+    private final CoffeeMachine coffeeMachine;
 
     @Autowired
-    public CoffeeMachineStockController(CoffeeMachineStockRepository coffeeMachineStockRepository, CoffeeMachineStockService coffeeMachineStockService) {
+    public CoffeeMachineStockController(CoffeeMachineStockRepository coffeeMachineStockRepository, CoffeeMachineStockService coffeeMachineStockService, CoffeeMachine coffeeMachine) {
         this.coffeeMachineStockRepository = coffeeMachineStockRepository;
         this.coffeeMachineStockService = coffeeMachineStockService;
+        this.coffeeMachine = coffeeMachine;
     }
 
     @ModelAttribute("coffeeMachineStock")
@@ -37,7 +38,6 @@ public class CoffeeMachineStockController {
         mav.addObject("groundContainerStock", coffeeMachineStockRepository.findByName("Ground container"));
         mav.addObject("descaleCounter", coffeeMachineStockRepository.findByName("Descale counter"));
         mav.addObject("waterHardnessStock", coffeeMachineStockRepository.findByName("Water hardness"));
-        CoffeeMachine coffeeMachine = new CoffeeMachine();
         mav.addObject("machine", coffeeMachine);
         return mav;
     }
@@ -90,7 +90,6 @@ public class CoffeeMachineStockController {
         coffeeMachineStockService.emptyGroundContainer();
         return "redirect:/stock-coffee-machine";
     }
-
 
     @GetMapping("/descale")
     public String descale() {

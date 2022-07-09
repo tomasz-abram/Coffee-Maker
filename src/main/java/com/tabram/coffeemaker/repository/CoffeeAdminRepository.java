@@ -12,8 +12,4 @@ public interface CoffeeAdminRepository extends JpaRepository<CoffeeAdmin, Long> 
 
     CoffeeAdmin findCoffeeAdminByNameOfCoffee(String nameOfCoffee);
 
-//    @Query("SELECT c FROM CoffeeAdmin c WHERE c.nameOfCoffee = ?1")
-//    Optional<CoffeeAdmin> findCoffeeByName(String nameOfCoffee);
-
-
 }

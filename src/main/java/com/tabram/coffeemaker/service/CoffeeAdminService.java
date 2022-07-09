@@ -19,6 +19,7 @@ public class CoffeeAdminService {
     private final CoffeeMachine coffeeMachine;
     private final UserRepository userRepository;
 
+
     @Autowired
     public CoffeeAdminService(CoffeeAdminRepository coffeeAdminRepository, CoffeeMachine coffeeMachine, UserRepository userRepository) {
         this.coffeeAdminRepository = coffeeAdminRepository;
@@ -26,7 +27,7 @@ public class CoffeeAdminService {
         this.userRepository = userRepository;
     }
 
-    public void checkCoffeeParameters(CoffeeDto coffeeDto, CoffeeMachine coffeeMachine) {
+    public void checkCoffeeParameters(CoffeeDto coffeeDto) {
         if (coffeeDto.getNameOfCoffee().isEmpty()) {
             throw new IllegalArgumentException("The name can not be empty.");
         }
@@ -67,7 +68,7 @@ public class CoffeeAdminService {
 
     public void addNewCoffee(CoffeeDto coffeeDto) {
 
-        checkCoffeeParameters(coffeeDto, coffeeMachine);
+        checkCoffeeParameters(coffeeDto);
 
         CoffeeAdmin coffee = coffeeAdminRepository.findCoffeeAdminByNameOfCoffee(coffeeDto.getNameOfCoffee());
         if (coffee != null) {

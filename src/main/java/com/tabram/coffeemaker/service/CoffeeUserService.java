@@ -25,15 +25,13 @@ public class CoffeeUserService {
     private final CoffeeUserRepository coffeeUserRepository;
     private final CoffeeAdminRepository coffeeAdminRepository;
     private final UserRepository userRepository;
-    private final CoffeeMachine coffeeMachine;
     private final CoffeeAdminService coffeeAdminService;
 
     @Autowired
-    public CoffeeUserService(CoffeeUserRepository coffeeUserRepository, CoffeeAdminRepository coffeeAdminRepository, UserRepository userRepository, CoffeeMachine coffeeMachine, CoffeeAdminService coffeeAdminService) {
+    public CoffeeUserService(CoffeeUserRepository coffeeUserRepository, CoffeeAdminRepository coffeeAdminRepository, UserRepository userRepository, CoffeeAdminService coffeeAdminService) {
         this.coffeeUserRepository = coffeeUserRepository;
         this.coffeeAdminRepository = coffeeAdminRepository;
         this.userRepository = userRepository;
-        this.coffeeMachine = coffeeMachine;
         this.coffeeAdminService = coffeeAdminService;
     }
 
@@ -95,7 +93,7 @@ public class CoffeeUserService {
 
     public void saveCoffee(CoffeeDto coffeeDto, User user) {
 
-        coffeeAdminService.checkCoffeeParameters(coffeeDto, coffeeMachine);
+        coffeeAdminService.checkCoffeeParameters(coffeeDto);
 
         if (coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId()) != null) {
             CoffeeUser coffeeDB = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId());

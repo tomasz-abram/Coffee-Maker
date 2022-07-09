@@ -23,13 +23,15 @@ public class CoffeeAdminController {
     private final CoffeeAdminService coffeeAdminService;
     private final CoffeeUserService coffeeUserService;
     private final UserRepository userRepository;
+    private final CoffeeMachine coffeeMachine;
 
     @Autowired
-    public CoffeeAdminController(CoffeeAdminRepository coffeeAdminRepository, CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService, UserRepository userRepository) {
+    public CoffeeAdminController(CoffeeAdminRepository coffeeAdminRepository, CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService, UserRepository userRepository, CoffeeMachine coffeeMachine) {
         this.coffeeAdminRepository = coffeeAdminRepository;
         this.coffeeAdminService = coffeeAdminService;
         this.coffeeUserService = coffeeUserService;
         this.userRepository = userRepository;
+        this.coffeeMachine = coffeeMachine;
     }
 
     @ModelAttribute("coffeeAdmin")
@@ -40,7 +42,6 @@ public class CoffeeAdminController {
     @GetMapping("/admin/admin-add-coffee")
     public ModelAndView showAddCoffeeForm() {
         ModelAndView mav = new ModelAndView("/admin/admin-add-coffee");
-        CoffeeMachine coffeeMachine = new CoffeeMachine();
         mav.addObject("coffeeMachine", coffeeMachine);
         return mav;
     }
@@ -58,7 +59,6 @@ public class CoffeeAdminController {
         ModelAndView mav = new ModelAndView("/admin/admin-add-coffee");
         CoffeeAdmin coffeeAdmin = coffeeAdminRepository.findById(coffeeAdminId).orElse(null);
         mav.addObject("coffeeAdmin", coffeeAdmin);
-        CoffeeMachine coffeeMachine = new CoffeeMachine();
         mav.addObject("coffeeMachine", coffeeMachine);
         return mav;
     }

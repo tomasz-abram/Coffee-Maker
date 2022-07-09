@@ -1,12 +1,6 @@
 package com.tabram.coffeemaker.model;
 
-import com.tabram.coffeemaker.config.CoffeeMachine;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "coffee_admin", uniqueConstraints = {@UniqueConstraint(columnNames = {"name_of_coffee", "user_id"})})
@@ -35,10 +29,6 @@ public class CoffeeAdmin {
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
-
-
-    public CoffeeAdmin(List<CoffeeAdmin> all) {
-    }
 
     public CoffeeAdmin() {
 
