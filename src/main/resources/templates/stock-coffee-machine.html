@@ -51,9 +51,9 @@
             ${(waterStock.getStatus() =='Ok' ? 'bg-success': '') +
               (waterStock.getStatus() =='Warning' ? 'bg-warning': '')+
               (waterStock.getStatus() =='Danger' ? 'bg-danger': '')}"
-                         th:style="'height:' + ((${waterStock.getValue() * 1.0} / ${machine.getMAX_WATER_CONTAINER()}) * 100.0 ) + '%;'">
+                         th:style="'height:' + ((${waterStock.getValue() * 1.0} / ${machine.getMaxWaterContainer()}) * 100.0 ) + '%;'">
                         <span class="sr-only"
-                              th:text="${#numbers.formatInteger(((waterStock.getValue() * 1.0 / machine.getMAX_WATER_CONTAINER()) * 100.0) ,1)+ '%'}">% Water Level</span>
+                              th:text="${#numbers.formatInteger(((waterStock.getValue() * 1.0 / machine.getMaxWaterContainer()) * 100.0) ,1)+ '%'}">% Water Level</span>
                     </div>
                 </div>
             </div>
@@ -67,9 +67,9 @@
             ${(milkStock.getStatus() =='Ok' ? 'bg-success': '') +
               (milkStock.getStatus() =='Warning' ? 'bg-warning': '')+
               (milkStock.getStatus() =='Danger' ? 'bg-danger': '')}"
-                         th:style="'height:' + ((${milkStock.getValue() * 1.0} / ${machine.getMAX_MILK_CONTAINER()}) * 100.0 ) + '%;'">
+                         th:style="'height:' + ((${milkStock.getValue() * 1.0} / ${machine.getMaxMilkContainer()}) * 100.0 ) + '%;'">
                         <span class="sr-only"
-                              th:text="${#numbers.formatInteger(((milkStock.getValue() * 1.0 / machine.getMAX_MILK_CONTAINER()) * 100.0) ,1)+ '%'}">% Milk Level</span>
+                              th:text="${#numbers.formatInteger(((milkStock.getValue() * 1.0 / machine.getMaxMilkContainer()) * 100.0) ,1)+ '%'}">% Milk Level</span>
                     </div>
                 </div>
             </div>
@@ -83,9 +83,9 @@
             ${(coffeeBeansStock.getStatus() =='Ok' ? 'bg-success': '') +
               (coffeeBeansStock.getStatus() =='Warning' ? 'bg-warning': '')+
               (coffeeBeansStock.getStatus() =='Danger' ? 'bg-danger': '')}"
-                         th:style="'height:' + ((${coffeeBeansStock.getValue() * 1.0} / ${machine.getMAX_COFFEE_BEANS_CONTAINER()}) * 100.0 ) + '%;'">
+                         th:style="'height:' + ((${coffeeBeansStock.getValue() * 1.0} / ${machine.getMaxCoffeeBeansContainer()}) * 100.0 ) + '%;'">
                         <span class="sr-only"
-                              th:text="${#numbers.formatInteger(((coffeeBeansStock.getValue() * 1.0 / machine.getMAX_COFFEE_BEANS_CONTAINER()) * 100.0) ,1)+ '%'}">%Beans Level</span>
+                              th:text="${#numbers.formatInteger(((coffeeBeansStock.getValue() * 1.0 / machine.getMaxCoffeeBeansContainer()) * 100.0) ,1)+ '%'}">%Beans Level</span>
                     </div>
                 </div>
             </div>
@@ -99,9 +99,9 @@
             ${(groundContainerStock.getStatus() =='Ok' ? 'bg-success': '') +
               (groundContainerStock.getStatus() =='Warning' ? 'bg-warning': '')+
               (groundContainerStock.getStatus() =='Danger' ? 'bg-danger': '')}"
-                         th:style="'height:' + ((${groundContainerStock.getValue() * 1.0} / ${machine.getMAX_GROUND_CONTAINER()}) * 100.0 ) + '%;'">
+                         th:style="'height:' + ((${groundContainerStock.getValue() * 1.0} / ${machine.getMaxGroundContainer()}) * 100.0 ) + '%;'">
                         <span class="sr-only"
-                              th:text="${#numbers.formatInteger(((groundContainerStock.getValue() * 1.0 / machine.getMAX_GROUND_CONTAINER()) * 100.0) ,1)+ '%'}">%Ground</span>
+                              th:text="${#numbers.formatInteger(((groundContainerStock.getValue() * 1.0 / machine.getMaxGroundContainer()) * 100.0) ,1)+ '%'}">%Ground</span>
                     </div>
                 </div>
             </div>
@@ -115,9 +115,9 @@
             ${(descaleCounter.getStatus() =='Ok' ? 'bg-success': '') +
               (descaleCounter.getStatus() =='Warning' ? 'bg-warning': '')+
               (descaleCounter.getStatus() =='Danger' ? 'bg-danger': '')}"
-                         th:style="'height:' + ((${descaleCounter.getValue() * 1.0} / ${machine.getMAX_DESCALE_COUNTER()}) * 100.0 ) + '%;'">
+                         th:style="'height:' + ((${descaleCounter.getValue() * 1.0} / ${machine.getMaxDescaleCounter()}) * 100.0 ) + '%;'">
                         <span class="sr-only"
-                              th:text="${#numbers.formatInteger(((descaleCounter.getValue()* 1.0 / machine.getMAX_DESCALE_COUNTER()) * 100.0) ,1)+ '%'}">%Milk </span>
+                              th:text="${#numbers.formatInteger(((descaleCounter.getValue()* 1.0 / machine.getMaxDescaleCounter()) * 100.0) ,1)+ '%'}">%Milk </span>
                     </div>
                 </div>
             </div>
@@ -140,27 +140,27 @@
 
             <div class="col ">
                 <span th:text="${#numbers.formatDecimal(waterStock.getValue(),0,'COMMA',0,'POINT')} + ' /'"></span>
-                <span th:text="${machine.getMAX_WATER_CONTAINER() + 'ml'}"></span>
+                <span th:text="${machine.getMaxWaterContainer() + 'ml'}"></span>
             </div>
 
             <div class="col">
                 <span th:text="${#numbers.formatDecimal(milkStock.getValue(),0,'COMMA',0,'POINT')} + ' /'"></span>
-                <span th:text="${machine.getMAX_MILK_CONTAINER() + 'ml'}"></span>
+                <span th:text="${machine.getMaxMilkContainer() + 'ml'}"></span>
             </div>
 
             <div class="col">
                 <span th:text="${coffeeBeansStock.getValue()} + ' /'"></span>
-                <span th:text="${machine.getMAX_COFFEE_BEANS_CONTAINER() + 'g'}"></span>
+                <span th:text="${machine.getMaxCoffeeBeansContainer() + 'g'}"></span>
             </div>
 
             <div class="col">
                 <span th:text="${#numbers.formatDecimal(groundContainerStock.getValue(),0,'COMMA',0,'POINT')} + ' /'"></span>
-                <span th:text="${machine.getMAX_GROUND_CONTAINER() + 'pcs'}"></span>
+                <span th:text="${machine.getMaxGroundContainer() + 'pcs'}"></span>
             </div>
 
             <div class="col">
                 <span th:text="${descaleCounter.getValue()} + ' /'"></span>
-                <span th:text="${machine.getMAX_DESCALE_COUNTER() }"></span>
+                <span th:text="${machine.getMaxDescaleCounter() }"></span>
             </div>
 
 
@@ -177,7 +177,7 @@
                     <a class=" list-group-item list-group-item-action"
                        th:href="@{/stock-coffee-machine/fill-water-tank(quantity=500)}"> Add 500ml water</a>
                     <a class=" list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-water-tank(quantity=${machine.getMAX_WATER_CONTAINER()})}">
+                       th:href="@{/stock-coffee-machine/fill-water-tank(quantity=${machine.getMaxWaterContainer()})}">
                         Fill to full!</a>
                     <a class=" list-group-item list-group-item-action"
                        th:href="@{/stock-coffee-machine/empty-water-tank}">
@@ -192,7 +192,7 @@
                     <a class="list-group-item list-group-item-action"
                        th:href="@{/stock-coffee-machine/fill-milk-tank(quantity=500)}"> Add 500ml milk</a>
                     <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-milk-tank(quantity=${machine.getMAX_MILK_CONTAINER()})}">
+                       th:href="@{/stock-coffee-machine/fill-milk-tank(quantity=${machine.getMaxMilkContainer()})}">
                         Fill to full!</a>
                     <a class="list-group-item list-group-item-action"
                        th:href="@{/stock-coffee-machine/empty-milk-tank}">
@@ -207,7 +207,7 @@
                     <a class="list-group-item list-group-item-action"
                        th:href="@{/stock-coffee-machine/fill-beans-container(quantity=100)}"> Add 100g beans</a>
                     <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-beans-container(quantity=${machine.getMAX_MILK_CONTAINER()})}">
+                       th:href="@{/stock-coffee-machine/fill-beans-container(quantity=${machine.getMaxMilkContainer()})}">
                         Fill to full!</a>
                     <a class="list-group-item list-group-item-action"
                        th:href="@{/stock-coffee-machine/empty-coffee-beans}">

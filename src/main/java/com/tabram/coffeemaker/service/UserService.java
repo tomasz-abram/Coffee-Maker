@@ -14,9 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -26,7 +25,8 @@ public class UserService implements UserServiceInterface {
     private final UserRepository userRepository;
     private final CoffeeUserService coffeeUserService;
     private final RoleRepository roleRepository;
-@Autowired
+
+    @Autowired
     public UserService(UserRepository userRepository, CoffeeUserService coffeeUserService, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.coffeeUserService = coffeeUserService;
@@ -38,9 +38,9 @@ public class UserService implements UserServiceInterface {
         User user = new User(registrationDto.getUserName(), new BCryptPasswordEncoder().encode(registrationDto.getPassword()), true);
 
         if (roleRepository.findByName("ROLE_USER") == null) {
-            user.setRoles(List.of(new Role("ROLE_USER")));
+            user.setRoles(Set.of(new Role("ROLE_USER")));
         } else {
-            user.setRoles(List.of(roleRepository.findByName("ROLE_USER")));
+            user.setRoles(Set.of(roleRepository.findByName("ROLE_USER")));
         }
 
         userRepository.saveAndFlush(user);
@@ -54,7 +54,6 @@ public class UserService implements UserServiceInterface {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, mapRolesToAuthorities(user.getRoles()));
     }
 
@@ -68,10 +67,4 @@ public class UserService implements UserServiceInterface {
         user.setEnabled(!user.isEnabled());
     }
 
-    @Transactional
-    public void updateUser(Long userId) {
-
-        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("User with id " + userId + " does not exist"));
-        user.setEnabled(!user.isEnabled());
-    }
 }

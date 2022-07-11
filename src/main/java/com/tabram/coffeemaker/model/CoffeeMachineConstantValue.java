@@ -1,4 +1,4 @@
-package com.tabram.coffeemaker.config;
+package com.tabram.coffeemaker.model;
 
 import org.springframework.data.keyvalue.annotation.KeySpace;
 
@@ -8,8 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@KeySpace("coffee_machine_limit_values")
-public class CoffeeMachineConstantValues {
+@KeySpace("coffee_machine_constant_values")
+public class CoffeeMachineConstantValue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,15 +20,12 @@ public class CoffeeMachineConstantValues {
     private Integer value;
 
 
-    public CoffeeMachineConstantValues(String name, Integer value) {
+    public CoffeeMachineConstantValue(String name, Integer value) {
         this.name = name;
         this.value = value;
     }
-
-    public CoffeeMachineConstantValues() {
-
+    public CoffeeMachineConstantValue() {
     }
-
 
     public Long getId() {
         return id;

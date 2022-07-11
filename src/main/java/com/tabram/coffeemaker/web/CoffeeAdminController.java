@@ -1,11 +1,10 @@
 package com.tabram.coffeemaker.web;
 
-import com.tabram.coffeemaker.config.CoffeeMachine;
 import com.tabram.coffeemaker.dto.CoffeeDto;
-import com.tabram.coffeemaker.model.CoffeeAdmin;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeAdminService;
+import com.tabram.coffeemaker.service.CoffeeMachineConstantValueService;
 import com.tabram.coffeemaker.service.CoffeeUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,15 +22,15 @@ public class CoffeeAdminController {
     private final CoffeeAdminService coffeeAdminService;
     private final CoffeeUserService coffeeUserService;
     private final UserRepository userRepository;
-    private final CoffeeMachine coffeeMachine;
+    private final CoffeeMachineConstantValueService coffeeMachineConstantValueService;
 
     @Autowired
-    public CoffeeAdminController(CoffeeAdminRepository coffeeAdminRepository, CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService, UserRepository userRepository, CoffeeMachine coffeeMachine) {
+    public CoffeeAdminController(CoffeeAdminRepository coffeeAdminRepository, CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService, UserRepository userRepository, CoffeeMachineConstantValueService coffeeMachineConstantValueService) {
         this.coffeeAdminRepository = coffeeAdminRepository;
         this.coffeeAdminService = coffeeAdminService;
         this.coffeeUserService = coffeeUserService;
         this.userRepository = userRepository;
-        this.coffeeMachine = coffeeMachine;
+        this.coffeeMachineConstantValueService = coffeeMachineConstantValueService;
     }
 
     @ModelAttribute("coffeeAdmin")
@@ -42,7 +41,7 @@ public class CoffeeAdminController {
     @GetMapping("/admin/admin-add-coffee")
     public ModelAndView showAddCoffeeForm() {
         ModelAndView mav = new ModelAndView("/admin/admin-add-coffee");
-        mav.addObject("coffeeMachine", coffeeMachine);
+        mav.addObject("coffeeMachine", coffeeMachineConstantValueService);
         return mav;
     }
 
@@ -57,9 +56,8 @@ public class CoffeeAdminController {
     @GetMapping("/admin/showUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Long coffeeAdminId) {
         ModelAndView mav = new ModelAndView("/admin/admin-add-coffee");
-        CoffeeAdmin coffeeAdmin = coffeeAdminRepository.findById(coffeeAdminId).orElse(null);
-        mav.addObject("coffeeAdmin", coffeeAdmin);
-        mav.addObject("coffeeMachine", coffeeMachine);
+        mav.addObject("coffeeAdmin", coffeeAdminRepository.findById(coffeeAdminId).orElse(null));
+        mav.addObject("coffeeMachine", coffeeMachineConstantValueService);
         return mav;
     }
 

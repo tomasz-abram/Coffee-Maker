@@ -1,6 +1,5 @@
 package com.tabram.coffeemaker.service;
 
-import com.tabram.coffeemaker.config.CoffeeMachine;
 import com.tabram.coffeemaker.model.CoffeeMachineStock;
 import com.tabram.coffeemaker.model.CoffeeUser;
 import com.tabram.coffeemaker.model.User;
@@ -17,14 +16,14 @@ public class MakeCoffeeService {
 
     private final CoffeeMachineStockRepository coffeeMachineStockRepository;
     private final CoffeeUserRepository coffeeUserRepository;
-    private final CoffeeMachine coffeeMachine;
+    private final CoffeeMachineConstantValueService coffeeMachineConstantValueService;
 
 
     @Autowired
-    public MakeCoffeeService(CoffeeMachineStockRepository coffeeMachineStockRepository, CoffeeUserRepository coffeeUserRepository, CoffeeMachine coffeeMachine) {
+    public MakeCoffeeService(CoffeeMachineStockRepository coffeeMachineStockRepository, CoffeeUserRepository coffeeUserRepository, CoffeeMachineConstantValueService coffeeMachineConstantValueService) {
         this.coffeeMachineStockRepository = coffeeMachineStockRepository;
         this.coffeeUserRepository = coffeeUserRepository;
-        this.coffeeMachine = coffeeMachine;
+        this.coffeeMachineConstantValueService = coffeeMachineConstantValueService;
     }
 
     public void makeCoffee(String nameOfCoffee, int quantity, User user) {
@@ -58,14 +57,14 @@ public class MakeCoffeeService {
             cMSList.add(coffeeBeansStock);
         }
 
-        if (coffeeMachine.getMAX_GROUND_CONTAINER() < groundContainerStock.getValue() + quantity) {
+        if (coffeeMachineConstantValueService.getMaxGroundContainer() < groundContainerStock.getValue() + quantity) {
             throw new IllegalStateException("Empty the grounds container before making this coffee");
         } else {
             groundContainerStock.setValue(groundContainerStock.getValue() + quantity);
             cMSList.add(groundContainerStock);
         }
 
-        if (coffeeMachine.getMAX_DESCALE_COUNTER() < descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater()) {
+        if (coffeeMachineConstantValueService.getMaxDescaleCounter() < descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater()) {
             throw new IllegalStateException("Descale the coffee machine before making this coffee");
         } else {
             descaleCounter.setValue((int) (descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater()));

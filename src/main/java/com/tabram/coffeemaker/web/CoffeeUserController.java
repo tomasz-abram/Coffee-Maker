@@ -1,10 +1,9 @@
 package com.tabram.coffeemaker.web;
 
-import com.tabram.coffeemaker.config.CoffeeMachine;
 import com.tabram.coffeemaker.dto.CoffeeDto;
-import com.tabram.coffeemaker.model.CoffeeUser;
 import com.tabram.coffeemaker.repository.CoffeeUserRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
+import com.tabram.coffeemaker.service.CoffeeMachineConstantValueService;
 import com.tabram.coffeemaker.service.CoffeeUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,14 +20,14 @@ public class CoffeeUserController {
     private final UserRepository userRepository;
     private final CoffeeUserService coffeeUserService;
     private final CoffeeUserRepository coffeeUserRepository;
-    private final CoffeeMachine coffeeMachine;
+    private final CoffeeMachineConstantValueService coffeeMachineConstantValueService;
 
     @Autowired
-    public CoffeeUserController(UserRepository userRepository, CoffeeUserService coffeeUserService, CoffeeUserRepository coffeeUserRepository, CoffeeMachine coffeeMachine) {
+    public CoffeeUserController(UserRepository userRepository, CoffeeUserService coffeeUserService, CoffeeUserRepository coffeeUserRepository, CoffeeMachineConstantValueService coffeeMachineConstantValueService) {
         this.userRepository = userRepository;
         this.coffeeUserService = coffeeUserService;
         this.coffeeUserRepository = coffeeUserRepository;
-        this.coffeeMachine = coffeeMachine;
+        this.coffeeMachineConstantValueService = coffeeMachineConstantValueService;
     }
 
     @ModelAttribute("coffeeUser")
@@ -39,7 +38,7 @@ public class CoffeeUserController {
     @GetMapping("/user/user-add-coffee")
     public ModelAndView showAddCoffeeForm() {
         ModelAndView mav = new ModelAndView("/user/user-add-coffee");
-        mav.addObject("coffeeMachine", coffeeMachine);
+        mav.addObject("coffeeMachine", coffeeMachineConstantValueService);
         return mav;
     }
 
@@ -59,9 +58,8 @@ public class CoffeeUserController {
     @GetMapping("/user/showUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Long coffeeUserId) {
         ModelAndView mav = new ModelAndView("/user/user-add-coffee");
-        CoffeeUser coffeeUser = coffeeUserRepository.findById(coffeeUserId).orElse(null);
-        mav.addObject("coffeeUser", coffeeUser);
-        mav.addObject("coffeeMachine", coffeeMachine);
+        mav.addObject("coffeeUser", coffeeUserRepository.findById(coffeeUserId).orElse(null));
+        mav.addObject("coffeeMachine", coffeeMachineConstantValueService);
         return mav;
     }
 

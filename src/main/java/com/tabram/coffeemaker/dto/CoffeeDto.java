@@ -1,7 +1,5 @@
 package com.tabram.coffeemaker.dto;
 
-import com.tabram.coffeemaker.model.User;
-
 public class CoffeeDto {
 
     private String nameOfCoffee;
@@ -12,7 +10,6 @@ public class CoffeeDto {
     private int amountMilk;
     private int tempMilk;
     private int cupSize;
-
 
     public CoffeeDto() {
     }

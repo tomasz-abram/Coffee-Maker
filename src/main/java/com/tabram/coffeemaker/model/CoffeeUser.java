@@ -1,7 +1,6 @@
 package com.tabram.coffeemaker.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "coffee_user")
@@ -26,24 +25,12 @@ public class CoffeeUser {
     private int tempMilk;
     @Column(name = "cup_size")
     private int cupSize;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
 
     public CoffeeUser() {
-    }
-
-    public CoffeeUser(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize) {
-        this.nameOfCoffee = nameOfCoffee;
-        this.tempWater = tempWater;
-        this.grindingLevel = grindingLevel;
-        this.amountOfCoffee = amountOfCoffee;
-        this.amountOfWater = amountOfWater;
-        this.amountMilk = amountMilk;
-        this.tempMilk = tempMilk;
-        this.cupSize = cupSize;
     }
 
     public CoffeeUser(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize, User user) {

@@ -37,7 +37,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return auth;
     }
 
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
@@ -60,10 +59,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .defaultSuccessUrl("/menu?logSuccess", true)
                 .failureUrl("/login?error")
-//                .successHandler()
-//                .successForwardUrl("/")
-//                .failureHandler(authenticationFailureHandler())
-
                 .permitAll()
                 .and()
                 .logout()

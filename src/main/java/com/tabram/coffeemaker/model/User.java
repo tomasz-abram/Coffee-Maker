@@ -3,9 +3,8 @@ package com.tabram.coffeemaker.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -24,7 +23,7 @@ public class User implements Serializable {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private Collection<Role> roles;
+    private Set<Role> roles;
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -44,7 +43,7 @@ public class User implements Serializable {
         this.isEnabled = isEnabled;
     }
 
-    public User(String userName, String password, boolean isEnabled, Collection<Role> roles, List<CoffeeUser> coffeeUser) {
+    public User(String userName, String password, boolean isEnabled, Set<Role> roles, List<CoffeeUser> coffeeUser) {
         this.userName = userName;
         this.password = password;
         this.isEnabled = isEnabled;
@@ -52,7 +51,7 @@ public class User implements Serializable {
         this.coffeeUser = coffeeUser;
     }
 
-    public User(String userName, String password, boolean isEnabled, Collection<Role> roles) {
+    public User(String userName, String password, boolean isEnabled, Set<Role> roles) {
         this.userName = userName;
         this.password = password;
         this.isEnabled = isEnabled;
@@ -69,10 +68,6 @@ public class User implements Serializable {
 
     public List<CoffeeUser> getCoffeeUser() {
         return coffeeUser;
-    }
-
-    public void setCoffeeUser(List<CoffeeUser> coffeeUser) {
-        this.coffeeUser = coffeeUser;
     }
 
     public Long getId() {
@@ -99,18 +94,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public List<String> getRolesName() {
-        List<String> l = new ArrayList<>();
-        roles.forEach(role -> l.add(role.getName()));
-        return l;
     }
 
 }

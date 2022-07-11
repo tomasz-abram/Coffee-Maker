@@ -1,7 +1,6 @@
 package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.model.CoffeeUser;
-import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.CoffeeUserRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeUserService;
@@ -49,8 +48,7 @@ public class MakeCoffeeController {
 
     @GetMapping("/{coffeeName}/{strength}/brew")
     public String brew(@PathVariable String coffeeName, @PathVariable int strength) {
-        User user = coffeeUserService.currentUser();
-        makeCoffeeService.makeCoffee(coffeeName, strength, user);
+        makeCoffeeService.makeCoffee(coffeeName, strength, coffeeUserService.currentUser());
         return "redirect:/make-coffee/enjoy";
     }
 

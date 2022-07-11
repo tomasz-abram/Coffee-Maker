@@ -1,9 +1,6 @@
 package com.tabram.coffeemaker.config;
 
-import com.tabram.coffeemaker.model.CoffeeAdmin;
-import com.tabram.coffeemaker.model.CoffeeMachineStock;
-import com.tabram.coffeemaker.model.Role;
-import com.tabram.coffeemaker.model.User;
+import com.tabram.coffeemaker.model.*;
 import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
 import com.tabram.coffeemaker.repository.CoffeeMachineConstantValueRepository;
 import com.tabram.coffeemaker.repository.CoffeeMachineStockRepository;
@@ -16,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
+import java.util.Set;
 
 @Configuration
 public class InitialData {
@@ -45,9 +43,9 @@ public class InitialData {
             List<CoffeeAdmin> coffees = List.of(espresso, cappuccino, latteMacchiato, lungo, macchiato, ristretto);
             coffeeAdminRepository.saveAllAndFlush(coffees);
 
-            User userAdmin = new User("Admin", new BCryptPasswordEncoder().encode("Admin"), true, List.of(new Role("ROLE_ADMIN")));
-            User userTest = new User("UserTest", new BCryptPasswordEncoder().encode("UserTest"), true, List.of(new Role("ROLE_USER")));
-            User userDefault = new User("Default", new BCryptPasswordEncoder().encode("Default"), true, List.of(new Role("ROLE_DEFAULT")));
+            User userAdmin = new User("Admin", new BCryptPasswordEncoder().encode("Admin"), true, Set.of(new Role("ROLE_ADMIN")));
+            User userTest = new User("UserTest", new BCryptPasswordEncoder().encode("UserTest"), true, Set.of(new Role("ROLE_USER")));
+            User userDefault = new User("Default", new BCryptPasswordEncoder().encode("Default"), true, Set.of(new Role("ROLE_DEFAULT")));
             List<User> users = List.of(userAdmin, userTest, userDefault);
             userRepository.saveAll(users);
 
@@ -66,40 +64,40 @@ public class InitialData {
             coffeeMachineStockRepository.saveAll(stocks);
 
 
-            List<CoffeeMachineConstantValues> listOfConstants = List.of(
-                    new CoffeeMachineConstantValues("min_water_container", 0),
-                    new CoffeeMachineConstantValues("max_water_container", 3000),
-                    new CoffeeMachineConstantValues("min_milk_container", 0),
-                    new CoffeeMachineConstantValues("max_milk_container", 1500),
-                    new CoffeeMachineConstantValues("min_coffee_beans_container", 0),
-                    new CoffeeMachineConstantValues("max_coffee_beans_container", 300),
-                    new CoffeeMachineConstantValues("min_ground_container", 0),
-                    new CoffeeMachineConstantValues("max_ground_container", 30),
-                    new CoffeeMachineConstantValues("max_descale_counter", 50000),
-                    new CoffeeMachineConstantValues("max_grinding_level", 10),
-                    new CoffeeMachineConstantValues("min_grinding_level", 1),
-                    new CoffeeMachineConstantValues("max_amount_of_coffee", 30),
-                    new CoffeeMachineConstantValues("min_amount_of_coffee", 10),
-                    new CoffeeMachineConstantValues("max_temp_water", 98),
-                    new CoffeeMachineConstantValues("min_temp_water", 30),
-                    new CoffeeMachineConstantValues("max_amount_of_water", 500),
-                    new CoffeeMachineConstantValues("min_amount_of_water", 15),
-                    new CoffeeMachineConstantValues("max_temp_milk", 90),
-                    new CoffeeMachineConstantValues("min_temp_milk", 1),
-                    new CoffeeMachineConstantValues("max_amount_of_milk", 500),
-                    new CoffeeMachineConstantValues("min_amount_of_milk", 0),
-                    new CoffeeMachineConstantValues("max_cup_size", 1000),
-                    new CoffeeMachineConstantValues("min_cup_size", 15),
-                    new CoffeeMachineConstantValues("warning_level_water", 500),
-                    new CoffeeMachineConstantValues("danger_level_water", 200),
-                    new CoffeeMachineConstantValues("warning_level_milk", 500),
-                    new CoffeeMachineConstantValues("danger_level_milk", 200),
-                    new CoffeeMachineConstantValues("warning_level_coffee_beans", 90),
-                    new CoffeeMachineConstantValues("danger_level_coffee_beans", 20),
-                    new CoffeeMachineConstantValues("warning_level_ground_container", 3),
-                    new CoffeeMachineConstantValues("danger_level_ground_container", 1),
-                    new CoffeeMachineConstantValues("warning_level_descale", 5000),
-                    new CoffeeMachineConstantValues("danger_level_descale", 2000)
+            List<CoffeeMachineConstantValue> listOfConstants = List.of(
+                    new CoffeeMachineConstantValue("min_water_container", 0),
+                    new CoffeeMachineConstantValue("max_water_container", 3000),
+                    new CoffeeMachineConstantValue("min_milk_container", 0),
+                    new CoffeeMachineConstantValue("max_milk_container", 1500),
+                    new CoffeeMachineConstantValue("min_coffee_beans_container", 0),
+                    new CoffeeMachineConstantValue("max_coffee_beans_container", 300),
+                    new CoffeeMachineConstantValue("min_ground_container", 0),
+                    new CoffeeMachineConstantValue("max_ground_container", 30),
+                    new CoffeeMachineConstantValue("max_descale_counter", 50000),
+                    new CoffeeMachineConstantValue("max_grinding_level", 10),
+                    new CoffeeMachineConstantValue("min_grinding_level", 1),
+                    new CoffeeMachineConstantValue("max_amount_of_coffee", 30),
+                    new CoffeeMachineConstantValue("min_amount_of_coffee", 10),
+                    new CoffeeMachineConstantValue("max_temp_water", 98),
+                    new CoffeeMachineConstantValue("min_temp_water", 30),
+                    new CoffeeMachineConstantValue("max_amount_of_water", 500),
+                    new CoffeeMachineConstantValue("min_amount_of_water", 15),
+                    new CoffeeMachineConstantValue("max_temp_milk", 90),
+                    new CoffeeMachineConstantValue("min_temp_milk", 1),
+                    new CoffeeMachineConstantValue("max_amount_of_milk", 500),
+                    new CoffeeMachineConstantValue("min_amount_of_milk", 0),
+                    new CoffeeMachineConstantValue("max_cup_size", 1000),
+                    new CoffeeMachineConstantValue("min_cup_size", 15),
+                    new CoffeeMachineConstantValue("warning_level_water", 500),
+                    new CoffeeMachineConstantValue("danger_level_water", 200),
+                    new CoffeeMachineConstantValue("warning_level_milk", 500),
+                    new CoffeeMachineConstantValue("danger_level_milk", 200),
+                    new CoffeeMachineConstantValue("warning_level_coffee_beans", 90),
+                    new CoffeeMachineConstantValue("danger_level_coffee_beans", 20),
+                    new CoffeeMachineConstantValue("warning_level_ground_container", 3),
+                    new CoffeeMachineConstantValue("danger_level_ground_container", 1),
+                    new CoffeeMachineConstantValue("warning_level_descale", 5000),
+                    new CoffeeMachineConstantValue("danger_level_descale", 2000)
             );
             coffeeMachineConstantValueRepository.saveAll(listOfConstants);
         };

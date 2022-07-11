@@ -13,7 +13,8 @@ public class ErrorController {
 
     private static Logger logger = LoggerFactory.getLogger(ErrorController.class);
 
-    @ExceptionHandler(Throwable.class)
+    @ExceptionHandler(value
+            = {IllegalArgumentException.class, IllegalStateException.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String exception(final Throwable throwable, final Model model) {
         logger.error("Exception during execution of SpringSecurity application", throwable);

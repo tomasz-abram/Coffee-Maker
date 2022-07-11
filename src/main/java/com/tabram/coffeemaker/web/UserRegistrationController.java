@@ -35,7 +35,6 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto userRegistrationDto) {
-        String userName = userRegistrationDto.getUserName();
         if (userRepository.findByUserName(userRegistrationDto.getUserName()) == null) {
             userServiceInterface.save(userRegistrationDto);
             return "redirect:/login?regisSuccess";

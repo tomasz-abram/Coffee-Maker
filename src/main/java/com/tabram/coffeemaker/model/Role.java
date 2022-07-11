@@ -2,7 +2,7 @@ package com.tabram.coffeemaker.model;
 
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -14,7 +14,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+    private Set<User> users;
 
     public Role() {
     }

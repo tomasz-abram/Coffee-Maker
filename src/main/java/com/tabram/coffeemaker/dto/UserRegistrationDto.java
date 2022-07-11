@@ -5,12 +5,6 @@ public class UserRegistrationDto {
     private String password;
 
     public UserRegistrationDto() {
-
-    }
-
-    public UserRegistrationDto(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
     }
 
     public String getUserName() {

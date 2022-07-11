@@ -1,6 +1,5 @@
 package com.tabram.coffeemaker.service;
 
-import com.tabram.coffeemaker.config.CoffeeMachine;
 import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.model.CoffeeAdmin;
 import com.tabram.coffeemaker.model.CoffeeUser;
@@ -117,12 +116,12 @@ public class CoffeeUserService {
                     coffeeDto.getCupSize(),
                     currentUser());
 
-             coffeeUserRepository.save(coffeeUser);
+            coffeeUserRepository.save(coffeeUser);
         }
     }
 
-    // Update exist coffee or creates a new coffee in coffeeUserRepository from coffeeAdminRepository.
-// Check the given coffee exist in the user's repository if yes, update, if not create new.
+    /* Update exist coffee or creates a new coffee in coffeeUserRepository from coffeeAdminRepository.
+       Check the given coffee exist in the user's repository if yes, update, if not create new. */
     public void updateDefaultCoffees(User user) {
 
         List<CoffeeAdmin> coffees = coffeeAdminRepository.findAll();

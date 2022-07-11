@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin User list</title>
+
+    <link href="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.css"
+          rel="stylesheet"
+          type="text/css"/>
+
+    <link crossorigin="anonymous"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          rel="stylesheet">
+
+    <link href="../../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+<div class="container fixed-top" th:insert="fragments/header::header"></div>
+
+<div class="container mt-5">
+    <a class="btn btn-dark " th:href="@{/menu}" type="button">Back</a>
+</div>
+
+<div class="container">
+    <div class="text-center">
+        <span class="fs-4  text-center">Change coffee machine constant value </span>
+    </div>
+    <hr/>
+
+
+    <table class="table table-bordered table-striped text-center align-items-center" id="constTable">
+        <thead>
+        <tr class="fs-6">
+            <th>Name</th>
+            <th>Value</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="machineConst: ${constValues}">
+            <td th:text="${machineConst.name}"></td>
+            <td th:text="${machineConst.value}"></td>
+            <td>
+                <div class="text-center">
+                    <a class="btn btn-outline-dark w-75"
+                       th:href="@{/admin/updateConstForm(machineConstId=${machineConst.id})}">Update</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        $("#constTable").DataTable({
+            'aoColumnDefs': [{
+                'bSortable': true,
+                'aTargets': [-1] /* 1st one, start by the right */
+            }]
+        });
+    })
+
+</script>
+
+</body>
+
+</html>

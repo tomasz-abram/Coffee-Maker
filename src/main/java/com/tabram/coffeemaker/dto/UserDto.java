@@ -2,29 +2,16 @@ package com.tabram.coffeemaker.dto;
 
 import com.tabram.coffeemaker.model.Role;
 
-import java.util.Collection;
+import java.util.Set;
 
 public class UserDto {
 
     private Long id;
     private String username;
     private boolean isEnabled;
-    private Collection<Role> roles;
+    private Set<Role> roles;
 
     public UserDto() {
-    }
-
-    public UserDto(Long id, String username, boolean isEnabled, Collection<Role> roles) {
-        this.id = id;
-        this.username = username;
-        this.isEnabled = isEnabled;
-        this.roles = roles;
-    }
-
-    public UserDto(String username, boolean isEnabled, Collection<Role> roles) {
-        this.username = username;
-        this.isEnabled = isEnabled;
-        this.roles = roles;
     }
 
     public Long getId() {
@@ -52,11 +39,11 @@ public class UserDto {
         isEnabled = enabled;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }

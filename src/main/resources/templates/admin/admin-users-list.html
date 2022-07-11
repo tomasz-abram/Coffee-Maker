@@ -48,7 +48,9 @@
             <td th:text="${user.getId()}"/>
             <td th:text="${user.getUsername()}"/>
             <td th:text="${user.isEnabled()}"/>
-            <td th:text="${user.getRolesName()}"/>
+            <td th:each="role: ${user.roles}">
+                <span th:text="${role.name}"></span>
+            </td>
             <td>
                 <div>
                     <a class="btn"

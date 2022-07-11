@@ -42,14 +42,14 @@
                 <input class="form-range h-100 m-auto" id="tempWaterSlider"
                        name="tempWater"
                        step="1"
-                       th:attr="min=${coffeeMachine.getMIN_TEMP_WATER()}, max=${coffeeMachine.getMAX_TEMP_WATER()}"
+                       th:attr="min=${coffeeMachine.getMinTempWater()}, max=${coffeeMachine.getMaxTempWater()}"
                        th:value="*{coffeeUser.tempWater} ? *{coffeeUser.tempWater} : 95  " type="range" value="95">
                 <ul class="form-range list-group-horizontal">
                     <li class="float-start list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_TEMP_WATER()}">min</span> &#8451;
+                        <span th:remove="tag" th:text="${coffeeMachine.getMinTempWater()}">min</span> &#8451;
                     </li>
                     <li class="float-end list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_TEMP_WATER()}">max</span> &#8451;
+                        <span th:remove="tag" th:text="${coffeeMachine.getMaxTempWater()}">max</span> &#8451;
                     </li>
                 </ul>
             </div>
@@ -60,14 +60,14 @@
                 <input class="form-range h-100 " id="amountOfWaterSlider"
                        name="amountOfWater"
                        step="5"
-                       th:attr="min=${coffeeMachine.getMIN_AMOUNT_OF_WATER()} , max=${coffeeMachine.getMAX_AMOUNT_OF_WATER()}"
+                       th:attr="min=${coffeeMachine.getMinAmountOfWater()} , max=${coffeeMachine.getMaxAmountOfWater()}"
                        th:value="*{coffeeUser.amountOfWater} ? *{coffeeUser.amountOfWater} : 100" type="range"
                        value="45">
                 <ul class="form-range list-group-horizontal">
                     <li class="float-start list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_AMOUNT_OF_WATER()}">min</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMinAmountOfWater()}">min</span></li>
                     <li class="float-end list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_AMOUNT_OF_WATER()}">max</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMaxAmountOfWater()}">max</span></li>
                 </ul>
             </div>
 
@@ -78,13 +78,13 @@
                 <input class="form-range h-100 " id="tempMilkSlider"
                        name="tempMilk"
                        step="1"
-                       th:attr="min=${coffeeMachine.getMIN_TEMP_MILK()} , max=${coffeeMachine.getMAX_TEMP_MILK()}"
+                       th:attr="min=${coffeeMachine.getMinTempMilk()} , max=${coffeeMachine.getMaxTempMilk()}"
                        th:value="*{coffeeUser.tempMilk} ? *{coffeeUser.tempMilk} : 0" type="range" value="0">
                 <ul class="form-range list-group-horizontal">
                     <li class="float-start list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_TEMP_MILK()}">min</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMinTempMilk()}">min</span></li>
                     <li class="float-end list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_TEMP_MILK()}">max</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMaxTempMilk()}">max</span></li>
                 </ul>
             </div>
 
@@ -95,13 +95,13 @@
                 <input class="form-range h-100 " id="amountMilkSlider"
                        name="amountMilk"
                        step="5"
-                       th:attr="min=${coffeeMachine.getMIN_AMOUNT_OF_MILK()} , max=${coffeeMachine.getMAX_AMOUNT_OF_MILK()}"
+                       th:attr="min=${coffeeMachine.getMinAmountOfMilk()} , max=${coffeeMachine.getMaxAmountOfMilk()}"
                        th:value="*{coffeeUser.amountMilk} ? *{coffeeUser.amountMilk} : 0" type="range" value="0">
                 <ul class="form-range list-group-horizontal">
                     <li class="float-start list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_AMOUNT_OF_MILK()}">min</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMinAmountOfMilk()}">min</span></li>
                     <li class="float-end list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_AMOUNT_OF_MILK()}">max</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMaxAmountOfMilk()}">max</span></li>
                 </ul>
             </div>
 
@@ -118,14 +118,14 @@
                 <input class="form-range h-100 " id="grindingLevelSlider"
                        name="grindingLevel"
                        step="1"
-                       th:attr="min=${coffeeMachine.getMIN_GRINDING_LEVEL()} , max=${coffeeMachine.getMAX_GRINDING_LEVEL()}"
+                       th:attr="min=${coffeeMachine.getMinGrindingLevel()} , max=${coffeeMachine.getMaxGrindingLevel()}"
                        th:value="*{coffeeUser.grindingLevel} ? *{coffeeUser.grindingLevel} : 5"
                        type="range" value="5">
                 <ul class="form-range list-group-horizontal">
                     <li class="float-start list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_GRINDING_LEVEL()}">min</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMinGrindingLevel()}">min</span></li>
                     <li class="float-end list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_GRINDING_LEVEL()}">max</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMaxGrindingLevel()}">max</span></li>
                 </ul>
             </div>
 
@@ -136,14 +136,14 @@
                 <input class="form-range h-100 " id="amountOfCoffeeSlider"
                        name="amountOfCoffee"
                        step="0.5"
-                       th:attr="min=${coffeeMachine.getMIN_AMOUNT_OF_COFFEE()} , max=${coffeeMachine.getMAX_AMOUNT_OF_COFFEE()}"
+                       th:attr="min=${coffeeMachine.getMinAmountOfCoffee()} , max=${coffeeMachine.getMaxAmountOfCoffee()}"
                        th:value="*{coffeeUser.amountOfCoffee} ? *{coffeeUser.amountOfCoffee} : 17.5" type="range"
                        value="17.5">
                 <ul class="form-range list-group-horizontal">
                     <li class="float-start list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_AMOUNT_OF_COFFEE()}">min</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMinAmountOfCoffee()}">min</span></li>
                     <li class="float-end list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_AMOUNT_OF_COFFEE()}">max</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMaxAmountOfCoffee()}">max</span></li>
                 </ul>
             </div>
 
@@ -155,13 +155,13 @@
                 <input class="form-range h-100 " id="cupSizeSlider"
                        name="cupSize"
                        step="5"
-                       th:attr="min=${coffeeMachine.getMIN_CUP_SIZE()} , max=${coffeeMachine.getMAX_CUP_SIZE()}"
+                       th:attr="min=${coffeeMachine.getMinCupSize()} , max=${coffeeMachine.getMaxCupSize()}"
                        th:value="*{coffeeUser.cupSize} ? *{coffeeUser.cupSize} : 150" type="range" value="45">
                 <ul class="form-range list-group-horizontal">
                     <li class="float-start list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMIN_CUP_SIZE()}">min</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMinCupSize()}">min</span></li>
                     <li class="float-end list-group-item">
-                        <span th:remove="tag" th:text="${coffeeMachine.getMAX_CUP_SIZE()}">max</span></li>
+                        <span th:remove="tag" th:text="${coffeeMachine.getMaxCupSize()}">max</span></li>
                 </ul>
             </div>
             <button class="btn btn-dark col-2" type="submit">Save</button>
