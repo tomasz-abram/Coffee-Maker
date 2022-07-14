@@ -14,9 +14,9 @@
 <body class="text-center" th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
 <div class="row h-100 justify-content-center justify-content-around align-items-center">
 
-    <!--        <h2 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h2>-->
     <div class="h-50 row">
         <div>
+<!--            <h5 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h5>-->
             <span class="fs-3 " th:utext="${errorMessage}">Error java.lang.NullPointerException</span>
         </div>
         <div>

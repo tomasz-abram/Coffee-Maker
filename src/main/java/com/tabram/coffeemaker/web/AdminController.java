@@ -54,7 +54,7 @@ public class AdminController {
 
     @GetMapping("/admin/admin-users-list")
     public ModelAndView getAllUsers() {
-        ModelAndView mav = new ModelAndView("/admin/admin-users-list");
+        ModelAndView mav = new ModelAndView("admin/admin-users-list");
         mav.addObject("users", userRepository.findAll());
         return mav;
     }
@@ -67,7 +67,7 @@ public class AdminController {
 
     @GetMapping("/admin/updateUserForm")
     public ModelAndView showUpdateForm(@RequestParam Long userId) {
-        ModelAndView mav = new ModelAndView("/admin/admin-update-user");
+        ModelAndView mav = new ModelAndView("admin/admin-update-user");
         mav.addObject("userD", userRepository.findById(userId).orElse(null));
         mav.addObject("roles", roleRepository.findAll());
         return mav;

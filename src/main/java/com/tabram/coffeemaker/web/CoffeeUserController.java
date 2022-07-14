@@ -37,7 +37,7 @@ public class CoffeeUserController {
 
     @GetMapping("/user/user-add-coffee")
     public ModelAndView showAddCoffeeForm() {
-        ModelAndView mav = new ModelAndView("/user/user-add-coffee");
+        ModelAndView mav = new ModelAndView("user/user-add-coffee");
         mav.addObject("coffeeMachine", coffeeMachineConstantValueService);
         return mav;
     }
@@ -57,7 +57,7 @@ public class CoffeeUserController {
 
     @GetMapping("/user/showUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Long coffeeUserId) {
-        ModelAndView mav = new ModelAndView("/user/user-add-coffee");
+        ModelAndView mav = new ModelAndView("user/user-add-coffee");
         mav.addObject("coffeeUser", coffeeUserRepository.findById(coffeeUserId).orElse(null));
         mav.addObject("coffeeMachine", coffeeMachineConstantValueService);
         return mav;
