@@ -1,7 +1,8 @@
 package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.dto.UserRegistrationDto;
-import com.tabram.coffeemaker.repository.UserRepository;
+import com.tabram.coffeemaker.service.CoffeeUserService;
+import com.tabram.coffeemaker.service.UserService;
 import com.tabram.coffeemaker.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserRegistrationController {
 
     private final UserServiceInterface userServiceInterface;
-    private final UserRepository userRepository;
+    private final UserService userService;
+    private final CoffeeUserService coffeeUserService;
 
     @Autowired
-    public UserRegistrationController(UserServiceInterface userServiceInterface, UserRepository userRepository) {
+    public UserRegistrationController(UserServiceInterface userServiceInterface, UserService userService, CoffeeUserService coffeeUserService) {
         this.userServiceInterface = userServiceInterface;
-        this.userRepository = userRepository;
+        this.userService = userService;
+        this.coffeeUserService = coffeeUserService;
     }
 
     @ModelAttribute("user")
@@ -35,14 +38,16 @@ public class UserRegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto userRegistrationDto) {
-        if (userRepository.findByUserName(userRegistrationDto.getUserName()) == null) {
+        if (!userService.checkIfTheUserExists(userRegistrationDto.getUserName())) {
             userServiceInterface.save(userRegistrationDto);
+            coffeeUserService.addCoffeeListToUser(userService.findUserByName(userRegistrationDto.getUserName()));
+
             return "redirect:/login?regisSuccess";
         } else {
             return "redirect:/registration?regisError";
         }
-    }
 
+    }
 
 }
 

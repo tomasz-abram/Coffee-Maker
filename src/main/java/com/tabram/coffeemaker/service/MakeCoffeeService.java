@@ -4,7 +4,6 @@ import com.tabram.coffeemaker.model.CoffeeMachineStock;
 import com.tabram.coffeemaker.model.CoffeeUser;
 import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.CoffeeMachineStockRepository;
-import com.tabram.coffeemaker.repository.CoffeeUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,27 +14,28 @@ import java.util.List;
 public class MakeCoffeeService {
 
     private final CoffeeMachineStockRepository coffeeMachineStockRepository;
-    private final CoffeeUserRepository coffeeUserRepository;
     private final CoffeeMachineConstantValueService coffeeMachineConstantValueService;
-
+    private final CoffeeMachineStockService coffeeMachineStockService;
+    private final CoffeeUserService coffeeUserService;
 
     @Autowired
-    public MakeCoffeeService(CoffeeMachineStockRepository coffeeMachineStockRepository, CoffeeUserRepository coffeeUserRepository, CoffeeMachineConstantValueService coffeeMachineConstantValueService) {
+    public MakeCoffeeService(CoffeeMachineStockRepository coffeeMachineStockRepository, CoffeeMachineConstantValueService coffeeMachineConstantValueService, CoffeeMachineStockService coffeeMachineStockService, CoffeeUserService coffeeUserService) {
         this.coffeeMachineStockRepository = coffeeMachineStockRepository;
-        this.coffeeUserRepository = coffeeUserRepository;
         this.coffeeMachineConstantValueService = coffeeMachineConstantValueService;
+        this.coffeeMachineStockService = coffeeMachineStockService;
+        this.coffeeUserService = coffeeUserService;
     }
 
-    public void makeCoffee(String nameOfCoffee, int quantity, User user) {
+    public void makeCoffee(String coffeeName, int quantity, User user) {
         List<CoffeeMachineStock> cMSList = new ArrayList<>();
-        CoffeeMachineStock waterStock = coffeeMachineStockRepository.findByName("Water");
-        CoffeeMachineStock milkStock = coffeeMachineStockRepository.findByName("Milk");
-        CoffeeMachineStock coffeeBeansStock = coffeeMachineStockRepository.findByName("Coffee beans");
-        CoffeeMachineStock groundContainerStock = coffeeMachineStockRepository.findByName("Ground container");
-        CoffeeMachineStock descaleCounter = coffeeMachineStockRepository.findByName("Descale counter");
-        CoffeeMachineStock waterHardnessStock = coffeeMachineStockRepository.findByName("Water hardness");
+        CoffeeMachineStock waterStock = coffeeMachineStockService.findStockByName("Water");
+        CoffeeMachineStock milkStock = coffeeMachineStockService.findStockByName("Milk");
+        CoffeeMachineStock coffeeBeansStock = coffeeMachineStockService.findStockByName("Coffee beans");
+        CoffeeMachineStock groundContainerStock = coffeeMachineStockService.findStockByName("Ground container");
+        CoffeeMachineStock descaleCounter = coffeeMachineStockService.findStockByName("Descale counter");
+        CoffeeMachineStock waterHardnessStock = coffeeMachineStockService.findStockByName("Water hardness");
 
-        CoffeeUser coffee = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(nameOfCoffee, user.getId());
+        CoffeeUser coffee = coffeeUserService.findCoffeeByCoffeeNameAndUserId(coffeeName, user.getId());
         if (waterStock.getValue() < coffee.getAmountOfWater()) {
             throw new IllegalStateException("There is not enough water in the machine to make this coffee");
         } else {

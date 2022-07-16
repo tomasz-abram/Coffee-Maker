@@ -9,6 +9,7 @@ import com.tabram.coffeemaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -27,7 +28,7 @@ public class CoffeeAdminService {
     }
 
     public void checkCoffeeParameters(CoffeeDto coffeeDto) {
-        if (coffeeDto.getNameOfCoffee().isEmpty()) {
+        if (coffeeDto.getCoffeeName().isEmpty()) {
             throw new IllegalArgumentException("The name can not be empty.");
         }
         if (coffeeDto.getTempWater() < coffeeMachineConstantValueService.getMinTempWater() || coffeeDto.getTempWater() > coffeeMachineConstantValueService.getMaxTempWater()) {
@@ -56,8 +57,13 @@ public class CoffeeAdminService {
         }
     }
 
-    public List<CoffeeAdmin> getCoffee() {
+    public List<CoffeeAdmin> getAllCoffees() {
         return coffeeAdminRepository.findAll();
+    }
+
+    public CoffeeAdmin findCoffeeById(Long coffeeId) {
+        return coffeeAdminRepository.findById(coffeeId)
+                .orElseThrow(() -> new EntityNotFoundException("Admin: coffee not found"));
     }
 
     public void deleteCoffee(Long coffeeId) {
@@ -68,9 +74,8 @@ public class CoffeeAdminService {
 
         checkCoffeeParameters(coffeeDto);
 
-        CoffeeAdmin coffee = coffeeAdminRepository.findCoffeeAdminByNameOfCoffee(coffeeDto.getNameOfCoffee());
-        if (coffee != null) {
-            CoffeeAdmin coffeeDB = coffeeAdminRepository.findCoffeeAdminByNameOfCoffee(coffeeDto.getNameOfCoffee());
+        if (coffeeAdminRepository.existsCoffeeAdminByCoffeeName(coffeeDto.getCoffeeName())) {
+            CoffeeAdmin coffeeDB = coffeeAdminRepository.findCoffeeAdminByCoffeeName(coffeeDto.getCoffeeName());
             coffeeDB.setTempWater(coffeeDto.getTempWater());
             coffeeDB.setGrindingLevel(coffeeDto.getGrindingLevel());
             coffeeDB.setAmountOfCoffee(coffeeDto.getAmountOfCoffee());
@@ -78,17 +83,19 @@ public class CoffeeAdminService {
             coffeeDB.setAmountMilk(coffeeDto.getAmountMilk());
             coffeeDB.setCupSize(coffeeDto.getCupSize());
             coffeeAdminRepository.save(coffeeDB);
+        } else {
+            CoffeeAdmin coffeeAdmin = new CoffeeAdmin(
+                    coffeeDto.getCoffeeName(),
+                    coffeeDto.getTempWater(),
+                    coffeeDto.getGrindingLevel(),
+                    coffeeDto.getAmountOfCoffee(),
+                    coffeeDto.getAmountOfWater(),
+                    coffeeDto.getAmountMilk(),
+                    coffeeDto.getTempMilk(),
+                    coffeeDto.getCupSize());
+            coffeeAdminRepository.save(coffeeAdmin);
         }
-        CoffeeAdmin coffeeAdmin = new CoffeeAdmin(
-                coffeeDto.getNameOfCoffee(),
-                coffeeDto.getTempWater(),
-                coffeeDto.getGrindingLevel(),
-                coffeeDto.getAmountOfCoffee(),
-                coffeeDto.getAmountOfWater(),
-                coffeeDto.getAmountMilk(),
-                coffeeDto.getTempMilk(),
-                coffeeDto.getCupSize());
-        coffeeAdminRepository.save(coffeeAdmin);
+
     }
 
     public void updateUser(UserDto userDto) {

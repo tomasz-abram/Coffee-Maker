@@ -22,6 +22,10 @@ public class CoffeeMachineStockService {
         this.coffeeMachineConstantValueService = coffeeMachineConstantValueService;
     }
 
+    public CoffeeMachineStock findStockByName(String stockName) {
+        return coffeeMachineStockRepository.findByName(stockName);
+    }
+
     public void updateWater(int addWater) {
         CoffeeMachineStock waterStock = coffeeMachineStockRepository.findByName("Water");
         float updateWater = (Objects.requireNonNull(waterStock).getValue() + addWater);

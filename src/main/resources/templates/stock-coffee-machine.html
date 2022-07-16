@@ -233,11 +233,11 @@
 
 
             <div class="col">
-                <form method="POST" th:action="@{stock-coffee-machine/user}" th:object="${coffeeMachineStock}">
+                <form method="POST" th:action="@{stock-coffee-machine/waterHardness}">
                     <label class="form-label" for="waterHardness">Set water hardness: </label>
 
                     <input class="form-control col-4 mb-4" id="waterHardness" name="waterHardness"
-                           placeholder="Water hardness" step="0.01" th:field="*{value}" type="number"/>
+                           placeholder="Water hardness" step="0.01" type="number"/>
 
                     <div sec:authorize="hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')">
                         <button class="btn btn-primary w-100" type="submit">Save</button>

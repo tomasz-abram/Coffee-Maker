@@ -9,8 +9,8 @@ public class CoffeeUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name_of_coffee")
-    private String nameOfCoffee;
+    @Column(name = "coffee_name")
+    private String coffeeName;
     @Column(name = "temp_water")
     private int tempWater;
     @Column(name = "grinding_level")
@@ -33,8 +33,8 @@ public class CoffeeUser {
     public CoffeeUser() {
     }
 
-    public CoffeeUser(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize, User user) {
-        this.nameOfCoffee = nameOfCoffee;
+    public CoffeeUser(String coffeeName, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize, User user) {
+        this.coffeeName = coffeeName;
         this.tempWater = tempWater;
         this.grindingLevel = grindingLevel;
         this.amountOfCoffee = amountOfCoffee;
@@ -53,12 +53,12 @@ public class CoffeeUser {
         this.id = id;
     }
 
-    public String getNameOfCoffee() {
-        return nameOfCoffee;
+    public String getCoffeeName() {
+        return coffeeName;
     }
 
-    public void setNameOfCoffee(String nameOfCoffee) {
-        this.nameOfCoffee = nameOfCoffee;
+    public void setCoffeeName(String coffeeName) {
+        this.coffeeName = coffeeName;
     }
 
     public int getTempWater() {

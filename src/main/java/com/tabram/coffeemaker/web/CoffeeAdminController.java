@@ -1,11 +1,11 @@
 package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.dto.CoffeeDto;
-import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeAdminService;
 import com.tabram.coffeemaker.service.CoffeeMachineConstantValueService;
 import com.tabram.coffeemaker.service.CoffeeUserService;
+import com.tabram.coffeemaker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,19 +18,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CoffeeAdminController {
 
-    private final CoffeeAdminRepository coffeeAdminRepository;
     private final CoffeeAdminService coffeeAdminService;
     private final CoffeeUserService coffeeUserService;
-    private final UserRepository userRepository;
     private final CoffeeMachineConstantValueService coffeeMachineConstantValueService;
+    private final UserService userService;
 
     @Autowired
-    public CoffeeAdminController(CoffeeAdminRepository coffeeAdminRepository, CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService, UserRepository userRepository, CoffeeMachineConstantValueService coffeeMachineConstantValueService) {
-        this.coffeeAdminRepository = coffeeAdminRepository;
+    public CoffeeAdminController(CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService, UserRepository userRepository, CoffeeMachineConstantValueService coffeeMachineConstantValueService, UserService userService) {
         this.coffeeAdminService = coffeeAdminService;
         this.coffeeUserService = coffeeUserService;
-        this.userRepository = userRepository;
         this.coffeeMachineConstantValueService = coffeeMachineConstantValueService;
+        this.userService = userService;
     }
 
     @ModelAttribute("coffeeAdmin")
@@ -49,14 +47,14 @@ public class CoffeeAdminController {
     public String addCoffee(@ModelAttribute("coffeeAdmin") CoffeeDto coffeeDto) {
         coffeeAdminService.addNewCoffee(coffeeDto);
         coffeeUserService.addOneCoffeeForEachUser(coffeeDto);
-        coffeeUserService.updateDefaultCoffees(userRepository.findByUserName("Default"));
+        coffeeUserService.updateDefaultCoffees(userService.findUserByName("Default"));
         return "redirect:/admin/admin-coffee-list";
     }
 
     @GetMapping("/admin/showUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Long coffeeAdminId) {
         ModelAndView mav = new ModelAndView("admin/admin-add-coffee");
-        mav.addObject("coffeeAdmin", coffeeAdminRepository.findById(coffeeAdminId).orElse(null));
+        mav.addObject("coffeeAdmin", coffeeAdminService.findCoffeeById(coffeeAdminId));
         mav.addObject("coffeeMachine", coffeeMachineConstantValueService);
         return mav;
     }
@@ -64,7 +62,7 @@ public class CoffeeAdminController {
     @GetMapping("admin/admin-coffee-list")
     public ModelAndView getAllCoffees() {
         ModelAndView mav = new ModelAndView("admin/admin-coffee-list");
-        mav.addObject("coffees", coffeeAdminRepository.findAll());
+        mav.addObject("coffees", coffeeAdminService.getAllCoffees());
         return mav;
     }
 

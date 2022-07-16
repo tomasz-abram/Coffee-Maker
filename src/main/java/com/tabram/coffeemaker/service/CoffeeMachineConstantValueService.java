@@ -3,13 +3,19 @@ package com.tabram.coffeemaker.service;
 import com.tabram.coffeemaker.dto.CoffeeMachineConstantValueDto;
 import com.tabram.coffeemaker.model.CoffeeMachineConstantValue;
 import com.tabram.coffeemaker.repository.CoffeeMachineConstantValueRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class CoffeeMachineConstantValueService {
 
+
     private final CoffeeMachineConstantValueRepository coffeeMachineConstantValueRepository;
 
+    @Autowired
     public CoffeeMachineConstantValueService(CoffeeMachineConstantValueRepository coffeeMachineConstantValueRepository) {
         this.coffeeMachineConstantValueRepository = coffeeMachineConstantValueRepository;
     }
@@ -154,5 +160,14 @@ public class CoffeeMachineConstantValueService {
         CoffeeMachineConstantValue machineConst = coffeeMachineConstantValueRepository.findByName(machineConstDto.getName());
         machineConst.setValue(machineConstDto.getValue());
         coffeeMachineConstantValueRepository.save(machineConst);
+    }
+
+    public List<CoffeeMachineConstantValue> getAllConstantValue() {
+        return coffeeMachineConstantValueRepository.findAll();
+    }
+
+    public CoffeeMachineConstantValue findConstantValueById(Long constId) {
+        return coffeeMachineConstantValueRepository.findById(constId)
+                .orElseThrow(() -> new EntityNotFoundException("Constant value not found"));
     }
 }

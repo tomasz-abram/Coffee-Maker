@@ -47,7 +47,7 @@
         </thead>
         <tbody>
         <tr th:each="coffeeUser: ${chooseCoffee}">
-            <td th:text="${coffeeUser.nameOfCoffee}"/>
+            <td th:text="${coffeeUser.coffeeName}"/>
             <td th:text="${coffeeUser.tempWater}"/>
             <td th:text="${coffeeUser.amountOfWater}"/>
             <td th:if="${chooseCoffee.getAmountMilk() > 0}" th:text="${coffeeUser.tempMilk}"/>
@@ -75,11 +75,11 @@
 
     <div class="list-group text-center row">
         <a class="gap-3 py-3 list-group-item list-group-item-action fs-6 "
-           th:href="@{/make-coffee/{nameOfCoffee}/1/brew(nameOfCoffee=${chooseCoffee.nameOfCoffee})}">Single coffee</a>
+           th:href="@{/make-coffee/{coffeeName}/1/brew(coffeeName=${chooseCoffee.coffeeName})}">Single coffee</a>
         <a class="gap-3 py-3 list-group-item list-group-item-action fs-6"
-           th:href="@{/make-coffee/{nameOfCoffee}/2/brew(nameOfCoffee=${chooseCoffee.nameOfCoffee})}">Double coffee</a>
+           th:href="@{/make-coffee/{coffeeName}/2/brew(coffeeName=${chooseCoffee.coffeeName})}">Double coffee</a>
         <a class="gap-3 py-3 list-group-item list-group-item-action fs-6"
-           th:href="@{/make-coffee/{nameOfCoffee}/3/brew(nameOfCoffee=${chooseCoffee.nameOfCoffee})}">Triple coffee</a>
+           th:href="@{/make-coffee/{coffeeName}/3/brew(coffeeName=${chooseCoffee.coffeeName})}">Triple coffee</a>
 
     </div>
 

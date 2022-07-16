@@ -6,15 +6,20 @@ import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.RoleRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,28 +28,50 @@ import java.util.stream.Collectors;
 public class UserService implements UserServiceInterface {
 
     private final UserRepository userRepository;
-    private final CoffeeUserService coffeeUserService;
     private final RoleRepository roleRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, CoffeeUserService coffeeUserService, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
-        this.coffeeUserService = coffeeUserService;
         this.roleRepository = roleRepository;
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User findUserByName(String username) {
+        return userRepository.findByUserName(username);
+    }
+
+    public User findUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
+
+    public boolean checkIfTheUserExists(String username) {
+        return userRepository.existsByUserName(username);
+    }
+
+    public User currentUser() {
+        User currentUser = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            currentUser = userRepository.findByUserName(authentication.getName());
+        }
+        return currentUser;
     }
 
     @Override
     public User save(UserRegistrationDto registrationDto) {
         User user = new User(registrationDto.getUserName(), new BCryptPasswordEncoder().encode(registrationDto.getPassword()), true);
 
-        if (roleRepository.findByName("ROLE_USER") == null) {
+        if (!roleRepository.existsByName("ROLE_USER")) {
             user.setRoles(Set.of(new Role("ROLE_USER")));
         } else {
             user.setRoles(Set.of(roleRepository.findByName("ROLE_USER")));
         }
-
         userRepository.saveAndFlush(user);
-        coffeeUserService.addCoffeeListToUser(user);
         return user;
     }
 
@@ -66,5 +93,6 @@ public class UserService implements UserServiceInterface {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("User with id " + userId + " does not exist"));
         user.setEnabled(!user.isEnabled());
     }
+
 
 }

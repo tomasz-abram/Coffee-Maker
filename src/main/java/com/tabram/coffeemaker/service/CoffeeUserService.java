@@ -8,11 +8,9 @@ import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
 import com.tabram.coffeemaker.repository.CoffeeUserRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -25,13 +23,28 @@ public class CoffeeUserService {
     private final CoffeeAdminRepository coffeeAdminRepository;
     private final UserRepository userRepository;
     private final CoffeeAdminService coffeeAdminService;
+    private final UserService userService;
 
     @Autowired
-    public CoffeeUserService(CoffeeUserRepository coffeeUserRepository, CoffeeAdminRepository coffeeAdminRepository, UserRepository userRepository, CoffeeAdminService coffeeAdminService) {
+    public CoffeeUserService(CoffeeUserRepository coffeeUserRepository, CoffeeAdminRepository coffeeAdminRepository, UserRepository userRepository, CoffeeAdminService coffeeAdminService, UserService userService) {
         this.coffeeUserRepository = coffeeUserRepository;
         this.coffeeAdminRepository = coffeeAdminRepository;
         this.userRepository = userRepository;
         this.coffeeAdminService = coffeeAdminService;
+        this.userService = userService;
+    }
+
+    public CoffeeUser findCoffeeUserById(Long coffeeUserId) {
+        return coffeeUserRepository.findById(coffeeUserId)
+                .orElseThrow(() -> new EntityNotFoundException("Coffee not found"));
+    }
+
+    public CoffeeUser findCoffeeByCoffeeNameAndUserId(String coffeeName, Long userId) {
+        return coffeeUserRepository.findCoffeeUserByCoffeeNameAndUserId(coffeeName, userId);
+    }
+
+    public void deleteCoffee(Long coffeeId) {
+        coffeeUserRepository.deleteById(coffeeId);
     }
 
     public void addCoffeeListToUser(User user) {
@@ -39,7 +52,7 @@ public class CoffeeUserService {
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         coffeeAdminRepository.findAll().forEach(coffees -> {
             CoffeeUser coffee = new CoffeeUser(
-                    coffees.getNameOfCoffee(),
+                    coffees.getCoffeeName(),
                     coffees.getTempWater(),
                     coffees.getGrindingLevel(),
                     coffees.getAmountOfCoffee(),
@@ -53,29 +66,12 @@ public class CoffeeUserService {
         coffeeUserRepository.saveAll(coffeeUsers);
     }
 
-    public List<CoffeeUser> getCoffee() {
-        return coffeeUserRepository.findAll();
-    }
-
-    public void deleteCoffee(Long coffeeId) {
-        coffeeUserRepository.deleteById(coffeeId);
-    }
-
-    public User currentUser() {
-        User currentUser = null;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            currentUser = userRepository.findByUserName(authentication.getName());
-        }
-        return currentUser;
-    }
-
     public void addOneCoffeeForEachUser(CoffeeDto coffeeDto) {
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
-            if (coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId()) == null) {
+            if (!coffeeUserRepository.existsCoffeeUserByCoffeeNameAndUserId(coffeeDto.getCoffeeName(), user.getId())) {
                 CoffeeUser coffee = new CoffeeUser(
-                        coffeeDto.getNameOfCoffee(),
+                        coffeeDto.getCoffeeName(),
                         coffeeDto.getTempWater(),
                         coffeeDto.getGrindingLevel(),
                         coffeeDto.getAmountOfCoffee(),
@@ -94,8 +90,8 @@ public class CoffeeUserService {
 
         coffeeAdminService.checkCoffeeParameters(coffeeDto);
 
-        if (coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId()) != null) {
-            CoffeeUser coffeeDB = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeDto.getNameOfCoffee(), user.getId());
+        if (coffeeUserRepository.existsCoffeeUserByCoffeeNameAndUserId(coffeeDto.getCoffeeName(), user.getId())) {
+            CoffeeUser coffeeDB = coffeeUserRepository.findCoffeeUserByCoffeeNameAndUserId(coffeeDto.getCoffeeName(), user.getId());
             coffeeDB.setTempWater(coffeeDto.getTempWater());
             coffeeDB.setGrindingLevel(coffeeDto.getGrindingLevel());
             coffeeDB.setAmountOfCoffee(coffeeDto.getAmountOfCoffee());
@@ -106,7 +102,7 @@ public class CoffeeUserService {
             coffeeUserRepository.save(coffeeDB);
         } else {
             CoffeeUser coffeeUser = new CoffeeUser(
-                    coffeeDto.getNameOfCoffee(),
+                    coffeeDto.getCoffeeName(),
                     coffeeDto.getTempWater(),
                     coffeeDto.getGrindingLevel(),
                     coffeeDto.getAmountOfCoffee(),
@@ -114,7 +110,7 @@ public class CoffeeUserService {
                     coffeeDto.getAmountMilk(),
                     coffeeDto.getTempMilk(),
                     coffeeDto.getCupSize(),
-                    currentUser());
+                    userService.currentUser());
 
             coffeeUserRepository.save(coffeeUser);
         }
@@ -128,12 +124,11 @@ public class CoffeeUserService {
         List<CoffeeUser> coffeesUser = new ArrayList<>();
 
         coffees.forEach(coffeeAdmin -> {
+            CoffeeUser cU = coffeeUserRepository.findCoffeeUserByCoffeeNameAndUserId(coffeeAdmin.getCoffeeName(), user.getId());
 
-            CoffeeUser cU = coffeeUserRepository.findCoffeeUserByNameOfCoffeeAndUserId(coffeeAdmin.getNameOfCoffee(), user.getId());
-
-            if (cU == null) {
+            if (!coffeeUserRepository.existsCoffeeUserByCoffeeNameAndUserId(coffeeAdmin.getCoffeeName(), user.getId())) {
                 CoffeeUser newCoffee = new CoffeeUser(
-                        coffeeAdmin.getNameOfCoffee(),
+                        coffeeAdmin.getCoffeeName(),
                         coffeeAdmin.getTempWater(),
                         coffeeAdmin.getGrindingLevel(),
                         coffeeAdmin.getAmountOfCoffee(),

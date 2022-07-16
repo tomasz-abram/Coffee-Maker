@@ -30,8 +30,8 @@
     <a class="navbar-brand list-group-item align-items-center justify-content-center"><h5>Choose a coffee</h5></a>
 
     <a class="gap-3 py-3 list-group-item list-group-item-action" th:each="coffeeUser: ${coffees}"
-       th:href="@{/make-coffee/{nameOfCoffee}/strength(nameOfCoffee=${coffeeUser.nameOfCoffee})}"
-       th:text="${coffeeUser.nameOfCoffee}">Coffee name</a>
+       th:href="@{/make-coffee/{coffeeName}/strength(coffeeName=${coffeeUser.coffeeName})}"
+       th:text="${coffeeUser.coffeeName}">Coffee name</a>
 
 
 </div>

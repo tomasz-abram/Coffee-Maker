@@ -2,7 +2,7 @@ package com.tabram.coffeemaker.dto;
 
 public class CoffeeDto {
 
-    private String nameOfCoffee;
+    private String coffeeName;
     private int tempWater;
     private int grindingLevel;
     private double amountOfCoffee;
@@ -14,8 +14,8 @@ public class CoffeeDto {
     public CoffeeDto() {
     }
 
-    public CoffeeDto(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize) {
-        this.nameOfCoffee = nameOfCoffee;
+    public CoffeeDto(String coffeeName, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize) {
+        this.coffeeName = coffeeName;
         this.tempWater = tempWater;
         this.grindingLevel = grindingLevel;
         this.amountOfCoffee = amountOfCoffee;
@@ -25,12 +25,12 @@ public class CoffeeDto {
         this.cupSize = cupSize;
     }
 
-    public String getNameOfCoffee() {
-        return nameOfCoffee;
+    public String getCoffeeName() {
+        return coffeeName;
     }
 
-    public void setNameOfCoffee(String nameOfCoffee) {
-        this.nameOfCoffee = nameOfCoffee;
+    public void setCoffeeName(String coffeeName) {
+        this.coffeeName = coffeeName;
     }
 
     public int getTempWater() {

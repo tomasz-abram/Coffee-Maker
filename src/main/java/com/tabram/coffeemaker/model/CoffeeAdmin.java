@@ -3,14 +3,14 @@ package com.tabram.coffeemaker.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "coffee_admin", uniqueConstraints = {@UniqueConstraint(columnNames = {"name_of_coffee", "user_id"})})
+@Table(name = "coffee_admin", uniqueConstraints = {@UniqueConstraint(columnNames = {"coffee_name", "user_id"})})
 public class CoffeeAdmin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name_of_coffee")
-    private String nameOfCoffee;
+    @Column(name = "coffee_name")
+    private String coffeeName;
     @Column(name = "temp_water")
     private int tempWater;
     @Column(name = "grinding_level")
@@ -34,8 +34,8 @@ public class CoffeeAdmin {
 
     }
 
-    public CoffeeAdmin(String nameOfCoffee, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize) {
-        this.nameOfCoffee = nameOfCoffee;
+    public CoffeeAdmin(String coffeeName, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize) {
+        this.coffeeName = coffeeName;
         this.tempWater = tempWater;
         this.grindingLevel = grindingLevel;
         this.amountOfCoffee = amountOfCoffee;
@@ -54,12 +54,12 @@ public class CoffeeAdmin {
         this.id = id;
     }
 
-    public String getNameOfCoffee() {
-        return nameOfCoffee;
+    public String getCoffeeName() {
+        return coffeeName;
     }
 
-    public void setNameOfCoffee(String nameOfCoffee) {
-        this.nameOfCoffee = nameOfCoffee;
+    public void setCoffeeName(String coffeeName) {
+        this.coffeeName = coffeeName;
     }
 
     public int getTempWater() {

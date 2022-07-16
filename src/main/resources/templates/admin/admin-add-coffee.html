@@ -27,10 +27,10 @@
         <hr/>
 
         <form class="text-center m-auto pb-5" method="POST" th:action="@{admin-add-coffee}">
-            <label class="form-label fs-5 m-auto" for="nameOfCoffee">Name of coffee</label>
-            <input class="list-group-item list-group mb-3 w-100 m-auto" id="nameOfCoffee" name="nameOfCoffee"
-                   placeholder="Enter name of coffee"
-                   th:value="*{coffeeAdmin.nameOfCoffee}" type="text"/>
+            <label class="form-label m-auto" for="coffeeName">Coffee name</label>
+            <input class="list-group-item list-group mb-3 w-100 m-auto text-center fs-5" id="coffeeName" name="coffeeName"
+                   placeholder="Enter coffee name"
+                   th:value="*{coffeeAdmin.coffeeName}" th:readonly="${coffeeAdmin.coffeeName != null }" type="text"/>
 
             <div class="m-auto">
                 <label class="form-label m-auto" for="tempWaterSlider">Temp. water:</label>

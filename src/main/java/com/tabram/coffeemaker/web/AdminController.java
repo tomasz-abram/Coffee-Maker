@@ -2,11 +2,9 @@ package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.dto.CoffeeMachineConstantValueDto;
 import com.tabram.coffeemaker.dto.UserDto;
-import com.tabram.coffeemaker.repository.CoffeeMachineConstantValueRepository;
-import com.tabram.coffeemaker.repository.RoleRepository;
-import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeAdminService;
 import com.tabram.coffeemaker.service.CoffeeMachineConstantValueService;
+import com.tabram.coffeemaker.service.RoleService;
 import com.tabram.coffeemaker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,19 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminController {
 
     private final UserService userService;
-    private final UserRepository userRepository;
     private final CoffeeAdminService coffeeAdminService;
-    private final RoleRepository roleRepository;
-    private final CoffeeMachineConstantValueRepository coffeeMachineConstantValueRepository;
+    private final RoleService roleService;
     private final CoffeeMachineConstantValueService coffeeMachineConstantValueService;
 
     @Autowired
-    public AdminController(UserService userService, UserRepository userRepository, CoffeeAdminService coffeeAdminService, RoleRepository roleRepository, CoffeeMachineConstantValueRepository coffeeMachineConstantValueRepository, CoffeeMachineConstantValueService coffeeMachineConstantValueService) {
+    public AdminController(UserService userService, CoffeeAdminService coffeeAdminService, RoleService roleService, CoffeeMachineConstantValueService coffeeMachineConstantValueService) {
         this.userService = userService;
-        this.userRepository = userRepository;
         this.coffeeAdminService = coffeeAdminService;
-        this.roleRepository = roleRepository;
-        this.coffeeMachineConstantValueRepository = coffeeMachineConstantValueRepository;
+        this.roleService = roleService;
         this.coffeeMachineConstantValueService = coffeeMachineConstantValueService;
     }
 
@@ -55,7 +49,7 @@ public class AdminController {
     @GetMapping("/admin/admin-users-list")
     public ModelAndView getAllUsers() {
         ModelAndView mav = new ModelAndView("admin/admin-users-list");
-        mav.addObject("users", userRepository.findAll());
+        mav.addObject("users", userService.getAllUsers());
         return mav;
     }
 
@@ -68,15 +62,15 @@ public class AdminController {
     @GetMapping("/admin/updateUserForm")
     public ModelAndView showUpdateForm(@RequestParam Long userId) {
         ModelAndView mav = new ModelAndView("admin/admin-update-user");
-        mav.addObject("userD", userRepository.findById(userId).orElse(null));
-        mav.addObject("roles", roleRepository.findAll());
+        mav.addObject("userD", userService.findUserById(userId));
+        mav.addObject("roles", roleService.getAllRoles());
         return mav;
     }
 
     @GetMapping("/admin/admin-coffee-machine-constant-value-list")
     public ModelAndView coffeeMachineConstValue() {
         ModelAndView mav = new ModelAndView("admin/admin-coffee-machine-constant-value-list");
-        mav.addObject("constValues", coffeeMachineConstantValueRepository.findAll());
+        mav.addObject("constValues", coffeeMachineConstantValueService.getAllConstantValue());
         return mav;
     }
 
@@ -90,7 +84,7 @@ public class AdminController {
     @GetMapping("/admin/updateConstForm")
     public ModelAndView updateConstForm(@RequestParam Long machineConstId) {
         ModelAndView mav = new ModelAndView("admin/admin-update-coffee-machine-constant-value");
-        mav.addObject("machineConst", coffeeMachineConstantValueRepository.findById(machineConstId).orElse(null));
+        mav.addObject("machineConst", coffeeMachineConstantValueService.findConstantValueById(machineConstId));
         return mav;
     }
 }

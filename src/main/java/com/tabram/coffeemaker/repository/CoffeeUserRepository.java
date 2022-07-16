@@ -7,5 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CoffeeUserRepository extends JpaRepository<CoffeeUser, Long> {
 
-    CoffeeUser findCoffeeUserByNameOfCoffeeAndUserId(String nameOfCoffee, Long userId);
+    CoffeeUser findCoffeeUserByCoffeeNameAndUserId(String coffeeName, Long userId);
+
+    boolean existsCoffeeUserByCoffeeNameAndUserId(String coffeeName, Long userId);
+
 }

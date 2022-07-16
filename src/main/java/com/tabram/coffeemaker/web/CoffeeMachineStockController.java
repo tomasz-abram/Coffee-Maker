@@ -1,7 +1,6 @@
 package com.tabram.coffeemaker.web;
 
 import com.tabram.coffeemaker.model.CoffeeMachineStock;
-import com.tabram.coffeemaker.repository.CoffeeMachineStockRepository;
 import com.tabram.coffeemaker.service.CoffeeMachineConstantValueService;
 import com.tabram.coffeemaker.service.CoffeeMachineStockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/stock-coffee-machine")
 public class CoffeeMachineStockController {
 
-    private final CoffeeMachineStockRepository coffeeMachineStockRepository;
     private final CoffeeMachineStockService coffeeMachineStockService;
     private final CoffeeMachineConstantValueService coffeeMachineConstantValueService;
 
     @Autowired
-    public CoffeeMachineStockController(CoffeeMachineStockRepository coffeeMachineStockRepository, CoffeeMachineStockService coffeeMachineStockService, CoffeeMachineConstantValueService coffeeMachineConstantValueService) {
-        this.coffeeMachineStockRepository = coffeeMachineStockRepository;
+    public CoffeeMachineStockController(CoffeeMachineStockService coffeeMachineStockService, CoffeeMachineConstantValueService coffeeMachineConstantValueService) {
         this.coffeeMachineStockService = coffeeMachineStockService;
         this.coffeeMachineConstantValueService = coffeeMachineConstantValueService;
     }
@@ -32,19 +29,19 @@ public class CoffeeMachineStockController {
     @GetMapping
     public ModelAndView getStock() {
         ModelAndView mav = new ModelAndView("stock-coffee-machine");
-        mav.addObject("waterStock", coffeeMachineStockRepository.findByName("Water"));
-        mav.addObject("milkStock", coffeeMachineStockRepository.findByName("Milk"));
-        mav.addObject("coffeeBeansStock", coffeeMachineStockRepository.findByName("Coffee beans"));
-        mav.addObject("groundContainerStock", coffeeMachineStockRepository.findByName("Ground container"));
-        mav.addObject("descaleCounter", coffeeMachineStockRepository.findByName("Descale counter"));
-        mav.addObject("waterHardnessStock", coffeeMachineStockRepository.findByName("Water hardness"));
+        mav.addObject("waterStock", coffeeMachineStockService.findStockByName("Water"));
+        mav.addObject("milkStock", coffeeMachineStockService.findStockByName("Milk"));
+        mav.addObject("coffeeBeansStock", coffeeMachineStockService.findStockByName("Coffee beans"));
+        mav.addObject("groundContainerStock", coffeeMachineStockService.findStockByName("Ground container"));
+        mav.addObject("descaleCounter", coffeeMachineStockService.findStockByName("Descale counter"));
+        mav.addObject("waterHardnessStock", coffeeMachineStockService.findStockByName("Water hardness"));
         mav.addObject("machine", coffeeMachineConstantValueService);
         return mav;
     }
 
-    @PostMapping("/user")
-    public String setWaterHardness(@ModelAttribute("coffeeMachineStock") CoffeeMachineStock cms) {
-        coffeeMachineStockService.updateWaterHardness(cms.getValue());
+    @PostMapping("/waterHardness")
+    public String setWaterHardness(@RequestParam("waterHardness") float value) {
+        coffeeMachineStockService.updateWaterHardness(value);
         return "redirect:/stock-coffee-machine";
     }
 
