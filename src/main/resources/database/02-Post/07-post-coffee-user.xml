@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="tabra (generated)" id="1658184346837-7">
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="1"/>
+            <column name="amount_milk" valueNumeric="0"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="40"/>
+            <column name="coffee_name" value="Espresso"/>
+            <column name="cup_size" valueNumeric="60"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="0"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="2"/>
+            <column name="amount_milk" valueNumeric="100"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="30"/>
+            <column name="coffee_name" value="Cappuccino"/>
+            <column name="cup_size" valueNumeric="200"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="3"/>
+            <column name="amount_milk" valueNumeric="120"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="40"/>
+            <column name="coffee_name" value="LatteMacchiato"/>
+            <column name="cup_size" valueNumeric="200"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="4"/>
+            <column name="amount_milk" valueNumeric="0"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="150"/>
+            <column name="coffee_name" value="Lungo"/>
+            <column name="cup_size" valueNumeric="200"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="5"/>
+            <column name="amount_milk" valueNumeric="10"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="40"/>
+            <column name="coffee_name" value="Macchiato"/>
+            <column name="cup_size" valueNumeric="100"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="6"/>
+            <column name="amount_milk" valueNumeric="0"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="20"/>
+            <column name="coffee_name" value="Ristretto"/>
+            <column name="cup_size" valueNumeric="60"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="0"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="7"/>
+            <column name="amount_milk" valueNumeric="0"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="40"/>
+            <column name="coffee_name" value="Espresso"/>
+            <column name="cup_size" valueNumeric="60"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="0"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="8"/>
+            <column name="amount_milk" valueNumeric="100"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="30"/>
+            <column name="coffee_name" value="Cappuccino"/>
+            <column name="cup_size" valueNumeric="200"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="9"/>
+            <column name="amount_milk" valueNumeric="120"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="40"/>
+            <column name="coffee_name" value="LatteMacchiato"/>
+            <column name="cup_size" valueNumeric="200"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="10"/>
+            <column name="amount_milk" valueNumeric="0"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="150"/>
+            <column name="coffee_name" value="Lungo"/>
+            <column name="cup_size" valueNumeric="200"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="11"/>
+            <column name="amount_milk" valueNumeric="10"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="40"/>
+            <column name="coffee_name" value="Macchiato"/>
+            <column name="cup_size" valueNumeric="100"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="12"/>
+            <column name="amount_milk" valueNumeric="0"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="20"/>
+            <column name="coffee_name" value="Ristretto"/>
+            <column name="cup_size" valueNumeric="60"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="0"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="13"/>
+            <column name="amount_milk" valueNumeric="0"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="40"/>
+            <column name="coffee_name" value="Espresso"/>
+            <column name="cup_size" valueNumeric="60"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="0"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="14"/>
+            <column name="amount_milk" valueNumeric="100"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="30"/>
+            <column name="coffee_name" value="Cappuccino"/>
+            <column name="cup_size" valueNumeric="200"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="15"/>
+            <column name="amount_milk" valueNumeric="120"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="40"/>
+            <column name="coffee_name" value="LatteMacchiato"/>
+            <column name="cup_size" valueNumeric="200"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="16"/>
+            <column name="amount_milk" valueNumeric="0"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="150"/>
+            <column name="coffee_name" value="Lungo"/>
+            <column name="cup_size" valueNumeric="200"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="17"/>
+            <column name="amount_milk" valueNumeric="10"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="40"/>
+            <column name="coffee_name" value="Macchiato"/>
+            <column name="cup_size" valueNumeric="100"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="65"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="coffee_user">
+            <column name="id" valueNumeric="18"/>
+            <column name="amount_milk" valueNumeric="0"/>
+            <column name="amount_of_coffee" valueNumeric="17.5"/>
+            <column name="amount_of_water" valueNumeric="20"/>
+            <column name="coffee_name" value="Ristretto"/>
+            <column name="cup_size" valueNumeric="60"/>
+            <column name="grinding_level" valueNumeric="5"/>
+            <column name="temp_milk" valueNumeric="0"/>
+            <column name="temp_water" valueNumeric="95"/>
+            <column name="user_id" valueNumeric="3"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

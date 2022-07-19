@@ -1,4 +1,4 @@
-package com.tabram.coffeemaker.web;
+package com.tabram.coffeemaker.controller;
 
 import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.service.CoffeeMachineConstantValueService;

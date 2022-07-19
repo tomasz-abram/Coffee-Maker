@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@KeySpace("coffee_machine_constant_values")
+@KeySpace("coffee_machine_constant_value")
 public class CoffeeMachineConstantValue {
 
     @Id

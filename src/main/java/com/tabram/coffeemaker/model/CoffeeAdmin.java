@@ -3,7 +3,7 @@ package com.tabram.coffeemaker.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "coffee_admin", uniqueConstraints = {@UniqueConstraint(columnNames = {"coffee_name", "user_id"})})
+@Table(name = "coffee_admin")
 public class CoffeeAdmin {
 
     @Id
@@ -25,10 +25,6 @@ public class CoffeeAdmin {
     private int tempMilk;
     @Column(name = "cup_size")
     private int cupSize;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private User user;
 
     public CoffeeAdmin() {
 

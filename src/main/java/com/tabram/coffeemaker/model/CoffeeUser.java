@@ -1,10 +1,11 @@
 package com.tabram.coffeemaker.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "coffee_user")
-public class CoffeeUser {
+@Table(name = "coffee_user", uniqueConstraints = {@UniqueConstraint(columnNames = {"coffee_name", "user_id"})})
+public class CoffeeUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
