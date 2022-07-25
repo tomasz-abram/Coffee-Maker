@@ -1,34 +1,34 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet author="tabra (generated)" id="1658184346837-3">
+    <changeSet author="tabra (generated)" id="1658250536775-3">
         <insert tableName="coffee_machine_stock">
             <column name="id" valueNumeric="1"/>
             <column name="name" value="Water"/>
-            <column name="status" value=""/>
+            <column name="status" value="Warning"/>
             <column name="units" value="ml"/>
             <column name="value" valueNumeric="500.0"/>
         </insert>
         <insert tableName="coffee_machine_stock">
             <column name="id" valueNumeric="2"/>
             <column name="name" value="Milk"/>
-            <column name="status" value=""/>
+            <column name="status" value="Warning"/>
             <column name="units" value="ml"/>
             <column name="value" valueNumeric="300.0"/>
         </insert>
         <insert tableName="coffee_machine_stock">
             <column name="id" valueNumeric="3"/>
             <column name="name" value="Coffee beans"/>
-            <column name="status" value=""/>
+            <column name="status" value="Ok"/>
             <column name="units" value="g"/>
             <column name="value" valueNumeric="200.0"/>
         </insert>
         <insert tableName="coffee_machine_stock">
             <column name="id" valueNumeric="4"/>
             <column name="name" value="Ground container"/>
-            <column name="status" value=""/>
+            <column name="status" value="Ok"/>
             <column name="units" value="pcs"/>
             <column name="value" valueNumeric="25.0"/>
         </insert>
@@ -42,7 +42,7 @@
         <insert tableName="coffee_machine_stock">
             <column name="id" valueNumeric="6"/>
             <column name="name" value="Descale counter"/>
-            <column name="status" value=""/>
+            <column name="status" value="Ok"/>
             <column name="units" value=""/>
             <column name="value" valueNumeric="2000.0"/>
         </insert>

@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet author="tabra (generated)" id="1658184340724-7">
+    <changeSet author="tabra (generated)" id="1658250431195-7">
         <createTable tableName="coffee_user">
             <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints primaryKey="true"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="amount_milk" type="INT"/>
             <column name="amount_of_coffee" type="DOUBLE"/>

@@ -1,45 +1,39 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet author="tabra (generated)" id="1658184340724-8">
-        <addPrimaryKey columnNames="user_id, role_id" constraintName="PRIMARY" tableName="user_role"/>
-    </changeSet>
-    <changeSet author="tabra (generated)" id="1658184340724-9">
-        <addUniqueConstraint columnNames="name" constraintName="UK_g9w6weuntaq3rm9kvp13a9wux"
-                             tableName="coffee_machine_stock"/>
-    </changeSet>
-    <changeSet author="tabra (generated)" id="1658184340724-10">
+    <changeSet author="tabra (generated)" id="1658250431195-8">
         <addUniqueConstraint columnNames="coffee_name, user_id" constraintName="UKrg123re56cpdvjnsmmkk403w3"
                              tableName="coffee_user"/>
     </changeSet>
-    <changeSet author="tabra (generated)" id="1658184340724-11">
+    <changeSet author="tabra (generated)" id="1658250431195-9">
         <createIndex indexName="FKa68196081fvovjhkek5m97n3y" tableName="user_role">
             <column name="role_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="tabra (generated)" id="1658184340724-12">
+    <changeSet author="tabra (generated)" id="1658250431195-10">
         <createIndex indexName="FKr18f0421hk0v2ecqut6j8qdhl" tableName="coffee_user">
             <column name="user_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="tabra (generated)" id="1658184340724-13">
+    <changeSet author="tabra (generated)" id="1658250431195-11">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role"
                                  constraintName="FK859n2jvi8ivhui0rl0esws6o" deferrable="false"
                                  initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-                                 referencedColumnNames="id" referencedTableName="user"/>
+                                 referencedColumnNames="id" referencedTableName="user" validate="true"/>
     </changeSet>
-    <changeSet author="tabra (generated)" id="1658184340724-14">
+    <changeSet author="tabra (generated)" id="1658250431195-12">
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role"
                                  constraintName="FKa68196081fvovjhkek5m97n3y" deferrable="false"
                                  initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-                                 referencedColumnNames="id" referencedTableName="role"/>
+                                 referencedColumnNames="id" referencedTableName="role" validate="true"/>
     </changeSet>
-    <changeSet author="tabra (generated)" id="1658184340724-15">
+    <changeSet author="tabra (generated)" id="1658250431195-13">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="coffee_user"
                                  constraintName="FKr18f0421hk0v2ecqut6j8qdhl" deferrable="false"
                                  initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT"
-                                 referencedColumnNames="id" referencedTableName="user"/>
+                                 referencedColumnNames="id" referencedTableName="user" validate="true"/>
     </changeSet>
+
 </databaseChangeLog>

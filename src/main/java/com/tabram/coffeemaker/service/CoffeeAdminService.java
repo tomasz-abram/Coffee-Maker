@@ -72,8 +72,6 @@ public class CoffeeAdminService {
 
     public void addNewCoffee(CoffeeDto coffeeDto) {
 
-        checkCoffeeParameters(coffeeDto);
-
         if (coffeeAdminRepository.existsCoffeeAdminByCoffeeName(coffeeDto.getCoffeeName())) {
             CoffeeAdmin coffeeDB = coffeeAdminRepository.findCoffeeAdminByCoffeeName(coffeeDto.getCoffeeName());
             coffeeDB.setTempWater(coffeeDto.getTempWater());

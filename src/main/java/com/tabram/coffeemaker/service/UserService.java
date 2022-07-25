@@ -6,7 +6,6 @@ import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.repository.RoleRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -54,33 +52,28 @@ public class UserService implements UserServiceInterface {
     }
 
     public User currentUser() {
-        User currentUser = null;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            currentUser = userRepository.findByUserName(authentication.getName());
+        boolean existsUser = userRepository.existsByUserName(authentication.getName());
+        if (!existsUser) {
+            throw new UsernameNotFoundException("User not found");
         }
-        return currentUser;
+        return userRepository.findByUserName(authentication.getName());
     }
 
     @Override
     public User save(UserRegistrationDto registrationDto) {
-        User user = new User(registrationDto.getUserName(), new BCryptPasswordEncoder().encode(registrationDto.getPassword()), true);
-
-        if (!roleRepository.existsByName("ROLE_USER")) {
-            user.setRoles(Set.of(new Role("ROLE_USER")));
-        } else {
-            user.setRoles(Set.of(roleRepository.findByName("ROLE_USER")));
-        }
-        userRepository.saveAndFlush(user);
-        return user;
+        User user = new User(registrationDto.getUserName(), new BCryptPasswordEncoder().encode(registrationDto.getPassword()), true, Set.of(roleRepository.findByName("ROLE_USER")));
+        return userRepository.save(user);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
-        if (user == null) {
+
+        boolean existsUser = userRepository.existsByUserName(username);
+        if (!existsUser) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
+        User user = userRepository.findByUserName(username);
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, mapRolesToAuthorities(user.getRoles()));
     }
 
@@ -88,10 +81,12 @@ public class UserService implements UserServiceInterface {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
-    @Transactional
+
     public void deactivationUser(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("User with id " + userId + " does not exist"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("User with id " + userId + " does not exist"));
         user.setEnabled(!user.isEnabled());
+        userRepository.save(user);
     }
 
 

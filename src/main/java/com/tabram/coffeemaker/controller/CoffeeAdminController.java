@@ -45,6 +45,7 @@ public class CoffeeAdminController {
 
     @PostMapping("/admin/admin-add-coffee")
     public String addCoffee(@ModelAttribute("coffeeAdmin") CoffeeDto coffeeDto) {
+        coffeeAdminService.checkCoffeeParameters(coffeeDto);
         coffeeAdminService.addNewCoffee(coffeeDto);
         coffeeUserService.addOneCoffeeForEachUser(coffeeDto);
         coffeeUserService.updateDefaultCoffees(userService.findUserByName("Default"));
