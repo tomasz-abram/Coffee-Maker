@@ -161,25 +161,6 @@ class CoffeeAdminServiceTest {
     @Nested
     class CheckCoffeeParameters {
 
-//        @BeforeEach
-//        public void setUp() {
-//            when(coffeeMachineConstantValueService.getMinTempWater()).thenReturn(1);
-//            when(coffeeMachineConstantValueService.getMaxTempWater()).thenReturn(95);
-//            when(coffeeMachineConstantValueService.getMinGrindingLevel()).thenReturn(1);
-//            when(coffeeMachineConstantValueService.getMaxGrindingLevel()).thenReturn(10);
-//            when(coffeeMachineConstantValueService.getMinAmountOfCoffee()).thenReturn(10);
-//            when(coffeeMachineConstantValueService.getMaxAmountOfCoffee()).thenReturn(30);
-//            when(coffeeMachineConstantValueService.getMinAmountOfWater()).thenReturn(15);
-//            when(coffeeMachineConstantValueService.getMaxAmountOfWater()).thenReturn(500);
-//            when(coffeeMachineConstantValueService.getMinAmountOfMilk()).thenReturn(0);
-//            when(coffeeMachineConstantValueService.getMaxAmountOfMilk()).thenReturn(500);
-//            when(coffeeMachineConstantValueService.getMinTempMilk()).thenReturn(1);
-//            when(coffeeMachineConstantValueService.getMaxTempMilk()).thenReturn(90);
-//            when(coffeeMachineConstantValueService.getMinCupSize()).thenReturn(15);
-//            when(coffeeMachineConstantValueService.getMaxCupSize()).thenReturn(1000);
-//
-//        }
-
         @Test
         void checkCoffeeParametersFoo() {
             CoffeeDto coffeeDtoTest = new CoffeeDto("TestCoffeeDTO", 95, 5, 17.5, 40, 0, 1, 60);

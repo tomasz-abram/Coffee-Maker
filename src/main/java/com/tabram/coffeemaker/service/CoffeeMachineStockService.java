@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class CoffeeMachineStockService {
@@ -28,7 +27,7 @@ public class CoffeeMachineStockService {
 
     public void updateWater(int addWater) {
         CoffeeMachineStock waterStock = coffeeMachineStockRepository.findByName("Water");
-        float updateWater = (Objects.requireNonNull(waterStock).getValue() + addWater);
+        float updateWater = waterStock.getValue() + addWater;
         if (updateWater > coffeeMachineConstantValueService.getMaxWaterContainer()) {
             waterStock.setValue(coffeeMachineConstantValueService.getMaxWaterContainer());
         } else {
@@ -39,13 +38,13 @@ public class CoffeeMachineStockService {
 
     public void emptyWater() {
         CoffeeMachineStock waterStock = coffeeMachineStockRepository.findByName("Water");
-        Objects.requireNonNull(waterStock).setValue(coffeeMachineConstantValueService.getMinWaterContainer());
+        waterStock.setValue(coffeeMachineConstantValueService.getMinWaterContainer());
         coffeeMachineStockRepository.save(waterStock);
     }
 
     public void updateMilk(int addMilk) {
         CoffeeMachineStock milkStock = coffeeMachineStockRepository.findByName("Milk");
-        float updateMilk = (Objects.requireNonNull(milkStock).getValue() + addMilk);
+        float updateMilk = milkStock.getValue() + addMilk;
 
         if (updateMilk > coffeeMachineConstantValueService.getMaxMilkContainer()) {
             milkStock.setValue(coffeeMachineConstantValueService.getMaxMilkContainer());
@@ -57,13 +56,13 @@ public class CoffeeMachineStockService {
 
     public void emptyMilk() {
         CoffeeMachineStock milkStock = coffeeMachineStockRepository.findByName("Milk");
-        Objects.requireNonNull(milkStock).setValue(coffeeMachineConstantValueService.getMinMilkContainer());
+        milkStock.setValue(coffeeMachineConstantValueService.getMinMilkContainer());
         coffeeMachineStockRepository.save(milkStock);
     }
 
     public void updateBeans(int addBeans) {
         CoffeeMachineStock beansStock = coffeeMachineStockRepository.findByName("Coffee beans");
-        float updateBeans = Objects.requireNonNull(beansStock).getValue() + addBeans;
+        float updateBeans = beansStock.getValue() + addBeans;
 
         if (updateBeans > coffeeMachineConstantValueService.getMaxCoffeeBeansContainer()) {
             beansStock.setValue(coffeeMachineConstantValueService.getMaxCoffeeBeansContainer());
@@ -75,19 +74,19 @@ public class CoffeeMachineStockService {
 
     public void emptyCoffeeBeans() {
         CoffeeMachineStock beansStock = coffeeMachineStockRepository.findByName("Coffee beans");
-        Objects.requireNonNull(beansStock).setValue(coffeeMachineConstantValueService.getMinCoffeeBeansContainer());
+        beansStock.setValue(coffeeMachineConstantValueService.getMinCoffeeBeansContainer());
         coffeeMachineStockRepository.save(beansStock);
     }
 
     public void emptyGroundContainer() {
         CoffeeMachineStock groundContainerStock = coffeeMachineStockRepository.findByName("Ground container");
-        Objects.requireNonNull(groundContainerStock).setValue(0);
+        groundContainerStock.setValue(0);
         coffeeMachineStockRepository.save(groundContainerStock);
     }
 
     public void descale() {
         CoffeeMachineStock descaleStock = coffeeMachineStockRepository.findByName("Descale counter");
-        Objects.requireNonNull(descaleStock).setValue(0);
+        descaleStock.setValue(0);
         coffeeMachineStockRepository.save(descaleStock);
     }
 
@@ -99,17 +98,20 @@ public class CoffeeMachineStockService {
         if (setHardness > 100) {
             throw new IllegalArgumentException("If you don't pour concrete over your coffee, this value is probably lower :)");
         }
-        Objects.requireNonNull(waterHardnessStock).setValue(setHardness);
+        waterHardnessStock.setValue(setHardness);
         coffeeMachineStockRepository.save(waterHardnessStock);
     }
 
     public void checkStockStatus() {
-        CoffeeMachineStock waterStock = coffeeMachineStockRepository.findByName("Water");
-        CoffeeMachineStock milkStock = coffeeMachineStockRepository.findByName("Milk");
-        CoffeeMachineStock coffeeBeansStock = coffeeMachineStockRepository.findByName("Coffee beans");
-        CoffeeMachineStock groundContainerStock = coffeeMachineStockRepository.findByName("Ground container");
-        CoffeeMachineStock descaleCounter = coffeeMachineStockRepository.findByName("Descale counter");
+        checkStockStatusForWater();
+        checkStockStatusForMilk();
+        checkStockStatusForCoffeeBeans();
+        checkStockStatusForGroundContainer();
+        checkStockStatusForDescaleCounter();
+    }
 
+    public void checkStockStatusForWater(){
+        CoffeeMachineStock waterStock = coffeeMachineStockRepository.findByName("Water");
         if (waterStock.getValue() > coffeeMachineConstantValueService.getWarningLevelWater()) {
             waterStock.setStatus("Ok");
         } else if (waterStock.getValue() <= coffeeMachineConstantValueService.getWarningLevelWater()) {
@@ -118,7 +120,11 @@ public class CoffeeMachineStockService {
                 waterStock.setStatus("Danger");
             }
         }
+        coffeeMachineStockRepository.save(waterStock);
+    }
 
+    public void checkStockStatusForMilk(){
+        CoffeeMachineStock milkStock = coffeeMachineStockRepository.findByName("Milk");
         if (milkStock.getValue() > coffeeMachineConstantValueService.getWarningLevelMilk()) {
             milkStock.setStatus("Ok");
         } else if (milkStock.getValue() <= coffeeMachineConstantValueService.getWarningLevelMilk()) {
@@ -127,7 +133,10 @@ public class CoffeeMachineStockService {
                 milkStock.setStatus("Danger");
             }
         }
-
+        coffeeMachineStockRepository.save(milkStock);
+    }
+    public void checkStockStatusForCoffeeBeans(){
+        CoffeeMachineStock coffeeBeansStock = coffeeMachineStockRepository.findByName("Coffee beans");
         if (coffeeBeansStock.getValue() > coffeeMachineConstantValueService.getWarningLevelCoffeeBeans()) {
             coffeeBeansStock.setStatus("Ok");
         } else if (coffeeBeansStock.getValue() <= coffeeMachineConstantValueService.getWarningLevelCoffeeBeans()) {
@@ -136,7 +145,10 @@ public class CoffeeMachineStockService {
                 coffeeBeansStock.setStatus("Danger");
             }
         }
-
+        coffeeMachineStockRepository.save(coffeeBeansStock);
+    }
+    public void checkStockStatusForGroundContainer(){
+        CoffeeMachineStock groundContainerStock = coffeeMachineStockRepository.findByName("Ground container");
         if (groundContainerStock.getValue() <= coffeeMachineConstantValueService.getWarningLevelGroundContainer()) {
             groundContainerStock.setStatus("Ok");
         } else if (groundContainerStock.getValue() >= coffeeMachineConstantValueService.getWarningLevelGroundContainer()) {
@@ -145,7 +157,10 @@ public class CoffeeMachineStockService {
                 groundContainerStock.setStatus("Danger");
             }
         }
+        coffeeMachineStockRepository.save(groundContainerStock);
 
+    } public void checkStockStatusForDescaleCounter(){
+        CoffeeMachineStock descaleCounter = coffeeMachineStockRepository.findByName("Descale counter");
         if (descaleCounter.getValue() < coffeeMachineConstantValueService.getWarningLevelDescale()) {
             descaleCounter.setStatus("Ok");
         } else if (descaleCounter.getValue() >= coffeeMachineConstantValueService.getWarningLevelDescale()) {
@@ -154,18 +169,17 @@ public class CoffeeMachineStockService {
                 descaleCounter.setStatus("Danger");
             }
         }
-
-        List<CoffeeMachineStock> stocks = List.of(waterStock, milkStock, coffeeBeansStock, groundContainerStock, descaleCounter);
-        coffeeMachineStockRepository.saveAll(stocks);
+        coffeeMachineStockRepository.save(descaleCounter);
     }
+
 
     public String alarmLightStockStatus() {
         String alarmLight;
-        List<String> lCMS = new ArrayList<>();
-        coffeeMachineStockRepository.findAll().forEach(stock -> lCMS.add(stock.getStatus()));
-        if (lCMS.stream().anyMatch(x -> x.equals("Warning")) || lCMS.stream().anyMatch(x -> x.equals("Danger"))) {
+        List<String> alarmLightCoffeeMachineStock = new ArrayList<>();
+        coffeeMachineStockRepository.findAll().forEach(stock -> alarmLightCoffeeMachineStock.add(stock.getStatus()));
+        if (alarmLightCoffeeMachineStock.stream().anyMatch(x -> x.equals("Warning")) || alarmLightCoffeeMachineStock.stream().anyMatch(x -> x.equals("Danger"))) {
             alarmLight = "Warning";
-            if (lCMS.stream().anyMatch(x -> x.equals("Danger"))) {
+            if (alarmLightCoffeeMachineStock.stream().anyMatch(x -> x.equals("Danger"))) {
                 alarmLight = "Danger";
             }
         } else {
