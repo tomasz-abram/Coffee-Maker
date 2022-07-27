@@ -111,7 +111,6 @@ public class CoffeeUserService {
                     coffeeDto.getTempMilk(),
                     coffeeDto.getCupSize(),
                     userService.currentUser());
-
             coffeeUserRepository.save(coffeeUser);
         }
     }
@@ -122,10 +121,8 @@ public class CoffeeUserService {
 
         List<CoffeeAdmin> coffees = coffeeAdminRepository.findAll();
         List<CoffeeUser> coffeesUser = new ArrayList<>();
-
         coffees.forEach(coffeeAdmin -> {
-            CoffeeUser cU = coffeeUserRepository.findCoffeeUserByCoffeeNameAndUserId(coffeeAdmin.getCoffeeName(), user.getId());
-
+            CoffeeUser coffeeUser = coffeeUserRepository.findCoffeeUserByCoffeeNameAndUserId(coffeeAdmin.getCoffeeName(), user.getId());
             if (!coffeeUserRepository.existsCoffeeUserByCoffeeNameAndUserId(coffeeAdmin.getCoffeeName(), user.getId())) {
                 CoffeeUser newCoffee = new CoffeeUser(
                         coffeeAdmin.getCoffeeName(),
@@ -138,16 +135,15 @@ public class CoffeeUserService {
                         coffeeAdmin.getCupSize(),
                         user);
                 coffeesUser.add(newCoffee);
-
             } else {
-                cU.setTempWater(coffeeAdmin.getTempWater());
-                cU.setGrindingLevel(coffeeAdmin.getGrindingLevel());
-                cU.setAmountOfCoffee(coffeeAdmin.getAmountOfCoffee());
-                cU.setAmountOfWater(coffeeAdmin.getAmountOfWater());
-                cU.setAmountMilk(coffeeAdmin.getAmountMilk());
-                cU.setTempMilk(coffeeAdmin.getTempMilk());
-                cU.setCupSize(coffeeAdmin.getCupSize());
-                coffeesUser.add(cU);
+                coffeeUser.setTempWater(coffeeAdmin.getTempWater());
+                coffeeUser.setGrindingLevel(coffeeAdmin.getGrindingLevel());
+                coffeeUser.setAmountOfCoffee(coffeeAdmin.getAmountOfCoffee());
+                coffeeUser.setAmountOfWater(coffeeAdmin.getAmountOfWater());
+                coffeeUser.setAmountMilk(coffeeAdmin.getAmountMilk());
+                coffeeUser.setTempMilk(coffeeAdmin.getTempMilk());
+                coffeeUser.setCupSize(coffeeAdmin.getCupSize());
+                coffeesUser.add(coffeeUser);
             }
         });
         coffeeUserRepository.saveAll(coffeesUser);

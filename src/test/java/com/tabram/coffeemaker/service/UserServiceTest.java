@@ -52,7 +52,7 @@ class UserServiceTest {
     }
 
     @Nested
-    class DeactivationUser {
+    class DeactivateUser {
         @Test
         void itShouldDeactivateTheUserIfExists() {
             //given
