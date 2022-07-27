@@ -7,6 +7,7 @@ import com.tabram.coffeemaker.repository.CoffeeMachineStockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +26,9 @@ public class MakeCoffeeService {
         this.coffeeMachineStockService = coffeeMachineStockService;
         this.coffeeUserService = coffeeUserService;
     }
-
+@Transactional
     public void makeCoffee(String coffeeName, int quantity, User user) {
-        List<CoffeeMachineStock> cMSList = new ArrayList<>();
+        List<CoffeeMachineStock> coffeeMachineStocksList = new ArrayList<>();
         CoffeeMachineStock waterStock = coffeeMachineStockService.findStockByName("Water");
         CoffeeMachineStock milkStock = coffeeMachineStockService.findStockByName("Milk");
         CoffeeMachineStock coffeeBeansStock = coffeeMachineStockService.findStockByName("Coffee beans");
@@ -40,38 +41,38 @@ public class MakeCoffeeService {
             throw new IllegalStateException("There is not enough water in the machine to make this coffee");
         } else {
             waterStock.setValue(waterStock.getValue() - coffee.getAmountOfWater());
-            cMSList.add(waterStock);
+            coffeeMachineStocksList.add(waterStock);
         }
 
         if (milkStock.getValue() < coffee.getAmountMilk()) {
             throw new IllegalStateException("There is not enough milk in the machine to make this coffee");
         } else {
             milkStock.setValue(milkStock.getValue() - coffee.getAmountMilk());
-            cMSList.add(milkStock);
+            coffeeMachineStocksList.add(milkStock);
         }
 
         if (coffeeBeansStock.getValue() < coffee.getAmountOfCoffee() * quantity) {
             throw new IllegalStateException("There is not enough coffee beans in the machine to make this coffee");
         } else {
             coffeeBeansStock.setValue((float) (coffeeBeansStock.getValue() - coffee.getAmountOfCoffee() * quantity));
-            cMSList.add(coffeeBeansStock);
+            coffeeMachineStocksList.add(coffeeBeansStock);
         }
 
         if (coffeeMachineConstantValueService.getMaxGroundContainer() < groundContainerStock.getValue() + quantity) {
             throw new IllegalStateException("Empty the grounds container before making this coffee");
         } else {
             groundContainerStock.setValue(groundContainerStock.getValue() + quantity);
-            cMSList.add(groundContainerStock);
+            coffeeMachineStocksList.add(groundContainerStock);
         }
 
         if (coffeeMachineConstantValueService.getMaxDescaleCounter() < descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater()) {
             throw new IllegalStateException("Descale the coffee machine before making this coffee");
         } else {
             descaleCounter.setValue((int) (descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater()));
-            cMSList.add(descaleCounter);
+            coffeeMachineStocksList.add(descaleCounter);
         }
 
-        coffeeMachineStockRepository.saveAll(cMSList);
+        coffeeMachineStockRepository.saveAll(coffeeMachineStocksList);
     }
 
 }
