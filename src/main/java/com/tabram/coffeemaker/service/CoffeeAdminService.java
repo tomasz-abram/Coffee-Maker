@@ -31,30 +31,41 @@ public class CoffeeAdminService {
         if (coffeeDto.getCoffeeName().isEmpty()) {
             throw new IllegalArgumentException("The name can not be empty.");
         }
-        if (coffeeDto.getTempWater() < coffeeMachineConstantValueService.getMinTempWater() || coffeeDto.getTempWater() > coffeeMachineConstantValueService.getMaxTempWater()) {
+        if(!isBetween(coffeeDto.getTempWater(),coffeeMachineConstantValueService.getMinTempWater(),coffeeMachineConstantValueService.getMaxTempWater())){
             throw new IllegalArgumentException("The water temperature must be in the range " + coffeeMachineConstantValueService.getMinTempWater() + " - " + coffeeMachineConstantValueService.getMaxTempWater());
         }
-        if (coffeeDto.getGrindingLevel() < coffeeMachineConstantValueService.getMinGrindingLevel() || coffeeDto.getGrindingLevel() > coffeeMachineConstantValueService.getMaxGrindingLevel()) {
+        if(!isBetween(coffeeDto.getGrindingLevel(),coffeeMachineConstantValueService.getMinGrindingLevel(),coffeeMachineConstantValueService.getMaxGrindingLevel())){
             throw new IllegalArgumentException("The grinding level must be in the range " + coffeeMachineConstantValueService.getMinGrindingLevel() + " - " + coffeeMachineConstantValueService.getMaxGrindingLevel());
         }
-        if (coffeeDto.getAmountOfCoffee() < coffeeMachineConstantValueService.getMinAmountOfCoffee() || coffeeDto.getAmountOfCoffee() > coffeeMachineConstantValueService.getMaxAmountOfCoffee()) {
+        if(!isBetween(coffeeDto.getAmountOfCoffee(),coffeeMachineConstantValueService.getMinAmountOfCoffee(),coffeeMachineConstantValueService.getMaxAmountOfCoffee())){
             throw new IllegalArgumentException("The amount of coffee must be in the range " + coffeeMachineConstantValueService.getMinAmountOfCoffee() + " - " + coffeeMachineConstantValueService.getMaxAmountOfCoffee());
         }
-        if (coffeeDto.getAmountOfWater() < coffeeMachineConstantValueService.getMinAmountOfWater() || coffeeDto.getAmountOfWater() > coffeeMachineConstantValueService.getMaxAmountOfWater()) {
+        if(!isBetween(coffeeDto.getAmountOfWater(),coffeeMachineConstantValueService.getMinAmountOfWater(),coffeeMachineConstantValueService.getMaxAmountOfWater())){
             throw new IllegalArgumentException("The amount of water must be in the range " + coffeeMachineConstantValueService.getMinAmountOfWater() + " - " + coffeeMachineConstantValueService.getMaxAmountOfWater());
         }
-        if (coffeeDto.getAmountMilk() < coffeeMachineConstantValueService.getMinAmountOfMilk() || coffeeDto.getAmountMilk() > coffeeMachineConstantValueService.getMaxAmountOfMilk()) {
+        if(!isBetween(coffeeDto.getAmountMilk(),coffeeMachineConstantValueService.getMinAmountOfMilk(),coffeeMachineConstantValueService.getMaxAmountOfMilk())){
             throw new IllegalArgumentException("The amount milk must be in the range " + coffeeMachineConstantValueService.getMinAmountOfMilk() + " - " + coffeeMachineConstantValueService.getMaxAmountOfMilk());
         }
-        if (coffeeDto.getTempMilk() < coffeeMachineConstantValueService.getMinTempMilk() || coffeeDto.getTempMilk() > coffeeMachineConstantValueService.getMaxTempMilk()) {
+        if(!isBetween(coffeeDto.getTempMilk(),coffeeMachineConstantValueService.getMinTempMilk(),coffeeMachineConstantValueService.getMaxTempMilk())){
             throw new IllegalArgumentException("The temp. milk must be in the range " + coffeeMachineConstantValueService.getMinTempMilk() + " - " + coffeeMachineConstantValueService.getMaxTempMilk());
         }
-        if (coffeeDto.getCupSize() < coffeeMachineConstantValueService.getMinCupSize() || coffeeDto.getCupSize() > coffeeMachineConstantValueService.getMaxCupSize()) {
+        if(!isBetween(coffeeDto.getCupSize(),coffeeMachineConstantValueService.getMinCupSize(),coffeeMachineConstantValueService.getMaxCupSize())){
             throw new IllegalArgumentException("The cup size must be in the range " + coffeeMachineConstantValueService.getMinCupSize() + " - " + coffeeMachineConstantValueService.getMaxCupSize());
         }
+
         if (coffeeDto.getAmountOfWater() + coffeeDto.getAmountMilk() > coffeeDto.getCupSize()) {
             throw new IllegalArgumentException("The cup must not be smaller than the sum of the amounts of water and milk.");
         }
+    }
+
+    public boolean isBetween(double val, int min, int max){
+        boolean check;
+        if (val >= min && val <= max){
+            check = true;
+        } else {
+            check = false;
+        }
+        return check;
     }
 
     public List<CoffeeAdmin> getAllCoffees() {

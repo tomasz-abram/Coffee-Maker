@@ -20,6 +20,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 import java.util.Set;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -321,6 +322,35 @@ class CoffeeAdminServiceTest {
             Assertions.assertThatThrownBy(() -> underTest.checkCoffeeParameters(coffeeDtoTest))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining("The cup must not be smaller than the sum of the amounts of water and milk.");
+        }
+
+    }
+
+    @Nested
+    class isBetween {
+        @Test
+        void itCheckTheValuesWhenTheyAreInRange() {
+            //given
+            int val = 500;
+            int min = 100;
+            int max = 1000;
+            //when
+            boolean actual = underTest.isBetween(val, min, max);
+            //then
+            assertThat(actual).isTrue();
+        }
+
+        @Test
+        void itCheckTheValuesWhenTheyAreNotInRange() {
+            //given
+            int val = 600;
+            int min = 100;
+            int max = 500;
+            //when
+            boolean actual = underTest.isBetween(val, min, max);
+            //then
+            assertThat(actual).isFalse();
+
         }
 
     }

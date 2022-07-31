@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/stock-coffee-machine")
 public class CoffeeMachineStockController {
 
+    private static final String REDIRECT = "redirect:/stock-coffee-machine";
     private final CoffeeMachineStockService coffeeMachineStockService;
     private final CoffeeMachineConstantValueService coffeeMachineConstantValueService;
 
@@ -42,54 +43,54 @@ public class CoffeeMachineStockController {
     @PostMapping("/waterHardness")
     public String setWaterHardness(@RequestParam("waterHardness") float value) {
         coffeeMachineStockService.updateWaterHardness(value);
-        return "redirect:/stock-coffee-machine";
+        return REDIRECT;
     }
 
     @GetMapping("/fill-water-tank")
     public String fillWater(@RequestParam int quantity) {
         coffeeMachineStockService.updateWater(quantity);
-        return "redirect:/stock-coffee-machine";
+        return REDIRECT;
     }
 
     @GetMapping("/empty-water-tank")
     public String emptyWater() {
         coffeeMachineStockService.emptyWater();
-        return "redirect:/stock-coffee-machine";
+        return REDIRECT;
     }
 
     @GetMapping("/fill-milk-tank")
     public String fillMilk(@RequestParam int quantity) {
         coffeeMachineStockService.updateMilk(quantity);
-        return "redirect:/stock-coffee-machine";
+        return REDIRECT;
     }
 
     @GetMapping("/empty-milk-tank")
     public String emptyMilk() {
         coffeeMachineStockService.emptyMilk();
-        return "redirect:/stock-coffee-machine";
+        return REDIRECT;
     }
 
     @GetMapping("/fill-beans-container")
     public String fillBeans(@RequestParam int quantity) {
         coffeeMachineStockService.updateBeans(quantity);
-        return "redirect:/stock-coffee-machine";
+        return REDIRECT;
     }
 
     @GetMapping("/empty-coffee-beans")
     public String emptyCoffeeBeans() {
         coffeeMachineStockService.emptyCoffeeBeans();
-        return "redirect:/stock-coffee-machine";
+        return REDIRECT;
     }
 
     @GetMapping("/empty-ground-container")
     public String cleanGroundContainer() {
         coffeeMachineStockService.emptyGroundContainer();
-        return "redirect:/stock-coffee-machine";
+        return REDIRECT;
     }
 
     @GetMapping("/descale")
     public String descale() {
         coffeeMachineStockService.descale();
-        return "redirect:/stock-coffee-machine";
+        return REDIRECT;
     }
 }

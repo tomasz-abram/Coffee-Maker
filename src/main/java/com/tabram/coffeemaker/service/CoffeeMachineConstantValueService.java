@@ -20,139 +20,143 @@ public class CoffeeMachineConstantValueService {
         this.coffeeMachineConstantValueRepository = coffeeMachineConstantValueRepository;
     }
 
+    public Integer getValue(String name){
+        return coffeeMachineConstantValueRepository.findByName(name).getValue();
+    }
+
     public Integer getMinWaterContainer() {
-        return coffeeMachineConstantValueRepository.findByName("min_water_container").getValue();
+        return getValue("min_water_container");
     }
 
     public Integer getMaxWaterContainer() {
-        return coffeeMachineConstantValueRepository.findByName("max_water_container").getValue();
+        return getValue("max_water_container");
     }
 
     public Integer getMinMilkContainer() {
-        return coffeeMachineConstantValueRepository.findByName("min_milk_container").getValue();
+        return getValue("min_milk_container");
     }
 
     public Integer getMaxMilkContainer() {
-        return coffeeMachineConstantValueRepository.findByName("max_milk_container").getValue();
+        return getValue("max_milk_container");
     }
 
     public Integer getMinCoffeeBeansContainer() {
-        return coffeeMachineConstantValueRepository.findByName("min_coffee_beans_container").getValue();
+        return getValue("min_coffee_beans_container");
     }
 
     public Integer getMaxCoffeeBeansContainer() {
-        return coffeeMachineConstantValueRepository.findByName("max_coffee_beans_container").getValue();
+        return getValue("max_coffee_beans_container");
     }
 
     public Integer getMaxGroundContainer() {
-        return coffeeMachineConstantValueRepository.findByName("max_ground_container").getValue();
+        return getValue("max_ground_container");
     }
 
     public Integer getMaxDescaleCounter() {
-        return coffeeMachineConstantValueRepository.findByName("max_descale_counter").getValue();
+        return getValue("max_descale_counter");
     }
 
     public Integer getMaxGrindingLevel() {
-        return coffeeMachineConstantValueRepository.findByName("max_grinding_level").getValue();
+        return getValue("max_grinding_level");
     }
 
     public Integer getMinGrindingLevel() {
-        return coffeeMachineConstantValueRepository.findByName("min_grinding_level").getValue();
+        return getValue("min_grinding_level");
     }
 
     public Integer getMaxAmountOfCoffee() {
-        return coffeeMachineConstantValueRepository.findByName("max_amount_of_coffee").getValue();
+        return getValue("max_amount_of_coffee");
     }
 
     public Integer getMinAmountOfCoffee() {
-        return coffeeMachineConstantValueRepository.findByName("min_amount_of_coffee").getValue();
+        return getValue("min_amount_of_coffee");
     }
 
     public Integer getMaxTempWater() {
-        return coffeeMachineConstantValueRepository.findByName("max_temp_water").getValue();
+        return getValue("max_temp_water");
     }
 
     public Integer getMinTempWater() {
-        return coffeeMachineConstantValueRepository.findByName("min_temp_water").getValue();
+        return getValue("min_temp_water");
     }
 
     public Integer getMaxAmountOfWater() {
-        return coffeeMachineConstantValueRepository.findByName("max_amount_of_water").getValue();
+        return getValue("max_amount_of_water");
     }
 
     public Integer getMinAmountOfWater() {
-        return coffeeMachineConstantValueRepository.findByName("min_amount_of_water").getValue();
+        return getValue("min_amount_of_water");
     }
 
     public Integer getMaxTempMilk() {
-        return coffeeMachineConstantValueRepository.findByName("max_temp_milk").getValue();
+        return getValue("max_temp_milk");
     }
 
     public Integer getMinTempMilk() {
-        return coffeeMachineConstantValueRepository.findByName("min_temp_milk").getValue();
+        return getValue("min_temp_milk");
     }
 
     public Integer getMaxAmountOfMilk() {
-        return coffeeMachineConstantValueRepository.findByName("max_amount_of_milk").getValue();
+        return getValue("max_amount_of_milk");
     }
 
     public Integer getMinAmountOfMilk() {
-        return coffeeMachineConstantValueRepository.findByName("min_amount_of_milk").getValue();
+        return getValue("min_amount_of_milk");
     }
 
     public Integer getMaxCupSize() {
-        return coffeeMachineConstantValueRepository.findByName("max_cup_size").getValue();
+        return getValue("max_cup_size");
     }
 
     public Integer getMinCupSize() {
-        return coffeeMachineConstantValueRepository.findByName("min_cup_size").getValue();
+        return getValue("min_cup_size");
     }
 
     public Integer getWarningLevelWater() {
-        return coffeeMachineConstantValueRepository.findByName("warning_level_water").getValue();
+        return getValue("warning_level_water");
     }
 
     public Integer getDangerLevelWater() {
-        return coffeeMachineConstantValueRepository.findByName("danger_level_water").getValue();
+        return getValue("danger_level_water");
     }
 
     public Integer getWarningLevelMilk() {
-        return coffeeMachineConstantValueRepository.findByName("warning_level_milk").getValue();
+        return getValue("warning_level_milk");
     }
 
     public Integer getDangerLevelMilk() {
-        return coffeeMachineConstantValueRepository.findByName("danger_level_milk").getValue();
+        return getValue("danger_level_milk");
     }
 
     public Integer getWarningLevelCoffeeBeans() {
-        return coffeeMachineConstantValueRepository.findByName("warning_level_coffee_beans").getValue();
+        return getValue("warning_level_coffee_beans");
     }
 
     public Integer getDangerLevelCoffeeBeans() {
-        return coffeeMachineConstantValueRepository.findByName("danger_level_coffee_beans").getValue();
+        return getValue("danger_level_coffee_beans");
     }
 
     public Integer getWarningLevelGroundContainer() {
-        Integer value = coffeeMachineConstantValueRepository.findByName("warning_level_ground_container").getValue();
-        Integer baseValue = coffeeMachineConstantValueRepository.findByName("max_ground_container").getValue();
+        Integer value = getValue("warning_level_ground_container");
+        Integer baseValue = getValue("max_ground_container");
         return baseValue - value;
     }
 
     public Integer getDangerLevelGroundContainer() {
-        Integer value = coffeeMachineConstantValueRepository.findByName("danger_level_ground_container").getValue();
-        Integer baseValue = coffeeMachineConstantValueRepository.findByName("max_ground_container").getValue();
+        Integer value = getValue("danger_level_ground_container");
+        Integer baseValue = getValue("max_ground_container");
         return baseValue - value;
     }
 
     public Integer getWarningLevelDescale() {
-        Integer value = coffeeMachineConstantValueRepository.findByName("warning_level_descale").getValue();
-        Integer baseValue = coffeeMachineConstantValueRepository.findByName("max_descale_counter").getValue();
+        Integer value = getValue("warning_level_descale");
+        Integer baseValue = getValue("max_descale_counter");
         return baseValue - value;
     }
 
     public Integer getDangerLevelDescale() {
-        Integer value = coffeeMachineConstantValueRepository.findByName("danger_level_descale").getValue();
-        Integer baseValue = coffeeMachineConstantValueRepository.findByName("max_ground_container").getValue();
+        Integer value = getValue("danger_level_descale");
+        Integer baseValue = getValue("max_ground_container");
         return baseValue - value;
     }
 

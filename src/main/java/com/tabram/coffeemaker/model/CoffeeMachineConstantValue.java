@@ -1,14 +1,9 @@
 package com.tabram.coffeemaker.model;
 
-import org.springframework.data.keyvalue.annotation.KeySpace;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-@KeySpace("coffee_machine_constant_value")
+@Table(name = "coffee_machine_constant_value")
 public class CoffeeMachineConstantValue {
 
     @Id
@@ -24,6 +19,7 @@ public class CoffeeMachineConstantValue {
         this.name = name;
         this.value = value;
     }
+
     public CoffeeMachineConstantValue() {
     }
 
