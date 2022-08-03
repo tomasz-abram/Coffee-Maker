@@ -29,6 +29,7 @@ public class CoffeeMachineStockController {
 
     @GetMapping
     public ModelAndView getStock() {
+        coffeeMachineStockService.checkStockStatus();
         ModelAndView mav = new ModelAndView("stock-coffee-machine");
         mav.addObject("waterStock", coffeeMachineStockService.findStockByName("Water"));
         mav.addObject("milkStock", coffeeMachineStockService.findStockByName("Milk"));

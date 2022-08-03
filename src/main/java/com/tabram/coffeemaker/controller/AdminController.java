@@ -8,10 +8,7 @@ import com.tabram.coffeemaker.service.RoleService;
 import com.tabram.coffeemaker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -40,8 +37,8 @@ public class AdminController {
         return new CoffeeMachineConstantValueDto();
     }
 
-    @GetMapping(path = {"/admin/deactivationUser"})
-    public String deactivationUser(@RequestParam Long userId) {
+    @PostMapping(path = {"/admin/admin-users-list"})
+    public String deactivationUser(@RequestParam("userId") Long userId) {
         userService.deactivationUser(userId);
         return "redirect:/admin/admin-users-list";
     }

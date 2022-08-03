@@ -44,7 +44,6 @@
 
         <tr class="" th:classappend="${user.isEnabled() ? '' : 'text-decoration-line-through'}"
             th:each="user:${users}">
-
             <td th:text="${user.getId()}"/>
             <td th:text="${user.getUsername()}"/>
             <td th:text="${user.isEnabled()}"/>
@@ -57,15 +56,20 @@
                        th:classappend="${user.isEnabled() ? 'btn-info' : 'btn-outline-info'}"
                        th:href="@{/admin/updateUserForm(userId=${user.id})}">Update</a>
 
-                    <a class="btn ml-2 "
-                       th:classappend="${user.isEnabled() ? 'btn-warning' : 'btn-outline-warning'}"
-                       th:href="@{/admin/deactivationUser(userId=${user.id})}"
-                       th:text="${user.isEnabled() ? 'Deactivation' : 'Activation '}"
-                    >Deactivation</a>
+                    <form class="d-inline-block"  th:method="POST" th:action="@{/admin/admin-users-list}">
+                        <input class="visually-hidden" id="userId" name="userId"
+                               placeholder="userId"  type="number" th:value="${user.getId}"/>
 
+                        <button type="submit" class="btn ml-2" th:classappend="${user.isEnabled() ? 'btn-warning' : 'btn-outline-warning'}"
+                           th:text="${user.isEnabled() ? 'Deactivation' : 'Activation '}"
+
+                        >Deactivation</button>
+                    </form>
                 </div>
             </td>
         </tr>
+
+
         </tbody>
     </table>
 </div>

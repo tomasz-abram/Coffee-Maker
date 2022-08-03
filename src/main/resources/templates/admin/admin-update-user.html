@@ -35,7 +35,7 @@
                 <label class="col-sm-2 col-form-label" for="id">Id :</label>
                 <div class="col-sm-10 ">
                     <input class="form-control text-center" id="id" placeholder="Id" readonly
-                           th:field="*{userD.id}" th:value="${userD.id}" type="number">
+                           th:field="*{userD.id}" th:value="*{userD.id}" type="number">
                 </div>
             </div>
 
