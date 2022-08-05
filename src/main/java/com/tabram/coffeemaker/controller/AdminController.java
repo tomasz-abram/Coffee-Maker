@@ -8,7 +8,10 @@ import com.tabram.coffeemaker.service.RoleService;
 import com.tabram.coffeemaker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -37,7 +40,7 @@ public class AdminController {
         return new CoffeeMachineConstantValueDto();
     }
 
-    @PostMapping(path = {"/admin/admin-users-list"})
+    @PostMapping(path = {"/admin/deactivateUser"})
     public String deactivationUser(@RequestParam("userId") Long userId) {
         userService.deactivationUser(userId);
         return "redirect:/admin/admin-users-list";
@@ -50,7 +53,7 @@ public class AdminController {
         return mav;
     }
 
-    @PostMapping("/admin/admin-update-user")
+    @PostMapping("/admin/adminUpdateUser")
     public String updateUser(@ModelAttribute("userD") UserDto userDto) {
         coffeeAdminService.updateUser(userDto);
         return "redirect:/admin/admin-users-list";
@@ -58,29 +61,29 @@ public class AdminController {
 
     @GetMapping("/admin/updateUserForm")
     public ModelAndView showUpdateForm(@RequestParam Long userId) {
-        ModelAndView mav = new ModelAndView("admin/admin-update-user");
+        ModelAndView mav = new ModelAndView("admin/adminUpdateUser");
         mav.addObject("userD", userService.findUserById(userId));
         mav.addObject("roles", roleService.getAllRoles());
         return mav;
     }
 
-    @GetMapping("/admin/admin-coffee-machine-constant-value-list")
+    @GetMapping("/admin/adminCoffeeMachineConstantValueList")
     public ModelAndView coffeeMachineConstValue() {
-        ModelAndView mav = new ModelAndView("admin/admin-coffee-machine-constant-value-list");
+        ModelAndView mav = new ModelAndView("admin/adminCoffeeMachineConstantValueList");
         mav.addObject("constValues", coffeeMachineConstantValueService.getAllConstantValue());
         return mav;
     }
 
-    @PostMapping("/admin/admin-update-coffee-machine-constant-value")
-    public String addCoffee(@ModelAttribute("machineConst") CoffeeMachineConstantValueDto coffeeMachineConstantValueDto) {
+    @PostMapping("/admin/adminUpdateCoffeeMachineConstantValue")
+    public String updateCoffeeMachineConstValue(@ModelAttribute("machineConst") CoffeeMachineConstantValueDto coffeeMachineConstantValueDto) {
         coffeeMachineConstantValueService.updateConstantValue(coffeeMachineConstantValueDto);
-        return "redirect:/admin/admin-coffee-machine-constant-value-list";
+        return "redirect:/admin/adminCoffeeMachineConstantValueList";
 
     }
 
     @GetMapping("/admin/updateConstForm")
     public ModelAndView updateConstForm(@RequestParam Long machineConstId) {
-        ModelAndView mav = new ModelAndView("admin/admin-update-coffee-machine-constant-value");
+        ModelAndView mav = new ModelAndView("admin/adminUpdateCoffeeMachineConstantValue");
         mav.addObject("machineConst", coffeeMachineConstantValueService.findConstantValueById(machineConstId));
         return mav;
     }

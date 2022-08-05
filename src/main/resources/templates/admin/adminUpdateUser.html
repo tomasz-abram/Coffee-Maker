@@ -20,7 +20,7 @@
 
     <div class="container  mt-5">
         <div>
-            <a class="btn btn-dark align-content-lg-start " th:href="@{/admin/admin-users-list}" type="button">
+            <a class="btn btn-dark align-content-lg-start " th:href="@{/admin/adminUsersList}" type="button">
                 Back </a>
         </div>
 
@@ -29,7 +29,7 @@
         </div>
         <hr/>
 
-        <form class=" container w-50" method="POST" th:action="@{/admin/admin-update-user}">
+        <form class=" container w-50" method="POST" th:modelAttribute="userD" th:action="@{/admin/adminUpdateUser}">
 
             <div class="form-group row py-2">
                 <label class="col-sm-2 col-form-label" for="id">Id :</label>

@@ -36,33 +36,33 @@ public class CoffeeAdminController {
         return new CoffeeDto();
     }
 
-    @GetMapping("/admin/admin-add-coffee")
+    @GetMapping("/admin/adminAddCoffee")
     public ModelAndView showAddCoffeeForm() {
-        ModelAndView mav = new ModelAndView("admin/admin-add-coffee");
+        ModelAndView mav = new ModelAndView("admin/adminAddCoffee");
         mav.addObject("coffeeMachine", coffeeMachineConstantValueService);
         return mav;
     }
 
-    @PostMapping("/admin/admin-add-coffee")
+    @PostMapping("/admin/adminAddCoffee")
     public String addCoffee(@ModelAttribute("coffeeAdmin") CoffeeDto coffeeDto) {
         coffeeAdminService.checkCoffeeParameters(coffeeDto);
         coffeeAdminService.addNewCoffee(coffeeDto);
         coffeeUserService.addOneCoffeeForEachUser(coffeeDto);
         coffeeUserService.updateDefaultCoffees(userService.findUserByName("Default"));
-        return "redirect:/admin/admin-coffee-list";
+        return "redirect:/admin/adminCoffeeList";
     }
 
     @GetMapping("/admin/showUpdateForm")
     public ModelAndView showUpdateForm(@RequestParam Long coffeeAdminId) {
-        ModelAndView mav = new ModelAndView("admin/admin-add-coffee");
+        ModelAndView mav = new ModelAndView("admin/adminAddCoffee");
         mav.addObject("coffeeAdmin", coffeeAdminService.findCoffeeById(coffeeAdminId));
         mav.addObject("coffeeMachine", coffeeMachineConstantValueService);
         return mav;
     }
 
-    @GetMapping("admin/admin-coffee-list")
+    @GetMapping("admin/adminCoffeeList")
     public ModelAndView getAllCoffees() {
-        ModelAndView mav = new ModelAndView("admin/admin-coffee-list");
+        ModelAndView mav = new ModelAndView("admin/adminCoffeeList");
         mav.addObject("coffees", coffeeAdminService.getAllCoffees());
         return mav;
     }
@@ -70,7 +70,7 @@ public class CoffeeAdminController {
     @GetMapping("/admin/delete-admin-coffee")
     public String deleteAdminCoffee(@RequestParam Long coffeeAdminId) {
         coffeeAdminService.deleteCoffee(coffeeAdminId);
-        return "redirect:/admin/admin-coffee-list";
+        return "redirect:/admin/adminCoffeeList";
     }
 }
 

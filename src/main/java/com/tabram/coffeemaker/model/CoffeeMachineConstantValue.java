@@ -46,4 +46,13 @@ public class CoffeeMachineConstantValue {
     public void setValue(Integer value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "CoffeeMachineConstantValue{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

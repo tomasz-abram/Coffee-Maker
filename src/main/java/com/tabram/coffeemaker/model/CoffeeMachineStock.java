@@ -66,4 +66,15 @@ public class CoffeeMachineStock {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "CoffeeMachineStock{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", value=" + value +
+                ", units='" + units + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

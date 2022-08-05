@@ -25,6 +25,7 @@ public class CoffeeDto {
         this.cupSize = cupSize;
     }
 
+
     public String getCoffeeName() {
         return coffeeName;
     }
@@ -87,5 +88,19 @@ public class CoffeeDto {
 
     public void setTempMilk(int tempMilk) {
         this.tempMilk = tempMilk;
+    }
+
+    @Override
+    public String toString() {
+        return "CoffeeDto{" +
+                "coffeeName='" + coffeeName + '\'' +
+                ", tempWater=" + tempWater +
+                ", grindingLevel=" + grindingLevel +
+                ", amountOfCoffee=" + amountOfCoffee +
+                ", amountOfWater=" + amountOfWater +
+                ", amountMilk=" + amountMilk +
+                ", tempMilk=" + tempMilk +
+                ", cupSize=" + cupSize +
+                '}';
     }
 }

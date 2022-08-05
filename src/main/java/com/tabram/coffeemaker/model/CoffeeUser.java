@@ -129,4 +129,20 @@ public class CoffeeUser implements Serializable {
     public void setTempMilk(int tempMilk) {
         this.tempMilk = tempMilk;
     }
+
+    @Override
+    public String toString() {
+        return "CoffeeUser{" +
+                "id=" + id +
+                ", coffeeName='" + coffeeName + '\'' +
+                ", tempWater=" + tempWater +
+                ", grindingLevel=" + grindingLevel +
+                ", amountOfCoffee=" + amountOfCoffee +
+                ", amountOfWater=" + amountOfWater +
+                ", amountMilk=" + amountMilk +
+                ", tempMilk=" + tempMilk +
+                ", cupSize=" + cupSize +
+                ", user=" + user +
+                '}';
+    }
 }

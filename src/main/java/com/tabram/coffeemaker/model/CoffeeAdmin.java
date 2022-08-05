@@ -113,4 +113,19 @@ public class CoffeeAdmin {
     public void setTempMilk(int tempMilk) {
         this.tempMilk = tempMilk;
     }
+
+    @Override
+    public String toString() {
+        return "CoffeeAdmin{" +
+                "id=" + id +
+                ", coffeeName='" + coffeeName + '\'' +
+                ", tempWater=" + tempWater +
+                ", grindingLevel=" + grindingLevel +
+                ", amountOfCoffee=" + amountOfCoffee +
+                ", amountOfWater=" + amountOfWater +
+                ", amountMilk=" + amountMilk +
+                ", tempMilk=" + tempMilk +
+                ", cupSize=" + cupSize +
+                '}';
+    }
 }

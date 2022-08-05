@@ -56,7 +56,7 @@
                        th:classappend="${user.isEnabled() ? 'btn-info' : 'btn-outline-info'}"
                        th:href="@{/admin/updateUserForm(userId=${user.id})}">Update</a>
 
-                    <form class="d-inline-block"  th:method="POST" th:action="@{/admin/admin-users-list}">
+                    <form class="d-inline-block"  th:method="POST" th:action="@{/admin/deactivateUser}">
                         <input class="visually-hidden" id="userId" name="userId"
                                placeholder="userId"  type="number" th:value="${user.getId}"/>
 
