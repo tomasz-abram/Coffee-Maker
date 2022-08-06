@@ -22,7 +22,7 @@
 
 <div class="container mt-5">
     <a class="btn btn-dark " th:href="@{/menu}" type="button">Back</a>
-    <a class="btn btn-dark float-end" th:href="@{/admin/adminAddCoffee}" type="button">Add Coffee</a>
+    <a class="btn btn-dark float-end" th:href="@{/admin/admin-add-coffee}" type="button">Add Coffee</a>
 </div>
 
 <div class="container">
@@ -60,7 +60,7 @@
             <td>
                 <div class="text-center">
                     <a class="btn btn-outline-dark w-75"
-                       th:href="@{/admin/showUpdateForm(coffeeAdminId=${coffeeAdmin.id})}">Update</a>
+                       th:href="@{/admin/show-update-form(coffeeAdminId=${coffeeAdmin.id})}">Update</a>
                     <a class="btn btn-danger ml-2 w-75"
                        th:href="@{/admin/delete-adminCoffee(coffeeAdminId=${coffeeAdmin.id})}">Delete</a>
                 </div>

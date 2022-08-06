@@ -43,8 +43,7 @@ class CoffeeAdminControllerIntegrationTest {
     private CoffeeMachineConstantValueService coffeeMachineConstantValueService;
     @MockBean
     private UserService userService;
-    @MockBean
-    private UserRepository userRepository;
+
 
     @Nested
     class ShowAddCoffeeForm {
@@ -52,7 +51,7 @@ class CoffeeAdminControllerIntegrationTest {
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenValid_thenReturnMav() throws Exception {
-            MvcResult mvcResult = mockMvc.perform(get("/admin/adminAddCoffee"))
+            MvcResult mvcResult = mockMvc.perform(get("/admin/admin-add-coffee"))
                     .andDo(print())
                     .andExpect(status().isOk())
                     .andReturn();
@@ -69,13 +68,13 @@ class CoffeeAdminControllerIntegrationTest {
         @WithMockUser(roles = "ADMIN")
         void whenInputValid_thenVerifyMethods() throws Exception {
             CoffeeDto coffeeDtoTest = new CoffeeDto("TestCoffee", 95, 5, 17.5, 40, 0, 1, 60);
-            mockMvc.perform(post("/admin/adminAddCoffee")
+            mockMvc.perform(post("/admin/admin-add-coffee")
                             .contentType(MediaType.TEXT_HTML)
                             .with(csrf())
                             .flashAttr("coffeeAdmin", coffeeDtoTest))
                     .andDo(print())
                     .andExpect(status().is3xxRedirection())
-                    .andExpect(redirectedUrl("/admin/adminCoffeeList"));
+                    .andExpect(redirectedUrl("/admin/admin-coffee-list"));
 
             verify(coffeeAdminService, times(1)).checkCoffeeParameters(coffeeDtoTest);
             verify(coffeeAdminService, times(1)).addNewCoffee(coffeeDtoTest);
@@ -96,10 +95,10 @@ class CoffeeAdminControllerIntegrationTest {
             CoffeeAdmin coffeeAdminTest = new CoffeeAdmin("Espresso", 95, 5, 17.5, 40, 0, 0, 60);
             when(coffeeAdminService.findCoffeeById(11L)).thenReturn(coffeeAdminTest);
 
-            MvcResult mvcResult = mockMvc.perform(get("/admin/showUpdateForm")
+            MvcResult mvcResult = mockMvc.perform(get("/admin/show-update-form")
                             .param("coffeeAdminId", "11"))
                     .andExpect(status().isOk())
-                    .andExpect(view().name("admin/adminAddCoffee"))
+                    .andExpect(view().name("admin/admin-add-coffee"))
                     .andDo(print())
                     .andReturn();
 
@@ -113,7 +112,7 @@ class CoffeeAdminControllerIntegrationTest {
         @WithMockUser(roles = "ADMIN")
         void whenNullValue_ThenReturn400() throws Exception {
 
-            mockMvc.perform(get("/admin/showUpdateForm")
+            mockMvc.perform(get("/admin/show-update-form")
                             .param("coffeeAdminId", ""))
                     .andExpect(status().isBadRequest())
                     .andDo(print());
@@ -133,7 +132,7 @@ class CoffeeAdminControllerIntegrationTest {
             List<CoffeeAdmin> coffeeAdminList = List.of(espresso, cappuccino);
             when(coffeeAdminService.getAllCoffees()).thenReturn(coffeeAdminList);
 
-            MvcResult mvcResult = mockMvc.perform(get("/admin/adminCoffeeList"))
+            MvcResult mvcResult = mockMvc.perform(get("/admin/admin-coffee-list"))
                     .andExpect(status().isOk())
                     .andDo(print())
                     .andReturn();
@@ -153,7 +152,7 @@ class CoffeeAdminControllerIntegrationTest {
             mockMvc.perform(get("/admin/delete-adminCoffee")
                             .param("coffeeAdminId", "10"))
                     .andExpect(status().is3xxRedirection())
-                    .andExpect(redirectedUrl("/admin/adminCoffeeList"))
+                    .andExpect(redirectedUrl("/admin/admin-coffee-list"))
                     .andDo(print());
             verify(coffeeAdminService, times(1)).deleteCoffee(10L);
         }

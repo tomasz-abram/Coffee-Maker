@@ -40,50 +40,50 @@ public class AdminController {
         return new CoffeeMachineConstantValueDto();
     }
 
-    @PostMapping(path = {"/admin/deactivateUser"})
+    @PostMapping(path = {"/admin/deactivate-user"})
     public String deactivationUser(@RequestParam("userId") Long userId) {
         userService.deactivationUser(userId);
-        return "redirect:/admin/adminUsersList";
+        return "redirect:/admin/admin-users-list";
     }
 
-    @GetMapping("/admin/adminUsersList")
+    @GetMapping("/admin/admin-users-list")
     public ModelAndView getAllUsers() {
-        ModelAndView mav = new ModelAndView("admin/adminUsersList");
+        ModelAndView mav = new ModelAndView("admin/admin-users-list");
         mav.addObject("users", userService.getAllUsers());
         return mav;
     }
 
-    @PostMapping("/admin/adminUpdateUser")
+    @PostMapping("/admin/admin-update-user")
     public String updateUser(@ModelAttribute("userD") UserDto userDto) {
         coffeeAdminService.updateUser(userDto);
-        return "redirect:/admin/adminUsersList";
+        return "redirect:/admin/admin-users-list";
     }
 
     @GetMapping("/admin/updateUserForm")
     public ModelAndView showUpdateForm(@RequestParam Long userId) {
-        ModelAndView mav = new ModelAndView("admin/adminUpdateUser");
+        ModelAndView mav = new ModelAndView("admin/admin-update-user");
         mav.addObject("userD", userService.findUserById(userId));
         mav.addObject("roles", roleService.getAllRoles());
         return mav;
     }
 
-    @GetMapping("/admin/adminCoffeeMachineConstantValueList")
+    @GetMapping("/admin/admin-coffee-machine-constant-value-list")
     public ModelAndView coffeeMachineConstValue() {
-        ModelAndView mav = new ModelAndView("admin/adminCoffeeMachineConstantValueList");
+        ModelAndView mav = new ModelAndView("admin/admin-coffee-machine-constant-value-list");
         mav.addObject("constValues", coffeeMachineConstantValueService.getAllConstantValue());
         return mav;
     }
 
-    @PostMapping("/admin/adminUpdateCoffeeMachineConstantValue")
+    @PostMapping("/admin/admin-update-coffee-machine-constant-value")
     public String updateCoffeeMachineConstValue(@ModelAttribute("machineConst") CoffeeMachineConstantValueDto coffeeMachineConstantValueDto) {
         coffeeMachineConstantValueService.updateConstantValue(coffeeMachineConstantValueDto);
-        return "redirect:/admin/adminCoffeeMachineConstantValueList";
+        return "redirect:/admin/admin-coffee-machine-constant-value-list";
 
     }
 
-    @GetMapping("/admin/updateConstForm")
+    @GetMapping("/admin/update-const-form")
     public ModelAndView updateConstForm(@RequestParam Long machineConstId) {
-        ModelAndView mav = new ModelAndView("admin/adminUpdateCoffeeMachineConstantValue");
+        ModelAndView mav = new ModelAndView("admin/admin-update-coffee-machine-constant-value");
         mav.addObject("machineConst", coffeeMachineConstantValueService.findConstantValueById(machineConstId));
         return mav;
     }

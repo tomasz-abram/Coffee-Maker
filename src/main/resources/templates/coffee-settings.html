@@ -67,7 +67,7 @@
             <td>
                 <div class="text-center">
                     <a class="btn btn-outline-dark w-75" sec:authorize="hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')"
-                       th:href="@{/user/showUpdateForm(coffeeUserId=${coffeeUser.id})}">Update</a>
+                       th:href="@{/user/show-update-form(coffeeUserId=${coffeeUser.id})}">Update</a>
 
                     <a class="btn btn-secondary ml-2 w-75 " data-bs-placement="left"
                        data-bs-toggle="tooltip" sec:authorize="hasRole('ROLE_DEFAULT')" title="Register to be able to update coffee!"

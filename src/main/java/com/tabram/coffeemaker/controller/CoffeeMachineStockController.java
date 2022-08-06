@@ -29,7 +29,6 @@ public class CoffeeMachineStockController {
 
     @GetMapping
     public ModelAndView getStock() {
-        coffeeMachineStockService.checkStockStatus();
         ModelAndView mav = new ModelAndView("stock-coffee-machine");
         mav.addObject("waterStock", coffeeMachineStockService.findStockByName("Water"));
         mav.addObject("milkStock", coffeeMachineStockService.findStockByName("Milk"));
@@ -38,10 +37,11 @@ public class CoffeeMachineStockController {
         mav.addObject("descaleCounter", coffeeMachineStockService.findStockByName("Descale counter"));
         mav.addObject("waterHardnessStock", coffeeMachineStockService.findStockByName("Water hardness"));
         mav.addObject("machine", coffeeMachineConstantValueService);
+        coffeeMachineStockService.checkStockStatus();
         return mav;
     }
 
-    @PostMapping("/waterHardness")
+    @PostMapping("/water-hardness")
     public String setWaterHardness(@RequestParam("waterHardness") float value) {
         coffeeMachineStockService.updateWaterHardness(value);
         return REDIRECT;

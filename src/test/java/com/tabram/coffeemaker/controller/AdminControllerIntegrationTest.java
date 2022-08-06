@@ -59,7 +59,7 @@ class AdminControllerIntegrationTest {
             List<User> users = List.of(testUser1, testUser2);
             when(userService.getAllUsers()).thenReturn(users);
 
-            MvcResult mvcResult = mockMvc.perform(get("/admin/adminUsersList")
+            MvcResult mvcResult = mockMvc.perform(get("/admin/admin-users-list")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andDo(print())
                     .andExpect(status().isOk())
@@ -81,12 +81,12 @@ class AdminControllerIntegrationTest {
             userDto.setEnabled(true);
             userDto.setRoles(Set.of(new Role("ROLE_TEST")));
 
-            mockMvc.perform(post("/admin/adminUpdateUser")
+            mockMvc.perform(post("/admin/admin-update-user")
                             .contentType(MediaType.TEXT_HTML)
                             .with(csrf())
                             .flashAttr("userD", userDto))
                     .andDo(print())
-                    .andExpect(redirectedUrl("/admin/adminUsersList"))
+                    .andExpect(redirectedUrl("/admin/admin-users-list"))
                     .andExpect(status().is3xxRedirection());
 
             ArgumentCaptor<UserDto> userDtoArgumentCaptor = ArgumentCaptor.forClass(UserDto.class);
@@ -131,7 +131,7 @@ class AdminControllerIntegrationTest {
             List<CoffeeMachineConstantValue> constValueList = List.of(coffeeMachineConstantValue1, coffeeMachineConstantValue2);
             when(coffeeMachineConstantValueService.getAllConstantValue()).thenReturn(constValueList);
 
-            MvcResult mvcResult = mockMvc.perform(get("/admin/adminCoffeeMachineConstantValueList"))
+            MvcResult mvcResult = mockMvc.perform(get("/admin/admin-coffee-machine-constant-value-list"))
                     .andExpect(status().isOk())
                     .andReturn();
 
@@ -150,13 +150,13 @@ class AdminControllerIntegrationTest {
             coffeeMachineConstantValueDto.setValue(1000);
             coffeeMachineConstantValueDto.setId(10L);
 
-            mockMvc.perform(post("/admin/adminUpdateCoffeeMachineConstantValue")
+            mockMvc.perform(post("/admin/admin-update-coffee-machine-constant-value")
                             .contentType(MediaType.TEXT_HTML)
                             .characterEncoding("UTF-8")
                             .flashAttr("machineConst", coffeeMachineConstantValueDto)
                             .with(csrf()))
                     .andDo(print())
-                    .andExpect(redirectedUrl("/admin/adminCoffeeMachineConstantValueList"))
+                    .andExpect(redirectedUrl("/admin/admin-coffee-machine-constant-value-list"))
                     .andExpect(status().is3xxRedirection());
 
             ArgumentCaptor<CoffeeMachineConstantValueDto> machineConstArgumentCaptor = ArgumentCaptor.forClass(CoffeeMachineConstantValueDto.class);
@@ -173,12 +173,12 @@ class AdminControllerIntegrationTest {
         void whenValidInput_ITGoesToUpdatePage() throws Exception {
             CoffeeMachineConstantValue coffeeMachineConstantValue = new CoffeeMachineConstantValue("TestConstant", 8888);
             when(coffeeMachineConstantValueService.findConstantValueById(10L)).thenReturn(coffeeMachineConstantValue);
-            MvcResult mvcResult = mockMvc.perform(get("/admin/updateConstForm")
+            MvcResult mvcResult = mockMvc.perform(get("/admin/update-const-form")
                             .contentType(MediaType.TEXT_HTML)
                             .with(csrf())
                             .param("machineConstId", "10"))
                     .andExpect(status().isOk())
-                    .andExpect(view().name("admin/adminUpdateCoffeeMachineConstantValue"))
+                    .andExpect(view().name("admin/admin-update-coffee-machine-constant-value"))
                     .andDo(print())
                     .andReturn();
 
@@ -192,12 +192,12 @@ class AdminControllerIntegrationTest {
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenValidInput_ThenItDeactivatesTheUser() throws Exception {
-            mockMvc.perform(post("/admin/deactivateUser")
+            mockMvc.perform(post("/admin/deactivate-user")
                             .contentType(MediaType.TEXT_HTML)
                             .param("userId", "10")
                             .with(csrf()))
                     .andDo(print())
-                    .andExpect(redirectedUrl("/admin/adminUsersList"))
+                    .andExpect(redirectedUrl("/admin/admin-users-list"))
                     .andExpect(status().is3xxRedirection());
             verify(userService, times(1)).deactivationUser(10L);
         }

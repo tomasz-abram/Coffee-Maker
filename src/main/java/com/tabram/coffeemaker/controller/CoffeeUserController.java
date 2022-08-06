@@ -52,7 +52,7 @@ public class CoffeeUserController {
         return mav;
     }
 
-    @GetMapping("/user/showUpdateForm")
+    @GetMapping("/user/show-update-form")
     public ModelAndView showUpdateForm(@RequestParam Long coffeeUserId) {
         ModelAndView mav = new ModelAndView("user/user-add-coffee");
         mav.addObject("coffeeUser", coffeeUserService.findCoffeeUserById(coffeeUserId));
