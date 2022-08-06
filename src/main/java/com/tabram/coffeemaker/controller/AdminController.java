@@ -43,12 +43,12 @@ public class AdminController {
     @PostMapping(path = {"/admin/deactivateUser"})
     public String deactivationUser(@RequestParam("userId") Long userId) {
         userService.deactivationUser(userId);
-        return "redirect:/admin/admin-users-list";
+        return "redirect:/admin/adminUsersList";
     }
 
-    @GetMapping("/admin/admin-users-list")
+    @GetMapping("/admin/adminUsersList")
     public ModelAndView getAllUsers() {
-        ModelAndView mav = new ModelAndView("admin/admin-users-list");
+        ModelAndView mav = new ModelAndView("admin/adminUsersList");
         mav.addObject("users", userService.getAllUsers());
         return mav;
     }
@@ -56,7 +56,7 @@ public class AdminController {
     @PostMapping("/admin/adminUpdateUser")
     public String updateUser(@ModelAttribute("userD") UserDto userDto) {
         coffeeAdminService.updateUser(userDto);
-        return "redirect:/admin/admin-users-list";
+        return "redirect:/admin/adminUsersList";
     }
 
     @GetMapping("/admin/updateUserForm")

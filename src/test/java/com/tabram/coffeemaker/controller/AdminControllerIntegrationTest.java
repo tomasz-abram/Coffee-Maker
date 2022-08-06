@@ -47,8 +47,6 @@ class AdminControllerIntegrationTest {
     private RoleService roleService;
     @MockBean
     private CoffeeMachineConstantValueService coffeeMachineConstantValueService;
-    @MockBean
-    private UserRepository userRepository;
 
 
     @Nested
@@ -61,7 +59,7 @@ class AdminControllerIntegrationTest {
             List<User> users = List.of(testUser1, testUser2);
             when(userService.getAllUsers()).thenReturn(users);
 
-            MvcResult mvcResult = mockMvc.perform(get("/admin/admin-users-list")
+            MvcResult mvcResult = mockMvc.perform(get("/admin/adminUsersList")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andDo(print())
                     .andExpect(status().isOk())
@@ -88,7 +86,7 @@ class AdminControllerIntegrationTest {
                             .with(csrf())
                             .flashAttr("userD", userDto))
                     .andDo(print())
-                    .andExpect(redirectedUrl("/admin/admin-users-list"))
+                    .andExpect(redirectedUrl("/admin/adminUsersList"))
                     .andExpect(status().is3xxRedirection());
 
             ArgumentCaptor<UserDto> userDtoArgumentCaptor = ArgumentCaptor.forClass(UserDto.class);
@@ -199,9 +197,10 @@ class AdminControllerIntegrationTest {
                             .param("userId", "10")
                             .with(csrf()))
                     .andDo(print())
-                    .andExpect(redirectedUrl("/admin/admin-users-list"))
+                    .andExpect(redirectedUrl("/admin/adminUsersList"))
                     .andExpect(status().is3xxRedirection());
             verify(userService, times(1)).deactivationUser(10L);
         }
     }
+
 }

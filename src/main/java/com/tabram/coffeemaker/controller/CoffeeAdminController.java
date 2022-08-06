@@ -1,7 +1,6 @@
 package com.tabram.coffeemaker.controller;
 
 import com.tabram.coffeemaker.dto.CoffeeDto;
-import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeAdminService;
 import com.tabram.coffeemaker.service.CoffeeMachineConstantValueService;
 import com.tabram.coffeemaker.service.CoffeeUserService;
@@ -24,7 +23,7 @@ public class CoffeeAdminController {
     private final UserService userService;
 
     @Autowired
-    public CoffeeAdminController(CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService, UserRepository userRepository, CoffeeMachineConstantValueService coffeeMachineConstantValueService, UserService userService) {
+    public CoffeeAdminController(CoffeeAdminService coffeeAdminService, CoffeeUserService coffeeUserService, CoffeeMachineConstantValueService coffeeMachineConstantValueService, UserService userService) {
         this.coffeeAdminService = coffeeAdminService;
         this.coffeeUserService = coffeeUserService;
         this.coffeeMachineConstantValueService = coffeeMachineConstantValueService;
@@ -67,7 +66,7 @@ public class CoffeeAdminController {
         return mav;
     }
 
-    @GetMapping("/admin/delete-admin-coffee")
+    @GetMapping("/admin/delete-adminCoffee")
     public String deleteAdminCoffee(@RequestParam Long coffeeAdminId) {
         coffeeAdminService.deleteCoffee(coffeeAdminId);
         return "redirect:/admin/adminCoffeeList";
