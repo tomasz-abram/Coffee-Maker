@@ -44,21 +44,16 @@
 <div class="list-group text-center row">
     <a class="navbar-brand list-group-item align-items-center justify-content-center"><h5>Menu</h5></a>
     <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/make-coffee/list}">Make Coffee</a>
-    <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/coffee-settings}">Coffee
-        settings</a>
-
-
-    <a class="gap-3 py-3 list-group-item list-group-item-action bg-opacity-25 "
+    <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/coffee-settings}">Coffee settings</a>
+    <a class="gap-3 py-3 list-group-item list-group-item-action bg-opacity-25"
        th:classappend="
-            ${(@coffeeMachineStockService.alarmLightStockStatus() =='Ok' ? 'bg-success ': '') +
-              (@coffeeMachineStockService.alarmLightStockStatus() =='Warning' ? 'bg-warning ': '')+
-              (@coffeeMachineStockService.alarmLightStockStatus() =='Danger' ? 'bg-danger ': '')}"
+            ${(light =='Ok' ? 'bg-success ': '') +
+              (light =='Warning' ? 'bg-warning ': '')+
+              (light =='Danger' ? 'bg-danger ': '')}"
+       th:href="@{/stock-coffee-machine}">Stock - "<span th:text="${light}">Name status</span>"</a>
 
-       th:href="@{/stock-coffee-machine}">Stock - "<span
-            th:text="${@coffeeMachineStockService.alarmLightStockStatus()}">Name status</span>"</a>
 
     <div sec:authorize="hasRole('ROLE_ADMIN')">
-
         <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
            th:href="@{/admin/admin-coffee-list}">Admin - Coffee list</a>
         <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
@@ -67,7 +62,6 @@
            th:href="@{/admin/admin-users-list}">Admin - Users list</a>
         <a class="gap-3 py-3 list-group-item list-group-item-dark list-group-item-action"
            th:href="@{/admin/admin-coffee-machine-constant-value-list}">Admin - Coffee machine constant value</a>
-
     </div>
     <a class="gap-3 py-3 list-group-item list-group-item-action" th:href="@{/}"> [ Back ] </a>
 

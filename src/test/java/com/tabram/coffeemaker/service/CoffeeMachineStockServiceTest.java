@@ -10,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 
@@ -26,6 +25,7 @@ class CoffeeMachineStockServiceTest {
     CoffeeMachineStockRepository coffeeMachineStockRepository;
     @Mock
     CoffeeMachineConstantValueService coffeeMachineConstantValueService;
+
     private CoffeeMachineStockService underTest;
 
     @BeforeEach
@@ -107,6 +107,39 @@ class CoffeeMachineStockServiceTest {
         assertEquals(expectedValue, capturedStock.getValue());
     }
 
+    @Test
+    void checkStockStatus() {
+
+        CoffeeMachineStock waterStockTest = new CoffeeMachineStock("Water", 600, "ml", "");
+        CoffeeMachineConstantValue warningLevelWaterTest = new CoffeeMachineConstantValue("warning_level_water", 500);
+        when(coffeeMachineStockRepository.findByName("Water")).thenReturn(waterStockTest);
+        when(coffeeMachineConstantValueService.getWarningLevelWater()).thenReturn(warningLevelWaterTest.getValue());
+
+        CoffeeMachineStock milkStockTest = new CoffeeMachineStock("Milk", 600, "ml", "");
+        CoffeeMachineConstantValue warningLevelMilkTest = new CoffeeMachineConstantValue("warning_level_milk", 500);
+        when(coffeeMachineStockRepository.findByName("Milk")).thenReturn(milkStockTest);
+        when(coffeeMachineConstantValueService.getWarningLevelMilk()).thenReturn(warningLevelMilkTest.getValue());
+
+        CoffeeMachineStock coffeeBeansStockTest = new CoffeeMachineStock("Coffee beans", 200, "g", "");
+        CoffeeMachineConstantValue warningLevelCoffeeBeansTest = new CoffeeMachineConstantValue("warning_level_coffee_beans", 90);
+        when(coffeeMachineStockRepository.findByName("Coffee beans")).thenReturn(coffeeBeansStockTest);
+        when(coffeeMachineConstantValueService.getWarningLevelCoffeeBeans()).thenReturn(warningLevelCoffeeBeansTest.getValue());
+
+        CoffeeMachineStock groundContainerStockTest = new CoffeeMachineStock("Ground container", 25, "pcs", "");
+        CoffeeMachineConstantValue warningLevelGroundContainerTest = new CoffeeMachineConstantValue("warning_level_ground_container", 27);
+        when(coffeeMachineStockRepository.findByName("Ground container")).thenReturn(groundContainerStockTest);
+        when(coffeeMachineConstantValueService.getWarningLevelGroundContainer()).thenReturn(warningLevelGroundContainerTest.getValue());
+
+        CoffeeMachineStock descaleCounterStockTest = new CoffeeMachineStock("Descale counter", 2000, "", "");
+        CoffeeMachineConstantValue warningLevelDescaleTest = new CoffeeMachineConstantValue("warning_level_descale", 5000);
+        when(coffeeMachineStockRepository.findByName("Descale counter")).thenReturn(descaleCounterStockTest);
+        when(coffeeMachineConstantValueService.getWarningLevelDescale()).thenReturn(warningLevelDescaleTest.getValue());
+
+        underTest.checkStockStatus();
+
+        verify(coffeeMachineStockRepository, times(5)).save(any());
+    }
+
     @Nested
     class AlarmLightStockStatusTest {
         @Test
@@ -124,6 +157,7 @@ class CoffeeMachineStockServiceTest {
 
             assertThat(actual).isEqualTo(expected);
         }
+
         @Test
         void itShouldGetTheStatusLightWarning() {
             String expected = "Warning";
@@ -139,6 +173,7 @@ class CoffeeMachineStockServiceTest {
 
             assertThat(actual).isEqualTo(expected);
         }
+
         @Test
         void itShouldGetTheStatusLightDanger() {
             String expected = "Danger";

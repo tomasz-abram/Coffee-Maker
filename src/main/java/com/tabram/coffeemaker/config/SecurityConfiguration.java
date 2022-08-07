@@ -49,7 +49,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/coffee-settings",
                         "/error",
-                        "/home",
                         "/menu",
                         "/stock-coffee-machine",
                         "/make-coffee/**"
@@ -58,7 +57,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/css/**",
                         "/registration**",
                         "/",
-                        "/login**"
+                        "/login**",
+                        "/home"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and()
