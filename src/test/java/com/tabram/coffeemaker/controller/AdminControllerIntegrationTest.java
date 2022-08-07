@@ -125,7 +125,6 @@ class AdminControllerIntegrationTest {
         @Test
         @WithMockUser(roles = "ADMIN")
         void takesAListOfConstantsAndPassesToThePage() throws Exception {
-
             CoffeeMachineConstantValue coffeeMachineConstantValue1 = new CoffeeMachineConstantValue("testConstant1", 1000);
             CoffeeMachineConstantValue coffeeMachineConstantValue2 = new CoffeeMachineConstantValue("testConstant2", 2000);
             List<CoffeeMachineConstantValue> constValueList = List.of(coffeeMachineConstantValue1, coffeeMachineConstantValue2);
@@ -167,7 +166,6 @@ class AdminControllerIntegrationTest {
 
     @Nested
     class UpdateConstForm {
-
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
         void whenValidInput_ITGoesToUpdatePage() throws Exception {

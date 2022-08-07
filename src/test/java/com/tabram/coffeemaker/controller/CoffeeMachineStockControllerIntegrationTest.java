@@ -85,6 +85,7 @@ class CoffeeMachineStockControllerIntegrationTest {
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/stock-coffee-machine"))
                     .andDo(print());
+
             verify(coffeeMachineStockService, times(1)).updateWaterHardness(10);
         }
     }

@@ -38,6 +38,14 @@ class MakeCoffeeControllerTest {
     @MockBean
     private UserService userService;
 
+    @Test
+    @WithMockUser
+    void showEnjoy() throws Exception {
+        mockMvc.perform(get("/make-coffee/enjoy"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
     @Nested
     class GetAllCoffees {
         @Test
@@ -65,9 +73,7 @@ class MakeCoffeeControllerTest {
                     .andDo(print())
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("http://localhost/login"));
-
         }
-
     }
 
     @Nested
@@ -90,7 +96,6 @@ class MakeCoffeeControllerTest {
             ModelAndView modelAndView = mvcResult.getModelAndView();
             assertEquals(espresso, modelAndView.getModel().get("chooseCoffee"));
             assertEquals(70d, modelAndView.getModel().get("tempCoffee"));
-
         }
 
         @Test
@@ -99,7 +104,6 @@ class MakeCoffeeControllerTest {
                     .andDo(print())
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("http://localhost/login"));
-
         }
     }
 

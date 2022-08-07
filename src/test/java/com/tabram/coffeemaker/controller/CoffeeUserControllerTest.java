@@ -63,7 +63,6 @@ class CoffeeUserControllerTest {
                     .andDo(print())
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("http://localhost/login"));
-
         }
 
         @Test
@@ -86,14 +85,13 @@ class CoffeeUserControllerTest {
             User userTest = new User("UserTest", "UserTest", true, Set.of(new Role("ROLE_USER")));
             when(userService.currentUser()).thenReturn(userTest);
 
-            MvcResult mvcResult = mockMvc.perform(post("/user/user-add-coffee")
+            mockMvc.perform(post("/user/user-add-coffee")
                             .contentType(MediaType.TEXT_HTML)
                             .with(csrf())
                             .flashAttr("coffeeUser", coffeeDto))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/coffee-settings"))
-                    .andDo(print())
-                    .andReturn();
+                    .andDo(print());
 
             ArgumentCaptor<CoffeeDto> coffeeDtoArgumentCaptor = ArgumentCaptor.forClass(CoffeeDto.class);
             verify(coffeeUserService, times(1)).saveCoffee(coffeeDtoArgumentCaptor.capture(), any());
@@ -115,7 +113,6 @@ class CoffeeUserControllerTest {
                     .andDo(print())
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("http://localhost/login"));
-
         }
     }
 
@@ -128,7 +125,6 @@ class CoffeeUserControllerTest {
             CoffeeUser cappuccino = new CoffeeUser("Cappuccino", 95, 5, 17.5, 30, 100, 65, 200);
             List<CoffeeUser> coffeeUserList = List.of(espresso, cappuccino);
             User userTest = new User("UserTest", "UserTest", true, Set.of(new Role("USER")), coffeeUserList);
-
             when(userService.currentUser()).thenReturn(userTest);
             when(userService.findUserByName(userTest.getUsername())).thenReturn(userTest);
 
@@ -149,7 +145,6 @@ class CoffeeUserControllerTest {
             CoffeeUser cappuccino = new CoffeeUser("Cappuccino", 95, 5, 17.5, 30, 100, 65, 200);
             List<CoffeeUser> coffeeUserList = List.of(espresso, cappuccino);
             User userTest = new User("UserTest", "UserTest", true, Set.of(new Role("USER")), coffeeUserList);
-
             when(userService.currentUser()).thenReturn(userTest);
             when(userService.findUserByName(userTest.getUsername())).thenReturn(userTest);
 
@@ -169,7 +164,6 @@ class CoffeeUserControllerTest {
                     .andDo(print())
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("http://localhost/login"));
-
         }
     }
 
@@ -207,7 +201,6 @@ class CoffeeUserControllerTest {
                     .andDo(print())
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("http://localhost/login"));
-
         }
     }
 
@@ -240,7 +233,6 @@ class CoffeeUserControllerTest {
                     .andDo(print())
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("http://localhost/login"));
-
         }
     }
 

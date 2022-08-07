@@ -46,7 +46,6 @@ class CoffeeAdminControllerIntegrationTest {
 
     @Nested
     class ShowAddCoffeeForm {
-
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenValid_thenReturnMav() throws Exception {
@@ -62,11 +61,11 @@ class CoffeeAdminControllerIntegrationTest {
 
     @Nested
     class AddCoffee {
-
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenInputValid_thenVerifyMethods() throws Exception {
             CoffeeDto coffeeDtoTest = new CoffeeDto("TestCoffee", 95, 5, 17.5, 40, 0, 1, 60);
+
             mockMvc.perform(post("/admin/admin-add-coffee")
                             .contentType(MediaType.TEXT_HTML)
                             .with(csrf())
@@ -82,12 +81,10 @@ class CoffeeAdminControllerIntegrationTest {
             assertThat(coffeeDtoArgumentCaptor.getValue()).isEqualTo(coffeeDtoTest);
             verify(coffeeUserService, times(1)).updateDefaultCoffees(userService.findUserByName("Default"));
         }
-
     }
 
     @Nested
     class ShowUpdateForm {
-
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenInputsValid_thenReturnCoffeeAdminAndCoffeeMachineMavObjects() throws Exception {
@@ -110,7 +107,6 @@ class CoffeeAdminControllerIntegrationTest {
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenNullValue_ThenReturn400() throws Exception {
-
             mockMvc.perform(get("/admin/show-update-form")
                             .param("coffeeAdminId", ""))
                     .andExpect(status().isBadRequest())
@@ -122,7 +118,6 @@ class CoffeeAdminControllerIntegrationTest {
 
     @Nested
     class GetAllCoffees {
-
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenValidUrl_ThenReturnMavWithAllCoffees() throws Exception {
@@ -144,7 +139,6 @@ class CoffeeAdminControllerIntegrationTest {
 
     @Nested
     class DeleteAdminCoffee {
-
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenValidInput_ThenDeleteCoffee() throws Exception {
