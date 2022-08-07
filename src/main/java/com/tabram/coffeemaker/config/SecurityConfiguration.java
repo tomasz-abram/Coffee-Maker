@@ -47,6 +47,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/coffee-settings",
+                        "/error",
+                        "/home",
+                        "/menu",
+                        "/stock-coffee-machine",
+                        "/make-coffee/**"
+                ).hasAnyRole("ADMIN", "USER", "DEFAULT")
                 .antMatchers(
                         "/css/**",
                         "/registration**",
@@ -54,6 +61,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/login**"
                 ).permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().accessDeniedPage("/registration?accessDenied")
                 .and()
                 .formLogin()
                 .loginPage("/login")

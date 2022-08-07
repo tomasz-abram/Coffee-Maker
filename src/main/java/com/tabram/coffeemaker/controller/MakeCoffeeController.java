@@ -29,14 +29,14 @@ public class MakeCoffeeController {
 
     @GetMapping("/list")
     public ModelAndView getAllCoffees() {
-        ModelAndView mav = new ModelAndView("makeCoffee/list");
+        ModelAndView mav = new ModelAndView("make-coffee/list");
         mav.addObject("coffees", userService.findUserByName(userService.currentUser().getUsername()).getCoffeeUser());
         return mav;
     }
 
     @GetMapping("/{coffeeName}/strength")
     public ModelAndView chooseCoffee(@PathVariable String coffeeName) {
-        ModelAndView mav = new ModelAndView("makeCoffee/strength");
+        ModelAndView mav = new ModelAndView("make-coffee/strength");
         CoffeeUser coffeeUser = coffeeUserService.findCoffeeByCoffeeNameAndUserId(coffeeName, userService.currentUser().getId());
         mav.addObject("chooseCoffee", coffeeUser);
         mav.addObject("tempCoffee", coffeeUserService.tempCoffee(coffeeUser));
@@ -51,7 +51,7 @@ public class MakeCoffeeController {
 
     @GetMapping("/enjoy")
     public String enjoy() {
-        return "makeCoffee/enjoy";
+        return "make-coffee/enjoy";
     }
 
 }

@@ -21,6 +21,10 @@
                 <div class="alert alert-danger">Username is taken! Please choose a different username.</div>
             </div>
 
+            <div th:if="${param.accessDenied}">
+                <div class="alert alert-danger">Register or log in to get access else contact the administrator.</div>
+            </div>
+
             <form method="POST" th:action="@{/registration}" th:object="${user}">
 
                 <h1 class="h3 mb-3 fw-normal">Please register</h1>

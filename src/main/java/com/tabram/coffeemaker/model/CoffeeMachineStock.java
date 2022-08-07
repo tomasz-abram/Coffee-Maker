@@ -18,8 +18,10 @@ public class CoffeeMachineStock {
     private String units;
     @Column
     private String status;
+
     public CoffeeMachineStock() {
     }
+
     public CoffeeMachineStock(String name, float value, String units, String status) {
         this.name = name;
         this.value = value;

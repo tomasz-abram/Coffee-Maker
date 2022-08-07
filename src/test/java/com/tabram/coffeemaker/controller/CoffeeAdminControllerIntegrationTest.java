@@ -2,7 +2,6 @@ package com.tabram.coffeemaker.controller;
 
 import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.model.CoffeeAdmin;
-import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeAdminService;
 import com.tabram.coffeemaker.service.CoffeeMachineConstantValueService;
 import com.tabram.coffeemaker.service.CoffeeUserService;

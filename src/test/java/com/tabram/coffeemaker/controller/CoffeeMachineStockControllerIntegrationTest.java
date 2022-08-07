@@ -42,7 +42,7 @@ class CoffeeMachineStockControllerIntegrationTest {
     class GetStock {
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
-        void whenOpensThePageItGetsResource() throws Exception {
+        void returnModelAndView() throws Exception {
             CoffeeMachineStock waterStock = new CoffeeMachineStock("Water", 500, "ml", "Ok");
             CoffeeMachineStock milkStock = new CoffeeMachineStock("Milk", 300, "ml", "Ok");
             CoffeeMachineStock coffeeBeansStock = new CoffeeMachineStock("Coffee beans", 200, "g", "Ok");

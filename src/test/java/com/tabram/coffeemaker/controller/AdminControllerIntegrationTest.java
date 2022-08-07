@@ -5,7 +5,6 @@ import com.tabram.coffeemaker.dto.UserDto;
 import com.tabram.coffeemaker.model.CoffeeMachineConstantValue;
 import com.tabram.coffeemaker.model.Role;
 import com.tabram.coffeemaker.model.User;
-import com.tabram.coffeemaker.repository.UserRepository;
 import com.tabram.coffeemaker.service.CoffeeAdminService;
 import com.tabram.coffeemaker.service.CoffeeMachineConstantValueService;
 import com.tabram.coffeemaker.service.RoleService;
@@ -32,7 +31,8 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AdminController.class)
 class AdminControllerIntegrationTest {
@@ -169,21 +169,19 @@ class AdminControllerIntegrationTest {
     class UpdateConstForm {
 
         @Test
-        @WithMockUser(roles = "ADMIN")
+        @WithMockUser(roles = {"ADMIN", "USER"})
         void whenValidInput_ITGoesToUpdatePage() throws Exception {
-            CoffeeMachineConstantValue coffeeMachineConstantValue = new CoffeeMachineConstantValue("TestConstant", 8888);
-            when(coffeeMachineConstantValueService.findConstantValueById(10L)).thenReturn(coffeeMachineConstantValue);
+            CoffeeMachineConstantValue coffeeMachineConstantValue = new CoffeeMachineConstantValue("testConstant", 1000);
+            coffeeMachineConstantValue.setId(10L);
+            when(coffeeMachineConstantValueService.findConstantValueById(20L)).thenReturn(coffeeMachineConstantValue);
+
             MvcResult mvcResult = mockMvc.perform(get("/admin/update-const-form")
-                            .contentType(MediaType.TEXT_HTML)
-                            .with(csrf())
-                            .param("machineConstId", "10"))
-                    .andExpect(status().isOk())
-                    .andExpect(view().name("admin/admin-update-coffee-machine-constant-value"))
+                            .param("machineConstId", "20"))
                     .andDo(print())
                     .andReturn();
 
             ModelAndView modelAndView = mvcResult.getModelAndView();
-            assertEquals(modelAndView.getModel().get("machineConst"), coffeeMachineConstantValue);
+            assertEquals(coffeeMachineConstantValue, modelAndView.getModel().get("machineConst"));
         }
     }
 

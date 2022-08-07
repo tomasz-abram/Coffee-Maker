@@ -29,6 +29,7 @@ public class User implements Serializable {
     @JoinColumn(name = "user_id")
     private List<CoffeeUser> coffeeUser;
 
+
     public User() {
     }
 
@@ -67,6 +68,10 @@ public class User implements Serializable {
 
     public List<CoffeeUser> getCoffeeUser() {
         return coffeeUser;
+    }
+
+    public void setCoffeeUser(List<CoffeeUser> coffeeUser) {
+        this.coffeeUser = coffeeUser;
     }
 
     public Long getId() {

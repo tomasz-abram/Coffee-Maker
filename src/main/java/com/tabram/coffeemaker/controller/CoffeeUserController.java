@@ -6,16 +6,13 @@ import com.tabram.coffeemaker.service.CoffeeUserService;
 import com.tabram.coffeemaker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CoffeeUserController {
 
-
+    private static final String REDIRECT = "redirect:/coffee-settings";
     private final UserService userService;
     private final CoffeeUserService coffeeUserService;
     private final CoffeeMachineConstantValueService coffeeMachineConstantValueService;
@@ -42,13 +39,14 @@ public class CoffeeUserController {
     @PostMapping("/user/user-add-coffee")
     public String addCoffee(@ModelAttribute("coffeeUser") CoffeeDto coffeeDto) {
         coffeeUserService.saveCoffee(coffeeDto, userService.currentUser());
-        return "redirect:/coffee-settings";
+        return REDIRECT;
     }
 
     @GetMapping("/coffee-settings")
     public ModelAndView getAllCoffees() {
         ModelAndView mav = new ModelAndView("coffee-settings");
-        mav.addObject("coffees", userService.findUserByName(userService.currentUser().getUsername()).getCoffeeUser());
+        String username = userService.currentUser().getUsername();
+        mav.addObject("coffees", userService.findUserByName(username).getCoffeeUser());
         return mav;
     }
 
@@ -63,12 +61,12 @@ public class CoffeeUserController {
     @GetMapping("/user/delete-user-coffee")
     public String deleteUserCoffee(@RequestParam Long coffeeUserId) {
         coffeeUserService.deleteCoffee(coffeeUserId);
-        return "redirect:/coffee-settings";
+        return REDIRECT;
     }
 
     @GetMapping("/user/update-coffee-recipes")
     public String updateCoffeeRecipes() {
         coffeeUserService.updateDefaultCoffees(userService.currentUser());
-        return "redirect:/coffee-settings";
+        return REDIRECT;
     }
 }
