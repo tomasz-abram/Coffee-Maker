@@ -6,13 +6,17 @@ services:
     networks:
       - coffee-mysql
     environment:
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=Dolphin28
-      - MYSQL_DATABASE=coffee_base
-      - MYSQL_ROOT_PASSWORD=root
-
+    - MYSQL_ROOT_USER=1
+    - MYSQL_PASSWORD=Dolphin28
+    - MYSQL_ROOT_PASSWORD=Dolphin28
+    - MYSQL_DATABASE=coffee_base
     ports:
       - "3307:3307"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3307" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     restart: always
 
   coffee-maker-app:
@@ -27,7 +31,7 @@ services:
     depends_on:
       - mysqldb
     environment:
-       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb/coffee_base?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true&autoReconnect=true
-
+       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb/coffee_base?useSSL=false&connectionTimeZone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true&autoReconnect=true
+    restart: on-failure
 networks:
   coffee-mysql:
