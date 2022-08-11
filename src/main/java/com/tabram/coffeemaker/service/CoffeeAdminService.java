@@ -59,13 +59,7 @@ public class CoffeeAdminService {
     }
 
     public boolean isBetween(double val, int min, int max){
-        boolean check;
-        if (val >= min && val <= max){
-            check = true;
-        } else {
-            check = false;
-        }
-        return check;
+        return val >= min && val <= max;
     }
 
     public List<CoffeeAdmin> getAllCoffees() {

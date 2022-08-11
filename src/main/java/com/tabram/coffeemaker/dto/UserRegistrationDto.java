@@ -4,9 +4,6 @@ public class UserRegistrationDto {
     private String userName;
     private String password;
 
-    public UserRegistrationDto() {
-    }
-
     public String getUserName() {
         return userName;
     }

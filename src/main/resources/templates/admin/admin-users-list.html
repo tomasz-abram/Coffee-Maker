@@ -54,7 +54,7 @@
                 <div>
                     <a class="btn"
                        th:classappend="${user.isEnabled() ? 'btn-info' : 'btn-outline-info'}"
-                       th:href="@{/admin/updateUserForm(userId=${user.id})}">Update</a>
+                       th:href="@{/admin/update-user-form(userId=${user.id})}">Update</a>
 
                     <form class="d-inline-block"  th:method="POST" th:action="@{/admin/deactivate-user}">
                         <input class="visually-hidden" id="userId" name="userId"

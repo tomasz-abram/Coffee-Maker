@@ -37,17 +37,17 @@ public class MakeCoffeeService {
         CoffeeMachineStock waterHardnessStock = coffeeMachineStockService.findStockByName("Water hardness");
 
         CoffeeUser coffee = coffeeUserService.findCoffeeByCoffeeNameAndUserId(coffeeName, user.getId());
-        if (waterStock.getValue() < coffee.getAmountOfWater()) {
+        if (waterStock.getValue() < coffee.getAmountOfWater() * quantity) {
             throw new IllegalStateException("There is not enough water in the machine to make this coffee");
         } else {
-            waterStock.setValue(waterStock.getValue() - coffee.getAmountOfWater());
+            waterStock.setValue(waterStock.getValue() - coffee.getAmountOfWater() * quantity);
             coffeeMachineStocksList.add(waterStock);
         }
 
-        if (milkStock.getValue() < coffee.getAmountMilk()) {
+        if (milkStock.getValue() < coffee.getAmountMilk() * quantity) {
             throw new IllegalStateException("There is not enough milk in the machine to make this coffee");
         } else {
-            milkStock.setValue(milkStock.getValue() - coffee.getAmountMilk());
+            milkStock.setValue(milkStock.getValue() - coffee.getAmountMilk() * quantity);
             coffeeMachineStocksList.add(milkStock);
         }
 
@@ -65,10 +65,10 @@ public class MakeCoffeeService {
             coffeeMachineStocksList.add(groundContainerStock);
         }
 
-        if (coffeeMachineConstantValueService.getMaxDescaleCounter() < descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater()) {
+        if (coffeeMachineConstantValueService.getMaxDescaleCounter() < descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater() * quantity) {
             throw new IllegalStateException("Descale the coffee machine before making this coffee");
         } else {
-            descaleCounter.setValue((int) (descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater()));
+            descaleCounter.setValue((int) (descaleCounter.getValue() + waterHardnessStock.getValue() * coffee.getAmountOfWater() * quantity));
             coffeeMachineStocksList.add(descaleCounter);
         }
 

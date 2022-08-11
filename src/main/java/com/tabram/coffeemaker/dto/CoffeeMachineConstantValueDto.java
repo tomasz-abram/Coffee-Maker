@@ -6,9 +6,6 @@ public class CoffeeMachineConstantValueDto {
     private String name;
     private Integer value;
 
-    public CoffeeMachineConstantValueDto() {
-    }
-
     public Long getId() {
         return id;
     }

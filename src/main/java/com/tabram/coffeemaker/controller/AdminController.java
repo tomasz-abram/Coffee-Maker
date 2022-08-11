@@ -59,7 +59,7 @@ public class AdminController {
         return "redirect:/admin/admin-users-list";
     }
 
-    @GetMapping("/admin/updateUserForm")
+    @GetMapping("/admin/update-user-form")
     public ModelAndView showUpdateForm(@RequestParam Long userId) {
         ModelAndView mav = new ModelAndView("admin/admin-update-user");
         mav.addObject("userD", userService.findUserById(userId));

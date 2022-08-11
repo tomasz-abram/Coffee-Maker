@@ -11,9 +11,6 @@ public class UserDto {
     private boolean isEnabled;
     private Set<Role> roles;
 
-    public UserDto() {
-    }
-
     public Long getId() {
         return id;
     }
@@ -46,6 +43,7 @@ public class UserDto {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
     @Override
     public String toString() {
         return "UserDto{" +

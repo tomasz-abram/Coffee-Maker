@@ -108,7 +108,7 @@ class AdminControllerIntegrationTest {
             when(userService.findUserById(10L)).thenReturn(user);
             when(roleService.getAllRoles()).thenReturn(roles);
 
-            MvcResult mvcResult = mockMvc.perform(get("/admin/updateUserForm")
+            MvcResult mvcResult = mockMvc.perform(get("/admin/update-user-form")
                             .param("userId", "10"))
                     .andExpect(status().isOk())
                     .andDo(print())
