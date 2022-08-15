@@ -172,67 +172,63 @@
 
             <div class="col">
                 <div class="list-group text-center ">
-                    <a class=" list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-water-tank(quantity=250)}"> Add 250ml water</a>
-                    <a class=" list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-water-tank(quantity=500)}"> Add 500ml water</a>
-                    <a class=" list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-water-tank(quantity=${machine.getMaxWaterContainer()})}">
-                        Fill to full!</a>
-                    <a class=" list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/empty-water-tank}">
-                        Empty the container</a>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="list-group text-center ">
-                    <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-milk-tank(quantity=250)}"> Add 250ml milk</a>
-                    <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-milk-tank(quantity=500)}"> Add 500ml milk</a>
-                    <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-milk-tank(quantity=${machine.getMaxMilkContainer()})}">
-                        Fill to full!</a>
-                    <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/empty-milk-tank}">
-                        Empty the container</a>
+                    <form id="fillWaterTank" th:action="@{/stock-coffee-machine/fill-water-tank}" th:method="PUT">
+                        <button type="submit" name="quantity" th:value="250" class="list-group-item list-group-item-action" >Add 250ml water</button>
+                        <button type="submit" name="quantity" th:value="500" class="list-group-item list-group-item-action">Add 500ml water</button>
+                        <button type="submit" name="quantity" th:value="${machine.getMaxWaterContainer()}" class="list-group-item list-group-item-action">Fill to full!</button>
+                    </form>
+                    <form th:action="@{/stock-coffee-machine/empty-water-tank}" th:method="PUT">
+                        <button type="submit" class="list-group-item list-group-item-action" >Empty the container</button>
+                    </form>
                 </div>
 
             </div>
-            <div class="col">
-                <div class="list-group text-center">
-                    <a class=" list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-beans-container(quantity=50)}"> Add 50g beans</a>
-                    <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-beans-container(quantity=100)}"> Add 100g beans</a>
-                    <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/fill-beans-container(quantity=${machine.getMaxMilkContainer()})}">
-                        Fill to full!</a>
-                    <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/empty-coffee-beans}">
-                        Empty the container</a>
-
-                </div>
-            </div>
-            <div class="col">
-
-                <div class="list-group text-center">
-                    <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/empty-ground-container}"> Clean the ground container </a>
-                </div>
-            </div>
-
             <div class="col">
 
                 <div class="list-group text-center ">
-                    <a class="list-group-item list-group-item-action"
-                       th:href="@{/stock-coffee-machine/descale}"> Descale </a>
+                    <form id="fillMilkTank" th:action="@{/stock-coffee-machine/fill-milk-tank}" th:method="PUT">
+                        <button type="submit" name="quantity" th:value="250" class="list-group-item list-group-item-action">Add 250ml milk</button>
+                        <button type="submit" name="quantity" th:value="500" class="list-group-item list-group-item-action">Add 500ml milk</button>
+                        <button type="submit" name="quantity" th:value="${machine.getMaxMilkContainer()}" class="list-group-item list-group-item-action">Fill to full!</button>
+                    </form>
+                    <form th:action="@{/stock-coffee-machine/empty-milk-tank}" th:method="PUT">
+                        <button type="submit" class="list-group-item list-group-item-action" >Empty the container</button>
+                    </form>
+                </div>
+
+            </div>
+            <div class="col">
+
+                <div class="list-group text-center ">
+                    <form id="fillBeansContainer" th:action="@{/stock-coffee-machine/fill-beans-container}" th:method="PUT">
+                        <button type="submit" name="quantity" th:value="50" class="list-group-item list-group-item-action">Add 50g beans</button>
+                        <button type="submit" name="quantity" th:value="100" class="list-group-item list-group-item-action">Add 100g beans</button>
+                        <button type="submit" name="quantity" th:value="${machine.getMaxCoffeeBeansContainer()}" class="list-group-item list-group-item-action">Fill to full!</button>
+                    </form>
+                    <form th:action="@{/stock-coffee-machine/empty-coffee-beans}" th:method="PUT">
+                        <button type="submit" class="list-group-item list-group-item-action" >Empty the container</button>
+                    </form>
                 </div>
             </div>
 
             <div class="col">
-                <form method="POST" th:action="@{stock-coffee-machine/water-hardness}">
+                <div class="list-group text-center">
+                    <form th:action="@{/stock-coffee-machine/empty-ground-container}" th:method="PUT">
+                        <button type="submit" class="list-group-item list-group-item-action">Clean the ground container</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="list-group text-center">
+                    <form th:action="@{/stock-coffee-machine/descale}" th:method="PUT">
+                        <button type="submit" class="list-group-item list-group-item-action">Descale</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col">
+                <form th:method="PUT" th:action="@{stock-coffee-machine/water-hardness}">
                     <label class="form-label" for="waterHardness">Set water hardness: </label>
 
                     <input class="form-control col-4 mb-4" id="waterHardness" name="waterHardness"

@@ -58,12 +58,14 @@
             <td th:text="${coffeeAdmin.cupSize}"/>
 
             <td>
-                <div class="text-center">
-                    <a class="btn btn-outline-dark w-75"
+                <div>
+                    <a class="btn btn-outline-dark mb-1"
                        th:href="@{/admin/show-update-form(coffeeAdminId=${coffeeAdmin.id})}">Update</a>
-                    <a class="btn btn-danger ml-2 w-75"
-                       th:href="@{/admin/delete-adminCoffee(coffeeAdminId=${coffeeAdmin.id})}">Delete</a>
                 </div>
+                    <form th:action="@{/admin/delete-admin-coffee}" th:method="DELETE">
+                        <button type="submit" name="coffeeAdminId" th:value="${coffeeAdmin.id}" class="btn btn-danger">Delete</button>
+                    </form>
+
             </td>
         </tr>
         </tbody>

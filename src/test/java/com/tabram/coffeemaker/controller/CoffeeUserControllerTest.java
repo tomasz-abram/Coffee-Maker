@@ -28,6 +28,8 @@ import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -209,8 +211,9 @@ class CoffeeUserControllerTest {
         @Test
         @WithMockUser(roles = "USER")
         void whenRoleIsCorrect_ThenDeleteCoffee() throws Exception {
-            mockMvc.perform(get("/user/delete-user-coffee")
-                            .param("coffeeUserId", "20"))
+            mockMvc.perform(delete("/user/delete-user-coffee")
+                            .param("coffeeUserId", "20")
+                            .with(csrf()))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/coffee-settings"))
                     .andDo(print());
@@ -244,7 +247,8 @@ class CoffeeUserControllerTest {
             User userTest = new User("UserTest", "UserTest", true, Set.of(new Role("ROLE_USER")));
             when(userService.currentUser()).thenReturn(userTest);
 
-            mockMvc.perform(get("/user/update-coffee-recipes"))
+            mockMvc.perform(put("/user/update-coffee-recipes")
+                    .with(csrf()))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/coffee-settings"))
                     .andDo(print());

@@ -7,10 +7,7 @@ import com.tabram.coffeemaker.service.CoffeeUserService;
 import com.tabram.coffeemaker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -66,7 +63,7 @@ public class CoffeeAdminController {
         return mav;
     }
 
-    @GetMapping("/admin/delete-adminCoffee")
+    @DeleteMapping("/admin/delete-admin-coffee")
     public String deleteAdminCoffee(@RequestParam Long coffeeAdminId) {
         coffeeAdminService.deleteCoffee(coffeeAdminId);
         return "redirect:/admin/admin-coffee-list";

@@ -24,8 +24,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -142,8 +141,9 @@ class CoffeeAdminControllerIntegrationTest {
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenValidInput_ThenDeleteCoffee() throws Exception {
-            mockMvc.perform(get("/admin/delete-adminCoffee")
-                            .param("coffeeAdminId", "10"))
+            mockMvc.perform(delete("/admin/delete-admin-coffee")
+                            .param("coffeeAdminId", "10")
+                            .with(csrf()))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/admin/admin-coffee-list"))
                     .andDo(print());
@@ -153,8 +153,9 @@ class CoffeeAdminControllerIntegrationTest {
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenNullValue_ThenReturn400() throws Exception {
-            mockMvc.perform(get("/admin/delete-adminCoffee")
-                            .param("coffeeAdminId", ""))
+            mockMvc.perform(delete("/admin/delete-admin-coffee")
+                            .param("coffeeAdminId", "")
+                            .with(csrf()))
                     .andExpect(status().isBadRequest())
                     .andDo(print());
             verify(coffeeAdminService, never()).deleteCoffee(any());

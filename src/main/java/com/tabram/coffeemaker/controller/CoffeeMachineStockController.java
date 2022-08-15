@@ -41,55 +41,55 @@ public class CoffeeMachineStockController {
         return mav;
     }
 
-    @PostMapping("/water-hardness")
+    @PutMapping("/water-hardness")
     public String setWaterHardness(@RequestParam("waterHardness") float value) {
         coffeeMachineStockService.updateWaterHardness(value);
         return REDIRECT;
     }
 
-    @GetMapping("/fill-water-tank")
-    public String fillWater(@RequestParam int quantity) {
+    @PutMapping("/fill-water-tank")
+    public String fillWater(@RequestParam("quantity") int quantity) {
         coffeeMachineStockService.updateWater(quantity);
         return REDIRECT;
     }
 
-    @GetMapping("/empty-water-tank")
+    @PutMapping("/empty-water-tank")
     public String emptyWater() {
         coffeeMachineStockService.emptyWater();
         return REDIRECT;
     }
 
-    @GetMapping("/fill-milk-tank")
+    @PutMapping("/fill-milk-tank")
     public String fillMilk(@RequestParam int quantity) {
         coffeeMachineStockService.updateMilk(quantity);
         return REDIRECT;
     }
 
-    @GetMapping("/empty-milk-tank")
+    @PutMapping("/empty-milk-tank")
     public String emptyMilk() {
         coffeeMachineStockService.emptyMilk();
         return REDIRECT;
     }
 
-    @GetMapping("/fill-beans-container")
+    @PutMapping("/fill-beans-container")
     public String fillBeans(@RequestParam int quantity) {
         coffeeMachineStockService.updateBeans(quantity);
         return REDIRECT;
     }
 
-    @GetMapping("/empty-coffee-beans")
+    @PutMapping("/empty-coffee-beans")
     public String emptyCoffeeBeans() {
         coffeeMachineStockService.emptyCoffeeBeans();
         return REDIRECT;
     }
 
-    @GetMapping("/empty-ground-container")
+    @PutMapping("/empty-ground-container")
     public String cleanGroundContainer() {
         coffeeMachineStockService.emptyGroundContainer();
         return REDIRECT;
     }
 
-    @GetMapping("/descale")
+    @PutMapping("/descale")
     public String descale() {
         coffeeMachineStockService.descale();
         return REDIRECT;

@@ -30,6 +30,8 @@ import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -81,7 +83,7 @@ class AdminControllerIntegrationTest {
             userDto.setEnabled(true);
             userDto.setRoles(Set.of(new Role("ROLE_TEST")));
 
-            mockMvc.perform(post("/admin/admin-update-user")
+            mockMvc.perform(put("/admin/admin-update-user")
                             .contentType(MediaType.TEXT_HTML)
                             .with(csrf())
                             .flashAttr("userD", userDto))
@@ -149,7 +151,7 @@ class AdminControllerIntegrationTest {
             coffeeMachineConstantValueDto.setValue(1000);
             coffeeMachineConstantValueDto.setId(10L);
 
-            mockMvc.perform(post("/admin/admin-update-coffee-machine-constant-value")
+            mockMvc.perform(put("/admin/admin-update-coffee-machine-constant-value")
                             .contentType(MediaType.TEXT_HTML)
                             .characterEncoding("UTF-8")
                             .flashAttr("machineConst", coffeeMachineConstantValueDto)
@@ -188,7 +190,7 @@ class AdminControllerIntegrationTest {
         @Test
         @WithMockUser(roles = "ADMIN")
         void whenValidInput_ThenItDeactivatesTheUser() throws Exception {
-            mockMvc.perform(post("/admin/deactivate-user")
+            mockMvc.perform(delete("/admin/deactivate-user")
                             .contentType(MediaType.TEXT_HTML)
                             .param("userId", "10")
                             .with(csrf()))

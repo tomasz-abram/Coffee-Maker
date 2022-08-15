@@ -8,10 +8,7 @@ import com.tabram.coffeemaker.service.RoleService;
 import com.tabram.coffeemaker.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -40,7 +37,7 @@ public class AdminController {
         return new CoffeeMachineConstantValueDto();
     }
 
-    @PostMapping(path = {"/admin/deactivate-user"})
+    @DeleteMapping(path = {"/admin/deactivate-user"})
     public String deactivationUser(@RequestParam("userId") Long userId) {
         userService.deactivationUser(userId);
         return "redirect:/admin/admin-users-list";
@@ -53,7 +50,7 @@ public class AdminController {
         return mav;
     }
 
-    @PostMapping("/admin/admin-update-user")
+    @PutMapping("/admin/admin-update-user")
     public String updateUser(@ModelAttribute("userD") UserDto userDto) {
         coffeeAdminService.updateUser(userDto);
         return "redirect:/admin/admin-users-list";
@@ -74,11 +71,10 @@ public class AdminController {
         return mav;
     }
 
-    @PostMapping("/admin/admin-update-coffee-machine-constant-value")
+    @PutMapping("/admin/admin-update-coffee-machine-constant-value")
     public String updateCoffeeMachineConstValue(@ModelAttribute("machineConst") CoffeeMachineConstantValueDto coffeeMachineConstantValueDto) {
         coffeeMachineConstantValueService.updateConstantValue(coffeeMachineConstantValueDto);
         return "redirect:/admin/admin-coffee-machine-constant-value-list";
-
     }
 
     @GetMapping("/admin/update-const-form")

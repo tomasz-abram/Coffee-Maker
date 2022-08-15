@@ -56,14 +56,13 @@
                        th:classappend="${user.isEnabled() ? 'btn-info' : 'btn-outline-info'}"
                        th:href="@{/admin/update-user-form(userId=${user.id})}">Update</a>
 
-                    <form class="d-inline-block"  th:method="POST" th:action="@{/admin/deactivate-user}">
+                    <form class="d-inline-block" th:action="@{/admin/deactivate-user}" th:method="DELETE">
                         <input class="visually-hidden" id="userId" name="userId"
-                               placeholder="userId"  type="number" th:value="${user.getId}"/>
-
-                        <button type="submit" class="btn ml-2" th:classappend="${user.isEnabled() ? 'btn-warning' : 'btn-outline-warning'}"
-                           th:text="${user.isEnabled() ? 'Deactivation' : 'Activation '}"
-
-                        >Deactivation</button>
+                               placeholder="userId" th:value="${user.getId}" type="number"/>
+                        <button class="btn ml-2" th:classappend="${user.isEnabled() ? 'btn-warning' : 'btn-outline-warning'}"
+                                th:text="${user.isEnabled() ? 'Deactivation' : 'Activation '}"
+                                type="submit">Deactivation
+                        </button>
                     </form>
                 </div>
             </td>

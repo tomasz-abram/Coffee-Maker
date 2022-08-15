@@ -29,7 +29,7 @@
         </div>
         <hr/>
 
-        <form class=" container w-50" method="POST" th:modelAttribute="userD" th:action="@{/admin/admin-update-user}">
+        <form class=" container w-50" th:method="PUT" th:modelAttribute="userD" th:action="@{/admin/admin-update-user}">
 
             <div class="form-group row py-2">
                 <label class="col-sm-2 col-form-label" for="id">Id :</label>

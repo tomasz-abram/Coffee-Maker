@@ -21,6 +21,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -79,7 +80,7 @@ class CoffeeMachineStockControllerIntegrationTest {
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
         void whenInputValid_ThenSetWaterHardness_AndRedirect() throws Exception {
-            mockMvc.perform(post("/stock-coffee-machine/water-hardness")
+            mockMvc.perform(put("/stock-coffee-machine/water-hardness")
                             .param("waterHardness", "10")
                             .with(csrf()))
                     .andExpect(status().is3xxRedirection())
@@ -95,7 +96,7 @@ class CoffeeMachineStockControllerIntegrationTest {
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
         void whenInputValid_ThenFillWater_AndRedirect() throws Exception {
-            mockMvc.perform(get("/stock-coffee-machine/fill-water-tank")
+            mockMvc.perform(put("/stock-coffee-machine/fill-water-tank")
                             .param("quantity", "10")
                             .with(csrf()))
                     .andExpect(status().is3xxRedirection())
@@ -111,7 +112,8 @@ class CoffeeMachineStockControllerIntegrationTest {
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
         void whenRemovesAllWaterFromTheContainer_ThenRedirect() throws Exception {
-            mockMvc.perform(get("/stock-coffee-machine/empty-water-tank"))
+            mockMvc.perform(put("/stock-coffee-machine/empty-water-tank")
+                            .with(csrf()))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/stock-coffee-machine"))
                     .andDo(print());
@@ -125,7 +127,7 @@ class CoffeeMachineStockControllerIntegrationTest {
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
         void whenInputValid_ThenFillMilk_AndRedirect() throws Exception {
-            mockMvc.perform(get("/stock-coffee-machine/fill-milk-tank")
+            mockMvc.perform(put("/stock-coffee-machine/fill-milk-tank")
                             .param("quantity", "100")
                             .with(csrf()))
                     .andExpect(status().is3xxRedirection())
@@ -141,7 +143,8 @@ class CoffeeMachineStockControllerIntegrationTest {
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
         void whenRemovesAllMilkFromTheContainer_ThenRedirect() throws Exception {
-            mockMvc.perform(get("/stock-coffee-machine/empty-milk-tank"))
+            mockMvc.perform(put("/stock-coffee-machine/empty-milk-tank")
+                            .with(csrf()))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/stock-coffee-machine"))
                     .andDo(print());
@@ -155,7 +158,7 @@ class CoffeeMachineStockControllerIntegrationTest {
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
         void whenInputValid_ThenFillTheContainerWithCoffeeBeans_AndRedirect() throws Exception {
-            mockMvc.perform(get("/stock-coffee-machine/fill-beans-container")
+            mockMvc.perform(put("/stock-coffee-machine/fill-beans-container")
                             .param("quantity", "100")
                             .with(csrf()))
                     .andExpect(status().is3xxRedirection())
@@ -171,7 +174,8 @@ class CoffeeMachineStockControllerIntegrationTest {
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
         void whenRemoveAllCoffeeBeansFromTheContainer_ThenRedirect() throws Exception {
-            mockMvc.perform(get("/stock-coffee-machine/empty-coffee-beans"))
+            mockMvc.perform(put("/stock-coffee-machine/empty-coffee-beans")
+                            .with(csrf()))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/stock-coffee-machine"))
                     .andDo(print());
@@ -185,7 +189,8 @@ class CoffeeMachineStockControllerIntegrationTest {
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
         void whenCleansGroundContainer_ThenRedirect() throws Exception {
-            mockMvc.perform(get("/stock-coffee-machine/empty-ground-container"))
+            mockMvc.perform(put("/stock-coffee-machine/empty-ground-container")
+                            .with(csrf()))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/stock-coffee-machine"))
                     .andDo(print());
@@ -199,7 +204,8 @@ class CoffeeMachineStockControllerIntegrationTest {
         @Test
         @WithMockUser(roles = {"ADMIN", "USER"})
         void whenDescale_thenRedirect() throws Exception {
-            mockMvc.perform(get("/stock-coffee-machine/descale"))
+            mockMvc.perform(put("/stock-coffee-machine/descale")
+                            .with(csrf()))
                     .andExpect(status().is3xxRedirection())
                     .andExpect(redirectedUrl("/stock-coffee-machine"))
                     .andDo(print());

@@ -72,6 +72,7 @@ public class MakeCoffeeService {
             coffeeMachineStocksList.add(descaleCounter);
         }
 
+        
         coffeeMachineStockRepository.saveAll(coffeeMachineStocksList);
     }
 

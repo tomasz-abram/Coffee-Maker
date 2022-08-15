@@ -58,13 +58,13 @@ public class CoffeeUserController {
         return mav;
     }
 
-    @GetMapping("/user/delete-user-coffee")
+    @DeleteMapping("/user/delete-user-coffee")
     public String deleteUserCoffee(@RequestParam Long coffeeUserId) {
         coffeeUserService.deleteCoffee(coffeeUserId);
         return REDIRECT;
     }
 
-    @GetMapping("/user/update-coffee-recipes")
+    @PutMapping("/user/update-coffee-recipes")
     public String updateCoffeeRecipes() {
         coffeeUserService.updateDefaultCoffees(userService.currentUser());
         return REDIRECT;
