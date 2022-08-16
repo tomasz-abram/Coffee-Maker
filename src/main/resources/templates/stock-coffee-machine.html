@@ -32,18 +32,16 @@
     <hr/>
 
     <div class="container">
-        <div class="text-center row justify-content-center align-items-center">
+        <div class="text-center row justify-content-center align-top">
 
-            <div class="col fs-5">Water level</div>
-            <div class="col fs-5">Milk level</div>
-            <div class="col fs-5">Coffee beans level</div>
-            <div class="col fs-5">Ground container level</div>
-            <div class="col fs-5">Descale</div>
-            <div class="col fs-5">Water hardness</div>
-            <div class="w-100"></div>
+            <!--WATER LEVEL-->
+            <div class="col">
 
-            <div class="col" >
-                <div class=" progress progress-bar-vertical mx-5">
+                <div class="header-text-status">
+                    <span>Water level</span>
+                </div>
+
+                <div class="progress progress-bar-vertical mx-1 fs-6">
                     <div aria-valuemax="100" aria-valuemin="0" class="progress-bar bg-opacity-75"
                          role="progressbar"
                          style="height: 80%"
@@ -56,27 +54,88 @@
                               th:text="${#numbers.formatInteger(((waterStock.getValue() * 1.0 / machine.getMaxWaterContainer()) * 100.0) ,1)+ '%'}">% Water Level</span>
                     </div>
                 </div>
+
+                <div class="value-text-status">
+                    <span th:text="${#numbers.formatDecimal(waterStock.getValue(),0,'COMMA',0,'POINT')} + ' /'">Value /</span>
+                    <span th:text="${machine.getMaxWaterContainer() + 'ml'}">value</span>
+                </div>
+
+                <div class="list-group text-center mt-auto">
+                    <form id="fillWaterTank" th:action="@{/stock-coffee-machine/fill-water-tank}" th:method="PUT">
+                        <button class="list-group-item list-group-item-action" name="quantity" th:value="250"
+                                type="submit">Add 250ml water
+                        </button>
+                        <button class="list-group-item list-group-item-action" name="quantity" th:value="500"
+                                type="submit">Add 500ml water
+                        </button>
+                        <button class="list-group-item list-group-item-action" name="quantity"
+                                th:value="${machine.getMaxWaterContainer()}"
+                                type="submit">Fill to full!
+                        </button>
+                    </form>
+                    <form th:action="@{/stock-coffee-machine/empty-water-tank}" th:method="PUT">
+                        <button class="list-group-item list-group-item-action" type="submit">Empty the container
+                        </button>
+                    </form>
+                </div>
+
             </div>
 
-
+            <!--MILK LEVEL-->
             <div class="col">
-                <div class="progress progress-bar-vertical mx-5">
-                    <div aria-valuemax="100" aria-valuemin="0" class="progress-bar bg-opacity-75" role="progressbar"
-                         style="height: 80%"
-                         th:classappend="
+
+                <div class="header-text-status">
+                    <span>Milk level</span>
+                </div>
+
+                <div>
+                    <div class="progress progress-bar-vertical mx-1 fs-6">
+                        <div aria-valuemax="100" aria-valuemin="0" class="progress-bar bg-opacity-75" role="progressbar"
+                             style="height: 80%"
+                             th:classappend="
             ${(milkStock.getStatus() =='Ok' ? 'bg-success': '') +
               (milkStock.getStatus() =='Warning' ? 'bg-warning': '')+
               (milkStock.getStatus() =='Danger' ? 'bg-danger': '')}"
-                         th:style="'height:' + ${((milkStock.getValue() * 1.0 / machine.getMaxMilkContainer()) * 100.0 ) + '%;'}">
+                             th:style="'height:' + ${((milkStock.getValue() * 1.0 / machine.getMaxMilkContainer()) * 100.0 ) + '%;'}">
                         <span class="sr-only"
                               th:text="${#numbers.formatInteger(((milkStock.getValue() * 1.0 / machine.getMaxMilkContainer()) * 100.0) ,1)+ '%'}">% Milk Level</span>
+                        </div>
                     </div>
                 </div>
+
+                <div class="value-text-status">
+                    <span th:text="${#numbers.formatDecimal(milkStock.getValue(),0,'COMMA',0,'POINT')} + ' /'">Value /</span>
+                    <span th:text="${machine.getMaxMilkContainer() + 'ml'}">value</span>
+                </div>
+
+                <div class="list-group text-center mt-auto">
+                    <form id="fillMilkTank" th:action="@{/stock-coffee-machine/fill-milk-tank}" th:method="PUT">
+                        <button class="list-group-item list-group-item-action" name="quantity" th:value="250"
+                                type="submit">Add 250ml milk
+                        </button>
+                        <button class="list-group-item list-group-item-action" name="quantity" th:value="500"
+                                type="submit">Add 500ml milk
+                        </button>
+                        <button class="list-group-item list-group-item-action" name="quantity"
+                                th:value="${machine.getMaxMilkContainer()}"
+                                type="submit">Fill to full!
+                        </button>
+                    </form>
+                    <form th:action="@{/stock-coffee-machine/empty-milk-tank}" th:method="PUT">
+                        <button class="list-group-item list-group-item-action" type="submit">Empty the container
+                        </button>
+                    </form>
+                </div>
+
             </div>
-
-
+            <!--COFFEE BEANS LEVEL-->
             <div class="col">
-                <div class="progress progress-bar-vertical mx-5">
+
+                <div class="header-text-status">
+                    <span>Coffee beans level</span>
+                </div>
+
+                <div class="progress progress-bar-vertical mx-1 fs-6">
                     <div aria-valuemax="100" aria-valuemin="0" class="progress-bar bg-opacity-75" role="progressbar"
                          style="height: 80%"
                          th:classappend="
@@ -88,11 +147,42 @@
                               th:text="${#numbers.formatInteger(((coffeeBeansStock.getValue() * 1.0 / machine.getMaxCoffeeBeansContainer()) * 100.0) ,1)+ '%'}">%Beans Level</span>
                     </div>
                 </div>
+
+                <div class="value-text-status">
+                    <span th:text="${coffeeBeansStock.getValue()} + ' /'">Value /</span>
+                    <span th:text="${machine.getMaxCoffeeBeansContainer() + 'g'}">value</span>
+                </div>
+
+                <div class="list-group text-center mt-auto">
+                    <form id="fillBeansContainer" th:action="@{/stock-coffee-machine/fill-beans-container}"
+                          th:method="PUT">
+                        <button class="list-group-item list-group-item-action" name="quantity" th:value="50"
+                                type="submit">Add 50g beans
+                        </button>
+                        <button class="list-group-item list-group-item-action" name="quantity" th:value="100"
+                                type="submit">Add 100g beans
+                        </button>
+                        <button class="list-group-item list-group-item-action" name="quantity"
+                                th:value="${machine.getMaxCoffeeBeansContainer()}"
+                                type="submit">Fill to full!
+                        </button>
+                    </form>
+                    <form th:action="@{/stock-coffee-machine/empty-coffee-beans}" th:method="PUT">
+                        <button class="list-group-item list-group-item-action" type="submit">Empty the container
+                        </button>
+                    </form>
+                </div>
+
             </div>
 
-
+            <!--GROUND CONTAINER LEVEL-->
             <div class="col">
-                <div class="progress progress-bar-vertical mx-5">
+
+                <div class="header-text-status">
+                    <span>Ground container level</span>
+                </div>
+
+                <div class="progress progress-bar-vertical mx-1 fs-6">
                     <div aria-valuemax="100" aria-valuemin="0" class="progress-bar bg-opacity-75" role="progressbar"
                          style="height: 80%"
                          th:classappend="
@@ -104,11 +194,30 @@
                               th:text="${#numbers.formatInteger(((groundContainerStock.getValue() * 1.0 / machine.getMaxGroundContainer()) * 100.0) ,1)+ '%'}">%Ground</span>
                     </div>
                 </div>
+
+                <div class="value-text-status">
+                    <span th:text="${#numbers.formatDecimal(groundContainerStock.getValue(),0,'COMMA',0,'POINT')} + ' /'">Value /</span>
+                    <span th:text="${machine.getMaxGroundContainer() + 'pcs'}">value</span>
+                </div>
+
+                <div class="list-group text-center mt-auto">
+                    <form th:action="@{/stock-coffee-machine/empty-ground-container}" th:method="PUT">
+                        <button class="list-group-item list-group-item-action" type="submit">Clean the ground
+                            container
+                        </button>
+                    </form>
+                </div>
+
             </div>
 
-
+            <!--DESCALE-->
             <div class="col">
-                <div class="progress progress-bar-vertical mx-5">
+
+                <div class="header-text-status">
+                    <span>Descale</span>
+                </div>
+
+                <div class="progress progress-bar-vertical fs-6">
                     <div aria-valuemax="100" aria-valuemin="0" class="progress-bar bg-opacity-75" role="progressbar"
                          style="height: 80%"
                          th:classappend="
@@ -120,133 +229,61 @@
                               th:text="${#numbers.formatInteger(((descaleCounter.getValue()* 1.0 / machine.getMaxDescaleCounter()) * 100.0) ,1)+ '%'}">%Milk </span>
                     </div>
                 </div>
-            </div>
 
-
-            <div class="col">
-                <div class="text-center progress progress-bar progress-light progress-bar-vertical mx-5">
-
-                    <span class="fs-5 w-100  sr-only" th:text="${waterHardnessStock.getValue()}">Wat. hard.</span>
-
-                    <span class="fs-5 sr-only w-100">
-
-                    </span>
-                </div>
-            </div>
-
-
-            <div class="w-100"></div>
-
-
-            <div class="col ">
-                <span th:text="${#numbers.formatDecimal(waterStock.getValue(),0,'COMMA',0,'POINT')} + ' /'"></span>
-                <span th:text="${machine.getMaxWaterContainer() + 'ml'}"></span>
-            </div>
-
-            <div class="col">
-                <span th:text="${#numbers.formatDecimal(milkStock.getValue(),0,'COMMA',0,'POINT')} + ' /'"></span>
-                <span th:text="${machine.getMaxMilkContainer() + 'ml'}"></span>
-            </div>
-
-            <div class="col">
-                <span th:text="${coffeeBeansStock.getValue()} + ' /'"></span>
-                <span th:text="${machine.getMaxCoffeeBeansContainer() + 'g'}"></span>
-            </div>
-
-            <div class="col">
-                <span th:text="${#numbers.formatDecimal(groundContainerStock.getValue(),0,'COMMA',0,'POINT')} + ' /'"></span>
-                <span th:text="${machine.getMaxGroundContainer() + 'pcs'}"></span>
-            </div>
-
-            <div class="col">
-                <span th:text="${descaleCounter.getValue()} + ' /'"></span>
-                <span th:text="${machine.getMaxDescaleCounter() }"></span>
-            </div>
-
-
-            <div class="col">
-
-            </div>
-
-            <div class="w-100"></div>
-
-            <div class="col">
-                <div class="list-group text-center ">
-                    <form id="fillWaterTank" th:action="@{/stock-coffee-machine/fill-water-tank}" th:method="PUT">
-                        <button type="submit" name="quantity" th:value="250" class="list-group-item list-group-item-action" >Add 250ml water</button>
-                        <button type="submit" name="quantity" th:value="500" class="list-group-item list-group-item-action">Add 500ml water</button>
-                        <button type="submit" name="quantity" th:value="${machine.getMaxWaterContainer()}" class="list-group-item list-group-item-action">Fill to full!</button>
-                    </form>
-                    <form th:action="@{/stock-coffee-machine/empty-water-tank}" th:method="PUT">
-                        <button type="submit" class="list-group-item list-group-item-action" >Empty the container</button>
-                    </form>
+                <div class="value-text-status">
+                    <span th:text="${descaleCounter.getValue()} + ' /'">Value /</span>
+                    <span th:text="${machine.getMaxDescaleCounter() }">value</span>
                 </div>
 
-            </div>
-            <div class="col">
-
-                <div class="list-group text-center ">
-                    <form id="fillMilkTank" th:action="@{/stock-coffee-machine/fill-milk-tank}" th:method="PUT">
-                        <button type="submit" name="quantity" th:value="250" class="list-group-item list-group-item-action">Add 250ml milk</button>
-                        <button type="submit" name="quantity" th:value="500" class="list-group-item list-group-item-action">Add 500ml milk</button>
-                        <button type="submit" name="quantity" th:value="${machine.getMaxMilkContainer()}" class="list-group-item list-group-item-action">Fill to full!</button>
-                    </form>
-                    <form th:action="@{/stock-coffee-machine/empty-milk-tank}" th:method="PUT">
-                        <button type="submit" class="list-group-item list-group-item-action" >Empty the container</button>
-                    </form>
-                </div>
-
-            </div>
-            <div class="col">
-
-                <div class="list-group text-center ">
-                    <form id="fillBeansContainer" th:action="@{/stock-coffee-machine/fill-beans-container}" th:method="PUT">
-                        <button type="submit" name="quantity" th:value="50" class="list-group-item list-group-item-action">Add 50g beans</button>
-                        <button type="submit" name="quantity" th:value="100" class="list-group-item list-group-item-action">Add 100g beans</button>
-                        <button type="submit" name="quantity" th:value="${machine.getMaxCoffeeBeansContainer()}" class="list-group-item list-group-item-action">Fill to full!</button>
-                    </form>
-                    <form th:action="@{/stock-coffee-machine/empty-coffee-beans}" th:method="PUT">
-                        <button type="submit" class="list-group-item list-group-item-action" >Empty the container</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="list-group text-center">
-                    <form th:action="@{/stock-coffee-machine/empty-ground-container}" th:method="PUT">
-                        <button type="submit" class="list-group-item list-group-item-action">Clean the ground container</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="list-group text-center">
+                <div class="list-group text-center mt-auto">
                     <form th:action="@{/stock-coffee-machine/descale}" th:method="PUT">
-                        <button type="submit" class="list-group-item list-group-item-action">Descale</button>
+                        <button class="list-group-item list-group-item-action" type="submit">Descale</button>
                     </form>
                 </div>
+
             </div>
 
+            <!--WATER HARDNESS-->
             <div class="col">
-                <form th:method="PUT" th:action="@{stock-coffee-machine/water-hardness}">
-                    <label class="form-label" for="waterHardness">Set water hardness: </label>
 
-                    <input class="form-control col-4 mb-4" id="waterHardness" name="waterHardness"
-                           placeholder="Water hardness" step="0.01" type="number"/>
+                <div class="header-text-status">
+                    <span>Water hardness</span>
+                </div>
 
-                    <div sec:authorize="hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')">
-                        <button class="btn btn-primary w-100" type="submit">Save</button>
-                    </div>
+                <div class="text-center progress progress-bar progress-light progress-bar-vertical mx-1">
+                    <span class="fs-6 w-100  sr-only" th:text="${waterHardnessStock.getValue()}">Wat. hard.</span>
+                </div>
 
-                    <div sec:authorize="hasRole('ROLE_DEFAULT')">
-                        <button class="btn w-100 btn-secondary text-decoration-line-through" data-bs-placement="left" data-bs-toggle="tooltip"
-                                title="Register to be able to change this the value!"
-                                type="button">Save
-                        </button>
-                    </div>
+                <div class="value-text-status">
 
-                </form>
+                </div>
+
+
+                <div class="text-center list-group mt-auto">
+                    <form th:action="@{stock-coffee-machine/water-hardness}" th:method="PUT">
+                        <label class="form-label" for="waterHardness">Set water hardness: </label>
+
+                        <input class="form-control col-4 mb-4" id="waterHardness" name="waterHardness"
+                               placeholder="Water hardness" step="0.01" type="number"/>
+
+                        <div sec:authorize="hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')">
+                            <button class="btn btn-primary w-100" type="submit">Save</button>
+                        </div>
+
+                        <div sec:authorize="hasRole('ROLE_DEFAULT')">
+                            <button class="btn w-100 btn-secondary text-decoration-line-through"
+                                    data-bs-placement="left" data-bs-toggle="tooltip"
+                                    title="Register to be able to change this the value!"
+                                    type="button">Save
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+
             </div>
+
+
         </div>
     </div>
 </div>
