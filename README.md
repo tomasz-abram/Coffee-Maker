@@ -28,9 +28,8 @@ docker pull ghcr.io/tomasz-abram/coffee-maker-app:latest
 
 The following steps are suggested to start the application:
 
-1. Clone the repository <code> gh repo clone tomasz-abram/Coffee-Maker </code>
+1. Clone the repository <code> git clone https://github.com/tomasz-abram/Coffee-Maker.git </code>
 2. Turn on the Docker software.
-3. Open the repository in IDE.
 4. Type the command in the terminal <code> docker-compose up </code>
 5. The web application is available on port 8081 <code> localhost:8081 </code>
 
