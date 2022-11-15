@@ -1,13 +1,15 @@
 package com.tabram.coffeemaker.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "coffee_machine_constant_value")
-public class CoffeeMachineConstantValue {
+public class CoffeeMachineConstantValue implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false, nullable = false)
     private Long id;
 
     private String name;

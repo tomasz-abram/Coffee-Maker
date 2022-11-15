@@ -9,6 +9,7 @@ public class CoffeeUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false, nullable = false)
     private Long id;
     @Column(name = "coffee_name")
     private String coffeeName;
@@ -32,17 +33,6 @@ public class CoffeeUser implements Serializable {
 
 
     public CoffeeUser() {
-    }
-
-    public CoffeeUser(String coffeeName, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize) {
-        this.coffeeName = coffeeName;
-        this.tempWater = tempWater;
-        this.grindingLevel = grindingLevel;
-        this.amountOfCoffee = amountOfCoffee;
-        this.amountOfWater = amountOfWater;
-        this.amountMilk = amountMilk;
-        this.tempMilk = tempMilk;
-        this.cupSize = cupSize;
     }
 
     public CoffeeUser(String coffeeName, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize, User user) {
