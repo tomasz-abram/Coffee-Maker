@@ -1,5 +1,6 @@
 package com.tabram.coffeemaker.service;
 
+import com.tabram.coffeemaker.dto.UserDto;
 import com.tabram.coffeemaker.dto.UserRegistrationDto;
 import com.tabram.coffeemaker.model.Role;
 import com.tabram.coffeemaker.model.User;
@@ -89,5 +90,11 @@ public class UserService implements UserServiceInterface {
         userRepository.save(user);
     }
 
+    public void updateUser(UserDto userDto) {
+        User userDB = userRepository.findByUserName(userDto.getUsername());
+        userDB.setRoles(userDto.getRoles());
+        userDB.setEnabled(userDto.isEnabled());
+        userRepository.save(userDB);
+    }
 
 }
