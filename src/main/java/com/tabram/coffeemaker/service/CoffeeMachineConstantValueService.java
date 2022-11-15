@@ -14,13 +14,14 @@ public class CoffeeMachineConstantValueService {
 
 
     private final CoffeeMachineConstantValueRepository coffeeMachineConstantValueRepository;
+    private static final String MAX_GROUND_CONTAINER = "max_ground_container";
 
     @Autowired
     public CoffeeMachineConstantValueService(CoffeeMachineConstantValueRepository coffeeMachineConstantValueRepository) {
         this.coffeeMachineConstantValueRepository = coffeeMachineConstantValueRepository;
     }
 
-    public Integer getValue(String name){
+    public Integer getValue(String name) {
         return coffeeMachineConstantValueRepository.findByName(name).getValue();
     }
 
@@ -49,11 +50,18 @@ public class CoffeeMachineConstantValueService {
     }
 
     public Integer getMaxGroundContainer() {
-        return getValue("max_ground_container");
+        return getValue(MAX_GROUND_CONTAINER);
+    }
+
+    public Integer getMinGroundContainer() {
+        return getValue("min_ground_container");
     }
 
     public Integer getMaxDescaleCounter() {
         return getValue("max_descale_counter");
+    }
+    public Integer getMinDescaleCounter() {
+        return getValue("min_descale_counter");
     }
 
     public Integer getMaxGrindingLevel() {
@@ -138,13 +146,13 @@ public class CoffeeMachineConstantValueService {
 
     public Integer getWarningLevelGroundContainer() {
         Integer value = getValue("warning_level_ground_container");
-        Integer baseValue = getValue("max_ground_container");
+        Integer baseValue = getValue(MAX_GROUND_CONTAINER);
         return baseValue - value;
     }
 
     public Integer getDangerLevelGroundContainer() {
         Integer value = getValue("danger_level_ground_container");
-        Integer baseValue = getValue("max_ground_container");
+        Integer baseValue = getValue(MAX_GROUND_CONTAINER);
         return baseValue - value;
     }
 
@@ -156,7 +164,7 @@ public class CoffeeMachineConstantValueService {
 
     public Integer getDangerLevelDescale() {
         Integer value = getValue("danger_level_descale");
-        Integer baseValue = getValue("max_ground_container");
+        Integer baseValue = getValue(MAX_GROUND_CONTAINER);
         return baseValue - value;
     }
 
