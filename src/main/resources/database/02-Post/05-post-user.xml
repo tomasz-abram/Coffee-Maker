@@ -8,19 +8,19 @@
             <column name="id" valueNumeric="1"/>
             <column name="is_enabled" valueBoolean="true"/>
             <column name="password" value="$2a$10$VLn/9gJCRBe/ndcYTBp.2OBpPl3.jBIuSJCaGm26ktPHHdOriN33y"/>
-            <column name="user_name" value="Admin"/>
+            <column name="username" value="Admin"/>
         </insert>
         <insert tableName="user">
             <column name="id" valueNumeric="2"/>
             <column name="is_enabled" valueBoolean="true"/>
             <column name="password" value="$2a$10$2yLSNR5kjlge/66SmHhuaeVbZmnLBkfjYIWflHpePHMRctuxH9O0y"/>
-            <column name="user_name" value="UserTest"/>
+            <column name="username" value="UserTest"/>
         </insert>
         <insert tableName="user">
             <column name="id" valueNumeric="3"/>
             <column name="is_enabled" valueBoolean="true"/>
             <column name="password" value="$2a$10$KlzseGdRus73rOIFCAC/pOrrlKYxt6Cffk9fgScTaf4/6xI/xuBQu"/>
-            <column name="user_name" value="Default"/>
+            <column name="username" value="Default"/>
         </insert>
     </changeSet>
 
