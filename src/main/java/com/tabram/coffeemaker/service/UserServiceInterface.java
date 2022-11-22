@@ -2,9 +2,20 @@ package com.tabram.coffeemaker.service;
 
 
 import com.tabram.coffeemaker.dto.UserRegistrationDto;
+import com.tabram.coffeemaker.model.Role;
 import com.tabram.coffeemaker.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.List;
+
 public interface UserServiceInterface extends UserDetailsService {
-    User save(UserRegistrationDto registrationDto);
+    User getUserByUsername(String username);
+
+    List<User> getAllUsers();
+
+    User saveUser(UserRegistrationDto registrationDto);
+
+    Role saveRole(Role role);
+
+    void addRoleToUser(String username, String roleName);
 }

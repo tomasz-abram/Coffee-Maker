@@ -4,7 +4,6 @@ import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.model.CoffeeAdmin;
 import com.tabram.coffeemaker.model.CoffeeUser;
 import com.tabram.coffeemaker.model.User;
-import com.tabram.coffeemaker.repository.CoffeeAdminRepository;
 import com.tabram.coffeemaker.repository.CoffeeUserRepository;
 import com.tabram.coffeemaker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +19,14 @@ import java.util.List;
 public class CoffeeUserService {
 
     private final CoffeeUserRepository coffeeUserRepository;
-    private final CoffeeAdminRepository coffeeAdminRepository;
-    private final UserRepository userRepository;
     private final CoffeeAdminService coffeeAdminService;
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public CoffeeUserService(CoffeeUserRepository coffeeUserRepository, CoffeeAdminRepository coffeeAdminRepository, UserRepository userRepository, CoffeeAdminService coffeeAdminService, UserService userService) {
+    public CoffeeUserService(CoffeeUserRepository coffeeUserRepository, CoffeeAdminService coffeeAdminService, UserRepository userRepository) {
         this.coffeeUserRepository = coffeeUserRepository;
-        this.coffeeAdminRepository = coffeeAdminRepository;
-        this.userRepository = userRepository;
         this.coffeeAdminService = coffeeAdminService;
-        this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     public CoffeeUser findCoffeeUserById(Long coffeeUserId) {
@@ -39,7 +34,15 @@ public class CoffeeUserService {
                 .orElseThrow(() -> new EntityNotFoundException("Coffee not found"));
     }
 
-    public CoffeeUser findCoffeeByCoffeeNameAndUserId(String coffeeName, Long userId) {
+    public void saveCoffee(CoffeeUser coffeeUser) {
+        coffeeUserRepository.save(coffeeUser);
+    }
+
+    public void saveAllCoffees(List<CoffeeUser> coffeeUsersList) {
+        coffeeUserRepository.saveAll(coffeeUsersList);
+    }
+
+    public CoffeeUser findCoffeeByCoffeeNameAndUsername(String coffeeName, Long userId) {
         return coffeeUserRepository.findCoffeeUserByCoffeeNameAndUserId(coffeeName, userId);
     }
 
@@ -47,10 +50,13 @@ public class CoffeeUserService {
         coffeeUserRepository.deleteById(coffeeId);
     }
 
-    public void addCoffeeListToUser(User user) {
+    public boolean coffeeExists(CoffeeDto coffeeDto, User user) {
+        return coffeeUserRepository.existsCoffeeUserByCoffeeNameAndUserId(coffeeDto.getCoffeeName(), user.getId());
+    }
 
+    public void addCoffeeListToUser(User user) {
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
-        coffeeAdminRepository.findAll().forEach(coffees -> {
+        coffeeAdminService.getAllCoffees().forEach(coffees -> {
             CoffeeUser coffee = new CoffeeUser(
                     coffees.getCoffeeName(),
                     coffees.getTempWater(),
@@ -63,13 +69,13 @@ public class CoffeeUserService {
                     user);
             coffeeUsers.add(coffee);
         });
-        coffeeUserRepository.saveAll(coffeeUsers);
+        saveAllCoffees(coffeeUsers);
     }
 
     public void addOneCoffeeForEachUser(CoffeeDto coffeeDto) {
         List<CoffeeUser> coffeeUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
-            if (!coffeeUserRepository.existsCoffeeUserByCoffeeNameAndUserId(coffeeDto.getCoffeeName(), user.getId())) {
+            if (!coffeeExists(coffeeDto, user)) {
                 CoffeeUser coffee = new CoffeeUser(
                         coffeeDto.getCoffeeName(),
                         coffeeDto.getTempWater(),
@@ -83,15 +89,13 @@ public class CoffeeUserService {
                 coffeeUsers.add(coffee);
             }
         });
-        coffeeUserRepository.saveAll(coffeeUsers);
+        saveAllCoffees(coffeeUsers);
     }
 
     public void saveCoffee(CoffeeDto coffeeDto, User user) {
-
         coffeeAdminService.checkCoffeeParameters(coffeeDto);
-
-        if (coffeeUserRepository.existsCoffeeUserByCoffeeNameAndUserId(coffeeDto.getCoffeeName(), user.getId())) {
-            CoffeeUser coffeeDB = coffeeUserRepository.findCoffeeUserByCoffeeNameAndUserId(coffeeDto.getCoffeeName(), user.getId());
+        if (coffeeExists(coffeeDto, user)) {
+            CoffeeUser coffeeDB = findCoffeeByCoffeeNameAndUsername(coffeeDto.getCoffeeName(), user.getId());
             coffeeDB.setTempWater(coffeeDto.getTempWater());
             coffeeDB.setGrindingLevel(coffeeDto.getGrindingLevel());
             coffeeDB.setAmountOfCoffee(coffeeDto.getAmountOfCoffee());
@@ -99,7 +103,7 @@ public class CoffeeUserService {
             coffeeDB.setAmountMilk(coffeeDto.getAmountMilk());
             coffeeDB.setTempMilk(coffeeDto.getTempMilk());
             coffeeDB.setCupSize(coffeeDto.getCupSize());
-            coffeeUserRepository.save(coffeeDB);
+            saveCoffee(coffeeDB);
         } else {
             CoffeeUser coffeeUser = new CoffeeUser(
                     coffeeDto.getCoffeeName(),
@@ -110,20 +114,20 @@ public class CoffeeUserService {
                     coffeeDto.getAmountMilk(),
                     coffeeDto.getTempMilk(),
                     coffeeDto.getCupSize(),
-                    userService.currentUser());
-            coffeeUserRepository.save(coffeeUser);
+                    user
+            );
+            saveCoffee(coffeeUser);
         }
     }
 
     /* Update exist coffee or creates a new coffee in coffeeUserRepository from coffeeAdminRepository.
        Check the given coffee exist in the user's repository if yes, update, if not create new. */
     public void updateDefaultCoffees(User user) {
-
-        List<CoffeeAdmin> coffees = coffeeAdminRepository.findAll();
+        List<CoffeeAdmin> coffees = coffeeAdminService.getAllCoffees();
         List<CoffeeUser> coffeesUser = new ArrayList<>();
         coffees.forEach(coffeeAdmin -> {
-            CoffeeUser coffeeUser = coffeeUserRepository.findCoffeeUserByCoffeeNameAndUserId(coffeeAdmin.getCoffeeName(), user.getId());
-            if (!coffeeUserRepository.existsCoffeeUserByCoffeeNameAndUserId(coffeeAdmin.getCoffeeName(), user.getId())) {
+            CoffeeUser coffeeUser = findCoffeeByCoffeeNameAndUsername(coffeeAdmin.getCoffeeName(), user.getId());
+            if (coffeeUser == null) {
                 CoffeeUser newCoffee = new CoffeeUser(
                         coffeeAdmin.getCoffeeName(),
                         coffeeAdmin.getTempWater(),
@@ -146,7 +150,7 @@ public class CoffeeUserService {
                 coffeesUser.add(coffeeUser);
             }
         });
-        coffeeUserRepository.saveAll(coffeesUser);
+        saveAllCoffees(coffeesUser);
     }
 
     public Double tempCoffee(CoffeeUser coffeeUser) {

@@ -26,7 +26,8 @@ public class MakeCoffeeService {
         this.coffeeMachineStockService = coffeeMachineStockService;
         this.coffeeUserService = coffeeUserService;
     }
-@Transactional
+
+    @Transactional
     public void makeCoffee(String coffeeName, int quantity, User user) {
         List<CoffeeMachineStock> coffeeMachineStocksList = new ArrayList<>();
         CoffeeMachineStock waterStock = coffeeMachineStockService.findStockByName("Water");
@@ -36,7 +37,7 @@ public class MakeCoffeeService {
         CoffeeMachineStock descaleCounter = coffeeMachineStockService.findStockByName("Descale counter");
         CoffeeMachineStock waterHardnessStock = coffeeMachineStockService.findStockByName("Water hardness");
 
-        CoffeeUser coffee = coffeeUserService.findCoffeeByCoffeeNameAndUserId(coffeeName, user.getId());
+        CoffeeUser coffee = coffeeUserService.findCoffeeByCoffeeNameAndUsername(coffeeName, user.getId());
         if (waterStock.getValue() < coffee.getAmountOfWater() * quantity) {
             throw new IllegalStateException("There is not enough water in the machine to make this coffee");
         } else {
@@ -72,7 +73,7 @@ public class MakeCoffeeService {
             coffeeMachineStocksList.add(descaleCounter);
         }
 
-        
+
         coffeeMachineStockRepository.saveAll(coffeeMachineStocksList);
     }
 
