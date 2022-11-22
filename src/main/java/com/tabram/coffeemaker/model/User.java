@@ -1,9 +1,13 @@
 package com.tabram.coffeemaker.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -14,8 +18,8 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private Long id;
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "username")
+    private String username;
     private String password;
     private boolean isEnabled;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -28,6 +32,7 @@ public class User implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("coffeeUser")
     private List<CoffeeUser> coffeeUser;
 
 
@@ -38,41 +43,25 @@ public class User implements Serializable {
         this.coffeeUser = coffeeUser;
     }
 
-    public User(String userName, String password, boolean isEnabled) {
-        this.userName = userName;
+    public User(String username, String password, boolean isEnabled) {
+        this.username = username;
         this.password = password;
         this.isEnabled = isEnabled;
     }
 
-    public User(String userName, String password, boolean isEnabled, Set<Role> roles, List<CoffeeUser> coffeeUser) {
-        this.userName = userName;
+    public User(String username, String password, boolean isEnabled, Set<Role> roles, List<CoffeeUser> coffeeUser) {
+        this.username = username;
         this.password = password;
         this.isEnabled = isEnabled;
         this.roles = roles;
         this.coffeeUser = coffeeUser;
     }
 
-    public User(String userName, String password, boolean isEnabled, Set<Role> roles) {
-        this.userName = userName;
+    public User(String username, String password, boolean isEnabled, Set<Role> roles) {
+        this.username = username;
         this.password = password;
         this.isEnabled = isEnabled;
         this.roles = roles;
-    }
-
-    public boolean isEnabled() {
-        return isEnabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
-    }
-
-    public List<CoffeeUser> getCoffeeUser() {
-        return coffeeUser;
-    }
-
-    public void setCoffeeUser(List<CoffeeUser> coffeeUser) {
-        this.coffeeUser = coffeeUser;
     }
 
     public Long getId() {
@@ -84,11 +73,11 @@ public class User implements Serializable {
     }
 
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     public void setUsername(String username) {
-        this.userName = username;
+        this.username = username;
     }
 
     public String getPassword() {
@@ -99,6 +88,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -107,15 +104,37 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
+    @JsonManagedReference
+    public List<CoffeeUser> getCoffeeUser() {
+        return coffeeUser;
+    }
+
+    public void setCoffeeUser(List<CoffeeUser> coffeeUser) {
+        this.coffeeUser = coffeeUser;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", isEnabled=" + isEnabled +
                 ", roles=" + roles +
                 ", coffeeUser=" + coffeeUser +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return isEnabled == user.isEnabled && id.equals(user.id) && username.equals(user.username) && password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, isEnabled);
     }
 }

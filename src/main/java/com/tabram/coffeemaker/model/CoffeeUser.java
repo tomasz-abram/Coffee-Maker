@@ -1,5 +1,8 @@
 package com.tabram.coffeemaker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -29,6 +32,7 @@ public class CoffeeUser implements Serializable {
     private int cupSize;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("user")
     private User user;
 
 
@@ -111,6 +115,8 @@ public class CoffeeUser implements Serializable {
         this.cupSize = cupSize;
     }
 
+    @JsonBackReference
+
     public User getUser() {
         return user;
     }
@@ -119,7 +125,7 @@ public class CoffeeUser implements Serializable {
         this.user = user;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return user.getUsername();
     }
 
