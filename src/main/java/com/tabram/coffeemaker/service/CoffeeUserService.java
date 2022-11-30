@@ -69,7 +69,8 @@ public class CoffeeUserService {
                     user);
             coffeeUsers.add(coffee);
         });
-        saveAllCoffees(coffeeUsers);
+        user.setCoffeeUser(coffeeUsers);
+        userRepository.save(user);
     }
 
     public void addOneCoffeeForEachUser(CoffeeDto coffeeDto) {

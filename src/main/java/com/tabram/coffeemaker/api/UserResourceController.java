@@ -1,19 +1,17 @@
 package com.tabram.coffeemaker.api;
 
 import com.tabram.coffeemaker.dto.RoleToUserForm;
-import com.tabram.coffeemaker.dto.UserRegistrationDto;
-import com.tabram.coffeemaker.model.Role;
+import com.tabram.coffeemaker.dto.UserDto;
 import com.tabram.coffeemaker.model.User;
 import com.tabram.coffeemaker.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class UserResourceController {
     private final UserService userService;
 
@@ -21,65 +19,43 @@ public class UserResourceController {
         this.userService = userService;
     }
 
-    @GetMapping("/admin/users")
+    @GetMapping("user/find/{username}")
+    public ResponseEntity<User> getUser(@PathVariable String username) {
+        return ResponseEntity.ok().body(userService.getUserByUsername(username));
+    }
+
+    @GetMapping("users")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
 
-    @PostMapping("/user/save")
-    public ResponseEntity<User> saveUser(@RequestBody UserRegistrationDto userRegistrationDto) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.registerUser(userRegistrationDto));
+    @GetMapping("/user/find/{username}")
+    public ResponseEntity<User> getUserById(@PathVariable("username") String username) {
+        User user = userService.getUserByUsername(username);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping("/role/save")
-    public ResponseEntity<Role> saveRole(@RequestBody Role role) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveRole(role));
-    }
-
-    @PostMapping("/role/addtouser")
-    public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form) {
+    @PostMapping("/user/add-role")
+    public ResponseEntity<String> addRoleToUser(@RequestBody RoleToUserForm form) {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("The role " + form.getRoleName() + "has been added to user " + form.getUsername());
     }
 
+    @DeleteMapping("/user/role/delete")
+    public ResponseEntity<String> deleteRoleFromUser(@RequestBody RoleToUserForm form) {
+        userService.deleteRoleFromUser(form.getUsername(), form.getRoleName());
+        return ResponseEntity.ok().body("The role " + form.getRoleName() + "has been removed from user: " + form.getUsername());
+    }
 
-//    @PostMapping("/token/refresh")
-//    public ResponseEntity<?> refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        String authorizationHeader = request.getHeader(AUTHORIZATION);
-//        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-//            try {
-//                String refresh_token = authorizationHeader.substring("Bearer ".length());
-//                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-//                JWTVerifier verifier = JWT.require(algorithm).build();
-//                DecodedJWT decodedJWT = verifier.verify(refresh_token);
-//                String username = decodedJWT.getSubject();
-//                User user = userService.getUserByUsername(username);
-//                String access_token = JWT.create()
-//                        .withSubject(user.getUsername())
-//                        .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
-//                        .withIssuer(request.getRequestURL().toString())
-//                        .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
-//                        .sign(algorithm);
-//
-//                Map<String, String> tokens = new HashMap<>();
-//                tokens.put("access_token", access_token);
-//                tokens.put("refresh_token", refresh_token);
-//                response.setContentType(APPLICATION_JSON_VALUE);
-//                new ObjectMapper().writeValue(response.getOutputStream(), tokens);
-//
-//            } catch (Exception exception) {
-//                response.setHeader("error", exception.getMessage());
-//                response.setStatus(FORBIDDEN.value());
-//                Map<String, String> error = new HashMap<>();
-//                error.put("error_message", exception.getMessage());
-//                response.setContentType(APPLICATION_JSON_VALUE);
-//                new ObjectMapper().writeValue(response.getOutputStream(), error);
-//            }
-//        } else {
-//            throw new RuntimeException("Refresh token is missing");
-//        }
-//        return ResponseEntity.ok().build();
-//    }
+    @PutMapping("/user/update")
+    public ResponseEntity<User> updateUser(@RequestBody UserDto userDto) {
+        User user = userService.updateUser(userDto);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/user/deactivate/{username}")
+    public ResponseEntity<String> deactivationUser(@PathVariable("username") String username) {
+        userService.deactivationUser(username);
+        return new ResponseEntity<>("The user has been successfully deactivated", HttpStatus.OK);
+    }
 }
