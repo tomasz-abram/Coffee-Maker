@@ -46,139 +46,133 @@
         </insert>
         <insert tableName="coffee_machine_constant_value">
             <column name="id" valueNumeric="9"/>
-            <column name="name" value="min_ground_container"/>
-            <column name="value" valueNumeric="0"/>
-        </insert>
-        <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="10"/>
             <column name="name" value="max_descale_counter"/>
             <column name="value" valueNumeric="50000"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="11"/>
+            <column name="id" valueNumeric="10"/>
             <column name="name" value="min_descale_counter"/>
             <column name="value" valueNumeric="0"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="12"/>
+            <column name="id" valueNumeric="11"/>
             <column name="name" value="max_grinding_level"/>
             <column name="value" valueNumeric="10"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="13"/>
+            <column name="id" valueNumeric="12"/>
             <column name="name" value="min_grinding_level"/>
             <column name="value" valueNumeric="1"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="14"/>
+            <column name="id" valueNumeric="13"/>
             <column name="name" value="max_amount_of_coffee"/>
             <column name="value" valueNumeric="30"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="15"/>
+            <column name="id" valueNumeric="14"/>
             <column name="name" value="min_amount_of_coffee"/>
             <column name="value" valueNumeric="10"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="16"/>
+            <column name="id" valueNumeric="15"/>
             <column name="name" value="max_temp_water"/>
             <column name="value" valueNumeric="98"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="17"/>
+            <column name="id" valueNumeric="16"/>
             <column name="name" value="min_temp_water"/>
             <column name="value" valueNumeric="30"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="18"/>
+            <column name="id" valueNumeric="17"/>
             <column name="name" value="max_amount_of_water"/>
             <column name="value" valueNumeric="500"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="19"/>
+            <column name="id" valueNumeric="18"/>
             <column name="name" value="min_amount_of_water"/>
             <column name="value" valueNumeric="15"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="20"/>
+            <column name="id" valueNumeric="19"/>
             <column name="name" value="max_temp_milk"/>
             <column name="value" valueNumeric="90"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="21"/>
+            <column name="id" valueNumeric="20"/>
             <column name="name" value="min_temp_milk"/>
             <column name="value" valueNumeric="1"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="22"/>
+            <column name="id" valueNumeric="21"/>
             <column name="name" value="max_amount_of_milk"/>
             <column name="value" valueNumeric="500"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="23"/>
+            <column name="id" valueNumeric="22"/>
             <column name="name" value="min_amount_of_milk"/>
             <column name="value" valueNumeric="0"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="24"/>
+            <column name="id" valueNumeric="23"/>
             <column name="name" value="max_cup_size"/>
             <column name="value" valueNumeric="1000"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="25"/>
+            <column name="id" valueNumeric="24"/>
             <column name="name" value="min_cup_size"/>
             <column name="value" valueNumeric="15"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="26"/>
+            <column name="id" valueNumeric="25"/>
             <column name="name" value="warning_level_water"/>
             <column name="value" valueNumeric="500"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="27"/>
+            <column name="id" valueNumeric="26"/>
             <column name="name" value="danger_level_water"/>
             <column name="value" valueNumeric="200"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="28"/>
+            <column name="id" valueNumeric="27"/>
             <column name="name" value="warning_level_milk"/>
             <column name="value" valueNumeric="500"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="29"/>
+            <column name="id" valueNumeric="28"/>
             <column name="name" value="danger_level_milk"/>
             <column name="value" valueNumeric="200"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="30"/>
+            <column name="id" valueNumeric="29"/>
             <column name="name" value="warning_level_coffee_beans"/>
             <column name="value" valueNumeric="90"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="31"/>
+            <column name="id" valueNumeric="30"/>
             <column name="name" value="danger_level_coffee_beans"/>
             <column name="value" valueNumeric="20"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="32"/>
+            <column name="id" valueNumeric="31"/>
             <column name="name" value="warning_level_ground_container"/>
             <column name="value" valueNumeric="3"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="33"/>
+            <column name="id" valueNumeric="32"/>
             <column name="name" value="danger_level_ground_container"/>
             <column name="value" valueNumeric="1"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="34"/>
+            <column name="id" valueNumeric="33"/>
             <column name="name" value="warning_level_descale"/>
             <column name="value" valueNumeric="5000"/>
         </insert>
         <insert tableName="coffee_machine_constant_value">
-            <column name="id" valueNumeric="35"/>
+            <column name="id" valueNumeric="34"/>
             <column name="name" value="danger_level_descale"/>
             <column name="value" valueNumeric="2000"/>
         </insert>
     </changeSet>
-
 </databaseChangeLog>
