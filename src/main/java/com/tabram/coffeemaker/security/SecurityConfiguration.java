@@ -2,6 +2,7 @@ package com.tabram.coffeemaker.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-
+    private static final String ADMIN = "ADMIN";
     private final JWTAuthEntryPoint jwtAuthEntryPoint;
 
     public SecurityConfiguration(JWTAuthEntryPoint jwtAuthEntryPoint) {
@@ -33,8 +34,9 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/admin/**").hasRole("ADMIN")
-                .antMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/admin/**").hasRole(ADMIN)
+                .antMatchers(HttpMethod.PUT,"/api/machine-constant/**").hasRole(ADMIN)
+                .antMatchers("/api/user/**").hasAnyRole("USER", ADMIN)
                 .antMatchers("/api/auth/**").permitAll()
                 .anyRequest()
                 .authenticated()

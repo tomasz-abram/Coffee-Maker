@@ -19,19 +19,19 @@ public class UserResourceController {
         this.userService = userService;
     }
 
-    @GetMapping("user/find/{username}")
+    @GetMapping("/user/find/{username}")
     public ResponseEntity<User> getUser(@PathVariable String username) {
         return ResponseEntity.ok().body(userService.getUserByUsername(username));
     }
 
-    @GetMapping("users")
+    @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
 
-    @GetMapping("/user/find/{username}")
-    public ResponseEntity<User> getUserById(@PathVariable("username") String username) {
-        User user = userService.getUserByUsername(username);
+    @GetMapping("/user/find/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+        User user = userService.getUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

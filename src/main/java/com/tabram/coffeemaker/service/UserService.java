@@ -63,6 +63,12 @@ public class UserService implements UserServiceInterface, UserDetailsService {
         }
     }
 
+    public User getUserById(long id) {
+        log.info("Fetching user: {}", id);
+        return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found '" + id + "'"));
+    }
+
+
     @Override
     public List<User> getAllUsers() {
         log.info("Fetching all users");

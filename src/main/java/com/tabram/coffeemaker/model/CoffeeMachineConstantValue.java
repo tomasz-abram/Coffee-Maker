@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "coffee_machine_constant_value")
+@Table(name = "coffee_machine_constant_value" , uniqueConstraints={@UniqueConstraint(columnNames={"name"})})
 public class CoffeeMachineConstantValue implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private Long id;
-
+@Column(name = "name")
     private String name;
 
     private Integer value;

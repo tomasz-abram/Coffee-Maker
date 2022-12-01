@@ -12,13 +12,13 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints={@UniqueConstraint(columnNames={"username"})})
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private Long id;
-    @Column(name = "username")
+    @Column(name = "username",unique = true)
     private String username;
     private String password;
     private boolean isEnabled;
