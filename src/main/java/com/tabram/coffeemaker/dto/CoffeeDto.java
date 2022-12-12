@@ -1,30 +1,31 @@
 package com.tabram.coffeemaker.dto;
 
+import com.tabram.coffeemaker.validation.*;
+
+import javax.validation.constraints.NotEmpty;
+
+
 public class CoffeeDto {
 
+    @NotEmpty(message = "{error.empty.coffeeName}")
     private String coffeeName;
+    @TempWater
     private int tempWater;
+    @GrindingLevel
     private int grindingLevel;
+    @AmountOfCoffee
     private double amountOfCoffee;
+    @AmountOfWater
     private int amountOfWater;
+    @AmountOfMilk
     private int amountMilk;
+    @TempMilk
     private int tempMilk;
+    @CupSize
     private int cupSize;
 
     public CoffeeDto() {
     }
-
-    public CoffeeDto(String coffeeName, int tempWater, int grindingLevel, double amountOfCoffee, int amountOfWater, int amountMilk, int tempMilk, int cupSize) {
-        this.coffeeName = coffeeName;
-        this.tempWater = tempWater;
-        this.grindingLevel = grindingLevel;
-        this.amountOfCoffee = amountOfCoffee;
-        this.amountOfWater = amountOfWater;
-        this.amountMilk = amountMilk;
-        this.tempMilk = tempMilk;
-        this.cupSize = cupSize;
-    }
-
 
     public String getCoffeeName() {
         return coffeeName;
