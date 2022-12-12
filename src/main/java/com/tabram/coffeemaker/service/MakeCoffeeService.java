@@ -1,5 +1,6 @@
 package com.tabram.coffeemaker.service;
 
+import com.tabram.coffeemaker.dto.CoffeeDto;
 import com.tabram.coffeemaker.model.CoffeeMachineStock;
 import com.tabram.coffeemaker.model.CoffeeUser;
 import com.tabram.coffeemaker.model.User;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class MakeCoffeeService {
 
     private final CoffeeMachineStockRepository coffeeMachineStockRepository;
@@ -27,7 +29,40 @@ public class MakeCoffeeService {
         this.coffeeUserService = coffeeUserService;
     }
 
-    @Transactional
+    public void checkCoffeeParameters(CoffeeDto coffeeDto) {
+        if (coffeeDto.getCoffeeName().isEmpty()) {
+            throw new IllegalArgumentException("The name can not be empty.");
+        }
+        if (!isBetween(coffeeDto.getTempWater(), coffeeMachineConstantValueService.getMinTempWater(), coffeeMachineConstantValueService.getMaxTempWater())) {
+            throw new IllegalArgumentException("The water temperature must be in the range " + coffeeMachineConstantValueService.getMinTempWater() + " - " + coffeeMachineConstantValueService.getMaxTempWater());
+        }
+        if (!isBetween(coffeeDto.getGrindingLevel(), coffeeMachineConstantValueService.getMinGrindingLevel(), coffeeMachineConstantValueService.getMaxGrindingLevel())) {
+            throw new IllegalArgumentException("The grinding level must be in the range " + coffeeMachineConstantValueService.getMinGrindingLevel() + " - " + coffeeMachineConstantValueService.getMaxGrindingLevel());
+        }
+        if (!isBetween(coffeeDto.getAmountOfCoffee(), coffeeMachineConstantValueService.getMinAmountOfCoffee(), coffeeMachineConstantValueService.getMaxAmountOfCoffee())) {
+            throw new IllegalArgumentException("The amount of coffee must be in the range " + coffeeMachineConstantValueService.getMinAmountOfCoffee() + " - " + coffeeMachineConstantValueService.getMaxAmountOfCoffee());
+        }
+        if (!isBetween(coffeeDto.getAmountOfWater(), coffeeMachineConstantValueService.getMinAmountOfWater(), coffeeMachineConstantValueService.getMaxAmountOfWater())) {
+            throw new IllegalArgumentException("The amount of water must be in the range " + coffeeMachineConstantValueService.getMinAmountOfWater() + " - " + coffeeMachineConstantValueService.getMaxAmountOfWater());
+        }
+        if (!isBetween(coffeeDto.getAmountMilk(), coffeeMachineConstantValueService.getMinAmountOfMilk(), coffeeMachineConstantValueService.getMaxAmountOfMilk())) {
+            throw new IllegalArgumentException("The amount milk must be in the range " + coffeeMachineConstantValueService.getMinAmountOfMilk() + " - " + coffeeMachineConstantValueService.getMaxAmountOfMilk());
+        }
+        if (!isBetween(coffeeDto.getTempMilk(), coffeeMachineConstantValueService.getMinTempMilk(), coffeeMachineConstantValueService.getMaxTempMilk())) {
+            throw new IllegalArgumentException("The temp. milk must be in the range " + coffeeMachineConstantValueService.getMinTempMilk() + " - " + coffeeMachineConstantValueService.getMaxTempMilk());
+        }
+        if (!isBetween(coffeeDto.getCupSize(), coffeeMachineConstantValueService.getMinCupSize(), coffeeMachineConstantValueService.getMaxCupSize())) {
+            throw new IllegalArgumentException("The cup size must be in the range " + coffeeMachineConstantValueService.getMinCupSize() + " - " + coffeeMachineConstantValueService.getMaxCupSize());
+        }
+        if (coffeeDto.getAmountOfWater() + coffeeDto.getAmountMilk() > coffeeDto.getCupSize()) {
+            throw new IllegalArgumentException("The cup must not be smaller than the sum of the amounts of water and milk.");
+        }
+    }
+
+    public boolean isBetween(double val, int min, int max) {
+        return val >= min && val <= max;
+    }
+
     public void makeCoffee(String coffeeName, int quantity, User user) {
         List<CoffeeMachineStock> coffeeMachineStocksList = new ArrayList<>();
         CoffeeMachineStock waterStock = coffeeMachineStockService.findStockByName("Water");

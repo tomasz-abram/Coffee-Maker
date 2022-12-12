@@ -4,13 +4,11 @@ import com.tabram.coffeemaker.dto.RoleDto;
 import com.tabram.coffeemaker.model.Role;
 import com.tabram.coffeemaker.service.RoleService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -20,6 +18,16 @@ public class RoleController {
 
     public RoleController(RoleService roleService) {
         this.roleService = roleService;
+    }
+
+    @GetMapping("roles")
+    public ResponseEntity<List<Role>> getAllRoles() {
+        return ResponseEntity.ok().body(roleService.getAllRoles());
+    }
+
+    @GetMapping("role/find/{roleName}")
+    public ResponseEntity<Role> findRole(@PathVariable String roleName) {
+        return ResponseEntity.ok().body(roleService.findRole(roleName));
     }
 
     @PostMapping("role/save")

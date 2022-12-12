@@ -14,7 +14,7 @@ public class CoffeeUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private Long id;
-    @Column(name = "coffee_name")
+    @Column(name = "coffee_name",unique=true)
     private String coffeeName;
     @Column(name = "temp_water")
     private int tempWater;

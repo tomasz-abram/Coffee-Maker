@@ -14,8 +14,6 @@ import static com.tabram.coffeemaker.service.CoffeeMachineConstantValueNames.*;
 @Service
 public class CoffeeMachineConstantValueService {
 
-
-    private static final String MAX_GROUND_CONTAINER = "max_ground_container";
     private final CoffeeMachineConstantValueRepository coffeeMachineConstantValueRepository;
 
     @Autowired

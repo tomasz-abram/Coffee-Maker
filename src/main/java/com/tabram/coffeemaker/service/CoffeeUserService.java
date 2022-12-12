@@ -94,7 +94,6 @@ public class CoffeeUserService {
     }
 
     public void saveCoffee(CoffeeDto coffeeDto, User user) {
-        coffeeAdminService.checkCoffeeParameters(coffeeDto);
         if (coffeeExists(coffeeDto, user)) {
             CoffeeUser coffeeDB = findCoffeeByCoffeeNameAndUsername(coffeeDto.getCoffeeName(), user.getId());
             coffeeDB.setTempWater(coffeeDto.getTempWater());
